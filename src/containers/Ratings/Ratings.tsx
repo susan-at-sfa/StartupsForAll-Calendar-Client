@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../hooks';
 import { setToken } from '../../store/slices/auth/authSlice';
 import { makeRequest } from '../../store/utils/makeRequest';
 import './index.css';
-
 interface APOD {
   hdurl: string;
   explanation: string;

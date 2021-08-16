@@ -2,14 +2,22 @@
 
 This repository will serve as the web client template for new EyeCue projects and Internship Projects
 
-## Design
-
-- [Design Document](https://docs.google.com/document/d/16MKaQZYe8jQzE6CZJIoEVMZwpFt6f2fvuh69PZbLkdY/edit#heading=h.iar5283uwhd1)
-
 ## React / Typecript Cheatsheet
+
 - https://react-typescript-cheatsheet.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+
+## Installation/Setup
+
+This project uses [yarn](https://yarnpkg.com/) package manager for Node. Please follow the [installation instructions](https://yarnpkg.com/getting-started/install) on their website.
+
+```bash
+# install dependencies
+$ yarn
+# create .env.dev file
+cp .env.example .env
+```
 
 ## Available Scripts
 
