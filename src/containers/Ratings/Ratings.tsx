@@ -1,5 +1,4 @@
 import { FC, useCallback, useState, useEffect, useMemo } from 'react';
-import logo from '../../assets/logo.svg';
 import Loading from '../../components/Loading';
 import { useAppDispatch } from '../../hooks';
 import { setToken } from '../../store/slices/auth/authSlice';
@@ -57,7 +56,7 @@ const Ratings: FC = () => {
       case 'video':
         return (
           <div style={{ width: '100%', marginLeft: 'auto', marginRight: 'auth' }}>
-            <iframe width="420" height="315" src={url}></iframe>
+            <iframe width="420" height="315" src={url} title={title} />
           </div>
         );
       case 'image':
