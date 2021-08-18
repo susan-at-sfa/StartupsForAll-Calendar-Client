@@ -1,14 +1,15 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import userReducer from './user/userSlice';
-import authReducer from './auth/authSlice';
+import { AnyAction, CombinedState, combineReducers } from '@reduxjs/toolkit';
+import userReducer, { UserState } from './user/userSlice';
+import authReducer, { AuthState } from './auth/authSlice';
+import { Reducer } from 'react';
 
-export let rootReducer = combineReducers({
-  auth: authReducer,
-  user: userReducer,
-});
+type RootReducer = Reducer<CombinedState<{
+  auth: AuthState;
+  user: UserState;
+}>, AnyAction>;
 
 export default function createReducer(injectedReducers = {}) {
-  rootReducer = combineReducers({
+  const rootReducer = combineReducers({
     auth: authReducer,
     user: userReducer,
     ...injectedReducers,
@@ -17,4 +18,4 @@ export default function createReducer(injectedReducers = {}) {
   return rootReducer;
 }
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<RootReducer>;
