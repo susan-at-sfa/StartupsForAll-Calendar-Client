@@ -11,17 +11,17 @@ const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
 
   const routes = useMemo(() => {
-    const jsx = [<Route path={Routes.Home} exact component={Home} />];
+    const jsx = [<Route key={'Home'} path={Routes.Home} exact component={Home} />];
     if (!token) {
       jsx.push(
-        <Route path={Routes.Login} exact component={Login} />,
-        <Route path={Routes.Register} exact component={Register} />,
-        <Redirect to={Routes.Home} />,
+        <Route key={'Login'} path={Routes.Login} exact component={Login} />,
+        <Route key={'Register'} path={Routes.Register} exact component={Register} />,
+        <Redirect key={'RedirectHome'} to={Routes.Home} />,
       );
     } else {
       jsx.push(
-        <Route path={Routes.Ratings} exact component={Ratings} />,
-        <Redirect to={Routes.Ratings} />,
+        <Route key={'Ratings'} path={Routes.Ratings} exact component={Ratings} />,
+        <Redirect key={'Ratings'} to={Routes.Ratings} />,
       );
     }
     return jsx;
