@@ -2,12 +2,12 @@ import React from 'react';
 import Loading from '../../components/Loading';
 
 // Lazily load routes and code split with webpack
-const LazyRegisterPage = React.lazy(() => import(/* webpackChunkName: "RegisterPage" */ './Register'));
+const LazyEventsPage = React.lazy(() => import(/* webpackChunkName: "EventsPage" */ './Events'));
 
-const RegisterPage = () => (
+const EventsPage = () => (
   <React.Suspense fallback={<Loading />}>
-    <LazyRegisterPage />
+    <LazyEventsPage />
   </React.Suspense>
 );
 
-export default RegisterPage;
+export default EventsPage;

@@ -1,33 +1,26 @@
-.Register {
+.Ratings {
   text-align: center;
 }
 
-.Register-logo {
+.Ratings-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-.links {
+.content {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  justify-content: space-evenly;
-  margin-bottom: 5rem;
-}
-
-.input-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  margin-bottom: 5rem;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .Register-logo {
+  .Ratings-logo {
     animation: App-logo-float infinite 3s ease-in-out;
   }
 }
 
-.Register-header {
+.Ratings-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

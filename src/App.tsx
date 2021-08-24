@@ -1,33 +1,44 @@
-import React, { FC, useMemo } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { Routes } from './constants/routes';
-import Home from './containers/Home';
-import Login from './containers/Login';
-import Register from './containers/Register';
-import Ratings from './containers/Ratings';
-import { useAppSelector } from './hooks';
+import React, { FC, useMemo } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { Routes } from "./constants/routes";
+import Events from "./containers/Events";
+import Login from "./containers/Login";
+import Admin from "./containers/Admin";
+import Add from "./containers/Add";
+import { useAppSelector } from "./hooks";
 
 const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
 
   const routes = useMemo(() => {
-    const jsx = [<Route key={'Home'} path={Routes.Home} exact component={Home} />];
+    const jsx = [
+      <Route key={"Events"} path={Routes.Events} exact component={Events} />,
+      <Route key={"Add"} path={Routes.Add} exact component={Add} />,
+    ];
     if (!token) {
       jsx.push(
-        <Route key={'Login'} path={Routes.Login} exact component={Login} />,
-        <Route key={'Register'} path={Routes.Register} exact component={Register} />,
-        <Redirect key={'RedirectHome'} to={Routes.Home} />,
+        <Route key={"Login"} path={Routes.Login} exact component={Login} />,
+        <Redirect key={"RedirectEvents"} to={Routes.Events} />
       );
     } else {
       jsx.push(
-        <Route key={'Ratings'} path={Routes.Ratings} exact component={Ratings} />,
-        <Redirect key={'Ratings'} to={Routes.Ratings} />,
+        <Route key={"Admin"} path={Routes.Admin} exact component={Admin} />,
+        <Redirect key={"RedirectEvents"} to={Routes.Events} />
       );
     }
     return jsx;
   }, [token]);
 
-  return <Switch>{routes}</Switch>;
+  return (
+    <Router>
+      <Switch>{routes}</Switch>
+    </Router>
+  );
 };
 
 export default App;
