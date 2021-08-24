@@ -9,6 +9,7 @@ export async function makeRequest(url: string, method: string, data?: unknown, t
     ...(data ? { body: JSON.stringify(data) } : {}),
   };
   try {
+    console.log('MAKING REQUEST');
     const response = await fetch(url, init);
     if (!response.ok) {
       // an error
@@ -16,6 +17,7 @@ export async function makeRequest(url: string, method: string, data?: unknown, t
       return { success: false, data: null, error: response };
     }
     const data = await response.json();
+    console.log('GOT DATA',data)
     return { success: true, data, error: null };
   } catch (e) {
     console.error(e);

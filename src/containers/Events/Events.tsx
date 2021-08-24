@@ -9,9 +9,7 @@ const Home: FC = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <h1>Events.tsx</h1>
-        </p>
+        <h1>Events.tsx</h1>
         <div className="links">
           <Link to={Routes.Events}>Back To Events</Link>
           <Link to={Routes.Add}>Add</Link>
