@@ -14,6 +14,7 @@ import { useAppSelector } from "./hooks";
 
 const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
+  // const username = useAppSelector(({ user }) => user.username);
 
   const routes = useMemo(() => {
     const jsx = [
