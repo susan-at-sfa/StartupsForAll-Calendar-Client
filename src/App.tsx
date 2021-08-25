@@ -11,6 +11,7 @@ import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
 import { useAppSelector } from "./hooks";
+import Header from "./components/header";
 
 const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
@@ -37,6 +38,7 @@ const App: FC = () => {
 
   return (
     <Router>
+      <Header />
       <Switch>{routes}</Switch>
     </Router>
   );
