@@ -18,16 +18,14 @@ const FormInput: FC<FormInputProps> = (props) => {
 }
 
 const Input = styled.input`
-  display: block;
-  right: 0;
-  float: right;
+float: right;
   border: 8px solid  #E8D9D6;
   border-right-width: 20px;
   height: 45px;
   padding-left: 15px;
   padding-right: 15px;
   width: 80%;
-  margin-bottom: 2em;
+  margin-bottom: 15px;
   &::placeholder{
     color: #E8D9D6;
     font-weight: bold;
