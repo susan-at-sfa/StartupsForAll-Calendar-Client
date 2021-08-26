@@ -62,6 +62,7 @@ position: relative;
 top: 250px;
 scroll-behavior: smooth;
 scrollbar-width: none;
+overflow: hidden;
   &::-webkit-scrollbar{
     display: none;
   }

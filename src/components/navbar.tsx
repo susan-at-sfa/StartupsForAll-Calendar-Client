@@ -19,13 +19,13 @@ const Navbar: FC = () => {
 
   return (
     <Wrapper>
-      {/* <NavLink to="/">Event List</NavLink>
-      <NavLink to="/add">Add Event</NavLink> */}
       {linkList.map((link, index) => {
         return <NavLink
           key={index}
           onClick={() => setSelected(link.id)}
-          to={link.id}>{link.title}
+          to={link.id}
+        >
+          {link.title}
         </NavLink>
       })}
     </Wrapper>
@@ -51,7 +51,4 @@ font-weight: bold;
 font-size: 20px;
 line-height: 30px;
 margin-left: 20px;
-&:active{
-  background-color: black;
-}
 `

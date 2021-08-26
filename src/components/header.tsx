@@ -8,6 +8,7 @@ import { useLocation } from "react-router";
 
 const Header: FC = () => {
   const location = useLocation()
+  console.log(location)
 
   return (
     <Wrapper>
