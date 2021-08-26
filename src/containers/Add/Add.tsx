@@ -2,13 +2,20 @@ import { FC } from "react";
 import FormInput from "../../components/FormInput";
 
 import "./index.css";
+import FormLabel from "../../components/FormLabel";
 
 const Add: FC = () => {
   return (
-    <div className="App">
-      <h1>Add.tsx</h1>
+    <div>
+      <h1>Add</h1>
+      <FormLabel text='Name' />
       <FormInput
-        placeholder="Add Event"
+        placeholder="Name"
+        type="text"
+      />
+      <FormLabel text='Email Address' />
+      <FormInput
+        placeholder="Email Address"
         type="text"
       />
     </div>
@@ -16,3 +23,4 @@ const Add: FC = () => {
 };
 
 export default Add;
+
