@@ -7,7 +7,10 @@ const Add: FC = () => {
   return (
     <div className="App">
       <h1>Add.tsx</h1>
-      <FormInput />
+      <FormInput
+        placeholder="Add Event"
+        type="text"
+      />
     </div>
   );
 };
