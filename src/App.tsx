@@ -12,6 +12,7 @@ import Admin from "./containers/Admin";
 import Add from "./containers/Add";
 import { useAppSelector } from "./hooks";
 import Header from "./components/header";
+import styled from "styled-components";
 
 const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
@@ -37,11 +38,31 @@ const App: FC = () => {
   }, [token]);
 
   return (
-    <Router>
-      <Header />
-      <Switch>{routes}</Switch>
-    </Router>
+    <Wrapper>
+      <Router>
+        <Header />
+        <Sections>
+          <Switch>{routes}</Switch>
+        </Sections>
+      </Router>
+    </Wrapper>
   );
 };
 
 export default App;
+
+const Wrapper = styled.section`
+height: 100vh;
+`
+
+const Sections = styled.section`
+width: 100%;
+height: calc(100vh - 250px);
+position: relative;
+top: 250px;
+scroll-behavior: smooth;
+scrollbar-width: none;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+`

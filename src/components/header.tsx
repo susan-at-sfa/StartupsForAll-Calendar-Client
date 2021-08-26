@@ -41,7 +41,7 @@ const Wrapper = styled.section`
       background-image: url(${headerImage});
       background-size: cover;
       overflow: hidden;
-      z-index: 3
+      z-index: 3;
       `
 
 const Title = styled.div`

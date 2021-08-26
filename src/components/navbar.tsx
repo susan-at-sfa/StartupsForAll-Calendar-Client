@@ -1,12 +1,33 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 const Navbar: FC = () => {
+  const [selected, setSelected] = useState('/')
+
+  const linkList = [
+    {
+      id: '/',
+      title: 'Event List'
+    },
+    {
+      id: '/add',
+      title: 'Add Event'
+    }
+  ]
+
   return (
     <Wrapper>
-      <NavLink to="/">Event List</NavLink>
-      <NavLink to="/add">Add Event</NavLink>
+      {/* <NavLink to="/">Event List</NavLink>
+      <NavLink to="/add">Add Event</NavLink> */}
+      {linkList.map((link, index) => {
+        return <NavLink
+          key={index}
+          onClick={() => setSelected(link.id)}
+          to={link.id}>{link.title}
+        </NavLink>
+      })}
     </Wrapper>
   )
 };
@@ -30,4 +51,7 @@ font-weight: bold;
 font-size: 20px;
 line-height: 30px;
 margin-left: 20px;
+&:active{
+  background-color: black;
+}
 `
