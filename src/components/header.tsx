@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "@emotion/styled";
 import headerImage from '../assets/images/s4aHEADER.png';
 import logo from '../assets/images/S4ALogo.png';
@@ -7,6 +7,7 @@ import { useLocation } from "react-router";
 
 
 const Header: FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   console.log(location)
 
@@ -26,8 +27,8 @@ const Header: FC = () => {
         <Title>Admin Events</Title>
       }
 
-      {/* <Hamburger onClick={() => setMenuOpen(!menuOpen)}> */}
-      <Hamburger >
+      <Hamburger className={menuOpen ? "active" : "Hamburger"} onClick={() => setMenuOpen(!menuOpen)}>
+        {/* <Hamburger > */}
         <span id='line1' />
         <span id='line2' />
       </Hamburger>
@@ -71,14 +72,28 @@ const Logo = styled.img`
 
 const Hamburger = styled.div`
   width: 34px;
-  height: 25px;
+  height: 35px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 15px;
   cursor: pointer;
+  &.active{
+      span{
+        &:first-child {
+          background-color: gray;
+          transform: rotate(45deg);
+          width: 75%
+        }
+        &:last-child{
+          background-color: gray;
+          transform: rotate(-45deg);
+          width: 75%;
+        }
+      }
+  }
 
   span {
     width: 100%;
