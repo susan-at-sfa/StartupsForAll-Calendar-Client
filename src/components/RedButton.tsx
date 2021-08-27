@@ -11,13 +11,12 @@ const RedButton: FC<RedButtonProps> = (props) => {
   )
 }
 
-
 const Button = styled.button`
   color: white;
   font-weight: bold;
   font-size: 14px;
   border: none;
-  width: 100%;
+  width: 50%;
   height: 35px;
   background-color:  #A36760;
 `

@@ -28,7 +28,6 @@ const Add: FC = () => {
 
   return (
     <div>
-      <h1>Add</h1>
       {inputList.map((item) => {
         const { id, text, placeholder, type } = item;
         return (
@@ -51,9 +50,7 @@ const Add: FC = () => {
 export default Add;
 
 const ButtonDiv = styled.div`
-/* position: fixed;
-bottom: 125px;
-right: 0px; */
+
 `
 
 

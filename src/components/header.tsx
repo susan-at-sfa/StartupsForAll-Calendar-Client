@@ -25,6 +25,13 @@ const Header: FC = () => {
       {location.pathname === "/admin" &&
         <Title>Admin Events</Title>
       }
+
+      {/* <Hamburger onClick={() => setMenuOpen(!menuOpen)}> */}
+      <Hamburger >
+        <span id='line1' />
+        <span id='line2' />
+      </Hamburger>
+
       <Navbar />
     </Wrapper>
   )
@@ -61,3 +68,23 @@ const Logo = styled.img`
       left: 15px;
       top: 15px;
       `
+
+const Hamburger = styled.div`
+  width: 34px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+
+  span {
+    width: 100%;
+    height: 1px;
+    background-color: #C79288;
+    transform-origin: left;
+    transition: all 1s ease;
+  }
+`

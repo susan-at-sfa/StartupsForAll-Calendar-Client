@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 
 const Navbar: FC = () => {
-  const [selected, setSelected] = useState('/')
+  const [selected, setSelected] = useState('/add')
   console.log(selected)
 
   const linkList = [
@@ -32,7 +32,7 @@ const Navbar: FC = () => {
           </li>
         })}
       </ul>
-    </Wrapper>
+    </Wrapper >
   )
 };
 
@@ -46,6 +46,7 @@ const Wrapper = styled.section`
       height: 48px;
       background-color: #A36760;
       bottom: 0;
+      overflow: hidden;
 
       ul {
   display: flex;
@@ -64,7 +65,9 @@ const Link = styled(NavLink)`
   font-size: 20px;
   line-height: 30px;
   margin-left: 20px;
-/* &:active{
-        background - color: black;
-} */
-      `
+  border-bottom: 3px solid transparent;
+  padding-bottom: 7px;
+&.active{
+  border-bottom: 3px solid white;
+}
+`
