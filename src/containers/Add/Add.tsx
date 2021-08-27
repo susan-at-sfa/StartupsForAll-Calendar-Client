@@ -1,6 +1,8 @@
 import { FC } from "react";
+import RedButton from "../../components/RedButton";
 import FormInput from "../../components/FormInput";
 import FormLabel from "../../components/FormLabel";
+import styled from "@emotion/styled";
 
 const Add: FC = () => {
   const inputList = [
@@ -39,9 +41,21 @@ const Add: FC = () => {
           </div>
         )
       })}
+      <ButtonDiv>
+        <RedButton buttonText='Submit' />
+      </ButtonDiv>
     </div>
   );
 };
 
 export default Add;
+
+const ButtonDiv = styled.div`
+/* position: fixed;
+bottom: 125px;
+right: 0px; */
+`
+
+
+
 

@@ -53,6 +53,7 @@ export default App;
 
 const Wrapper = styled.section`
 height: 100vh;
+display: flex;
 `
 
 const Sections = styled.section`
