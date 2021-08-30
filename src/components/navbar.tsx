@@ -39,22 +39,22 @@ const Navbar: FC = () => {
 export default Navbar;
 
 const Wrapper = styled.section`
-      display: flex;
-      align-items: center;
-      position: absolute;
-      width: 100%;
-      height: 48px;
-      background-color: #A36760;
-      bottom: 0;
-      overflow: hidden;
-
-      ul {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style-type: none;
-  padding: 0;
-}
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 48px;
+  background-color: #A36760;
+  bottom: 0;
+  overflow: hidden;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+  }
 `
 
 const Link = styled(NavLink)`
@@ -67,7 +67,7 @@ const Link = styled(NavLink)`
   margin-left: 20px;
   border-bottom: 3px solid transparent;
   padding-bottom: 7px;
-&.active{
-  border-bottom: 3px solid white;
-}
+  .active{
+    border-bottom: 3px solid white;
+  }
 `

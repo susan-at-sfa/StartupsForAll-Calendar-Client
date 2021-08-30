@@ -9,7 +9,6 @@ import { useLocation } from "react-router";
 const Header: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-  console.log(location)
 
   return (
     <Wrapper>
@@ -31,6 +30,7 @@ const Header: FC = () => {
         {/* <Hamburger > */}
         <span id='line1' />
         <span id='line2' />
+        <span id='line3' />
       </Hamburger>
 
       <Navbar />
@@ -41,34 +41,34 @@ const Header: FC = () => {
 export default Header;
 
 const Wrapper = styled.section`
-      position: fixed;
-      height: 250px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-image: url(${headerImage});
-      background-size: cover;
-      overflow: hidden;
-      z-index: 3;
-      `
+  position: fixed;
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${headerImage});
+  background-size: cover;
+  overflow: hidden;
+  z-index: 3;
+`
 
 const Title = styled.div`
-      font-style: normal;
-      font-weight: 600;
-      font-size: 40px;
-      line-height: 54px;
-      text-align: center;
-      color: #C79288;
-      `
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 54px;
+  text-align: center;
+  color: #C79288;
+`
 
 const Logo = styled.img`
-      position: absolute;
-      height: auto;
-      width: 200px;
-      left: 15px;
-      top: 15px;
-      `
+  position: absolute;
+  height: auto;
+  width: 200px;
+  left: 15px;
+  top: 15px;
+`
 
 const Hamburger = styled.div`
   width: 34px;
@@ -81,18 +81,22 @@ const Hamburger = styled.div`
   right: 15px;
   cursor: pointer;
   &.active{
-      span{
-        &:first-child {
-          background-color: gray;
-          transform: rotate(45deg);
-          width: 75%
-        }
-        &:last-child{
-          background-color: gray;
-          transform: rotate(-45deg);
-          width: 75%;
-        }
+    span{
+      &:first-of-type{
+      background-color: gray;
+      transform: rotate(45deg);
+      width: 75%;
       }
+      &:nth-of-type(2) {
+          opacity: 0;
+        }
+      &:last-of-type{
+        opacity: 100;
+        background-color: gray;
+        transform: rotate(-45deg);
+        width: 75%;
+      }
+    }
   }
 
   span {
@@ -101,5 +105,8 @@ const Hamburger = styled.div`
     background-color: #C79288;
     transform-origin: left;
     transition: all 1s ease;
+    &:nth-of-type(3){
+      opacity: 0;
+    }
   }
 `
