@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "@emotion/styled";
 import headerImage from '../assets/images/s4aHEADER.png';
 import logo from '../assets/images/S4ALogo.png';
@@ -15,7 +15,7 @@ const Header: FC = () => {
   console.log("HEADER STATE", menuOpen)
 
   return (
-    <Wrapper>
+    <Wrapper className={menuOpen ? "active" : "Wrapper"}>
       <Logo src={logo} alt="Startups for All logo" />
       {location.pathname === "/" &&
         <Title>Events</Title>
@@ -55,7 +55,6 @@ const Wrapper = styled.section`
   overflow: hidden;
   z-index: 3;
 `
-
 const Title = styled.div`
   font-style: normal;
   font-weight: 600;
@@ -113,3 +112,4 @@ const Hamburger = styled.div`
     }
   }
 `
+

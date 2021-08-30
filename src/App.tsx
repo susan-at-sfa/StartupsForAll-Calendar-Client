@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useMemo } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,7 @@ import Add from "./containers/Add";
 import { useAppSelector } from "./hooks";
 import Header from "./components/header";
 import styled from "styled-components";
+import Menu from "./components/Menu";
 
 const App: FC = () => {
 
@@ -41,6 +42,7 @@ const App: FC = () => {
   return (
     <Wrapper>
       <Router>
+        <Menu />
         <Header />
         <Sections>
           <Switch>{routes}</Switch>

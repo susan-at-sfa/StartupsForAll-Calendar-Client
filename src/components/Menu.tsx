@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "@emotion/styled";
 import { setMenuOpen } from "../store/slices/menu/menuOpenSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -9,16 +9,13 @@ const Menu: FC = () => {
   console.log("MENU STATE", menuOpen)
 
   return (
-    <HamburgerMenu>
-      <div className={'menu ' + (menuOpen && 'active')} id='menu'>
-        <ul>
-          <li onClick={() => dispatch(setMenuOpen(false))}>
-            <a href='./events'>Home</a>
-          </li>
-        </ul>
-      </div>
-    </HamburgerMenu>
-
+    <HamburgerMenu className={'menu ' + (menuOpen && 'active')} id='menu'>
+      <ul>
+        <li onClick={() => dispatch(setMenuOpen(false))}>
+          <a href='./events'>Home</a>
+        </li>
+      </ul>
+    </HamburgerMenu >
   )
 }
 
