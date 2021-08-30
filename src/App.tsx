@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +15,7 @@ import Header from "./components/header";
 import styled from "styled-components";
 
 const App: FC = () => {
+
   const token = useAppSelector(({ auth }) => auth.token);
   // const username = useAppSelector(({ user }) => user.username);
 

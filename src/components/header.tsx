@@ -4,11 +4,15 @@ import headerImage from '../assets/images/s4aHEADER.png';
 import logo from '../assets/images/S4ALogo.png';
 import Navbar from "./navbar";
 import { useLocation } from "react-router";
+import { useAppSelector, useAppDispatch } from "../hooks";
+import { setMenuOpen } from "../store/slices/menu/menuOpenSlice";
 
 
 const Header: FC = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const menuOpen = useAppSelector(({ menu }) => menu.menuOpen)
+  const dispatch = useAppDispatch()
   const location = useLocation()
+  console.log("HEADER STATE", menuOpen)
 
   return (
     <Wrapper>
@@ -26,8 +30,7 @@ const Header: FC = () => {
         <Title>Admin Events</Title>
       }
 
-      <Hamburger className={menuOpen ? "active" : "Hamburger"} onClick={() => setMenuOpen(!menuOpen)}>
-        {/* <Hamburger > */}
+      <Hamburger className={menuOpen ? "active" : "Hamburger"} onClick={() => dispatch(setMenuOpen(!menuOpen))}>
         <span id='line1' />
         <span id='line2' />
         <span id='line3' />
