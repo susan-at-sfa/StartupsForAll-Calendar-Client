@@ -82,9 +82,10 @@ const Wrapper = styled.section`
   z-index: 2;
   transition: all 0.5s ease;
   &.active{
+    color: black;
     height: 100vh;
     width: 100vw;
-    background-color: black;
+    background-color: white;
     background-image: none;
     transition: 0.5s ease;
   }

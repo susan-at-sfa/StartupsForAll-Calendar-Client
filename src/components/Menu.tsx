@@ -5,21 +5,34 @@ const Menu: FC = () => {
   const [cohortMenuOpen, setCohortMenuOpen] = useState(false);
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
 
+  const startUpsURL: string = "https://startupsforall.org/"
+  const codaLink: string = "https://coda.io/signin?continueTo=%2Fd%2FSfA-Cohort-2-Team-Hub_dNycPZJTj2Q&errorMessage=VW5hdXRob3JpemVk%3AQmdyWWVXeGxnOWFQU2JJVA%3AEcEKH5iyz0P178O72CsqKlb_4Iohya1G6f51eLi8YAM"
+  const cohortLinks = [
+    {
+      id: 1,
+      link: "founders-cohort2",
+      title: "Cohort 2"
+    },
+    {
+      id: 2,
+      link: "founders-cohort1",
+      title: "Cohort 1"
+    }
+  ]
+
   return (
     <HamburgerMenu>
       {!cohortMenuOpen && !dashboardMenuOpen
         ? (
           <ul>
             <li onClick={() => setCohortMenuOpen(true)}>
-              {/* Need to open secondary menu with links to cohort 1/cohort2 */}
-              <h4>Meet The Founders</h4>
+              <h4>{"Meet The Founders >"}</h4>
             </li>
             <li>
               <a href='https://startupsforall.org/#experts'>Our Experts</a>
             </li>
             <li onClick={() => setDashboardMenuOpen(true)}>
-              {/* Need to open secondary menu with links to cohort 1 and 2 dashboards */}
-              <h4>Cohort Dashboards</h4>
+              <h4>{"Cohort Dashboards >"}</h4>
             </li>
           </ul>
         )
@@ -29,9 +42,13 @@ const Menu: FC = () => {
               <li onClick={() => setCohortMenuOpen(false)}>
                 <h4>{"<Back"}</h4>
               </li>
-              <li>
-                <a href="">Cohort</a>
-              </li>
+              {cohortLinks.map((item) => {
+                const { id, title, link } = item;
+                return (
+                  <li key={id}>
+                    <a href={startUpsURL + link}>{title}</a>
+                  </li>)
+              })}
             </ul>
           )
           : dashboardMenuOpen
@@ -41,7 +58,10 @@ const Menu: FC = () => {
                   <h4>{"<Back"}</h4>
                 </li>
                 <li>
-                  <a href="">Dashboard</a>
+                  <a href={codaLink}>Cohort 2(via Coda)</a>
+                </li>
+                <li>
+                  <a href={startUpsURL + "dashboard"}>Cohort 1</a>
                 </li>
               </ul>
             )
@@ -52,26 +72,17 @@ const Menu: FC = () => {
 }
 
 const HamburgerMenu = styled.div`
-h4{
-  color: white
-}
-      /* width: 100vw;
-      height: 100vh;
-      background-color: black;
-      position: fixed;
-      top: 0;
-      right: -400px;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: all 1s ease;
-  &.active{
-        right: 0
-  } */
+  a{
+    text-decoration: none;
+  }
+  ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+  }
       `
-
-
 
 export default Menu;
