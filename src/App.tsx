@@ -13,7 +13,6 @@ import Add from "./containers/Add";
 import { useAppSelector } from "./hooks";
 import Header from "./components/header";
 import styled from "styled-components";
-import Menu from "./components/Menu";
 
 const App: FC = () => {
 
@@ -43,7 +42,6 @@ const App: FC = () => {
     <Wrapper>
       <Router>
         <Header />
-        <Menu />
         <Sections>
           <Switch>{routes}</Switch>
         </Sections>

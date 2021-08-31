@@ -6,13 +6,28 @@ import Navbar from "./navbar";
 import { useLocation } from "react-router";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { setMenuOpen } from "../store/slices/menu/menuOpenSlice";
+import Menu from "./Menu";
 
+// interface RouteTitles {
+//   "/": string;
+//   "/add": string;
+//   "/login": string;
+//   "/admin": string;
+// }
+
+// const Header: FC<RouteTitles> = () => {
 
 const Header: FC = () => {
   const menuOpen = useAppSelector(({ menu }) => menu.menuOpen)
   const dispatch = useAppDispatch()
   const location = useLocation()
-  console.log("HEADER STATE", menuOpen)
+
+  // const routeTitles = {
+  //   "/": "Events",
+  //   "/add": "Add Event",
+  //   "/login": "Login",
+  //   "/admin": "Admin Events"
+  // }
 
   return (
     <Wrapper className={menuOpen ? "active" : "Wrapper"}>
@@ -23,6 +38,15 @@ const Header: FC = () => {
         <span id='line2' />
         <span id='line3' />
       </Hamburger>
+      {menuOpen ?
+        <Menu />
+        : null
+      }
+
+      {/* {!menuOpen
+        ? <Title>{routeTitles[location.pathname]}</Title>
+        : null
+      } */}
 
       {menuOpen === false && location.pathname === "/" &&
         <Title>Events</Title>
