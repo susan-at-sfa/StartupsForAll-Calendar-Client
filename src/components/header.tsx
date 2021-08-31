@@ -38,10 +38,7 @@ const Header: FC = () => {
         <span id='line2' />
         <span id='line3' />
       </Hamburger>
-      {menuOpen ?
-        <Menu />
-        : null
-      }
+      {menuOpen ? <Menu /> : null}
 
       {/* {!menuOpen
         ? <Title>{routeTitles[location.pathname]}</Title>

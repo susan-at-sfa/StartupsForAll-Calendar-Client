@@ -19,6 +19,18 @@ const Menu: FC = () => {
       title: "Cohort 1"
     }
   ]
+  const dashboardLinks = [
+    {
+      id: 1,
+      link: codaLink,
+      title: "Cohort 2(via Coda)"
+    },
+    {
+      id: 2,
+      link: startUpsURL + "dashboard",
+      title: "Cohort 1"
+    }
+  ]
 
   return (
     <HamburgerMenu>
@@ -57,12 +69,14 @@ const Menu: FC = () => {
                 <li onClick={() => setDashboardMenuOpen(false)}>
                   <h4>{"<Back"}</h4>
                 </li>
-                <li>
-                  <a href={codaLink}>Cohort 2(via Coda)</a>
-                </li>
-                <li>
-                  <a href={startUpsURL + "dashboard"}>Cohort 1</a>
-                </li>
+                {dashboardLinks.map((item) => {
+                  const { id, title, link } = item;
+                  return (
+                    <li key={id}>
+                      <a href={link}>{title}</a>
+                    </li>
+                  )
+                })}
               </ul>
             )
             : null
@@ -76,13 +90,13 @@ const HamburgerMenu = styled.div`
     text-decoration: none;
   }
   ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 30px;
-  font-weight: 300;
-  text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
   }
-      `
+`
 
 export default Menu;
