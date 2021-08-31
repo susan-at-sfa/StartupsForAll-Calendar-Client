@@ -38,13 +38,13 @@ const Menu: FC = () => {
         ? (
           <ul>
             <li onClick={() => setCohortMenuOpen(true)}>
-              <h4>{"Meet The Founders >"}</h4>
+              <p>{"Meet The Founders >"}</p>
             </li>
             <li>
-              <a href='https://startupsforall.org/#experts'>Our Experts</a>
+              <p><a href='https://startupsforall.org/#experts'>Our Experts</a></p>
             </li>
             <li onClick={() => setDashboardMenuOpen(true)}>
-              <h4>{"Cohort Dashboards >"}</h4>
+              <p>{"Cohort Dashboards >"}</p>
             </li>
           </ul>
         )
@@ -52,7 +52,7 @@ const Menu: FC = () => {
           ? (
             <ul>
               <li onClick={() => setCohortMenuOpen(false)}>
-                <h4>{"<Back"}</h4>
+                <p>{"<Back"}</p>
               </li>
               {cohortLinks.map((item) => {
                 const { id, title, link } = item;
@@ -67,7 +67,7 @@ const Menu: FC = () => {
             ? (
               <ul>
                 <li onClick={() => setDashboardMenuOpen(false)}>
-                  <h4>{"<Back"}</h4>
+                  <p>{"<Back"}</p>
                 </li>
                 {dashboardLinks.map((item) => {
                   const { id, title, link } = item;
@@ -87,6 +87,7 @@ const Menu: FC = () => {
 
 const HamburgerMenu = styled.div`
   a{
+    color: black;
     text-decoration: none;
   }
   ul{
@@ -95,6 +96,7 @@ const HamburgerMenu = styled.div`
     padding: 0;
     font-size: 30px;
     font-weight: 300;
+    font-style: normal;
     text-align: center;
   }
 `
