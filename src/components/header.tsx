@@ -16,27 +16,29 @@ const Header: FC = () => {
 
   return (
     <Wrapper className={menuOpen ? "active" : "Wrapper"}>
-      <Logo src={logo} alt="Startups for All logo" />
-      {location.pathname === "/" &&
-        <Title>Events</Title>
-      }
-      {location.pathname === "/add" &&
-        <Title>Add Event</Title>
-      }
-      {location.pathname === "/login" &&
-        <Title>Login</Title>
-      }
-      {location.pathname === "/admin" &&
-        <Title>Admin Events</Title>
-      }
 
+      <Logo src={logo} alt="Startups for All logo" />
       <Hamburger className={menuOpen ? "active" : "Hamburger"} onClick={() => dispatch(setMenuOpen(!menuOpen))}>
         <span id='line1' />
         <span id='line2' />
         <span id='line3' />
       </Hamburger>
 
-      <Navbar />
+      {menuOpen === false && location.pathname === "/" &&
+        <Title>Events</Title>
+      }
+      {menuOpen === false && location.pathname === "/add" &&
+        <Title>Add Event</Title>
+      }
+      {menuOpen === false && location.pathname === "/login" &&
+        <Title>Login</Title>
+      }
+      {menuOpen === false && location.pathname === "/admin" &&
+        <Title>Admin Events</Title>
+      }
+      {menuOpen === false &&
+        <Navbar />}
+
     </Wrapper>
   )
 }
@@ -53,7 +55,15 @@ const Wrapper = styled.section`
   background-image: url(${headerImage});
   background-size: cover;
   overflow: hidden;
-  z-index: 3;
+  z-index: 2;
+  transition: all 0.5s ease;
+  &.active{
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    background-image: none;
+    transition: 0.5s ease;
+  }
 `
 const Title = styled.div`
   font-style: normal;
@@ -70,6 +80,7 @@ const Logo = styled.img`
   width: 200px;
   left: 15px;
   top: 15px;
+  z-index: 4;
 `
 
 const Hamburger = styled.div`
@@ -82,6 +93,7 @@ const Hamburger = styled.div`
   top: 10px;
   right: 15px;
   cursor: pointer;
+  z-index: 4;
   &.active{
     span{
       &:first-of-type{

@@ -42,8 +42,8 @@ const App: FC = () => {
   return (
     <Wrapper>
       <Router>
-        <Menu />
         <Header />
+        <Menu />
         <Sections>
           <Switch>{routes}</Switch>
         </Sections>

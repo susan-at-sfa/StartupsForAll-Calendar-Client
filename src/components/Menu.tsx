@@ -9,7 +9,7 @@ const Menu: FC = () => {
   console.log("MENU STATE", menuOpen)
 
   return (
-    <HamburgerMenu className={'menu ' + (menuOpen && 'active')} id='menu'>
+    <HamburgerMenu className={menuOpen ? 'active' : 'HamburgerMenu'} >
       <ul>
         <li onClick={() => dispatch(setMenuOpen(false))}>
           <a href='./events'>Home</a>
@@ -32,9 +32,9 @@ const HamburgerMenu = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 1s ease;
-  &.active{
+  /* &.active{
     right: 0
-  }
+  } */
 `
 
 
