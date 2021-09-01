@@ -1,6 +1,6 @@
 import React, { FormEvent, FC, useState } from "react";
-// import RedButton from "../RedButton";
-// import FormInput from "../FormInput";
+import RedButton from "../RedButton";
+import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { makeRequest } from "../../store/utils/makeRequest";
@@ -36,39 +36,28 @@ const AuthorizeToAddEvents: FC = () => {
     <form onSubmit={validateAndSubmit}>
       <div>
         <FormLabel text="Name" />
-        <input
-          required
-          placeholder="Name"
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-        />
+        <FormInput required placeholder="Name" type="text" onChange={setName} />
       </div>
       <div>
         <FormLabel text="Email Address" />
-        <input
+        <FormInput
           required
           placeholder="Email Address"
           type="email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={setEmail}
         />
       </div>
       <div>
         <FormLabel text="Password" />
-        <input
+        <FormInput
           required
           placeholder="Password"
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={setPassword}
         />
       </div>
       <ButtonDiv>
-        <button
-          // buttonText="Submit"
-          // TODO: edit RedButton to take in a button type prop/attribute
-          type="submit"
-        >
-          Submit
-        </button>
+        <RedButton buttonText="Submit" buttonType="submit" />
       </ButtonDiv>
     </form>
   );

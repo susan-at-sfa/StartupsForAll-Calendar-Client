@@ -3,13 +3,12 @@ import styled from "@emotion/styled";
 
 interface RedButtonProps {
   buttonText: string;
+  buttonType: "button" | "reset" | "submit";
 }
 
 const RedButton: FC<RedButtonProps> = (props) => {
-  return (
-    <Button>{props.buttonText}</Button >
-  )
-}
+  return <Button type={props.buttonType}>{props.buttonText}</Button>;
+};
 
 const Button = styled.button`
   color: white;
@@ -18,7 +17,7 @@ const Button = styled.button`
   border: none;
   width: 50%;
   height: 35px;
-  background-color:  #A36760;
-`
+  background-color: #a36760;
+`;
 
 export default RedButton;

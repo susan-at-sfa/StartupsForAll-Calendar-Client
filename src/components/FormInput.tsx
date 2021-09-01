@@ -1,10 +1,11 @@
-import { FC } from "react"
-import styled from "@emotion/styled"
+import { FC } from "react";
+import styled from "@emotion/styled";
 
 interface FormInputProps {
   placeholder?: string;
   type?: string;
   required?: boolean;
+  onChange(value: string): void;
 }
 
 const FormInput: FC<FormInputProps> = (props) => {
@@ -13,31 +14,32 @@ const FormInput: FC<FormInputProps> = (props) => {
       placeholder={props.placeholder}
       type={props.type}
       required={props.required}
+      onChange={(e) => props.onChange(e.target.value)}
     />
-  )
-}
+  );
+};
 
 const Input = styled.input`
   /* float: right; */
-  border: 8px solid  #E8D9D6;
+  border: 8px solid #e8d9d6;
   border-right-width: 20px;
   height: 45px;
   padding-left: 15px;
   padding-right: 15px;
   width: 300px;
   margin-bottom: 15px;
-  &::placeholder{
-    color: #E8D9D6;
+  &::placeholder {
+    color: #e8d9d6;
     font-weight: bold;
-    }
-  &:focus{
+  }
+  &:focus {
     outline: none;
-    border-color: #A36760;
+    border-color: #a36760;
     transition: 0.75s ease;
-    }
-  &:focus::placeholder{
-    color: #A36760;
+  }
+  &:focus::placeholder {
+    color: #a36760;
     transition: 0.75s ease;
-    }
-`
-export default FormInput
+  }
+`;
+export default FormInput;
