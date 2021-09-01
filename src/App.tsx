@@ -15,9 +15,9 @@ import Header from "./components/header";
 import styled from "styled-components";
 
 const App: FC = () => {
-
   const token = useAppSelector(({ auth }) => auth.token);
-  // const username = useAppSelector(({ user }) => user.username);
+  const user = useAppSelector(({ user }) => user);
+  console.log("USER UPDATE", user);
 
   const routes = useMemo(() => {
     const jsx = [
@@ -53,19 +53,19 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-height: 100vh;
-display: flex;
-`
+  height: 100vh;
+  display: flex;
+`;
 
 const Sections = styled.section`
-width: 100%;
-height: calc(100vh - 250px);
-position: relative;
-top: 250px;
-scroll-behavior: smooth;
-scrollbar-width: none;
-overflow: hidden;
-  &::-webkit-scrollbar{
+  width: 100%;
+  height: calc(100vh - 250px);
+  position: relative;
+  top: 250px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overflow: hidden;
+  &::-webkit-scrollbar {
     display: none;
   }
-`
+`;

@@ -25,9 +25,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     getUser(state) {
+      console.log('userSlice getUser()', state);
       return state;
     },
     setUser(state, action) {
+      console.log('setUser in userSlice', action);
       const userData = action.payload;
       return { ...state, ...userData };
     },

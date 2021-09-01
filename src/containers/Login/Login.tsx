@@ -1,7 +1,4 @@
 import React, { FC, useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/logo.svg";
-import { Routes } from "../../constants/routes";
 import { useAppDispatch } from "../../hooks";
 import { login } from "../../store/slices/auth/authSlice";
 import RedButton from "../../components/RedButton";

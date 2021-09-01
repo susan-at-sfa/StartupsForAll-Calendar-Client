@@ -13,20 +13,14 @@ const AuthorizeToAddEvents: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const validateAndSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!name || !email || !password) return showValidationErrors();
     const payload = { name, email, password };
     dispatch(login(payload));
   };
 
-  const showValidationErrors = () => {
-    // TODO: replace me with a service/modal or something better...
-    return alert("VALIDATION ERRORS - this is horrible!");
-  };
-
   return (
-    <form onSubmit={validateAndSubmit}>
+    <form onSubmit={submitForm}>
       <FormLabel htmlFor="name" text="Name" />
       <FormInput
         name="name"

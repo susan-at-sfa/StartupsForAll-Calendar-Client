@@ -16,6 +16,7 @@ const userSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<{ username?: string; password: string, name?: string, email?: string }>) {},
     setToken(state, action: PayloadAction<{ token: string }>) {
+      console.log('hit authSlice setToken', action);
       const { token } = action.payload;
       return { ...state, token };
     },
