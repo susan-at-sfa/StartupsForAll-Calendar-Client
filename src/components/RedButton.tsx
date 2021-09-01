@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 interface RedButtonProps {
   buttonText: string;
   buttonType: "button" | "reset" | "submit";
+  onClick?(value: string): void;
 }
 
 const RedButton: FC<RedButtonProps> = (props) => {

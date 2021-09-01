@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface UserState {
-  username: string;
+  name?: string;
+  username?: string;
   status: 'idle' | 'loading' | 'failed';
-  email: string;
-  id: string;
-  created_at: string;
-  updated_at: string;
+  email?: string;
+  id?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 const initialState: UserState = {
+  name: '',
   username: '',
   status: 'idle',
   email: '',

@@ -3,28 +3,21 @@ import RedButton from "../RedButton";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
-import { makeRequest } from "../../store/utils/makeRequest";
+import { useAppDispatch } from "../../hooks";
+import { login } from "../../store/slices/auth/authSlice";
 
 const AuthorizeToAddEvents: FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const dispatch = useAppDispatch();
+
   const validateAndSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!name || !email || !password) return showValidationErrors();
-    const formData = {
-      name: name,
-      email: email,
-      password: password,
-    };
-    console.log("validate and submit clicked", name, email, password, formData);
-    const { success, data, error } = await makeRequest(
-      `${process.env.REACT_APP_API_URL}/confirm-privileges`,
-      "POST",
-      formData
-    );
-    console.log("got result from makeRequest:", success, data, error);
+    const payload = { name, email, password };
+    dispatch(login(payload));
   };
 
   const showValidationErrors = () => {
@@ -34,28 +27,33 @@ const AuthorizeToAddEvents: FC = () => {
 
   return (
     <form onSubmit={validateAndSubmit}>
-      <div>
-        <FormLabel text="Name" />
-        <FormInput required placeholder="Name" type="text" onChange={setName} />
-      </div>
-      <div>
-        <FormLabel text="Email Address" />
-        <FormInput
-          required
-          placeholder="Email Address"
-          type="email"
-          onChange={setEmail}
-        />
-      </div>
-      <div>
-        <FormLabel text="Password" />
-        <FormInput
-          required
-          placeholder="Password"
-          type="password"
-          onChange={setPassword}
-        />
-      </div>
+      <FormLabel htmlFor="name" text="Name" />
+      <FormInput
+        name="name"
+        onChange={setName}
+        placeholder="Name"
+        required
+        type="text"
+        value={name}
+      />
+      <FormLabel htmlFor="email" text="Email Address" />
+      <FormInput
+        name="email"
+        onChange={setEmail}
+        placeholder="Email Address"
+        required
+        type="email"
+        value={email}
+      />
+      <FormLabel htmlFor="password" text="Password" />
+      <FormInput
+        name="password"
+        onChange={setPassword}
+        required
+        placeholder="Password"
+        type="password"
+        value={password}
+      />
       <ButtonDiv>
         <RedButton buttonText="Submit" buttonType="submit" />
       </ButtonDiv>

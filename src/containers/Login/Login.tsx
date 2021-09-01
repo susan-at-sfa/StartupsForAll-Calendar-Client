@@ -4,7 +4,9 @@ import logo from "../../assets/logo.svg";
 import { Routes } from "../../constants/routes";
 import { useAppDispatch } from "../../hooks";
 import { login } from "../../store/slices/auth/authSlice";
-import "./index.css";
+import RedButton from "../../components/RedButton";
+import FormInput from "../../components/FormInput";
+import FormLabel from "../../components/FormLabel";
 
 const Login: FC = () => {
   const [username, setUsername] = useState("");
@@ -13,42 +15,25 @@ const Login: FC = () => {
   const dispatch = useAppDispatch();
 
   function handleLogin() {
-    dispatch(login({ username, password }));
+    const payload = { username, password };
+    dispatch(login(payload));
   }
   return (
     <div className="Login">
-      <header className="Login-header">
-        <img src={logo} className="Login-logo" alt="logo" />
-        <p>
-          Edit <code>src/containers/Login.tsx</code> and save to reload.
-        </p>
-        <div className="input-container">
-          <label htmlFor="username">
-            Username
-            <input
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              name="username"
-            />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              name="password"
-              type="password"
-            />
-          </label>
-        </div>
-        <div className="button">
-          <button onClick={handleLogin}>Submit</button>
-        </div>
-        <div className="links">
-          <Link to={Routes.Events}>Back To Events</Link>
-          <Link to={Routes.Add}>Add</Link>
-        </div>
-      </header>
+      <FormLabel htmlFor="username" text="Username" />
+      <FormInput value={username} onChange={setUsername} name="username" />
+      <FormLabel htmlFor="password" text="Password" />
+      <FormInput
+        value={password}
+        onChange={setPassword}
+        name="password"
+        type="password"
+      />
+      <RedButton
+        buttonText="submit"
+        onClick={handleLogin}
+        buttonType="submit"
+      />
     </div>
   );
 };

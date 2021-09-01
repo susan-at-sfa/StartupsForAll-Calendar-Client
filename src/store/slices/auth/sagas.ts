@@ -6,9 +6,18 @@ import { makeRequest } from '../../utils/makeRequest';
 
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:1323';
 
-function* loginUser(action: PayloadAction<{ username: string; password: string }>) {
-  console.log('LOGGING IN', action.payload.username);
-  const { success, data, error } = yield call(makeRequest, `${BASE_URL}/login`, 'POST', action.payload);
+function* loginUser(action: PayloadAction<{ username?: string; password: string; name?: string; email?: string; }>) {
+  console.log('LOGGING IN', action);
+  let endpoint;
+  if (action.payload.email) {
+    // email is only provided for event key auth
+    endpoint = 'confirm-privileges'
+  } else {
+    // admin user login
+    endpoint = 'login'
+  }
+  const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}`, 'POST', action.payload);
+
   if (success) {
     console.log('SUCCESS LOGIN', data);
     yield put(setToken({ token: data.access_token }));

@@ -6,6 +6,8 @@ interface FormInputProps {
   type?: string;
   required?: boolean;
   onChange(value: string): void;
+  value?: string;
+  name?: string;
 }
 
 const FormInput: FC<FormInputProps> = (props) => {
@@ -15,6 +17,8 @@ const FormInput: FC<FormInputProps> = (props) => {
       type={props.type}
       required={props.required}
       onChange={(e) => props.onChange(e.target.value)}
+      value={props.value}
+      name={props.name}
     />
   );
 };
