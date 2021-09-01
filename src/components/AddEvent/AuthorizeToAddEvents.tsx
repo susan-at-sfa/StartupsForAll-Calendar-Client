@@ -14,7 +14,6 @@ const AuthorizeToAddEvents: FC = () => {
     event.preventDefault();
     if (!name || !email || !password) return showValidationErrors();
     const formData = {
-      username: "eventKey", // TODO: is this secure or do I need a DTO for eventKey on the back?
       name: name,
       email: email,
       password: password,
