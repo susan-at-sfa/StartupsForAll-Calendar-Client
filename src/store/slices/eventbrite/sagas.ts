@@ -15,7 +15,7 @@ function* fetchEvent(action: PayloadAction<{ id: string }>) {
     // We can (and probably should) transform the eventbrite external api response to a preferred shape on the API side instead.
     const eventData: EventbriteEvent = {
       ...data,
-      name: data.name.text,
+      name: data.name,
       // etc..
     }
     yield put(setEventbrite(eventData));

@@ -37,6 +37,9 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
           </React.Fragment>
         );
       })}
+      <div>
+        <RedButton buttonType="submit" buttonText="Looks Alright To Me" />
+      </div>
     </form>
   );
 };
