@@ -17,23 +17,88 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
   };
 
   return (
-    <form onSubmit={submitForm}>
-      <FormLabel htmlFor="eventbriteID" text="Enter Event Brite ID" />
-      <FormInput
-        name="eventbriteID"
-        onChange={setEventbriteID}
-        placeholder="EventBrite ID"
-        required
-        type="text"
-        value={eventbriteID}
-      />
+    <EventbritePasteWrapper>
+      <PasteLinkContainer>
+        <form onSubmit={submitForm}>
+          <FormLabel htmlFor="eventbriteID" text="Enter Event Brite ID" />
+          <PasteLink>
+            <input
+              name="eventbriteID"
+              onChange={(e) => setEventbriteID(e.target.value)}
+              placeholder="EventBrite ID"
+              required
+              type="text"
+              value={eventbriteID}
+            />
+            <button type="submit">Get Info</button>
+          </PasteLink>
+        </form>
+      </PasteLinkContainer>
+      <SkipEventbrite>
+        <p>OR</p>
+      </SkipEventbrite>
       <ButtonDiv>
-        <RedButton buttonText="Get Info" buttonType="submit" />
+        <RedButton buttonText="Create New" buttonType="button" />
       </ButtonDiv>
-    </form>
+    </EventbritePasteWrapper>
   );
 };
 
 export default EventbriteIDInput;
 
-const ButtonDiv = styled.div``;
+const EventbritePasteWrapper = styled.div`
+display: flex;
+`
+const PasteLinkContainer = styled.div`
+display: flex;
+position: fixed;
+top:285px;
+right: 0;
+`
+const PasteLink = styled.div`
+display: flex;
+border: 8px solid #e8d9d6;
+height: 45px;
+width: 350px;
+border-right-width: 0px;
+right: 0;
+button{
+  font-weight: bold;
+  font-size: 14px;
+  flex: 0.4;
+  color: white;
+  height: 45px;
+  background-color: #a36760;
+  border: none;
+}
+input{
+  flex: 0.6;
+  border: none;
+  &::placeholder {
+    color: #e8d9d6;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  &:focus::placeholder {
+    color: #a36760;
+    transition: 0.75s ease;
+  }
+}
+`
+const SkipEventbrite = styled.div`
+position: fixed;
+top: 375px;
+left: 165px;
+`
+const ButtonDiv = styled.div`
+width: 350px;
+position: fixed;
+top: 435px;
+right: 0;
+`
+
+

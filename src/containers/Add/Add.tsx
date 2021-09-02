@@ -22,11 +22,11 @@ const Add: FC = () => {
   return (
     // Since our default state is now the initialState object seen in eventbriteSlice, we check existence differently.
     // There's probably a better way to do this.
-    !eventbriteDetails.id ? (
-      <EventbriteIDInput handleSubmit={handleSubmit} />
-    ) : (
-      <EventDetailsForm eventDetails={eventbriteDetails} />
-    )
+    // !eventbriteDetails.id ? (
+    <EventbriteIDInput handleSubmit={handleSubmit} />
+    // ) : (
+    //   <EventDetailsForm eventDetails={eventbriteDetails} />
+    // )
   );
 };
 

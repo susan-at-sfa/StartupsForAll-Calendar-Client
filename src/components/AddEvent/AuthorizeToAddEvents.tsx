@@ -20,41 +20,56 @@ const AuthorizeToAddEvents: FC = () => {
   };
 
   return (
-    <form onSubmit={submitForm}>
-      <FormLabel htmlFor="name" text="Name" />
-      <FormInput
-        name="name"
-        onChange={setName}
-        placeholder="Name"
-        required
-        type="text"
-        value={name}
-      />
-      <FormLabel htmlFor="email" text="Email Address" />
-      <FormInput
-        name="email"
-        onChange={setEmail}
-        placeholder="Email Address"
-        required
-        type="email"
-        value={email}
-      />
-      <FormLabel htmlFor="password" text="Password" />
-      <FormInput
-        name="password"
-        onChange={setPassword}
-        required
-        placeholder="Password"
-        type="password"
-        value={password}
-      />
-      <ButtonDiv>
-        <RedButton buttonText="Submit" buttonType="submit" />
-      </ButtonDiv>
-    </form>
+    <EventAuthPage>
+      <form onSubmit={submitForm}>
+        <FormLabel htmlFor="name" text="Name" />
+        <FormInput
+          name="name"
+          onChange={setName}
+          placeholder="Name"
+          required
+          type="text"
+          value={name}
+        />
+        <FormLabel htmlFor="email" text="Email Address" />
+        <FormInput
+          name="email"
+          onChange={setEmail}
+          placeholder="Email Address"
+          required
+          type="email"
+          value={email}
+        />
+        <FormLabel htmlFor="password" text="Password" />
+        <FormInput
+          name="password"
+          onChange={setPassword}
+          required
+          placeholder="Password"
+          type="password"
+          value={password}
+        />
+        <ButtonDiv>
+          <RedButton buttonText="Submit" buttonType="submit" />
+        </ButtonDiv>
+      </form>
+    </EventAuthPage>
   );
 };
 
 export default AuthorizeToAddEvents;
 
-const ButtonDiv = styled.div``;
+const EventAuthPage = styled.div`
+display: flex;
+position: fixed;
+right: 0;
+top: 275px;
+`
+
+const ButtonDiv = styled.div`
+position: fixed;
+right: 0;
+width: 350px;
+height: 15px;
+margin-top: 20px;
+`

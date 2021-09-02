@@ -3,6 +3,12 @@ import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
 import { useState } from "react";
 
+// export interface NavbarProps {
+//   id: string;
+//   title: string;
+//   isSelected: boolean;
+// }
+
 const Navbar: FC = () => {
   const [selected, setSelected] = useState('/add')
   console.log(selected)

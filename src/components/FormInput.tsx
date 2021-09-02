@@ -24,7 +24,6 @@ const FormInput: FC<FormInputProps> = (props) => {
 };
 
 const Input = styled.input`
-  /* float: right; */
   border: 8px solid #e8d9d6;
   border-right-width: 20px;
   height: 45px;

@@ -8,17 +8,23 @@ interface RedButtonProps {
 }
 
 const RedButton: FC<RedButtonProps> = (props) => {
-  return <Button type={props.buttonType}>{props.buttonText}</Button>;
+  return <Button type={props.buttonType}><span>{props.buttonText}</span></Button>;
 };
 
 const Button = styled.button`
+display: flex;
   color: white;
   font-weight: bold;
   font-size: 14px;
   border: none;
-  width: 50%;
+  width: 100%;
   height: 35px;
   background-color: #a36760;
+  /* span{
+    position: relative;
+    left: 50vw;
+    top: 25%;
+  } */
 `;
 
 export default RedButton;
