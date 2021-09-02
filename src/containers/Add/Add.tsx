@@ -9,7 +9,7 @@ import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbrite
 const Add: FC = () => {
   const dispatch = useDispatch();
   const token = useAppSelector(({ auth }) => auth.token);
-  const eventbriteDetails = useAppSelector(({ eventbrite }) => eventbrite)
+  const eventbriteDetails = useAppSelector(({ eventbrite }) => eventbrite);
 
   const handleSubmit = (id: string) => {
     dispatch(requestEventbriteEvent({ id }));
@@ -22,12 +22,12 @@ const Add: FC = () => {
   return (
     // Since our default state is now the initialState object seen in eventbriteSlice, we check existence differently.
     // There's probably a better way to do this.
-    !eventbriteDetails.name
-      ? <EventbriteIDInput handleSubmit={handleSubmit} />
-      : <EventDetailsForm eventDetails={eventbriteDetails}/>
+    !eventbriteDetails.id ? (
+      <EventbriteIDInput handleSubmit={handleSubmit} />
+    ) : (
+      <EventDetailsForm eventDetails={eventbriteDetails} />
+    )
   );
 };
 
 export default Add;
-
-// const ButtonDiv = styled.div``
