@@ -1,49 +1,31 @@
-import { FC, useState } from "react";
-import { makeRequest } from "../../store/utils/makeRequest";
+import { FC } from "react";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../hooks";
 import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
 import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
 import EventDetailsForm from "../../components/AddEvent/EventDetails";
+import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 
 const Add: FC = () => {
+  const dispatch = useDispatch();
   const token = useAppSelector(({ auth }) => auth.token);
-  const [eventBriteDetails, setEventBriteDetails] = useState<any>({});
+  const eventbriteDetails = useAppSelector(({ eventbrite }) => eventbrite)
 
-  const handleSubmit = async (id: string) => {
-    const url = `${process.env.REACT_APP_API_URL}/events/event-brite/${id}`;
-    const method = "GET";
-    try {
-      const { success, data, error } = await makeRequest(url, method);
-      if (error) throw new Error(error);
-      if (success) setEventBriteDetails(data);
-      console.log(eventBriteDetails);
-    } catch (e) {
-      // TODO: handle error
-      console.error(e);
-    }
+  const handleSubmit = (id: string) => {
+    dispatch(requestEventbriteEvent({ id }));
   };
 
-  const addEvent = async () => {
-    console.log("addevent 165969600543");
-  };
-
-  let renderedElement;
   if (!token) {
-    renderedElement = <AuthorizeToAddEvents />;
-  } else if (Object.keys(eventBriteDetails).length === 0) {
-    console.log("eb details:", eventBriteDetails);
-    renderedElement = <EventbriteIDInput handleSubmit={handleSubmit} />;
-  } else {
-    console.log("eb details:", eventBriteDetails);
-    renderedElement = (
-      <EventDetailsForm
-        handleSubmit={addEvent}
-        eventDetails={eventBriteDetails}
-      />
-    );
+    return <AuthorizeToAddEvents />;
   }
 
-  return renderedElement;
+  return (
+    // Since our default state is now the initialState object seen in eventbriteSlice, we check existence differently.
+    // There's probably a better way to do this.
+    !eventbriteDetails.name
+      ? <EventbriteIDInput handleSubmit={handleSubmit} />
+      : <EventDetailsForm eventDetails={eventbriteDetails}/>
+  );
 };
 
 export default Add;
