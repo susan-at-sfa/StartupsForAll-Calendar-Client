@@ -100,7 +100,7 @@ function* fetchEvent(action: PayloadAction<{ id: string }>) {
         },
         {
           key: 'Start Time',
-          value: data.start.utc.split('T')[1],
+          value: data.start.utc,
           type: 'text',
           placeholder: null,
           info: null,
@@ -108,7 +108,7 @@ function* fetchEvent(action: PayloadAction<{ id: string }>) {
         },
         {
           key: 'End Time',
-          value: data.start.utc.split('T')[1],
+          value: data.end.utc,
           type: 'text',
           placeholder: null,
           info: null,

@@ -2,7 +2,6 @@ import React, { FormEvent, FC } from "react";
 import EventbriteEvent from "../../store/slices/eventbrite/EventbriteEvent";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
-import RedButton from "../RedButton";
 import styled from "@emotion/styled";
 
 interface EventDetailsFormProps {
@@ -20,7 +19,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
   };
 
   return (
-    <FormContainer>
+    <Wrapper>
       {eventDetails.logo ? (
         <img
           src={eventDetails.logo}
@@ -29,36 +28,41 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
         />
       ) : null}
       <form onSubmit={submitForm}>
-        {eventDetails.form_elements &&
-          eventDetails.form_elements.map((formElement) => {
-            const { key, type, placeholder, info, disabled } = formElement;
-            let value: string;
-            if (
-              formElement.key === "Start Time" ||
-              formElement.key === "End Time"
-            ) {
-              value = formElement.value.toLocaleString();
-            } else {
-              value = formElement.value;
-            }
-            return (
-              <fieldset key={key}>
-                {type === "hidden" ? null : (
-                  <FormLabel htmlFor={key} text={key} />
-                )}
-                <FormInput
-                  placeholder={placeholder}
-                  type={type}
-                  required
-                  disabled={disabled}
-                  onChange={(change) => makeChange(value, change)}
-                  value={value}
-                  name={key}
-                />
-                {info ? <span>{info}</span> : null}
-              </fieldset>
-            );
-          })}
+        <FormFields>
+          {eventDetails.form_elements &&
+            eventDetails.form_elements.map((formElement) => {
+              const { key, type, placeholder, info, disabled } = formElement;
+              let value: string;
+              if (
+                formElement.key === "Start Time" ||
+                formElement.key === "End Time"
+              ) {
+                value = new Date(formElement.value)
+                  .toLocaleString()
+                  .split(" ")[1]
+                  .slice(0, -3);
+              } else {
+                value = formElement.value;
+              }
+              return (
+                <fieldset key={key}>
+                  {type === "hidden" ? null : (
+                    <FormLabel htmlFor={key} text={key} />
+                  )}
+                  <FormInput
+                    placeholder={placeholder}
+                    type={type}
+                    required
+                    disabled={disabled}
+                    onChange={(change) => makeChange(value, change)}
+                    value={value}
+                    name={key}
+                  />
+                  {info ? <span>{info}</span> : null}
+                </fieldset>
+              );
+            })}
+        </FormFields>
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
@@ -71,11 +75,16 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
           </ButtonDiv>
         </EventsGreenDiv>
       </form>
-    </FormContainer>
+    </Wrapper>
   );
 };
 
 export default EventDetailsForm;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const EventsGreenDiv = styled.div`
   display: flex;
@@ -87,7 +96,7 @@ const EventsGreenDiv = styled.div`
   background: #7bb1a7;
   z-index: 4;
 `;
-const FormContainer = styled.div`
+const FormFields = styled.div`
   position: relative;
   bottom: 90px;
 `;
