@@ -50,7 +50,7 @@ const AuthorizeToAddEvents: FC = () => {
           value={password}
         />
         <ButtonDiv>
-          <RedButton buttonText="Submit" buttonType="submit" />
+          <button type="submit"><span>Submit</span></button>
         </ButtonDiv>
       </form>
     </EventAuthPage>
@@ -67,9 +67,22 @@ top: 275px;
 `
 
 const ButtonDiv = styled.div`
-position: fixed;
-right: 0;
+display: flex;
 width: 350px;
-height: 15px;
-margin-top: 20px;
+position: fixed;
+bottom: 185px;
+right: 0;
+span{
+  position: relative;
+  left: -15px;
+}
+button{
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  height: 35px;
+  background-color: #a36760;
+}
 `

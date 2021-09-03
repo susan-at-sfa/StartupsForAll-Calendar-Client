@@ -1,4 +1,4 @@
-import React, { FormEvent, FC, useState } from "react";
+import { FormEvent, FC, useState } from "react";
 import RedButton from "../RedButton";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
@@ -38,7 +38,7 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
         <p>OR</p>
       </SkipEventbrite>
       <ButtonDiv>
-        <RedButton buttonText="Create New" buttonType="button" />
+        <button type="submit"><span>Create New</span></button>
       </ButtonDiv>
     </EventbritePasteWrapper>
   );
@@ -95,10 +95,24 @@ top: 375px;
 left: 165px;
 `
 const ButtonDiv = styled.div`
+display: flex;
 width: 350px;
 position: fixed;
 top: 435px;
 right: 0;
+span{
+  position: relative;
+  left: -20px;
+}
+button{
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  height: 35px;
+  background-color: #a36760;
+}
 `
 
 
