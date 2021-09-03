@@ -1,14 +1,24 @@
-import React, { FormEvent, FC } from "react";
+import React, { FormEvent, FC, useState } from "react";
+import { useHistory } from "react-router";
 import EventbriteEvent from "../../store/slices/eventbrite/EventbriteEvent";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
+import { Topics } from "../../store/slices/eventbrite/Topics.enum";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import eventbriteSlice, {
+  setEventbrite,
+} from "../../store/slices/eventbrite/eventbriteSlice";
 
 interface EventDetailsFormProps {
   eventDetails: EventbriteEvent;
 }
 
 const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const [topics, setTopics] = useState<string[]>([]);
+
   const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // TODO: handle form submission
@@ -16,6 +26,22 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
 
   const makeChange = (element: any, value: any) => {
     console.log("make change val:", element, value);
+  };
+
+  const changeTopics = (topic: string) => {
+    const index = topics.indexOf(topic);
+    if (index === -1) {
+      setTopics([...topics, topic]);
+    } else {
+      const newTopics = topics.splice(index, 1);
+      setTopics(newTopics);
+    }
+  };
+
+  const cancelEvent = () => {
+    const eventData: EventbriteEvent = {};
+    dispatch(setEventbrite(eventData));
+    history.push("/add");
   };
 
   return (
@@ -45,7 +71,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
                 value = formElement.value;
               }
               return (
-                <fieldset key={key}>
+                <fieldset key={key} disabled={disabled}>
                   {type === "hidden" ? null : (
                     <FormLabel htmlFor={key} text={key} />
                   )}
@@ -62,11 +88,23 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
                 </fieldset>
               );
             })}
+          <fieldset>
+            <FormLabel htmlFor="topics" text="Topics" />
+            <select
+              multiple={true}
+              value={topics}
+              onChange={(e) => changeTopics(e.target.value)}
+            >
+              {Topics.map((topic) => (
+                <option value={topic}>{topic}</option>
+              ))}
+            </select>
+          </fieldset>
         </FormFields>
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
-            <button type="submit" id="dark">
+            <button type="submit" id="dark" onClick={cancelEvent}>
               Cancel
             </button>
             <button type="submit" id="light">
@@ -94,7 +132,7 @@ const EventsGreenDiv = styled.div`
   width: 100vw;
   bottom: 0px;
   background: #7bb1a7;
-  z-index: 4;
+  z-index: 2;
 `;
 const FormFields = styled.div`
   position: relative;

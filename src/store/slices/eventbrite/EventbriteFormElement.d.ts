@@ -4,5 +4,5 @@ export default interface EventbriteFormElement {
   type: string;
   placeholder: string | null;
   info: string | null;
-  disabled: boolean;
+  disabled: boolean | string;
 }

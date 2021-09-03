@@ -1,26 +1,17 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import headerImage from '../assets/images/s4aHEADER.png';
-import logo from '../assets/images/S4ALogo.png';
+import headerImage from "../assets/images/s4aHEADER.png";
+import logo from "../assets/images/S4ALogo.png";
 import Navbar from "./navbar";
 import { useLocation } from "react-router";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { setMenuOpen } from "../store/slices/menu/menuOpenSlice";
 import Menu from "./Menu";
 
-// interface RouteTitles {
-//   "/": string;
-//   "/add": string;
-//   "/login": string;
-//   "/admin": string;
-// }
-
-// const Header: FC<RouteTitles> = () => {
-
 const Header: FC = () => {
-  const menuOpen = useAppSelector(({ menu }) => menu.menuOpen)
-  const dispatch = useAppDispatch()
-  const location = useLocation()
+  const menuOpen = useAppSelector(({ menu }) => menu.menuOpen);
+  const dispatch = useAppDispatch();
+  const location = useLocation();
 
   // const routeTitles = {
   //   "/": "Events",
@@ -31,12 +22,14 @@ const Header: FC = () => {
 
   return (
     <Wrapper className={menuOpen ? "active" : "Wrapper"}>
-
       <Logo src={logo} alt="Startups for All logo" />
-      <Hamburger className={menuOpen ? "active" : "Hamburger"} onClick={() => dispatch(setMenuOpen(!menuOpen))}>
-        <span id='line1' />
-        <span id='line2' />
-        <span id='line3' />
+      <Hamburger
+        className={menuOpen ? "active" : "Hamburger"}
+        onClick={() => dispatch(setMenuOpen(!menuOpen))}
+      >
+        <span id="line1" />
+        <span id="line2" />
+        <span id="line3" />
       </Hamburger>
       {menuOpen ? <Menu /> : null}
 
@@ -45,24 +38,20 @@ const Header: FC = () => {
         : null
       } */}
 
-      {menuOpen === false && location.pathname === "/" &&
-        <Title>Events</Title>
-      }
-      {menuOpen === false && location.pathname === "/add" &&
+      {menuOpen === false && location.pathname === "/" && <Title>Events</Title>}
+      {menuOpen === false && location.pathname === "/add" && (
         <Title>Add Event</Title>
-      }
-      {menuOpen === false && location.pathname === "/login" &&
+      )}
+      {menuOpen === false && location.pathname === "/login" && (
         <Title>Login</Title>
-      }
-      {menuOpen === false && location.pathname === "/admin" &&
+      )}
+      {menuOpen === false && location.pathname === "/admin" && (
         <Title>Admin Events</Title>
-      }
-      {menuOpen === false &&
-        <Navbar />}
-
+      )}
+      {menuOpen === false && <Navbar />}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default Header;
 
@@ -78,23 +67,24 @@ const Wrapper = styled.section`
   overflow: hidden;
   z-index: 2;
   transition: all 0.5s ease;
-  &.active{
+  &.active {
     color: black;
     height: 100vh;
     width: 100vw;
     background-color: white;
     background-image: none;
     transition: 0.5s ease;
+    z-index: 4;
   }
-`
+`;
 const Title = styled.div`
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
   line-height: 54px;
   text-align: center;
-  color: #C79288;
-`
+  color: #c79288;
+`;
 
 const Logo = styled.img`
   position: absolute;
@@ -103,7 +93,7 @@ const Logo = styled.img`
   left: 15px;
   top: 15px;
   z-index: 4;
-`
+`;
 
 const Hamburger = styled.div`
   width: 34px;
@@ -116,17 +106,17 @@ const Hamburger = styled.div`
   right: 15px;
   cursor: pointer;
   z-index: 4;
-  &.active{
-    span{
-      &:first-of-type{
-      background-color: gray;
-      transform: rotate(45deg);
-      width: 75%;
+  &.active {
+    span {
+      &:first-of-type {
+        background-color: gray;
+        transform: rotate(45deg);
+        width: 75%;
       }
       &:nth-of-type(2) {
-          opacity: 0;
-        }
-      &:last-of-type{
+        opacity: 0;
+      }
+      &:last-of-type {
         opacity: 100;
         background-color: gray;
         transform: rotate(-45deg);
@@ -138,12 +128,11 @@ const Hamburger = styled.div`
   span {
     width: 100%;
     height: 1px;
-    background-color: #C79288;
+    background-color: #c79288;
     transform-origin: left;
     transition: all 1s ease;
-    &:nth-of-type(3){
+    &:nth-of-type(3) {
       opacity: 0;
     }
   }
-`
-
+`;
