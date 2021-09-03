@@ -10,13 +10,23 @@ function* fetchEvent(action: PayloadAction<{ id: string }>) {
   const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}`, 'GET');
 
   if (success) {
+    console.log('got eventbrite data:', data);
+    let start, end;
+    if (data.series_dates) {
+      console.log("FOUND A SERIES");
+      // TODO: where to handle this?
+    } else {
+      start = data.start.utc;
+      end = data.end.utc;
+    }
     // NOTE FROM ELLY:
     // Here we are constructing our own local event brite event object based on the returned data from the api call.
     // We can (and probably should) transform the eventbrite external api response to a preferred shape on the API side instead.
     const eventData: EventbriteEvent = {
       ...data,
       name: data.name,
-      // etc..
+      start: start,
+      end: end,
     }
     yield put(setEventbrite(eventData));
   }

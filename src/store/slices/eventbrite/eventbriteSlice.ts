@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import EventbriteSeries from './EventbriteSeries';
 export interface EventbriteEvent {
   name: string;
   created: Date | null;
@@ -10,6 +11,8 @@ export interface EventbriteEvent {
   end: Record<string, unknown>;
   id: string;
   url: string;
+  logo: string;
+  series_dates?: EventbriteSeries[];
 }
 
 const initialState: EventbriteEvent = {
@@ -23,6 +26,7 @@ const initialState: EventbriteEvent = {
   end: {},
   id: '',
   url: '',
+  logo: '',
 };
 
 const eventbriteSlice = createSlice({

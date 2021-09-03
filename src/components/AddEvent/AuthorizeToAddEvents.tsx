@@ -1,5 +1,4 @@
 import React, { FormEvent, FC, useState } from "react";
-import RedButton from "../RedButton";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
@@ -50,7 +49,9 @@ const AuthorizeToAddEvents: FC = () => {
           value={password}
         />
         <ButtonDiv>
-          <button type="submit"><span>Submit</span></button>
+          <button type="submit">
+            <span>Submit</span>
+          </button>
         </ButtonDiv>
       </form>
     </EventAuthPage>
@@ -60,29 +61,29 @@ const AuthorizeToAddEvents: FC = () => {
 export default AuthorizeToAddEvents;
 
 const EventAuthPage = styled.div`
-display: flex;
-position: fixed;
-right: 0;
-top: 275px;
-`
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 275px;
+`;
 
 const ButtonDiv = styled.div`
-display: flex;
-width: 350px;
-position: fixed;
-bottom: 185px;
-right: 0;
-span{
-  position: relative;
-  left: -15px;
-}
-button{
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  border: none;
-  width: 100%;
-  height: 35px;
-  background-color: #a36760;
-}
-`
+  display: flex;
+  width: 350px;
+  position: fixed;
+  bottom: 185px;
+  right: 0;
+  span {
+    position: relative;
+    left: -15px;
+  }
+  button {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    width: 100%;
+    height: 35px;
+    background-color: #a36760;
+  }
+`;
