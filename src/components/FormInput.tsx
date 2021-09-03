@@ -8,6 +8,7 @@ interface FormInputProps {
   onChange(value: string): void;
   value?: string;
   name?: string;
+  disabled?: boolean;
 }
 
 const FormInput: FC<FormInputProps> = (props) => {

@@ -18,7 +18,7 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
     <EventbritePasteWrapper>
       <PasteLinkContainer>
         <form onSubmit={submitForm}>
-          <FormLabel htmlFor="eventbriteID" text="Enter Event Brite ID" />s
+          <FormLabel htmlFor="eventbriteID" text="Enter Event Brite ID" />
           <PasteLink>
             <input
               name="eventbriteID"

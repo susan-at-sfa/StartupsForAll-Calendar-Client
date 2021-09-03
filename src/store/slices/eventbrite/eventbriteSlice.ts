@@ -1,32 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import EventbriteSeries from './EventbriteSeries';
-export interface EventbriteEvent {
-  name: string;
-  created: Date | null;
-  changed: Date | null;
-  currency: string;
-  description: string;
-  summary: string;
-  start: Record<string, unknown>;
-  end: Record<string, unknown>;
-  id: string;
-  url: string;
-  logo: string;
-  series_dates?: EventbriteSeries[];
-}
+import EventbriteEvent from './EventbriteEvent';
 
 const initialState: EventbriteEvent = {
-  name: '',
-  created: null,
-  changed: null,
-  currency: '',
-  description: '',
-  summary: '',
-  start: {},
-  end: {},
-  id: '',
-  url: '',
+  form_elements: [],
   logo: '',
+  series_dates: [],
 };
 
 const eventbriteSlice = createSlice({
