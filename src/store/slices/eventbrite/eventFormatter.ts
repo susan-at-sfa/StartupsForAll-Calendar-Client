@@ -9,7 +9,7 @@ export default (data: any): EventbriteEvent => {
 
   let formElements: EventbriteFormatted[] = [
     {
-      key: 'Changed',
+      key: 'changed',
       value: data.changed,
       type: 'hidden',
       placeholder: null,
@@ -17,23 +17,23 @@ export default (data: any): EventbriteEvent => {
       disabled: 'disabled'
     },
     {
-      key: 'Created',
+      key: 'created',
       value: data.created,
       type: 'hidden',
       placeholder: null,
       info: null,
       disabled: 'disabled'
     },
+    // {
+    //   key: 'Id',
+    //   value: data.id,
+    //   type: 'text',
+    //   placeholder: 'Id',
+    //   info: null,
+    //   disabled: 'disabled'
+    // },
     {
-      key: 'Id',
-      value: data.id,
-      type: 'text',
-      placeholder: 'Id',
-      info: null,
-      disabled: 'disabled'
-    },
-    {
-      key: 'Name',
+      key: 'name',
       value: data.name,
       type: 'text',
       placeholder: 'Name',
@@ -41,7 +41,7 @@ export default (data: any): EventbriteEvent => {
       disabled: false
     },
     {
-      key: 'Summary',
+      key: 'summary',
       value: data.summary,
       type: 'text',
       placeholder: 'Summary',
@@ -49,7 +49,7 @@ export default (data: any): EventbriteEvent => {
       disabled: false
     },
     {
-      key: 'Description', // TODO: see about getting this or leaving it off the entity entirely...
+      key: 'description', // TODO: see about getting this or leaving it off the entity entirely...
       value: data.description,
       type: 'text',
       placeholder: 'Description',
@@ -57,7 +57,7 @@ export default (data: any): EventbriteEvent => {
       disabled: false
     },
     {
-      key: 'Url',
+      key: 'url',
       value: data.url,
       type: 'text',
       placeholder: 'Url',
@@ -74,34 +74,34 @@ export default (data: any): EventbriteEvent => {
     formElements = [
       ...formElements,
       {
-        key: 'Start Date',
+        key: 'start_date',
         value: data.start.utc.split('T')[0],
         type: 'date',
-        placeholder: null,
+        placeholder: 'Start Date',
         info: null,
         disabled: 'disabled'
       },
       {
-        key: 'End Date',
+        key: 'end_date',
         value: data.end.utc.split('T')[0],
         type: 'date',
-        placeholder: null,
+        placeholder: 'End Date',
         info: null,
         disabled: 'disabled'
       },
       {
-        key: 'Start Time',
+        key: 'start_time',
         value: data.start.utc,
         type: 'text',
-        placeholder: null,
+        placeholder: 'Start Time',
         info: null,
         disabled: 'disabled'
       },
       {
-        key: 'End Time',
+        key: 'end_time',
         value: data.end.utc,
         type: 'text',
-        placeholder: null,
+        placeholder: 'End Time',
         info: null,
         disabled: 'disabled'
       },

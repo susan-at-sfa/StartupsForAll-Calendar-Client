@@ -5,10 +5,8 @@ import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { Topics } from "../../store/slices/eventbrite/Topics.enum";
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import eventbriteSlice, {
-  setEventbrite,
-} from "../../store/slices/eventbrite/eventbriteSlice";
+import { useAppDispatch } from "../../hooks";
+import { setEventbrite } from "../../store/slices/eventbrite/eventbriteSlice";
 
 interface EventDetailsFormProps {
   eventDetails: EventbriteEvent;
@@ -60,8 +58,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               const { key, type, placeholder, info, disabled } = formElement;
               let value: string;
               if (
-                formElement.key === "Start Time" ||
-                formElement.key === "End Time"
+                formElement.key === "start_time" ||
+                formElement.key === "end_time"
               ) {
                 value = new Date(formElement.value)
                   .toLocaleString()
@@ -73,7 +71,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               return (
                 <fieldset key={key} disabled={disabled}>
                   {type === "hidden" ? null : (
-                    <FormLabel htmlFor={key} text={key} />
+                    <FormLabel htmlFor={key} text={placeholder} />
                   )}
                   <FormInput
                     placeholder={placeholder}
@@ -82,7 +80,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
                     disabled={disabled}
                     onChange={(change) => makeChange(value, change)}
                     value={value}
-                    name={key}
+                    name={placeholder}
                   />
                   {info ? <span>{info}</span> : null}
                 </fieldset>
