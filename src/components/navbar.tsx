@@ -10,8 +10,8 @@ import { useState } from "react";
 // }
 
 const Navbar: FC = () => {
-  const [selected, setSelected] = useState('/add')
-  console.log(selected)
+  const [selected, setSelected] = useState('/')
+  console.log("Selected", selected)
 
   const linkList = [
     {
@@ -28,9 +28,12 @@ const Navbar: FC = () => {
     <Wrapper>
       <ul>
         {linkList.map((link, index) => {
-          return <li key={index}>
+          return <li
+            key={index}
+            onClick={() => setSelected(link.id)}
+            className={selected === link.id ? "active" : ""}
+          >
             <Link
-              onClick={() => setSelected(link.id)}
               to={link.id}
             >
               {link.title}
@@ -56,10 +59,18 @@ const Wrapper = styled.section`
 
   ul {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 15px;
+  }
+  li{
+    margin-right: 15px;
+    border-bottom: 3px solid transparent;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    &.active{
+      border-bottom: 3px solid white;
+    }
   }
 `
 
@@ -69,11 +80,5 @@ const Link = styled(NavLink)`
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
-  line-height: 30px;
-  margin-left: 20px;
-  border-bottom: 3px solid transparent;
-  padding-bottom: 7px;
-  .active{
-    border-bottom: 3px solid white;
-  }
+  /* margin-left: 20px; */
 `
