@@ -1,17 +1,16 @@
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
-import { useState } from "react";
-
-// export interface NavbarProps {
-//   id: string;
-//   title: string;
-//   isSelected: boolean;
-// }
+import { useState, useEffect } from "react";
 
 const Navbar: FC = () => {
   const [selected, setSelected] = useState('/')
+  const location = useLocation();
   console.log("Selected", selected)
+
+  useEffect(() => {
+    setSelected(location.pathname)
+  }, [location.pathname])
 
   const linkList = [
     {
@@ -24,13 +23,13 @@ const Navbar: FC = () => {
     }
   ]
 
+
   return (
     <Wrapper>
       <ul>
         {linkList.map((link, index) => {
           return <li
             key={index}
-            onClick={() => setSelected(link.id)}
             className={selected === link.id ? "active" : ""}
           >
             <Link
@@ -56,7 +55,6 @@ const Wrapper = styled.section`
   background-color: #A36760;
   bottom: 0;
   overflow: hidden;
-
   ul {
     display: flex;
     list-style: none;
@@ -73,12 +71,10 @@ const Wrapper = styled.section`
     }
   }
 `
-
 const Link = styled(NavLink)`
   color: #FFFFFF;
   text-decoration: none;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
-  /* margin-left: 20px; */
 `

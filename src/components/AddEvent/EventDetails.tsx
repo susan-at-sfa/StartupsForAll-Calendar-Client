@@ -121,7 +121,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const EventsGreenDiv = styled.div`
   display: flex;
   border: none;
