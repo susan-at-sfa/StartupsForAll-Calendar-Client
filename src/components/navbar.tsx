@@ -23,7 +23,6 @@ const Navbar: FC = () => {
     }
   ]
 
-
   return (
     <Wrapper>
       <ul>

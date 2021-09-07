@@ -66,7 +66,6 @@ const EventAuthPage = styled.div`
   right: 0;
   top: 275px;
 `;
-
 const ButtonDiv = styled.div`
   display: flex;
   width: 350px;
