@@ -65,6 +65,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
                   .toLocaleString()
                   .split(" ")[1]
                   .slice(0, -3);
+              } else if (info) {
+                value = formElement.value + " " + info;
               } else {
                 value = formElement.value;
               }
@@ -82,7 +84,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
                     value={value}
                     name={placeholder}
                   />
-                  {info ? <span>{info}</span> : null}
                 </fieldset>
               );
             })}

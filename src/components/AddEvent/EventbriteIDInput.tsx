@@ -1,4 +1,4 @@
-import { FormEvent, FC, useState, useEffect } from "react";
+import { FormEvent, FC, useState } from "react";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 
@@ -19,7 +19,7 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
       <PasteLinkContainer>
         <form onSubmit={submitForm}>
           <FormLabel htmlFor="eventbriteID" text="Enter Event Brite ID" />
-          <PasteLink >
+          <PasteLink>
             <input
               name="eventbriteID"
               onChange={(e) => setEventbriteID(e.target.value)}
@@ -71,7 +71,7 @@ const PasteLink = styled.div`
     background-color: #a36760;
     border: none;
   }
-  &:focus-within{
+  &:focus-within {
     outline: none;
     border-color: #a36760;
     transition: 0.75s ease;
@@ -83,7 +83,7 @@ const PasteLink = styled.div`
       color: #e8d9d6;
       font-weight: bold;
     }
-    &:focus{
+    &:focus {
       outline: none;
       border-color: #a36760;
       transition: 0.75s ease;

@@ -41,6 +41,14 @@ export default (data: any): EventbriteEvent => {
       disabled: false
     },
     {
+      key: 'cost',
+      value: data.cost,
+      type: 'text',
+      placeholder: 'Cost',
+      info: `${data.currency} *Taxes and Fees not included.`,
+      disabled: true
+    },
+    {
       key: 'summary',
       value: data.summary,
       type: 'text',
