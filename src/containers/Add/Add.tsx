@@ -15,19 +15,19 @@ const Add: FC = () => {
     dispatch(requestEventbriteEvent({ id }));
   };
 
-  // if (!token) {
-  //   return <AuthorizeToAddEvents />;
-  // }
+  if (!token) {
+    return <AuthorizeToAddEvents />;
+  }
 
   return (
     // Since our default state is now the initialState object seen in eventbriteSlice, we check existence differently.
     // There's probably a better way to do this.
-    // eventbriteDetails.form_elements &&
-    //   eventbriteDetails.form_elements.length > 0 ? (
-    //   <EventDetailsForm eventDetails={eventbriteDetails} />
-    // ) : (
-    <EventbriteIDInput handleSubmit={handleSubmit} />
-    // )
+    eventbriteDetails.form_elements &&
+      eventbriteDetails.form_elements.length > 0 ? (
+      <EventDetailsForm eventDetails={eventbriteDetails} />
+    ) : (
+      <EventbriteIDInput handleSubmit={handleSubmit} />
+    )
   );
 };
 
