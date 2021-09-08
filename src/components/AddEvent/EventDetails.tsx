@@ -37,6 +37,9 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
 
   // const dispatch = useAppDispatch();
   const [eventName, setEventName] = useState<string>(eventDetails.name || "");
+  const [eventReferrer, setEventReferrer] = useState<string>(
+    eventDetails.creator_name || ""
+  );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
     eventDetails.currency || "USD"
@@ -44,9 +47,9 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [description, setDescription] = useState<string>(
     eventDetails.description || ""
   );
-  const [endDate, setEndDate] = useState<Date | string>(
-    eventDetails.end_date.toISOString().split("T")[0] || null
-  );
+  // const [endDate, setEndDate] = useState<Date | string>(
+  //   eventDetails.end_date.toISOString().split("T")[0] || null
+  // );
   const [startDate, setStartDate] = useState<Date | string>(
     eventDetails.start_date.toISOString().split("T")[0] || null
   );
@@ -54,7 +57,10 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     eventDetails.end_time.toLocaleTimeString() || ""
   );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.end_time.toLocaleTimeString() || ""
+    eventDetails.start_time.toLocaleTimeString() || ""
+  );
+  const [location, setLocation] = useState<string>(
+    eventDetails.location || "Online"
   );
   const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
@@ -91,16 +97,26 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
 
   return (
     <Wrapper>
-      {eventDetails.logo ? (
-        <img
-          src={eventDetails.logo}
-          alt="event logo"
-          style={{ maxWidth: "100%" }}
-        />
-      ) : null}
       <form onSubmit={submitForm}>
         <FormFields>
           <fieldset>
+            <FormLabel htmlFor="url" text="Eventrite URL or ID" />
+            <FormInput
+              placeholder="URL"
+              type="text"
+              required
+              disabled={false}
+              value={url}
+              onChange={setUrl}
+              name="url"
+            />
+            {eventDetails.logo ? (
+              <img
+                src={eventDetails.logo}
+                alt="event logo"
+                style={{ maxWidth: "100%" }}
+              />
+            ) : null}
             {eventDetails.id ? (
               <>
                 <FormInput
@@ -121,51 +137,37 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
                   value={eventDetails.id}
                   onChange={() => null}
                 />
+                <FormInput
+                  type="hidden"
+                  disabled={true}
+                  value={eventDetails.creator_email}
+                  onChange={() => null}
+                />
               </>
             ) : null}
-            <FormLabel htmlFor="name" text="Name" />
+            <FormLabel htmlFor="title" text="Title" />
             <FormInput
-              placeholder="Name"
+              placeholder="Title"
               type="text"
               required
               disabled={false}
               value={eventName}
               onChange={setEventName}
-              name="name"
+              name="title"
             />
-            <FormLabel htmlFor="cost" text="Cost" />
+            <FormLabel htmlFor="creator" text="Event Referred By" />
             <FormInput
-              placeholder="Cost"
-              type="number"
+              placeholder="Event Referrer"
+              type="string"
               required
               disabled={false}
-              value={cost}
-              onChange={setCost}
-              name="cost"
+              value={eventReferrer}
+              onChange={setEventReferrer}
+              name="creator"
             />
-            <FormLabel htmlFor="description" text="Description" />
+            <FormLabel htmlFor="start_date" text="Date" />
             <FormInput
-              placeholder="Description"
-              type="text"
-              required
-              disabled={false}
-              value={description}
-              onChange={setDescription}
-              name="description"
-            />
-            <FormLabel htmlFor="url" text="URL" />
-            <FormInput
-              placeholder="URL"
-              type="text"
-              required
-              disabled={false}
-              value={url}
-              onChange={setUrl}
-              name="url"
-            />
-            <FormLabel htmlFor="start_date" text="Start Date" />
-            <FormInput
-              placeholder="Start Date"
+              placeholder="Date"
               type="date"
               required
               disabled={false}
@@ -173,7 +175,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               onChange={setStartDate}
               name="start_date"
             />
-            <FormLabel htmlFor="end_date" text="End Date" />
+            {/* <FormLabel htmlFor="end_date" text="End Date" />
             <FormInput
               placeholder="End Date"
               type="date"
@@ -182,7 +184,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               value={endDate}
               onChange={setEndDate}
               name="end_date"
-            />
+            /> */}
             <FormLabel htmlFor="start_time" text="Start Time" />
             <FormInput
               placeholder="Start Time"
@@ -203,6 +205,26 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               onChange={setEndTime}
               name="end_time"
             />
+            <FormLabel htmlFor="location" text="Location" />
+            <FormInput
+              placeholder="Location"
+              type="text"
+              required
+              disabled={false}
+              value={location}
+              onChange={setLocation}
+              name="location"
+            />
+            <FormLabel htmlFor="cost" text="Cost" />
+            <FormInput
+              placeholder="Cost"
+              type="string"
+              required
+              disabled={false}
+              value={cost}
+              onChange={setCost}
+              name="cost"
+            />
           </fieldset>
           <fieldset>
             <FormLabel htmlFor="topics" text="Topics" />
@@ -217,6 +239,18 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
                 </option>
               ))}
             </select>
+          </fieldset>
+          <fieldset>
+            <FormLabel htmlFor="description" text="Description" />
+            <textarea
+              placeholder="Description"
+              required
+              disabled={false}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              name="description"
+              rows={12}
+            />
           </fieldset>
         </FormFields>
         <EventsGreenDiv>

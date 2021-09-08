@@ -10,6 +10,7 @@ interface FormInputProps {
   name?: string;
   disabled?: boolean;
   defaultValue?: string;
+  rows?: string;
 }
 
 const FormInput: FC<FormInputProps> = (props) => {

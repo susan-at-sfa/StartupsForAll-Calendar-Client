@@ -2,7 +2,10 @@ export default interface EventbriteEvent {
   logo?: string;
   changed?: DateString;
   created?: DateString;
+  creator_name?: string;
+  creator_email?: string;
   id: string;
+  location?: string;
   name: string;
   cost?: string;
   currency?: string;
