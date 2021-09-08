@@ -7,25 +7,25 @@ import styled from "@emotion/styled";
 import { Topics } from "../../store/slices/eventbrite/Topics.enum";
 import { useAppDispatch } from "../../hooks";
 import { setEventbrite } from "../../store/slices/eventbrite/eventbriteSlice";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
 
-const schema = yup.object().shape({
-  title: yup.string().required(),
-  description: yup.string().required(),
-  creator_email: yup.string().required(),
-  creator_name: yup.string().required(),
-  event_link: yup.string().required(),
-  cost: yup.number().required(),
-  when: yup.date().required(),
-  where: yup.string().required(),
-  who: yup.string().required(),
-  topics: yup
-    .string()
-    .oneOf([...Topics])
-    .required(),
-});
+// const schema = yup.object().shape({
+//   title: yup.string().required(),
+//   description: yup.string().required(),
+//   creator_email: yup.string().required(),
+//   creator_name: yup.string().required(),
+//   event_link: yup.string().required(),
+//   cost: yup.number().required(),
+//   when: yup.date().required(),
+//   where: yup.string().required(),
+//   who: yup.string().required(),
+//   topics: yup
+//     .string()
+//     .oneOf([...Topics])
+//     .required(),
+// });
 interface EventDetailsFormProps {
   eventDetails: EventbriteEvent;
 }
@@ -35,14 +35,14 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
   const dispatch = useAppDispatch();
   const [topics, setTopics] = useState<string[]>([]);
 
-  const { register, handleSubmit, watch } = useForm<EventbriteEvent>({
-    resolver: yupResolver(schema),
-  });
+  // const { register, handleSubmit, watch } = useForm<EventbriteEvent>({
+  //   resolver: yupResolver(schema),
+  // });
 
   const submitForm = (event: any) => {
     event.preventDefault();
     console.log("FORM SUBMIT");
-    handleSubmit((data) => console.log(data));
+    // handleSubmit((data) => console.log(data));
   };
 
   // const submitForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -93,8 +93,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={true}
               value={eventDetails.changed}
-              // name="changed"
-              {...register("changed")}
+            // name="changed"
+            // {...register("changed")}
             />
             <AddEventFormInput
               placeholder="null"
@@ -102,8 +102,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={true}
               value={eventDetails.created}
-              // name="created"
-              {...register("created")}
+            // name="created"
+            // {...register("created")}
             />
             <FormLabel htmlFor="name" text="Name" />
             <AddEventFormInput
@@ -112,8 +112,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.name}
-              // name="name"
-              {...register("name")}
+            // name="name"
+            // {...register("name")}
             />
             <FormLabel htmlFor="cost" text="Cost" />
             <AddEventFormInput
@@ -122,8 +122,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.cost}
-              // name="cost"
-              {...register("cost")}
+            // name="cost"
+            // {...register("cost")}
             />
             <FormLabel htmlFor="summary" text="Summary" />
             <AddEventFormInput
@@ -132,8 +132,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.summary}
-              // name="summary"
-              {...register("summary")}
+            // name="summary"
+            // {...register("summary")}
             />
             <FormLabel htmlFor="url" text="URL" />
             <AddEventFormInput
@@ -142,8 +142,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.url}
-              // name="url"
-              {...register("url")}
+            // name="url"
+            // {...register("url")}
             />
             <FormLabel htmlFor="start_date" text="Start Date" />
             <AddEventFormInput
@@ -152,8 +152,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.start_date}
-              // name="start_date"
-              {...register("start_date")}
+            // name="start_date"
+            // {...register("start_date")}
             />
             <FormLabel htmlFor="end_date" text="End Date" />
             <AddEventFormInput
@@ -162,8 +162,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.end_date}
-              // name="end_date"
-              {...register("end_date")}
+            // name="end_date"
+            // {...register("end_date")}
             />
             <FormLabel htmlFor="start_time" text="Start Time" />
             <AddEventFormInput
@@ -172,8 +172,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.start_time}
-              // name="start_time"
-              {...register("start_time")}
+            // name="start_time"
+            // {...register("start_time")}
             />
             <FormLabel htmlFor="end_time" text="End Time" />
             <AddEventFormInput
@@ -182,8 +182,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
               required
               disabled={false}
               value={eventDetails.end_time}
-              // name="end_time"
-              {...register("end_time")}
+            // name="end_time"
+            // {...register("end_time")}
             />
           </fieldset>
           <fieldset>

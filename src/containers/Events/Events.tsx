@@ -16,7 +16,7 @@ export interface EventPageProps {
   url: string;
 }
 
-const Events: FC<EventPageProps> = () => {
+const Events: FC = () => {
   const events = [
     {
       id: 1,
@@ -32,20 +32,20 @@ const Events: FC<EventPageProps> = () => {
       topics: ['🚀 Open Space', '🧩 Strategy'],
       url: "https://www.website.com"
     },
-    {
-      id: 2,
-      category: "Expert",
-      cost: "$500.00",
-      creator_name: "Tatiana Press",
-      description: "This is another event",
-      end_time: "10:00 PM",
-      location: "Over Here",
-      start_date: "2021-12-13",
-      start_time: "6:00 PM",
-      title: "People and Power: Advancing Communication",
-      topics: ['🔍 User Research', '🌎 Social Impact'],
-      url: "https://www.website.com"
-    }
+    // {
+    //   id: 2,
+    //   category: "Expert",
+    //   cost: "$500.00",
+    //   creator_name: "Tatiana Press",
+    //   description: "This is another event",
+    //   end_time: "10:00 PM",
+    //   location: "Over Here",
+    //   start_date: "2021-12-13",
+    //   start_time: "6:00 PM",
+    //   title: "People and Power: Advancing Communication",
+    //   topics: ['🔍 User Research', '🌎 Social Impact'],
+    //   url: "https://www.website.com"
+    // }
   ]
 
   return (
@@ -54,6 +54,7 @@ const Events: FC<EventPageProps> = () => {
         const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
         return <ListEvent
           key={id}
+          id={id}
           category={category}
           title={title}
           date={start_date}

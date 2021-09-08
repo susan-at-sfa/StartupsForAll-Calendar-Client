@@ -2,7 +2,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { setEventbrite, requestEventbriteEvent } from './eventbriteSlice';
 import { makeRequest } from '../../utils/makeRequest';
-import EventbriteEvent from './EventbriteEvent';
+// import EventbriteEvent from './EventbriteEvent';
 
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:1323';
 
