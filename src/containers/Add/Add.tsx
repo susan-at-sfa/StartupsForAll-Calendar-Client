@@ -23,7 +23,26 @@ const Add: FC = () => {
 
   const [isCreatingNewEmptyEvent, setCreatingNewEmptyEvent] = useState(false);
   const cancelEvent = () => {
-    const eventData: EventbriteEvent = {} as EventbriteEvent;
+    const eventData: EventbriteEvent = {
+      logo: "",
+      changed: "",
+      created: "",
+      creator_name: "",
+      creator_email: "",
+      id: "",
+      location: "",
+      title: "",
+      cost: "",
+      currency: "",
+      summary: "",
+      description: "",
+      url: "",
+      start_date: "",
+      end_date: "",
+      start_time: "",
+      end_time: "",
+      series_dates: [],
+    };
     dispatch(setEventbrite(eventData));
     setCreatingNewEmptyEvent(false);
     history.push("/add");

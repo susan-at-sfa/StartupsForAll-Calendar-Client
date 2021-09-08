@@ -4,7 +4,8 @@ import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { Topics } from "../../store/slices/eventbrite/Topics.enum";
-import { useAppDispatch } from "../../hooks";
+
+// import { useAppDispatch } from "../../hooks";
 // import { setEventbrite } from "../../store/slices/eventbrite/eventbriteSlice";
 
 // import { useForm } from "react-hook-form";
@@ -36,7 +37,9 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   console.log("EventDetails component - got props:", eventDetails);
 
   // const dispatch = useAppDispatch();
-  const [eventName, setEventName] = useState<string>(eventDetails.name || "");
+  const [eventTitle, setEventTitle] = useState<string>(
+    eventDetails.title || ""
+  );
   const [eventReferrer, setEventReferrer] = useState<string>(
     eventDetails.creator_name || ""
   );
@@ -51,13 +54,15 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   //   eventDetails.end_date.toISOString().split("T")[0] || null
   // );
   const [startDate, setStartDate] = useState<Date | string>(
-    eventDetails.start_date.toISOString().split("T")[0] || null
+    eventDetails.start_date
+      ? eventDetails.start_date.toISOString().split("T")[0]
+      : new Date().toISOString().split("T")[0]
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end_time.toLocaleTimeString() || ""
+    eventDetails.end_time ? eventDetails.end_time.toLocaleTimeString() : ""
   );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.start_time.toLocaleTimeString() || ""
+    eventDetails.start_time ? eventDetails.start_time.toLocaleTimeString() : ""
   );
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
@@ -151,8 +156,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               type="text"
               required
               disabled={false}
-              value={eventName}
-              onChange={setEventName}
+              value={eventTitle}
+              onChange={setEventTitle}
               name="title"
             />
             <FormLabel htmlFor="creator" text="Event Referred By" />

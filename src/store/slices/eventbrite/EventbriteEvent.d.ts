@@ -6,7 +6,7 @@ export default interface EventbriteEvent {
   creator_email?: string;
   id: string;
   location?: string;
-  name: string;
+  title: string;
   cost?: string;
   currency?: string;
   summary?: string;
