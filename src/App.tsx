@@ -64,7 +64,6 @@ const Sections = styled.section`
   top: 250px;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  // overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
