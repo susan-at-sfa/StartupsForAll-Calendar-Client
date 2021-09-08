@@ -26,10 +26,10 @@ const eventbriteSlice = createSlice({
     requestEventbriteEvent(state, action: PayloadAction<{id: string}>) {},
     setEventbrite(state, action: PayloadAction<EventbriteEvent>) {
       let eventData = action.payload;
-      eventData.start_date = (new Date(Date.parse(eventData.start_date))).toLocaleDateString();
-      eventData.end_date = (new Date(Date.parse(eventData.end_date))).toLocaleDateString();
-      eventData.start_time = (new Date(Date.parse(eventData.start_date))).toLocaleTimeString();
-      eventData.end_time = (new Date(Date.parse(eventData.end_date))).toLocaleTimeString();
+      eventData.start_date = new Date(Date.parse(eventData.start_date));
+      eventData.end_date = new Date(Date.parse(eventData.end_date));
+      eventData.start_time = eventData.start_date;
+      eventData.end_time = eventData.end_date;
       return { ...eventData };
     },
   }
