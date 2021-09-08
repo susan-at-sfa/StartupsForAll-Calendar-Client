@@ -1,26 +1,25 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
 
-interface FormInputProps {
+interface AddEventFormInputProps {
   placeholder?: string;
   type?: string;
   required?: boolean;
-  onChange(value: string): void;
   value?: string;
   name?: string;
   disabled?: boolean;
   defaultValue?: string;
 }
 
-const FormInput: FC<FormInputProps> = (props) => {
+const AddEventFormInput: FC<AddEventFormInputProps> = (props) => {
   return (
     <Input
       placeholder={props.placeholder}
       type={props.type}
       required={props.required}
-      onChange={(e) => props.onChange(e.target.value)}
       value={props.value}
       name={props.name}
+      disabled={props.disabled}
     />
   );
 };
@@ -47,4 +46,4 @@ const Input = styled.input`
     transition: 0.75s ease;
   }
 `;
-export default FormInput;
+export default AddEventFormInput;
