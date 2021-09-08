@@ -1,48 +1,70 @@
 import React, { FC, useState } from "react";
-import { useHistory } from "react-router";
 import EventbriteEvent from "../../store/slices/eventbrite/EventbriteEvent";
-import AddEventFormInput from "./AddEventFormInput";
+import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { Topics } from "../../store/slices/eventbrite/Topics.enum";
 import { useAppDispatch } from "../../hooks";
-import { setEventbrite } from "../../store/slices/eventbrite/eventbriteSlice";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+// import { setEventbrite } from "../../store/slices/eventbrite/eventbriteSlice";
 
-const schema = yup.object().shape({
-  title: yup.string().required(),
-  description: yup.string().required(),
-  creator_email: yup.string().required(),
-  creator_name: yup.string().required(),
-  event_link: yup.string().required(),
-  cost: yup.number().required(),
-  when: yup.date().required(),
-  where: yup.string().required(),
-  who: yup.string().required(),
-  topics: yup
-    .string()
-    .oneOf([...Topics])
-    .required(),
-});
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
+
+// const schema = yup.object().shape({
+//   title: yup.string().required(),
+//   description: yup.string().required(),
+//   creator_email: yup.string().required(),
+//   creator_name: yup.string().required(),
+//   event_link: yup.string().required(),
+//   cost: yup.number().required(),
+//   when: yup.date().required(),
+//   where: yup.string().required(),
+//   who: yup.string().required(),
+//   topics: yup
+//     .string()
+//     .oneOf([...Topics])
+//     .required(),
+// });
 interface EventDetailsFormProps {
   eventDetails: EventbriteEvent;
+  cancelEvent(value: boolean): void;
 }
 
-const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
-  const history = useHistory();
-  const dispatch = useAppDispatch();
+const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
+  const { eventDetails } = props;
+  console.log("EventDetails component - got props:", eventDetails);
+
+  // const dispatch = useAppDispatch();
+  const [eventName, setEventName] = useState<string>(eventDetails.name || "");
+  const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
+  const [currency, setCurrency] = useState<string>(
+    eventDetails.currency || "USD"
+  );
+  const [description, setDescription] = useState<string>(
+    eventDetails.description || ""
+  );
+  const [endDate, setEndDate] = useState<Date | string>(
+    eventDetails.end_date || ""
+  );
+  const [startDate, setStartDate] = useState<Date | string>(
+    eventDetails.start_date || ""
+  );
+  const [endTime, setEndTime] = useState<string>(eventDetails.end_time || "");
+  const [startTime, setStartTime] = useState<string>(
+    eventDetails.end_time || ""
+  );
+  const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
 
-  const { register, handleSubmit, watch } = useForm<EventbriteEvent>({
-    resolver: yupResolver(schema),
-  });
+  // const { register, handleSubmit, watch } = useForm<EventbriteEvent>({
+  //   resolver: yupResolver(schema),
+  // });
 
   const submitForm = (event: any) => {
     event.preventDefault();
     console.log("FORM SUBMIT");
-    handleSubmit((data) => console.log(data));
+    // handleSubmit((data) => console.log(data));
   };
 
   // const submitForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -55,10 +77,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
   //   // setFormStep('two');
   // };
 
-  const makeChange = (element: any, value: any) => {
-    console.log("make change val:", element, value);
-  };
-
   const changeTopics = (topic: string) => {
     const index = topics.indexOf(topic);
     if (index === -1) {
@@ -67,12 +85,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
       const newTopics = topics.splice(index, 1);
       setTopics(newTopics);
     }
-  };
-
-  const cancelEvent = () => {
-    const eventData: EventbriteEvent = {} as EventbriteEvent;
-    dispatch(setEventbrite(eventData));
-    history.push("/add");
   };
 
   return (
@@ -87,103 +99,107 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
       <form onSubmit={submitForm}>
         <FormFields>
           <fieldset>
-            <AddEventFormInput
-              placeholder="null"
-              type="hidden"
-              required
-              disabled={true}
-              value={eventDetails.changed}
-              // name="changed"
-              {...register("changed")}
-            />
-            <AddEventFormInput
-              placeholder="null"
-              type="hidden"
-              required
-              disabled={true}
-              value={eventDetails.created}
-              // name="created"
-              {...register("created")}
-            />
+            {eventDetails.id ? (
+              <>
+                <FormInput
+                  type="hidden"
+                  disabled={true}
+                  value={eventDetails.changed}
+                  onChange={() => null}
+                />
+                <FormInput
+                  type="hidden"
+                  disabled={true}
+                  value={eventDetails.created}
+                  onChange={() => null}
+                />
+                <FormInput
+                  type="hidden"
+                  disabled={true}
+                  value={eventDetails.id}
+                  onChange={() => null}
+                />
+              </>
+            ) : null}
             <FormLabel htmlFor="name" text="Name" />
-            <AddEventFormInput
+            <FormInput
               placeholder="Name"
               type="text"
               required
               disabled={false}
-              value={eventDetails.name}
-              // name="name"
-              {...register("name")}
+              value={eventName}
+              onChange={setEventName}
+              name="name"
             />
             <FormLabel htmlFor="cost" text="Cost" />
-            <AddEventFormInput
+            <FormInput
               placeholder="Cost"
-              type="text"
+              type="number"
               required
               disabled={false}
-              value={eventDetails.cost}
-              // name="cost"
-              {...register("cost")}
+              value={cost}
+              onChange={setCost}
+              name="cost"
             />
-            <FormLabel htmlFor="summary" text="Summary" />
-            <AddEventFormInput
-              placeholder="Summary"
+            <FormLabel htmlFor="description" text="Description" />
+            <FormInput
+              placeholder="Description"
               type="text"
               required
               disabled={false}
-              value={eventDetails.summary}
-              // name="summary"
-              {...register("summary")}
+              value={description}
+              onChange={setDescription}
+              name="description"
             />
             <FormLabel htmlFor="url" text="URL" />
-            <AddEventFormInput
+            <FormInput
               placeholder="URL"
               type="text"
               required
               disabled={false}
-              value={eventDetails.url}
-              // name="url"
-              {...register("url")}
+              value={url}
+              onChange={setUrl}
+              name="url"
             />
             <FormLabel htmlFor="start_date" text="Start Date" />
-            <AddEventFormInput
+            <FormInput
               placeholder="Start Date"
               type="date"
               required
               disabled={false}
-              value={eventDetails.start_date}
-              // name="start_date"
-              {...register("start_date")}
+              value={startDate}
+              onChange={setStartDate}
+              name="start_date"
             />
             <FormLabel htmlFor="end_date" text="End Date" />
-            <AddEventFormInput
+            <FormInput
               placeholder="End Date"
               type="date"
               required
               disabled={false}
-              value={eventDetails.end_date}
-              // name="end_date"
-              {...register("end_date")}
+              value={endDate}
+              onChange={setEndDate}
+              name="end_date"
             />
             <FormLabel htmlFor="start_time" text="Start Time" />
-            <AddEventFormInput
+            <FormInput
               placeholder="Start Time"
               type="text"
               required
               disabled={false}
-              value={eventDetails.start_time}
-              // name="start_time"
-              {...register("start_time")}
+              value={startTime}
+              onChange={setStartTime}
+              name="start_time"
             />
             <FormLabel htmlFor="end_time" text="End Time" />
-            <AddEventFormInput
+            <FormInput
               placeholder="End Time"
               type="text"
               required
               disabled={false}
-              value={eventDetails.end_time}
-              // name="end_time"
-              {...register("end_time")}
+              value={endTime}
+              onChange={setEndTime}
+              name="end_time"
             />
           </fieldset>
           <fieldset>
@@ -202,7 +218,11 @@ const EventDetailsForm: FC<EventDetailsFormProps> = ({ eventDetails }) => {
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
-            <button type="button" id="dark" onClick={cancelEvent}>
+            <button
+              type="button"
+              id="dark"
+              onClick={() => props.cancelEvent(false)}
+            >
               Cancel
             </button>
             <button type="submit" id="light">

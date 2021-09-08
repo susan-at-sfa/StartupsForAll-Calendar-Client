@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 
 interface EventbriteIDInputProps {
   handleSubmit(value: string): void;
+  newEvent(value: boolean): void;
 }
 
 const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
@@ -36,7 +37,7 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
         <p>OR</p>
       </SkipEventbrite>
       <ButtonDiv>
-        <button type="submit">
+        <button type="button" onClick={() => props.newEvent(true)}>
           <span>Create New</span>
         </button>
       </ButtonDiv>
