@@ -45,14 +45,16 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     eventDetails.description || ""
   );
   const [endDate, setEndDate] = useState<Date | string>(
-    eventDetails.end_date || ""
+    eventDetails.end_date.toISOString().split("T")[0] || null
   );
   const [startDate, setStartDate] = useState<Date | string>(
-    eventDetails.start_date || ""
+    eventDetails.start_date.toISOString().split("T")[0] || null
   );
-  const [endTime, setEndTime] = useState<string>(eventDetails.end_time || "");
+  const [endTime, setEndTime] = useState<string>(
+    eventDetails.end_time.toLocaleTimeString() || ""
+  );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.end_time || ""
+    eventDetails.end_time.toLocaleTimeString() || ""
   );
   const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
@@ -210,7 +212,9 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               onChange={(e) => changeTopics(e.target.value)}
             >
               {Topics.map((topic) => (
-                <option value={topic}>{topic}</option>
+                <option value={topic} key={topic}>
+                  {topic}
+                </option>
               ))}
             </select>
           </fieldset>

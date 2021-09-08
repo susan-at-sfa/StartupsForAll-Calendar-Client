@@ -11,7 +11,7 @@ export default interface EventbriteEvent {
   url?: string;
   start_date?: DateString;
   end_date?: DateString;
-  start_time: string;
-  end_time: string;
+  start_time: DateString;
+  end_time: DateString;
   series_dates?: EventbriteSeries[];
 }
