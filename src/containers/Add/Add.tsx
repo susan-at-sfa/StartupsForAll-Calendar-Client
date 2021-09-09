@@ -9,7 +9,7 @@ import {
   requestEventbriteEvent,
   setEventbrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
-import EventbriteEvent from "../../store/slices/eventbrite/EventbriteEvent";
+import NewEvent from "../../store/slices/eventbrite/NewEvent";
 
 const Add: FC = () => {
   const history = useHistory();
@@ -23,7 +23,7 @@ const Add: FC = () => {
 
   const [isCreatingNewEmptyEvent, setCreatingNewEmptyEvent] = useState(false);
   const cancelEvent = () => {
-    const eventData: EventbriteEvent = {
+    const eventData: NewEvent = {
       logo: "",
       changed: "",
       created: "",

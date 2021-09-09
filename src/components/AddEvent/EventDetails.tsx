@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import EventbriteEvent from "../../store/slices/eventbrite/EventbriteEvent";
+import NewEvent from "../../store/slices/eventbrite/NewEvent";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
@@ -28,7 +28,7 @@ import { Topics } from "../../store/slices/eventbrite/Topics.enum";
 //     .required(),
 // });
 interface EventDetailsFormProps {
-  eventDetails: EventbriteEvent;
+  eventDetails: NewEvent;
   cancelEvent(value: boolean): void;
 }
 
@@ -70,7 +70,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
 
-  // const { register, handleSubmit, watch } = useForm<EventbriteEvent>({
+  // const { register, handleSubmit, watch } = useForm<NewEvent>({
   //   resolver: yupResolver(schema),
   // });
 

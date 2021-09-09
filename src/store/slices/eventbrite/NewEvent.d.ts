@@ -1,7 +1,7 @@
-export default interface EventbriteEvent {
+export default interface NewEvent {
   logo?: string;
-  changed?: DateString;
-  created?: DateString;
+  changed?: DateString | string;
+  created?: DateString | string;
   creator_name?: string;
   creator_email?: string;
   id: string;
@@ -12,9 +12,9 @@ export default interface EventbriteEvent {
   summary?: string;
   description?: string;
   url?: string;
-  start_date?: DateString;
-  end_date?: DateString;
-  start_time: DateString;
-  end_time: DateString;
+  start_date?: DateString | string;
+  end_date?: DateString | string;
+  start_time: DateString | string;
+  end_time: DateString | string;
   series_dates?: EventbriteSeries[];
 }

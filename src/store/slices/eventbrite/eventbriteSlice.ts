@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import EventbriteEvent from './EventbriteEvent';
+import NewEvent from './NewEvent';
 
-const initialState: EventbriteEvent = {
+const initialState: NewEvent = {
   logo: '',
   changed: '',
   created: '',
@@ -27,7 +27,7 @@ const eventbriteSlice = createSlice({
   initialState,
   reducers: {
     requestEventbriteEvent(state, action: PayloadAction<{id: string}>) {},
-    setEventbrite(state, action: PayloadAction<EventbriteEvent>) {
+    setEventbrite(state, action: PayloadAction<NewEvent>) {
       let eventData = action.payload;
       eventData.start_date = new Date(Date.parse(eventData.start_date));
       eventData.end_date = new Date(Date.parse(eventData.end_date));

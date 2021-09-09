@@ -3,7 +3,7 @@ import userReducer, { UserState } from './user/userSlice';
 import authReducer, { AuthState } from './auth/authSlice';
 import menuOpenReducer, { MenuState } from './menu/menuOpenSlice';
 import eventbriteReducer from './eventbrite/eventbriteSlice';
-import EventbriteEvent from './eventbrite/EventbriteEvent';
+import NewEvent from './eventbrite/NewEvent';
 import { Reducer } from 'react';
 import eventModalReducer, { EventDetailsModalState } from './eventDetails/showEventDetailsSlice';
 
@@ -11,7 +11,7 @@ type RootReducer = Reducer<CombinedState<{
   auth: AuthState;
   user: UserState;
   menu: MenuState;
-  eventbrite: EventbriteEvent;
+  eventbrite: NewEvent;
   eventModal: EventDetailsModalState;
 }>, AnyAction>;
 
