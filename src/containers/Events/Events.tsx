@@ -42,9 +42,9 @@ const Events: FC = () => {
       description: "This is another event",
       end_time: "10:00 PM",
       location: "Over Here",
-      start_date: "2021-12-13",
+      start_date: "2021-10-13",
       start_time: "6:00 PM",
-      title: "People and Power: Advancing Power",
+      title: "People and Power: Advancing Each Other",
       // We will want to account for title length. Perhaps append "..." after a certain number of characters for list view
       topics: ['🔍 User Research', '🌎 Social Impact'],
       url: "https://www.website.com"
@@ -57,7 +57,7 @@ const Events: FC = () => {
       description: "This is another event",
       end_time: "10:00 PM",
       location: "Over Here",
-      start_date: "2021-10-18",
+      start_date: "2021-11-18",
       start_time: "6:00 PM",
       title: "And Justice For All",
       // We will want to account for title length. Perhaps append "..." after a certain number of characters for list view

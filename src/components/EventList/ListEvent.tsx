@@ -14,7 +14,6 @@ export interface ListEventProps {
 
 const ListEvent: FC<ListEventProps> = (props) => {
   const { id, category, title, date, start_time, end_time, creator_name, topics } = props;
-  console.log("Topics", topics);
 
   const topicEmojis: Record<string, string> = {
     '💵 Funding / Financial': '💵',
@@ -31,6 +30,8 @@ const ListEvent: FC<ListEventProps> = (props) => {
     "Community": "#B6A5D3"
   }
 
+  const eventDate = new Date(date).toDateString()
+
   return (
     <Wrapper key={id}>
       <LeftDisplay>
@@ -38,7 +39,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
         <CreatedBy>{creator_name}</CreatedBy>
       </LeftDisplay>
       <RightDisplay>
-        <DateDisplay>{date}</DateDisplay>
+        <DateDisplay>{eventDate}</DateDisplay>
         <TimeDisplay>{start_time} - {end_time}</TimeDisplay>
         <TopicsDisplay>
           <ul>
@@ -74,25 +75,23 @@ margin-top: 10px;
 }
 `
 const LeftDisplay = styled.div`
-flex: 0.6;
+flex: 0.55;
 display: flex;
 flex-direction: column;
 `
 const Title = styled.div`
 display: flex;
-flex: 0.6;
-align-items: flex-end;
+align-items: flex-start;
 padding-top: 10px;
 font-size: 15px;
 font-weight: bold;
 `
 const CreatedBy = styled.div`
 display: flex;
-flex: 0.4;
 font-size: 12px;
 `
 const RightDisplay = styled.div`
-flex: 0.4;
+flex: 0.45;
 display: flex;
 flex-wrap: wrap;
 justify-content: right;
@@ -114,15 +113,13 @@ font-size: 12px;
 `
 const TopicsDisplay = styled.div`
 display: flex;
-/* flex-direction: row; */
-/* align-items: flex-start; */
 height: 20px;
 padding: 0;
 ul{
+  display: flex;
   font-size: 12px;
   padding: 0;
   list-style: none;
-  display: flex;
   margin-right: 5px;
 }
 li{
