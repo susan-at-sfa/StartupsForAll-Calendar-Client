@@ -3,7 +3,7 @@ import userReducer, { UserState } from './user/userSlice';
 import authReducer, { AuthState } from './auth/authSlice';
 import menuOpenReducer, { MenuState } from './menu/menuOpenSlice';
 import newEventReducer from './eventbrite/newEventSlice';
-import NewEvent from './eventbrite/NewEvent';
+import NewEvent from '../../constants/NewEvent.d';
 import { Reducer } from 'react';
 import eventModalReducer, { EventDetailsModalState } from './eventDetails/showEventDetailsSlice';
 

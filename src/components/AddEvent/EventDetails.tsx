@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import NewEvent from "../../store/slices/eventbrite/NewEvent";
+import NewEvent from "../../constants/NewEvent.d";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
@@ -55,14 +55,20 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   // );
   const [startDate, setStartDate] = useState<Date | string>(
     eventDetails.start_date
-      ? eventDetails.start_date.toISOString().split("T")[0]
-      : new Date().toISOString().split("T")[0]
+      ? new Date(Date.parse(eventDetails.start_date))
+          .toISOString()
+          .split("T")[0]
+      : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end_time ? eventDetails.end_time.toLocaleTimeString() : ""
+    eventDetails.end_time
+      ? new Date(Date.parse(eventDetails.end_time)).toLocaleTimeString()
+      : ""
   );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.start_time ? eventDetails.start_time.toLocaleTimeString() : ""
+    eventDetails.start_time
+      ? new Date(Date.parse(eventDetails.start_time)).toLocaleTimeString()
+      : ""
   );
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
