@@ -37,6 +37,15 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     '🔍 User Research': '🔍',
   }
 
+  const topicEmojiColors: Record<string, string> = {
+    '💵 Funding / Financial': '#EEF8E9',
+    '☕️ Action Cafe': '#F0F7FF',
+    '🚀 Open Space': '#E9F7F8',
+    '🌎 Social Impact': '#EFE9F8',
+    '🧩 Strategy': '#FFF0F0',
+    '🔍 User Research': '#FFFAF0',
+  }
+
   const categoryBackgroundColor: Record<string, string> = {
     "Founder": "#9DD3C9",
     "Expert": "#A0BAD2",
@@ -109,8 +118,21 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <p><a href={url}>{url}</a></p>
                     </SecondSection>
                     <ModalFooter>
-
+                      <ul>
+                        {topics.map((topic, index) => {
+                          return (
+                            <li key={index}>
+                              <p style={{ backgroundColor: topicEmojiColors[topic] }}>{topic}</p>
+                            </li>
+                          )
+                        })}
+                      </ul>
                     </ModalFooter>
+                    <PostedByDiv>
+                      <p>Posted</p>
+                      <p>{created_at}</p>
+                      <p>by {creator_name}</p>
+                    </PostedByDiv>
                   </Wrapper>
                 </animated.div>
               </Background>
@@ -287,5 +309,30 @@ a{
 }
 `
 const ModalFooter = styled.div`
-
+margin-top: 20px;
+display: flex;
+justify-content: flex-end;
+ul{
+  list-style: none;
+  margin: 0 0 5px 0;
+}
+p{
+  font-weight: 600;
+  color: #A36760;
+  margin: 0 0 3px 0;
+  padding: 4px 50px 4px 10px;
+  font-size: 14px;
+}
+`
+const PostedByDiv = styled.div`
+  justify-content: right;
+  align-content: right;
+  padding-left: 175px;
+  margin-bottom: 20px;
+  p{
+    padding-right: 0;
+    font-size: 14px;
+    margin: 0;
+    line-height: 20px;
+  }
 `

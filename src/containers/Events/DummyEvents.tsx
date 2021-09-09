@@ -51,7 +51,7 @@ export const events = [
     start_time: "6:00 PM",
     title: "And Justice For All",
     // We will want to account for title length. Perhaps append "..." after a certain number of characters for list view
-    topics: ['☕️ Action Cafe', '🌎 Social Impact'],
+    topics: ['☕️ Action Cafe', '💵 Funding / Financial'],
     url: "https://www.website.com"
   }
 ]
