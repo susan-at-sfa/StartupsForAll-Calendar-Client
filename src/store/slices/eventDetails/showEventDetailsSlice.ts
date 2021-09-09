@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface EventDetailsModalState {
   eventDetailsModalOpen: true | false;
-  selectedEventID: string | undefined;
+  selectedEventID: string;
 }
 
 const initialState: EventDetailsModalState = {

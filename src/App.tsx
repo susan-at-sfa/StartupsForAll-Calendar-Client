@@ -45,7 +45,7 @@ const App: FC = () => {
     <Wrapper>
       <Router>
         {eventDetailsModalOpen &&
-          <EventDetailsModal />}
+          <EventDetailsModal id={selectedEventID} />}
         <Header />
         <Sections>
           <Switch>{routes}</Switch>

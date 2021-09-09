@@ -65,7 +65,7 @@ const Wrapper = styled.section`
   background-image: url(${headerImage});
   background-size: cover;
   overflow: hidden;
-  z-index: 2;
+  z-index: 1;
   transition: all 0.5s ease;
   &.active {
     color: black;

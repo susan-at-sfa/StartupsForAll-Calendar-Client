@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import ListEvent from "../../components/EventList/ListEvent";
+import { events } from "./DummyEvents";
 
 export interface EventPageProps {
   id: string;
@@ -10,6 +11,7 @@ export interface EventPageProps {
   description: string;
   end_time: string;
   location: string;
+  logo: string;
   start_date: string;
   start_time: string;
   title: string;
@@ -18,53 +20,6 @@ export interface EventPageProps {
 }
 
 const Events: FC = () => {
-  const events = [
-    {
-      id: "1",
-      category: "Founder",
-      cost: "$20.00",
-      creator_name: "Mira Karsgaard",
-      description: "This is an event",
-      end_time: "6:00 PM",
-      location: "Over There",
-      start_date: "2021-09-25",
-      start_time: "4:00 PM",
-      title: "People and Power: Advancing Leadership",
-      // We will want to account for title length. Perhaps append "..." after a certain number of characters for list view
-      topics: ['🚀 Open Space', '🧩 Strategy'],
-      url: "https://www.website.com"
-    },
-    {
-      id: "2",
-      category: "Expert",
-      cost: "$500.00",
-      creator_name: "Tatiana Press",
-      description: "This is another event",
-      end_time: "10:00 PM",
-      location: "Over Here",
-      start_date: "2021-10-13",
-      start_time: "6:00 PM",
-      title: "People and Power: Advancing Each Other",
-      // We will want to account for title length. Perhaps append "..." after a certain number of characters for list view
-      topics: ['🔍 User Research', '🌎 Social Impact'],
-      url: "https://www.website.com"
-    },
-    {
-      id: "3",
-      category: "Community",
-      cost: "$500.00",
-      creator_name: "Ziare Botosh",
-      description: "This is another event",
-      end_time: "10:00 PM",
-      location: "Over Here",
-      start_date: "2021-11-18",
-      start_time: "6:00 PM",
-      title: "And Justice For All",
-      // We will want to account for title length. Perhaps append "..." after a certain number of characters for list view
-      topics: ['☕️ Action Cafe', '🌎 Social Impact'],
-      url: "https://www.website.com"
-    }
-  ]
 
   return (
     <ListEventContainer>
