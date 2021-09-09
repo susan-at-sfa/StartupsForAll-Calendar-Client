@@ -45,6 +45,29 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                 <button id="calendarAdd" type="button">+Cal</button>
                 <button id="viewPage" type="button">View Event Page</button>
               </ButtonDiv>
+              <SmallHeader>
+                <SmallHeaderLeft>
+                  <h2>{title}</h2>
+                  <p>{creator_name}</p>
+                </SmallHeaderLeft>
+                <SmallHeaderRight>
+                  <h2>{eventDate}</h2>
+                  <p>{start_time} - {end_time}</p>
+                  <ul>
+                    {topics.map((topic, index) => {
+                      return (
+                        <li key={index}>
+                          {topicEmojis[topic]}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <h3
+                    style={{ backgroundColor: categoryBackgroundColor[category] }}>
+                    {category}
+                  </h3>
+                </SmallHeaderRight>
+              </SmallHeader>
               <ModalImg>
                 <img src={logo} alt={title + "logo"} />
               </ModalImg>
@@ -123,6 +146,54 @@ justify-content: right;
   font-size: 14px;
 }
 `
+const SmallHeader = styled.div`
+display: flex;
+margin-top: 10px;
+margin-bottom: 5px;
+margin-right: 10px;
+h2{
+  font-size: 15px;
+  margin: 0;
+  line-height: 17px;
+}
+h3 {
+  font-size: 13px;
+  color: white;
+  height: 19px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0;
+}
+p{
+  font-size: 12px;
+  margin: 0;
+  line-height: 17px;
+}
+ul{
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+li{
+  display: flex;
+  margin: 0 3px 0px 5px;
+}
+`
+const SmallHeaderLeft = styled.div`
+flex: 0.55;
+`
+const SmallHeaderRight = styled.div`
+flex: 0.45;
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+flex-wrap: wrap;
+p{
+  margin-left: 20px;
+}
+`
 const ModalImg = styled.div`
 display: flex;
 margin-right: 10px;
@@ -141,6 +212,7 @@ h2{
   font-size: 20px;
   font-weight: bold;
   margin: 0 10px 0 0;
+  line-height: 22px;
 }
 p{
   font-size: 15px;
