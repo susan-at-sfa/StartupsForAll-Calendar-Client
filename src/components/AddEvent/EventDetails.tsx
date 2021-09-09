@@ -4,6 +4,7 @@ import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { Topics } from "../../store/slices/eventbrite/Topics.enum";
+import { useAppSelector } from "../../hooks";
 
 // import { useAppDispatch } from "../../hooks";
 // import { setEventbrite } from "../../store/slices/eventbrite/newEventSlice";
@@ -35,6 +36,10 @@ interface EventDetailsFormProps {
 const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const { eventDetails } = props;
   console.log("EventDetails component - got props:", eventDetails);
+  const { creator_name, creator_email } = useAppSelector(({ user }) => ({
+    creator_email: user.email,
+    creator_name: user.name,
+  }));
 
   // const dispatch = useAppDispatch();
   const [eventTitle, setEventTitle] = useState<string>(
@@ -135,24 +140,28 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
                   disabled={true}
                   value={eventDetails.changed}
                   onChange={() => null}
+                  name="changed"
                 />
                 <FormInput
                   type="hidden"
                   disabled={true}
                   value={eventDetails.created}
                   onChange={() => null}
+                  name="created"
                 />
                 <FormInput
                   type="hidden"
                   disabled={true}
                   value={eventDetails.id}
                   onChange={() => null}
+                  name="eventbrite_id"
                 />
                 <FormInput
                   type="hidden"
                   disabled={true}
-                  value={eventDetails.creator_email}
+                  value={creator_email}
                   onChange={() => null}
+                  name="creator_email"
                 />
               </>
             ) : null}
@@ -166,15 +175,15 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               onChange={setEventTitle}
               name="title"
             />
-            <FormLabel htmlFor="creator" text="Event Referred By" />
+            <FormLabel htmlFor="creator_name" text="Event Posted By" />
             <FormInput
               placeholder="Event Referrer"
               type="string"
               required
               disabled={false}
-              value={eventReferrer}
-              onChange={setEventReferrer}
-              name="creator"
+              value={creator_name}
+              onChange={() => null}
+              name="creator_name"
             />
             <FormLabel htmlFor="start_date" text="Date" />
             <FormInput
