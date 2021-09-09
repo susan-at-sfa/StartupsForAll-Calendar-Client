@@ -17,26 +17,26 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     dispatch(setEventDetailsModalOpen(false));
   }
 
+  const topicEmojis: Record<string, string> = {
+    '💵 Funding / Financial': '💵',
+    '☕️ Action Cafe': '☕️',
+    '🚀 Open Space': '🚀',
+    '🌎 Social Impact': '🌎',
+    '🧩 Strategy': '🧩',
+    '🔍 User Research': '🔍',
+  }
+
+  const categoryBackgroundColor: Record<string, string> = {
+    "Founder": "#9DD3C9",
+    "Expert": "#A0BAD2",
+    "Community": "#B6A5D3"
+  }
+
   return (
     <>
       {event.map((e) => {
         const { id, category, logo, location, title, start_date, start_time, end_time, creator_name, topics, description } = e;
         const eventDate = new Date(start_date).toDateString();
-        const topicEmojis: Record<string, string> = {
-          '💵 Funding / Financial': '💵',
-          '☕️ Action Cafe': '☕️',
-          '🚀 Open Space': '🚀',
-          '🌎 Social Impact': '🌎',
-          '🧩 Strategy': '🧩',
-          '🔍 User Research': '🔍',
-        }
-
-        const categoryBackgroundColor: Record<string, string> = {
-          "Founder": "#9DD3C9",
-          "Expert": "#A0BAD2",
-          "Community": "#B6A5D3"
-        }
-
         return (
           <Background key={id}>
             <Wrapper>
