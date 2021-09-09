@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch } from '../../hooks';
+import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice';
 
 export interface ListEventProps {
   category: string;
   creator_name: string;
   date: string;
   end_time: string;
-  id: number;
+  id: string;
   start_time: string;
   title: string;
   topics: string[];
@@ -14,6 +16,7 @@ export interface ListEventProps {
 
 const ListEvent: FC<ListEventProps> = (props) => {
   const { id, category, title, date, start_time, end_time, creator_name, topics } = props;
+  const dispatch = useAppDispatch();
 
   const topicEmojis: Record<string, string> = {
     '💵 Funding / Financial': '💵',
@@ -32,8 +35,13 @@ const ListEvent: FC<ListEventProps> = (props) => {
 
   const eventDate = new Date(date).toDateString()
 
+  const onClickingEvent = (eventID: string) => {
+    dispatch(setSelectedEventID(eventID));
+    dispatch(setEventDetailsModalOpen(true));
+  }
+
   return (
-    <Wrapper key={id}>
+    < Wrapper key={id} onClick={() => onClickingEvent(id)}>
       <LeftDisplay>
         <Title>{title}</Title>
         <CreatedBy>{creator_name}</CreatedBy>
@@ -56,7 +64,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
           {category}
         </CategoryDisplay>
       </RightDisplay>
-    </Wrapper>
+    </Wrapper >
   )
 }
 

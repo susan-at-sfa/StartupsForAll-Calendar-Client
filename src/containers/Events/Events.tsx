@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ListEvent from "../../components/EventList/ListEvent";
 
 export interface EventPageProps {
-  id: number;
+  id: string;
   category: string;
   cost: string;
   creator_name: string;
@@ -20,7 +20,7 @@ export interface EventPageProps {
 const Events: FC = () => {
   const events = [
     {
-      id: 1,
+      id: "1",
       category: "Founder",
       cost: "$20.00",
       creator_name: "Mira Karsgaard",
@@ -35,7 +35,7 @@ const Events: FC = () => {
       url: "https://www.website.com"
     },
     {
-      id: 2,
+      id: "2",
       category: "Expert",
       cost: "$500.00",
       creator_name: "Tatiana Press",
@@ -50,7 +50,7 @@ const Events: FC = () => {
       url: "https://www.website.com"
     },
     {
-      id: 3,
+      id: "3",
       category: "Community",
       cost: "$500.00",
       creator_name: "Ziare Botosh",

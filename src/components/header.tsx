@@ -85,7 +85,6 @@ const Title = styled.div`
   text-align: center;
   color: #c79288;
 `;
-
 const Logo = styled.img`
   position: absolute;
   height: auto;
@@ -94,7 +93,6 @@ const Logo = styled.img`
   top: 15px;
   z-index: 4;
 `;
-
 const Hamburger = styled.div`
   width: 34px;
   height: 35px;
@@ -124,7 +122,6 @@ const Hamburger = styled.div`
       }
     }
   }
-
   span {
     width: 100%;
     height: 1px;
