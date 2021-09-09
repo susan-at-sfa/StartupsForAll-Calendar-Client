@@ -18,10 +18,31 @@ code {
     monospace;
 }
 
-fieldset {
-  border: none;
+fieldset,
+select,
+textarea {
   margin: 0;
   padding: 0;
   width: 100%;
+  max-width: 100%;
   max-width: 100vw;
+}
+
+fieldset {
+  border: none;
+}
+
+select {
+  min-height: 142px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+option {
+  width: 100%;
+  flex-grow: 0;
 }

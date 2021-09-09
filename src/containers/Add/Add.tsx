@@ -1,18 +1,51 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../hooks";
 import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
 import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
 import EventDetailsForm from "../../components/AddEvent/EventDetails";
-import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
+import {
+  requestEventbriteEvent,
+  setEventbrite,
+} from "../../store/slices/eventbrite/eventbriteSlice";
+import EventbriteEvent from "../../store/slices/eventbrite/EventbriteEvent";
 
 const Add: FC = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const token = useAppSelector(({ auth }) => auth.token);
   const eventbriteDetails = useAppSelector(({ eventbrite }) => eventbrite);
 
   const handleSubmit = (id: string) => {
     dispatch(requestEventbriteEvent({ id }));
+  };
+
+  const [isCreatingNewEmptyEvent, setCreatingNewEmptyEvent] = useState(false);
+  const cancelEvent = () => {
+    const eventData: EventbriteEvent = {
+      logo: "",
+      changed: "",
+      created: "",
+      creator_name: "",
+      creator_email: "",
+      id: "",
+      location: "",
+      title: "",
+      cost: "",
+      currency: "",
+      summary: "",
+      description: "",
+      url: "",
+      start_date: "",
+      end_date: "",
+      start_time: "",
+      end_time: "",
+      series_dates: [],
+    };
+    dispatch(setEventbrite(eventData));
+    setCreatingNewEmptyEvent(false);
+    history.push("/add");
   };
 
   if (!token) {
@@ -22,10 +55,16 @@ const Add: FC = () => {
   return (
     // Since our default state is now the initialState object seen in eventbriteSlice, we check existence differently.
     // There's probably a better way to do this.
-    eventbriteDetails && eventbriteDetails.id ? (
-      <EventDetailsForm eventDetails={eventbriteDetails} />
+    (eventbriteDetails && eventbriteDetails.id) || isCreatingNewEmptyEvent ? (
+      <EventDetailsForm
+        cancelEvent={cancelEvent}
+        eventDetails={eventbriteDetails}
+      />
     ) : (
-      <EventbriteIDInput handleSubmit={handleSubmit} />
+      <EventbriteIDInput
+        newEvent={setCreatingNewEmptyEvent}
+        handleSubmit={handleSubmit}
+      />
     )
   );
 };

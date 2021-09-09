@@ -2,8 +2,11 @@ export default interface EventbriteEvent {
   logo?: string;
   changed?: DateString;
   created?: DateString;
+  creator_name?: string;
+  creator_email?: string;
   id: string;
-  name: string;
+  location?: string;
+  title: string;
   cost?: string;
   currency?: string;
   summary?: string;
@@ -11,7 +14,7 @@ export default interface EventbriteEvent {
   url?: string;
   start_date?: DateString;
   end_date?: DateString;
-  start_time: string;
-  end_time: string;
+  start_time: DateString;
+  end_time: DateString;
   series_dates?: EventbriteSeries[];
 }

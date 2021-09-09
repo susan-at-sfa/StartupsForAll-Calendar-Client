@@ -6,10 +6,11 @@ interface FormInputProps {
   type?: string;
   required?: boolean;
   onChange(value: string): void;
-  value?: string;
+  value?: string | number | Date | string[] | any;
   name?: string;
   disabled?: boolean;
   defaultValue?: string;
+  rows?: string;
 }
 
 const FormInput: FC<FormInputProps> = (props) => {
