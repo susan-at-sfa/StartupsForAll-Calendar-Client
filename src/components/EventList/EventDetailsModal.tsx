@@ -35,7 +35,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
   return (
     <>
       {event.map((e) => {
-        const { id, category, logo, location, title, start_date, start_time, end_time, creator_name, topics, description } = e;
+        const { id, category, logo, location, title, start_date, start_time, end_time, creator_name, topics, description, url } = e;
         const eventDate = new Date(start_date).toDateString();
         return (
           <Background key={id}>
@@ -43,7 +43,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               <ButtonDiv>
                 <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
                 <button id="calendarAdd" type="button">+Cal</button>
-                <button id="viewPage" type="button">View Event Page</button>
+                <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
               </ButtonDiv>
               <SmallHeader>
                 <SmallHeaderLeft>
@@ -81,6 +81,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                 <h4>Summary</h4>
                 <p>{description}</p>
               </ModalHeader>
+              <ButtonDiv>
+                <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
+                <button id="calendarAdd" type="button">+Cal</button>
+                <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
+              </ButtonDiv>
             </Wrapper>
           </Background>
         )
@@ -116,8 +121,15 @@ const ButtonDiv = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: right;
+margin-top: 5px;
+a{
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
 #back{
-  margin-right: 45px;
+  margin-right: 28px;
   padding: 1px 10px 1px 10px;
   border: none;
   height: 30px;
@@ -138,17 +150,14 @@ justify-content: right;
 }
 #viewPage{
   border: none;
-  padding: 1px 55px 1px 15px;
+  padding: 1px 62px 1px 18px;
   height: 30px;
   background-color: #A36760;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
 }
 `
 const SmallHeader = styled.div`
 display: flex;
-margin-top: 10px;
+margin-top: 15px;
 margin-bottom: 5px;
 margin-right: 10px;
 h2{
@@ -178,7 +187,7 @@ ul{
 }
 li{
   display: flex;
-  margin: 0 3px 0px 5px;
+  margin: 0 5px 0px 5px;
 }
 `
 const SmallHeaderLeft = styled.div`
@@ -191,7 +200,7 @@ flex-direction: row;
 justify-content: flex-end;
 flex-wrap: wrap;
 p{
-  margin-left: 20px;
+  margin-left: 25px;
 }
 `
 const ModalImg = styled.div`
@@ -207,7 +216,8 @@ height: auto;
 `
 const ModalHeader = styled.div`
 width: 325px;
-margin-top: 5px;
+margin-top: 15px;
+margin-bottom: 20px;
 h2{
   font-size: 20px;
   font-weight: bold;

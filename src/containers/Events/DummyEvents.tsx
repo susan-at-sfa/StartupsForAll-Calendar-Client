@@ -20,7 +20,7 @@ export const events = [
     category: "Expert",
     cost: "$500.00",
     creator_name: "Tatiana Press",
-    description: "This is another event",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec metus congue, facilisis odio vel, eleifend dolor. Morbi ut mattis quam. Interdum et malesuada fames.",
     end_time: "10:00 PM",
     location: "Over Here",
     logo: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F131740909%2F172060252421%2F1%2Foriginal.20210409-200645?h=200&w=450&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=44b99a1a8e5bd64ea83871e69cabea36",
