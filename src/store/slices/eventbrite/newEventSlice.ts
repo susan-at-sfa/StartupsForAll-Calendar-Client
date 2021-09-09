@@ -22,8 +22,8 @@ const initialState: NewEvent = {
   series_dates: [],
 };
 
-const eventbriteSlice = createSlice({
-  name: 'eventbrite',
+const newEventSlice = createSlice({
+  name: 'newEvent',
   initialState,
   reducers: {
     requestEventbriteEvent(state, action: PayloadAction<{id: string}>) {},
@@ -31,13 +31,17 @@ const eventbriteSlice = createSlice({
       let eventData = action.payload;
       eventData.start_date = new Date(Date.parse(eventData.start_date));
       eventData.end_date = new Date(Date.parse(eventData.end_date));
-      eventData.start_time = eventData.start_date;
-      eventData.end_time = eventData.end_date;
+      eventData.start_time = new Date(Date.parse(eventData.start_date));
+      eventData.end_time = new Date(Date.parse(eventData.end_date));
       return { ...eventData };
     },
+    resetEvent(state, action: PayloadAction<NewEvent>) {
+      let eventData = action.payload;
+      return { ...eventData };
+    }
   }
-})
+});
 
-export const { requestEventbriteEvent, setEventbrite } = eventbriteSlice.actions;
+export const { requestEventbriteEvent, setEventbrite, resetEvent } = newEventSlice.actions;
 
-export default eventbriteSlice.reducer;
+export default newEventSlice.reducer;

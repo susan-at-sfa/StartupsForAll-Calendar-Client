@@ -8,14 +8,15 @@ import EventDetailsForm from "../../components/AddEvent/EventDetails";
 import {
   requestEventbriteEvent,
   setEventbrite,
-} from "../../store/slices/eventbrite/eventbriteSlice";
+  resetEvent,
+} from "../../store/slices/eventbrite/newEventSlice";
 import NewEvent from "../../store/slices/eventbrite/NewEvent";
 
 const Add: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const token = useAppSelector(({ auth }) => auth.token);
-  const eventbriteDetails = useAppSelector(({ eventbrite }) => eventbrite);
+  const eventbriteDetails = useAppSelector(({ newEvent }) => newEvent);
 
   const handleSubmit = (id: string) => {
     dispatch(requestEventbriteEvent({ id }));
@@ -43,7 +44,7 @@ const Add: FC = () => {
       end_time: "",
       series_dates: [],
     };
-    dispatch(setEventbrite(eventData));
+    dispatch(resetEvent(eventData));
     setCreatingNewEmptyEvent(false);
     history.push("/add");
   };
@@ -53,7 +54,7 @@ const Add: FC = () => {
   }
 
   return (
-    // Since our default state is now the initialState object seen in eventbriteSlice, we check existence differently.
+    // Since our default state is now the initialState object seen in newEventSlice, we check existence differently.
     // There's probably a better way to do this.
     (eventbriteDetails && eventbriteDetails.id) || isCreatingNewEmptyEvent ? (
       <EventDetailsForm

@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { Topics } from "../../store/slices/eventbrite/Topics.enum";
 
 // import { useAppDispatch } from "../../hooks";
-// import { setEventbrite } from "../../store/slices/eventbrite/eventbriteSlice";
+// import { setEventbrite } from "../../store/slices/eventbrite/newEventSlice";
 
 // import { useForm } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
@@ -29,7 +29,7 @@ import { Topics } from "../../store/slices/eventbrite/Topics.enum";
 // });
 interface EventDetailsFormProps {
   eventDetails: NewEvent;
-  cancelEvent(value: boolean): void;
+  cancelEvent(): void;
 }
 
 const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
@@ -261,11 +261,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
-            <button
-              type="button"
-              id="dark"
-              onClick={() => props.cancelEvent(false)}
-            >
+            <button type="button" id="dark" onClick={props.cancelEvent}>
               Cancel
             </button>
             <button type="submit" id="light">
