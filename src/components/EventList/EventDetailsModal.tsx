@@ -48,7 +48,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
       {modalOpen ? (
         <>
           {event.map((e) => {
-            const { id, category, logo, location, title, start_date, start_time, end_time, creator_name, topics, description, url } = e;
+            const { id, category, cost, created_at, custom_blurb, logo, location, title, start_date, start_time, end_time, creator_name, topics, description, url } = e;
             const eventDate = new Date(start_date).toDateString();
             return (
               <Background key={id}>
@@ -92,6 +92,8 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <p>{start_time} - {end_time}</p>
                       <h4>Location</h4>
                       <p>{location}</p>
+                      <h4>Price</h4>
+                      <p>{cost} <span id="cost">+ taxes & fees where applicable</span></p>
                       <h4>Summary</h4>
                       <p>{description}</p>
                     </ModalHeader>
@@ -100,6 +102,15 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <button id="calendarAdd" type="button">+Cal</button>
                       <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
                     </ButtonDiv>
+                    <SecondSection>
+                      <h4>Info from {creator_name}</h4>
+                      <p>{custom_blurb}</p>
+                      <h4>Event Link</h4>
+                      <p><a href={url}>{url}</a></p>
+                    </SecondSection>
+                    <ModalFooter>
+
+                    </ModalFooter>
                   </Wrapper>
                 </animated.div>
               </Background>
@@ -134,6 +145,7 @@ background-color: white;
 height: 90vh;
 width: 90vw;
 z-index: 10;
+overflow: scroll;
 `
 const ButtonDiv = styled.div`
 display: flex;
@@ -254,4 +266,26 @@ h4{
 span{
   color: #7BB1A7;
 }
+#cost{
+  font-size: 12px;
+}
+`
+const SecondSection = styled.div`
+margin: 15px 10px 0px 0px;
+h4{
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+p{
+  font-size: 15px;
+  margin: 0;
+}
+a{
+  color: #7BB1A7;
+  text-decoration: none;
+}
+`
+const ModalFooter = styled.div`
+
 `
