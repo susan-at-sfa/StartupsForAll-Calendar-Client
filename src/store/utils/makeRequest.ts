@@ -9,7 +9,7 @@ export async function makeRequest(url: string, method: string, data?: unknown, t
     ...(data ? { body: JSON.stringify(data) } : {}),
   };
   try {
-    console.log('store/util/ MAKING REQUEST');
+    console.log('store/util/ MAKING REQUEST', init);
     const response = await fetch(url, init);
     if (!response.ok) {
       // an error

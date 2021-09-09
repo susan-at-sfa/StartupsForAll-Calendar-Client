@@ -1,33 +1,13 @@
 import React, { FC, useState } from "react";
 import NewEvent from "../../constants/NewEvent.d";
+import { Topics } from "../../constants/Topics.enum";
+
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
+
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
-import { Topics } from "../../store/slices/eventbrite/Topics.enum";
-import { useAppSelector } from "../../hooks";
-
-// import { useAppDispatch } from "../../hooks";
-// import { setEventbrite } from "../../store/slices/eventbrite/newEventSlice";
-
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
-
-// const schema = yup.object().shape({
-//   title: yup.string().required(),
-//   description: yup.string().required(),
-//   creator_email: yup.string().required(),
-//   creator_name: yup.string().required(),
-//   event_link: yup.string().required(),
-//   cost: yup.number().required(),
-//   when: yup.date().required(),
-//   where: yup.string().required(),
-//   who: yup.string().required(),
-//   topics: yup
-//     .string()
-//     .oneOf([...Topics])
-//     .required(),
-// });
 interface EventDetailsFormProps {
   eventDetails: NewEvent;
   cancelEvent(): void;
@@ -35,6 +15,9 @@ interface EventDetailsFormProps {
 
 const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const { eventDetails } = props;
+  const dispatch = useAppDispatch();
+  const token = useAppSelector(({ auth }) => auth.token);
+
   console.log("EventDetails component - got props:", eventDetails);
   const { creator_name, creator_email } = useAppSelector(({ user }) => ({
     creator_email: user.email,
@@ -85,21 +68,35 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   //   resolver: yupResolver(schema),
   // });
 
-  const submitForm = (event: any) => {
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("FORM SUBMIT");
-    // handleSubmit((data) => console.log(data));
+    const fd: NewEvent = {
+      changed: eventDetails.changed,
+      cost: cost.toString(),
+      created: eventDetails.created,
+      currency: currency,
+      description: description,
+      end_date: eventDetails.end_date,
+      end_time: endTime,
+      eventbrite_id: eventDetails.id,
+      logo: "",
+      start_date: startDate,
+      start_time: startTime,
+      summary: "",
+      title: eventTitle,
+      topics: topics,
+      url: url,
+    };
+    if (eventDetails.logo) {
+      fd.logo = eventDetails.logo;
+    }
+    if (eventDetails.summary) {
+      fd.summary = eventDetails.summary;
+    }
+    console.log(fd);
+    dispatch(saveNewEvent({ form: fd, token: token }));
   };
-
-  // const submitForm = async (event: FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   // TODO: handle form submission
-  //   // handleSubmit(event);
-  // };
-  // const onSubmit = (data: TetherFormData) => {
-  //   dispatch(createTether({ data, onSuccess }));
-  //   // setFormStep('two');
-  // };
 
   const changeTopics = (topic: string) => {
     const index = topics.indexOf(topic);

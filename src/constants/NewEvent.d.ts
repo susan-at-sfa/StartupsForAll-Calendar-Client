@@ -1,20 +1,22 @@
 export default interface NewEvent {
-  logo?: string;
   changed?: DateString | string;
-  created?: DateString | string;
-  creator_name?: string;
-  creator_email?: string;
-  id: string;
-  location?: string;
-  title: string;
   cost?: string;
+  created?: DateString | string;
+  creator_email?: string;
+  creator_name?: string;
   currency?: string;
-  summary?: string;
   description?: string;
-  url?: string;
+  id?: string;
+  eventbrite_id?: string;
+  location?: string;
+  logo?: string;
+  series_dates?: EventbriteSeries[];
   start_date?: DateString | string;
   end_date?: DateString | string;
   start_time: DateString | string;
   end_time: DateString | string;
-  series_dates?: EventbriteSeries[];
+  summary?: string;
+  title: string;
+  topics?: string[];
+  url?: string;
 }

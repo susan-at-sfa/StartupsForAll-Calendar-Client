@@ -5,17 +5,15 @@ import { useAppSelector } from "../../hooks";
 import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
 import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
 import EventDetailsForm from "../../components/AddEvent/EventDetails";
-import {
-  requestEventbriteEvent,
-  resetEvent,
-} from "../../store/slices/eventbrite/newEventSlice";
+import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
+import { resetEvent } from "../../store/slices/newEvent/newEventSlice";
 import { emptyEvent } from "../../constants/NewEvent";
 
 const Add: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const token = useAppSelector(({ auth }) => auth.token);
-  const eventbriteDetails = useAppSelector(({ newEvent }) => newEvent);
+  const eventbriteDetails = useAppSelector(({ eventbrite }) => eventbrite);
 
   const handleSubmit = (id: string) => {
     dispatch(requestEventbriteEvent({ id }));
