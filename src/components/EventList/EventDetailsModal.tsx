@@ -3,19 +3,30 @@ import styled from '@emotion/styled';
 import { events } from '../../containers/Events/DummyEvents';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice'
+import { useSpring, animated } from 'react-spring';
 
 interface EventDetailsModalProps {
-  id: string
+  selectedEventID: string
+  modalOpen: boolean
 }
 
 const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
-  const event = events.filter(e => e.id === props.id)
+  const { selectedEventID, modalOpen } = props;
+  const event = events.filter(e => e.id === selectedEventID)
   const dispatch = useAppDispatch();
 
   const onClickingBack = () => {
     dispatch(setSelectedEventID(""));
     dispatch(setEventDetailsModalOpen(false));
   }
+
+  const animation = useSpring({
+    config: {
+      duration: 350
+    },
+    opacity: modalOpen ? 1 : 0,
+    transform: modalOpen ? `translateY(0%)` : `translateY(-100%)`
+  })
 
   const topicEmojis: Record<string, string> = {
     '💵 Funding / Financial': '💵',
@@ -34,63 +45,69 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
 
   return (
     <>
-      {event.map((e) => {
-        const { id, category, logo, location, title, start_date, start_time, end_time, creator_name, topics, description, url } = e;
-        const eventDate = new Date(start_date).toDateString();
-        return (
-          <Background key={id}>
-            <Wrapper>
-              <ButtonDiv>
-                <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
-                <button id="calendarAdd" type="button">+Cal</button>
-                <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
-              </ButtonDiv>
-              <SmallHeader>
-                <SmallHeaderLeft>
-                  <h2>{title}</h2>
-                  <p>{creator_name}</p>
-                </SmallHeaderLeft>
-                <SmallHeaderRight>
-                  <h2>{eventDate}</h2>
-                  <p>{start_time} - {end_time}</p>
-                  <ul>
-                    {topics.map((topic, index) => {
-                      return (
-                        <li key={index}>
-                          {topicEmojis[topic]}
-                        </li>
-                      )
-                    })}
-                  </ul>
-                  <h3
-                    style={{ backgroundColor: categoryBackgroundColor[category] }}>
-                    {category}
-                  </h3>
-                </SmallHeaderRight>
-              </SmallHeader>
-              <ModalImg>
-                <img src={logo} alt={title + "logo"} />
-              </ModalImg>
-              <ModalHeader>
-                <h2>{title}</h2>
-                <p>Referred by <span>{creator_name}</span></p>
-                <h4>{eventDate}</h4>
-                <p>{start_time} - {end_time}</p>
-                <h4>Location</h4>
-                <p>{location}</p>
-                <h4>Summary</h4>
-                <p>{description}</p>
-              </ModalHeader>
-              <ButtonDiv>
-                <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
-                <button id="calendarAdd" type="button">+Cal</button>
-                <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
-              </ButtonDiv>
-            </Wrapper>
-          </Background>
-        )
-      })
-      }
+      {modalOpen ? (
+        <>
+          {event.map((e) => {
+            const { id, category, logo, location, title, start_date, start_time, end_time, creator_name, topics, description, url } = e;
+            const eventDate = new Date(start_date).toDateString();
+            return (
+              <Background key={id}>
+                <animated.div style={animation}>
+                  <Wrapper>
+                    <ButtonDiv>
+                      <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
+                      <button id="calendarAdd" type="button">+Cal</button>
+                      <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
+                    </ButtonDiv>
+                    <SmallHeader>
+                      <SmallHeaderLeft>
+                        <h2>{title}</h2>
+                        <p>{creator_name}</p>
+                      </SmallHeaderLeft>
+                      <SmallHeaderRight>
+                        <h2>{eventDate}</h2>
+                        <p>{start_time} - {end_time}</p>
+                        <ul>
+                          {topics.map((topic, index) => {
+                            return (
+                              <li key={index}>
+                                {topicEmojis[topic]}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                        <h3
+                          style={{ backgroundColor: categoryBackgroundColor[category] }}>
+                          {category}
+                        </h3>
+                      </SmallHeaderRight>
+                    </SmallHeader>
+                    <ModalImg>
+                      <img src={logo} alt={title + "logo"} />
+                    </ModalImg>
+                    <ModalHeader>
+                      <h2>{title}</h2>
+                      <p>Referred by <span>{creator_name}</span></p>
+                      <h4>{eventDate}</h4>
+                      <p>{start_time} - {end_time}</p>
+                      <h4>Location</h4>
+                      <p>{location}</p>
+                      <h4>Summary</h4>
+                      <p>{description}</p>
+                    </ModalHeader>
+                    <ButtonDiv>
+                      <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
+                      <button id="calendarAdd" type="button">+Cal</button>
+                      <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
+                    </ButtonDiv>
+                  </Wrapper>
+                </animated.div>
+              </Background>
+            )
+          })
+          }
+        </>
+      ) : null}
     </>
   )
 }
@@ -106,7 +123,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 7;
-`
+  `
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -116,6 +133,7 @@ padding-left: 10px;
 background-color: white;
 height: 90vh;
 width: 90vw;
+z-index: 10;
 `
 const ButtonDiv = styled.div`
 display: flex;
