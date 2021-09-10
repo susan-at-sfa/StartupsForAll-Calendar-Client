@@ -1,15 +1,14 @@
 import React, { FC, useState } from "react";
 import NewEvent from "../../constants/NewEvent.d";
-import { Topics } from "../../constants/Topics.enum";
-
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
-
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
+import { Topics } from "../../constants/Topics.enum";
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
+import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+
 interface EventDetailsFormProps {
   eventDetails: NewEvent;
   cancelEvent(): void;
