@@ -6,21 +6,24 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Routes } from "./constants/routes";
+import { useAppSelector } from "./hooks";
 import Events from "./containers/Events";
 import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
 import Header from "./components/header";
-import EventDetailsModal from "./components/EventList/EventDetailsModal"
-import { useAppSelector } from "./hooks";
+import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import styled from "styled-components";
 
 const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
   const user = useAppSelector(({ user }) => user);
-  const selectedEventID = useAppSelector(({ eventModal }) => eventModal.selectedEventID)
-  const eventDetailsModalOpen = useAppSelector(({ eventModal }) => eventModal.eventDetailsModalOpen)
-  console.log("USER UPDATE", user);
+  const selectedEventID = useAppSelector(
+    ({ eventModal }) => eventModal.selectedEventID
+  );
+  const eventDetailsModalOpen = useAppSelector(
+    ({ eventModal }) => eventModal.eventDetailsModalOpen
+  );
 
   const routes = useMemo(() => {
     const jsx = [
@@ -44,7 +47,10 @@ const App: FC = () => {
   return (
     <Wrapper>
       <Router>
-        <EventDetailsModal selectedEventID={selectedEventID} modalOpen={eventDetailsModalOpen} />
+        <EventDetailsModal
+          selectedEventID={selectedEventID}
+          modalOpen={eventDetailsModalOpen}
+        />
         <Header />
         <Sections>
           <Switch>{routes}</Switch>
