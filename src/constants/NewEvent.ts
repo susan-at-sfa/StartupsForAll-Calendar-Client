@@ -2,12 +2,15 @@ import NewEvent from "./NewEvent.d";
 
 export const emptyEvent: NewEvent = {
   logo: '',
+  category: '',
+  category_text: '',
   changed: '',
   created: '',
   creator_name: '',
   creator_email: '',
   id: '',
   location: '',
+  promoted: false,
   title: '',
   cost: '',
   currency: '',

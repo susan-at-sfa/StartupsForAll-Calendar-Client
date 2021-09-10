@@ -8,6 +8,8 @@ import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
+import { Category } from "../../constants/Category.enum";
+import { CategoryText } from "../../constants/CategoryText.enum";
 interface EventDetailsFormProps {
   eventDetails: NewEvent;
   cancelEvent(): void;
@@ -28,8 +30,14 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [eventTitle, setEventTitle] = useState<string>(
     eventDetails.title || ""
   );
-  const [eventReferrer, setEventReferrer] = useState<string>(
-    eventDetails.creator_name || ""
+  // const [eventReferrer, setEventReferrer] = useState<string>(
+  //   eventDetails.creator_name || ""
+  // );
+  const [category, setCategory] = useState<Category | string>(
+    Category.StartupsForAll
+  );
+  const [categoryText, setCategoryText] = useState<CategoryText | string>(
+    CategoryText.StartupsForAll
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
@@ -72,15 +80,21 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     event.preventDefault();
     console.log("FORM SUBMIT");
     const fd: NewEvent = {
+      category: category,
+      category_text: categoryText,
       changed: eventDetails.changed,
-      cost: cost.toString(),
+      cost: Number(cost.toString().substring(1)),
       created: eventDetails.created,
+      creator_email: creator_email,
+      creator_name: creator_name,
       currency: currency,
       description: description,
       end_date: eventDetails.end_date,
       end_time: endTime,
       eventbrite_id: eventDetails.id,
+      location: location,
       logo: "",
+      promoted: false,
       start_date: startDate,
       start_time: startTime,
       summary: "",
@@ -129,38 +143,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
                 alt="event logo"
                 style={{ maxWidth: "100%" }}
               />
-            ) : null}
-            {eventDetails.id ? (
-              <>
-                <FormInput
-                  type="hidden"
-                  disabled={true}
-                  value={eventDetails.changed}
-                  onChange={() => null}
-                  name="changed"
-                />
-                <FormInput
-                  type="hidden"
-                  disabled={true}
-                  value={eventDetails.created}
-                  onChange={() => null}
-                  name="created"
-                />
-                <FormInput
-                  type="hidden"
-                  disabled={true}
-                  value={eventDetails.id}
-                  onChange={() => null}
-                  name="eventbrite_id"
-                />
-                <FormInput
-                  type="hidden"
-                  disabled={true}
-                  value={creator_email}
-                  onChange={() => null}
-                  name="creator_email"
-                />
-              </>
             ) : null}
             <FormLabel htmlFor="title" text="Title" />
             <FormInput
@@ -268,6 +250,28 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               name="description"
               rows={12}
             />
+            <FormLabel htmlFor="category" text="Category" />
+            <select
+              value={category}
+              defaultValue={Category.StartupsForAll}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value={Category.Experts}>Experts</option>
+              <option value={Category.Founders}>Founders</option>
+              <option value={Category.StartupsForAll}>Startups For All</option>
+            </select>
+            <select
+              value={categoryText}
+              onChange={(e) => setCategoryText(e.target.value)}
+              defaultValue={CategoryText.StartupsForAll}
+            >
+              <option value={CategoryText.StartupsForAll}>
+                {CategoryText.StartupsForAll}
+              </option>
+              <option value={CategoryText.Community}>
+                {CategoryText.Community}
+              </option>
+            </select>
           </fieldset>
         </FormFields>
         <EventsGreenDiv>

@@ -1,6 +1,11 @@
+import { Category } from "./Category.enum";
+import { CategoryText } from "./CategoryText.enum";
+
 export default interface NewEvent {
   changed?: DateString | string;
-  cost?: string;
+  category: Category | string;
+  category_text: CategoryText | string;
+  cost?: string | number;
   created?: DateString | string;
   creator_email?: string;
   creator_name?: string;
@@ -10,6 +15,7 @@ export default interface NewEvent {
   eventbrite_id?: string;
   location?: string;
   logo?: string;
+  promoted?: boolean;
   series_dates?: EventbriteSeries[];
   start_date?: DateString | string;
   end_date?: DateString | string;
