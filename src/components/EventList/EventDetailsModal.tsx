@@ -1,7 +1,7 @@
 import { FC, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { events } from '../../containers/Events/DummyEvents';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice'
 import { useSpring, animated } from 'react-spring';
 import { BiVideo } from "react-icons/bi";
@@ -92,6 +92,10 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </h3>
                       </SmallHeaderRight>
                     </SmallHeader>
+                    <CustomBlurb>
+                      <h2>Info from {creator_name}</h2>
+                      <p>{custom_blurb}</p>
+                    </CustomBlurb>
                     <ModalImg>
                       <img src={logo} alt={title + "logo"} />
                     </ModalImg>
@@ -113,8 +117,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
                     </ButtonDiv>
                     <SecondSection>
-                      <h4>Info from {creator_name}</h4>
-                      <p>{custom_blurb}</p>
                       <h4>Event Link</h4>
                       <p><a href={url}>{url}</a></p>
                     </SecondSection>
@@ -206,6 +208,7 @@ a{
   border: none;
   padding: 1px 62px 1px 18px;
   height: 30px;
+  width: 200px;
   background-color: #A36760;
 }
 `
@@ -255,6 +258,20 @@ justify-content: flex-end;
 flex-wrap: wrap;
 p{
   margin-left: 25px;
+}
+`
+const CustomBlurb = styled.div`
+margin: 5px 0px 10px 0;
+background-color: #fdfbe4;
+padding: 15px 20px 15px 15px;
+h2{
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+p{
+  margin: 0;
+  font-size: 12px;
 }
 `
 const ModalImg = styled.div`
