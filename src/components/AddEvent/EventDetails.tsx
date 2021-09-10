@@ -26,13 +26,9 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     creator_name: user.name,
   }));
 
-  // const dispatch = useAppDispatch();
   const [eventTitle, setEventTitle] = useState<string>(
     eventDetails.title || ""
   );
-  // const [eventReferrer, setEventReferrer] = useState<string>(
-  //   eventDetails.creator_name || ""
-  // );
   const [category, setCategory] = useState<Category | string>(
     Category.StartupsForAll
   );
@@ -46,9 +42,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [description, setDescription] = useState<string>(
     eventDetails.description || ""
   );
-  // const [endDate, setEndDate] = useState<Date | string>(
-  //   eventDetails.end_date.toISOString().split("T")[0] || null
-  // );
   const [startDate, setStartDate] = useState<Date | string>(
     eventDetails.start_date
       ? new Date(Date.parse(eventDetails.start_date))
@@ -72,13 +65,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
 
-  // const { register, handleSubmit, watch } = useForm<NewEvent>({
-  //   resolver: yupResolver(schema),
-  // });
-
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("FORM SUBMIT");
     const fd: NewEvent = {
       category: category,
       category_text: categoryText,
@@ -108,7 +96,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     if (eventDetails.summary) {
       fd.summary = eventDetails.summary;
     }
-    console.log(fd);
     dispatch(saveNewEvent({ form: fd, token: token }));
   };
 
@@ -174,16 +161,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               onChange={setStartDate}
               name="start_date"
             />
-            {/* <FormLabel htmlFor="end_date" text="End Date" />
-            <FormInput
-              placeholder="End Date"
-              type="date"
-              required
-              disabled={false}
-              value={endDate}
-              onChange={setEndDate}
-              name="end_date"
-            /> */}
             <FormLabel htmlFor="start_time" text="Start Time" />
             <FormInput
               placeholder="Start Time"

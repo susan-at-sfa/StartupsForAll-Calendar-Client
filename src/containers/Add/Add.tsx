@@ -2,13 +2,14 @@ import { FC, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../hooks";
-import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
-import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
-import EventDetailsForm from "../../components/AddEvent/EventDetails";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import { resetEvent } from "../../store/slices/newEvent/newEventSlice";
 import { resetEventBrite } from "../../store/slices/eventbrite/eventbriteSlice";
 import { emptyEvent } from "../../constants/NewEvent";
+
+import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
+import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
+import EventDetailsForm from "../../components/AddEvent/EventDetails";
 
 const Add: FC = () => {
   const history = useHistory();
@@ -32,20 +33,17 @@ const Add: FC = () => {
     return <AuthorizeToAddEvents />;
   }
 
-  return (
-    // Since our default state is now the initialState object seen in newEventSlice, we check existence differently.
-    // There's probably a better way to do this.
-    (eventbriteDetails && eventbriteDetails.id) || isCreatingNewEmptyEvent ? (
-      <EventDetailsForm
-        cancelEvent={cancelEvent}
-        eventDetails={eventbriteDetails}
-      />
-    ) : (
-      <EventbriteIDInput
-        newEvent={setCreatingNewEmptyEvent}
-        handleSubmit={handleSubmit}
-      />
-    )
+  return (eventbriteDetails && eventbriteDetails.id) ||
+    isCreatingNewEmptyEvent ? (
+    <EventDetailsForm
+      cancelEvent={cancelEvent}
+      eventDetails={eventbriteDetails}
+    />
+  ) : (
+    <EventbriteIDInput
+      newEvent={setCreatingNewEmptyEvent}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 
