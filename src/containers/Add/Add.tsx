@@ -7,6 +7,7 @@ import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
 import EventDetailsForm from "../../components/AddEvent/EventDetails";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import { resetEvent } from "../../store/slices/newEvent/newEventSlice";
+import { resetEventBrite } from "../../store/slices/eventbrite/eventbriteSlice";
 import { emptyEvent } from "../../constants/NewEvent";
 
 const Add: FC = () => {
@@ -22,6 +23,7 @@ const Add: FC = () => {
   const [isCreatingNewEmptyEvent, setCreatingNewEmptyEvent] = useState(false);
   const cancelEvent = () => {
     dispatch(resetEvent(emptyEvent));
+    dispatch(resetEventBrite(emptyEvent));
     setCreatingNewEmptyEvent(false);
     history.push("/add");
   };

@@ -18,9 +18,14 @@ const eventbriteSlice = createSlice({
       eventData.end_time = eventData.end_date;
       return { ...eventData };
     },
+    resetEventBrite(state, action: PayloadAction<NewEvent>) {
+      console.log("eventbrite slice - reset eb event - action.payload", action.payload);
+      let eventData = action.payload;
+      return { ...eventData };
+    }
   }
 });
 
-export const { requestEventbriteEvent, setEventbrite } = eventbriteSlice.actions;
+export const { requestEventbriteEvent, setEventbrite, resetEventBrite } = eventbriteSlice.actions;
 
 export default eventbriteSlice.reducer;
