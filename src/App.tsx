@@ -14,7 +14,6 @@ import Header from "./components/header";
 import EventDetailsModal from "./components/EventList/EventDetailsModal"
 import { useAppSelector } from "./hooks";
 import styled from "styled-components";
-import { setSelectedEventID } from "./store/slices/eventDetails/showEventDetailsSlice";
 
 const App: FC = () => {
   const token = useAppSelector(({ auth }) => auth.token);
@@ -45,8 +44,6 @@ const App: FC = () => {
   return (
     <Wrapper>
       <Router>
-        {/* {eventDetailsModalOpen &&
-          <EventDetailsModal selectedEventID={selectedEventID} modalOpen={eventDetailsModalOpen} />} */}
         <EventDetailsModal selectedEventID={selectedEventID} modalOpen={eventDetailsModalOpen} />
         <Header />
         <Sections>
@@ -61,11 +58,12 @@ export default App;
 
 const Wrapper = styled.section`
   height: 100vh;
+  width: 100vw;
   display: flex;
 `;
 
 const Sections = styled.section`
-  width: 100%;
+  width: 100vw;
   height: calc(100vh - 250px);
   position: relative;
   top: 250px;

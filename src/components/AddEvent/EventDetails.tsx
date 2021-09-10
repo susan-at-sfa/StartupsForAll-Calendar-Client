@@ -283,6 +283,19 @@ export default EventDetailsForm;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+    fieldset {
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-block-start: 0;
+    padding-block-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    border: none;
+    min-inline-size: min-content;
+}
+textArea{
+  width: 95%;
+}
 `;
 const EventsGreenDiv = styled.div`
   display: flex;
@@ -297,7 +310,7 @@ const EventsGreenDiv = styled.div`
 const FormFields = styled.div`
   position: relative;
   bottom: 90px;
-`;
+  `;
 const ButtonDiv = styled.div`
   position: fixed;
   right: 0;

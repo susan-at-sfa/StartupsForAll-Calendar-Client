@@ -66,7 +66,7 @@ const Wrapper = styled.section`
     padding-bottom: 5px;
     padding-top: 10px;
     &.active{
-      border-bottom: 3px solid white;
+      border-bottom: 4px solid white;
     }
   }
 `

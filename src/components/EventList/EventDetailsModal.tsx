@@ -4,6 +4,7 @@ import { events } from '../../containers/Events/DummyEvents';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice'
 import { useSpring, animated } from 'react-spring';
+import { BiVideo } from "react-icons/bi";
 
 interface EventDetailsModalProps {
   selectedEventID: string
@@ -65,7 +66,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                   <Wrapper>
                     <ButtonDiv>
                       <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
-                      <button id="calendarAdd" type="button">+Cal</button>
+                      <button id="calendarAdd" type="button"></button>
                       <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
                     </ButtonDiv>
                     <SmallHeader>
@@ -100,7 +101,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <h4>{eventDate}</h4>
                       <p>{start_time} - {end_time}</p>
                       <h4>Location</h4>
-                      <p>{location}</p>
+                      <p><BiVideo /> {location}</p>
                       <h4>Price</h4>
                       <p>{cost} <span id="cost">+ taxes & fees where applicable</span></p>
                       <h4>Summary</h4>
@@ -108,7 +109,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     </ModalHeader>
                     <ButtonDiv>
                       <button id="back" type="button" onClick={() => onClickingBack()}>Back</button>
-                      <button id="calendarAdd" type="button">+Cal</button>
+                      <button id="calendarAdd" type="button"></button>
                       <button id="viewPage" type="button"><a href={url}>View More Details</a></button>
                     </ButtonDiv>
                     <SecondSection>
@@ -195,6 +196,7 @@ a{
   margin-right: 5px;
   border: none;
   height: 30px;
+  width: 50px;
   background-color: #C79288;
   color: white;
   font-weight: 600;
