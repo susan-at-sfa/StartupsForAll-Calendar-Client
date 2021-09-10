@@ -7,6 +7,7 @@ export interface EventPageProps {
   id: string;
   category: string;
   cost: string;
+  created_at: string;
   creator_name: string;
   description: string;
   end_time: string;

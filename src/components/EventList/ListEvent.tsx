@@ -116,6 +116,7 @@ display: flex;
 align-items: center;
 height: 15px;
 margin-bottom: -10px;
+margin-left: 20px;
 padding-top: 0;
 font-size: 12px;
 `
@@ -128,7 +129,6 @@ ul{
   font-size: 12px;
   padding: 0;
   list-style: none;
-  margin-right: 5px;
 }
 li{
   display: flex;

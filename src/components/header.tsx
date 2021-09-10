@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import headerImage from "../assets/images/s4aHEADER.png";
 import logo from "../assets/images/S4ALogo.png";
+import stars from "../assets/images/stars.png";
 import Navbar from "./navbar";
 import { useLocation } from "react-router";
 import { useAppSelector, useAppDispatch } from "../hooks";
@@ -58,11 +58,11 @@ export default Header;
 const Wrapper = styled.section`
   position: fixed;
   height: 250px;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(${headerImage});
+  background-image: url(${stars});
   background-size: cover;
   overflow: hidden;
   z-index: 1;
