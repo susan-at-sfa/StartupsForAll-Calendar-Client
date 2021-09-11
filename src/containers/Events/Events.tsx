@@ -2,8 +2,9 @@ import { FC } from "react";
 import styled from "styled-components";
 import ListEvent from "../../components/EventList/ListEvent";
 // import { events } from "./DummyEvents";
-import { useAppSelector } from "../../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 import { FiList } from 'react-icons/fi'
+import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 
 export interface EventPageProps {
   id: string;
@@ -23,6 +24,7 @@ export interface EventPageProps {
 }
 
 const Events: FC = () => {
+  const dispatch = useAppDispatch();
   const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
 
   const months = [
@@ -53,15 +55,14 @@ const Events: FC = () => {
     )
   })
 
-
   return (
     <ListEventContainer>
-      <FilterButton>
+      <FilterButton onClick={() => dispatch(setFilterModalOpen(true))}>
         <FiList id="filterIcon" />
         <p> Filter</p>
       </FilterButton>
       <>{sections}</>
-      <ul className="displayListEventList">
+      {/* <ul className="displayListEventList">
         {events.map((event: any) => {
           const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
           console.log("Event Date", event.start_date.substring(5, 7))
@@ -78,18 +79,20 @@ const Events: FC = () => {
           />
         })
         }
-      </ul>
+      </ul> */}
     </ListEventContainer>
   );
 };
 
 export default Events;
+
 const FilterButton = styled.div`
   position: fixed;
   display: flex;
   right: 20px;
   top: 265px;
   width: 60px; 
+  padding-left: 5px;
   background-color: white;
   z-index: 2;
   p{
@@ -106,7 +109,7 @@ const FilterButton = styled.div`
   }
 `
 const MonthSection = styled.section`
-  height: 25px;
+  height: 125px;
 `
 const MonthHeader = styled.div`
   position: sticky;;
@@ -130,7 +133,6 @@ const MonthHeader = styled.div`
 const DisplayEvents = styled.div`
   
 `
-
 const ListEventContainer = styled.div`
   display: flex;
   flex-direction: column;

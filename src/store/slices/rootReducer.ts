@@ -8,12 +8,14 @@ import NewEvent from '../../constants/NewEvent.d';
 import { Reducer } from 'react';
 import eventModalReducer, { EventDetailsModalState } from './eventDetails/showEventDetailsSlice';
 import dbEventReducer, { DbEventState } from './dbEvent/dbEventSlice';
+import filterModalReducer, { FilterModalState } from './filterModal/showFilterModalSlice';
 
 type RootReducer = Reducer<CombinedState<{
   auth: AuthState;
   dbEvent: DbEventState;
   eventbrite: NewEvent;
   eventModal: EventDetailsModalState;
+  filterModal: FilterModalState;
   menu: MenuState;
   newEvent: NewEvent;
   user: UserState;
@@ -25,6 +27,7 @@ export default function createReducer(injectedReducers = {}) {
     dbEvent: dbEventReducer,
     eventbrite: eventbriteReducer,
     eventModal: eventModalReducer,
+    filterModal: filterModalReducer,
     menu: menuOpenReducer,
     newEvent: newEventReducer,
     user: userReducer,
