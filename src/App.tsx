@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import { FC, useMemo, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,16 +6,24 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Routes } from "./constants/routes";
-import { useAppSelector } from "./hooks";
+import { useAppSelector, useAppDispatch } from "./hooks";
+import styled from "styled-components";
+import { getAllDbEvents } from "./store/slices/dbEvent/dbEventSlice";
+//components
 import Events from "./containers/Events";
 import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
 import Header from "./components/header";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
-import styled from "styled-components";
 
 const App: FC = () => {
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllDbEvents())
+  }, [dispatch]);
+
   const token = useAppSelector(({ auth }) => auth.token);
   const user = useAppSelector(({ user }) => user);
   const selectedEventID = useAppSelector(
