@@ -62,7 +62,7 @@ const Events: FC = () => {
         <p> Filter</p>
       </FilterButton>
       <>{sections}</>
-      {/* <ul className="displayListEventList">
+      <ul className="displayListEventList">
         {events.map((event: any) => {
           const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
           console.log("Event Date", event.start_date.substring(5, 7))
@@ -79,7 +79,7 @@ const Events: FC = () => {
           />
         })
         }
-      </ul> */}
+      </ul>
     </ListEventContainer>
   );
 };

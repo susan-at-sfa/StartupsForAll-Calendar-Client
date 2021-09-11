@@ -12,7 +12,7 @@ const dbEventSlice = createSlice({
   name: 'dbEvent',
   initialState,
   reducers: {
-    getAllDbEvents(state) { },
+    getAllDbEvents() { },
     setAllDbEvents(state, action: PayloadAction<any[]>) {
       const dbEvents = action.payload;
       return { ...state, dbEvents }
