@@ -153,14 +153,14 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
 export default EventDetailsModal;
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 7;
+width: 100vw;
+height: 100vh;
+background: rgba(0, 0, 0, 0.8);
+position: fixed;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 7;
   `
 const Wrapper = styled.div`
 display: flex;

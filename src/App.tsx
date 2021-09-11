@@ -16,6 +16,7 @@ import Admin from "./containers/Admin";
 import Add from "./containers/Add";
 import Header from "./components/header";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
+import FilterModal from "./components/EventList/FilterModal";
 
 const App: FC = () => {
 
@@ -31,6 +32,9 @@ const App: FC = () => {
   );
   const eventDetailsModalOpen = useAppSelector(
     ({ eventModal }) => eventModal.eventDetailsModalOpen
+  );
+  const filterModalOpen = useAppSelector(
+    ({ filterModal }) => filterModal.filterModalOpen
   );
 
   const routes = useMemo(() => {
@@ -59,6 +63,7 @@ const App: FC = () => {
           selectedEventID={selectedEventID}
           modalOpen={eventDetailsModalOpen}
         />
+        <FilterModal modalOpen={filterModalOpen} />
         <Header />
         <Sections>
           <Switch>{routes}</Switch>
