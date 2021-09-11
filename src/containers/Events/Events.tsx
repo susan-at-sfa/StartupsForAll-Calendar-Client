@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ListEvent from "../../components/EventList/ListEvent";
 // import { events } from "./DummyEvents";
 import { useAppSelector } from "../../hooks";
+import { FiList } from 'react-icons/fi'
 
 export interface EventPageProps {
   id: string;
@@ -25,18 +26,18 @@ const Events: FC = () => {
   const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "JANUARY",
+    "FEBRUARY",
+    "MARCH",
+    "APRIL",
+    "MAY",
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOBER",
+    "NOVEMBER",
+    "DECEMBER"
   ]
 
   const sections = months.map((month, index) => {
@@ -55,10 +56,15 @@ const Events: FC = () => {
 
   return (
     <ListEventContainer>
+      <FilterButton>
+        <FiList id="filterIcon" />
+        <p> Filter</p>
+      </FilterButton>
       <>{sections}</>
       <ul className="displayListEventList">
         {events.map((event: any) => {
           const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
+          console.log("Event Date", event.start_date.substring(5, 7))
           return <ListEvent
             key={id}
             id={id}
@@ -78,9 +84,29 @@ const Events: FC = () => {
 };
 
 export default Events;
-
+const FilterButton = styled.div`
+  position: fixed;
+  display: flex;
+  right: 20px;
+  top: 265px;
+  width: 60px; 
+  background-color: white;
+  z-index: 2;
+  p{
+    color: #C79288;
+    margin: 0;
+    font-size: 14px; 
+    font-weight: bold;
+    padding: 0;
+  }
+  #filterIcon{
+    color: #C79288;
+    margin: 2px 2px 0 0;
+    height: 15px;
+  }
+`
 const MonthSection = styled.section`
-height: 85px;
+  height: 25px;
 `
 const MonthHeader = styled.div`
   position: sticky;;
@@ -90,7 +116,7 @@ const MonthHeader = styled.div`
     font-style: normal;
     font-size: 13px;
     font-weight: bold;
-    width: 100%;
+    width: 90%;
     text-align: left;
     border-bottom: 1px solid #C79288;
     line-height: 2px;
@@ -106,8 +132,8 @@ const DisplayEvents = styled.div`
 `
 
 const ListEventContainer = styled.div`
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 //   align-items: center;
 //   justify-content: center;
 //   .displayListEventList{

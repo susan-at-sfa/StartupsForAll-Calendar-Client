@@ -78,8 +78,8 @@ const Wrapper = styled.section`
 
 const Sections = styled.section`
   width: 100vw;
-  height: calc(100vh - 250px);
-  position: relative;
+  max-height: calc(100vh - 250px);
+  position: absolute;
   top: 250px;
   scroll-behavior: smooth;
   scrollbar-width: none;
