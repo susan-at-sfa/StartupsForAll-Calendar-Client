@@ -1,9 +1,12 @@
 import React, { FC, useState } from "react";
 import NewEvent from "../../constants/NewEvent.d";
+import BlankNewEventInputs from "./BlankNewEventInputs";
+import EventbriteEventInfo from "./EventbriteEventInfo";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
+import TopicsChooser from "./TopicsChooser";
 import styled from "@emotion/styled";
-import { Topics } from "../../constants/Topics.enum";
+
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
@@ -25,6 +28,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     creator_name: user.name,
   }));
 
+  const [customBlurb, setCustomBlurb] = useState<string>("");
   const [eventTitle, setEventTitle] = useState<string>(
     eventDetails.title || ""
   );
@@ -41,11 +45,17 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [description, setDescription] = useState<string>(
     eventDetails.description || ""
   );
+  const [summary, setSummary] = useState<string>(eventDetails.summary || "");
   const [startDate, setStartDate] = useState<Date | string>(
     eventDetails.start_date
       ? new Date(Date.parse(eventDetails.start_date))
           .toISOString()
           .split("T")[0]
+      : ""
+  );
+  const [endDate, setEndDate] = useState<Date | string>(
+    eventDetails.end_date
+      ? new Date(Date.parse(eventDetails.end_date)).toISOString().split("T")[0]
       : ""
   );
   const [endTime, setEndTime] = useState<string>(
@@ -76,7 +86,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
       creator_name: creator_name,
       currency: currency,
       description: description,
-      end_date: eventDetails.end_date,
+      end_date: eventDetails.end_date || eventDetails.start_date || startDate,
       end_time: endTime,
       eventbrite_id: eventDetails.id,
       location: location,
@@ -123,109 +133,69 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               onChange={setUrl}
               name="url"
             />
-            {eventDetails.logo ? (
-              <img
-                src={eventDetails.logo}
-                alt="event logo"
-                style={{ maxWidth: "100%" }}
-              />
-            ) : null}
-            <FormLabel htmlFor="title" text="Title" />
-            <FormInput
-              placeholder="Title"
-              type="text"
-              required
-              disabled={false}
-              value={eventTitle}
-              onChange={setEventTitle}
-              name="title"
-            />
+
             <FormLabel htmlFor="creator_name" text="Event Posted By" />
             <FormInput
-              placeholder="Event Referrer"
+              placeholder="Event Posted By"
               type="string"
               required
-              disabled={false}
               value={creator_name}
               onChange={() => null}
               name="creator_name"
             />
-            <FormLabel htmlFor="start_date" text="Date" />
-            <FormInput
-              placeholder="Date"
-              type="date"
-              required
-              disabled={false}
-              value={startDate}
-              onChange={setStartDate}
-              name="start_date"
-            />
-            <FormLabel htmlFor="start_time" text="Start Time" />
-            <FormInput
-              placeholder="Start Time"
-              type="text"
-              required
-              disabled={false}
-              value={startTime}
-              onChange={setStartTime}
-              name="start_time"
-            />
-            <FormLabel htmlFor="end_time" text="End Time" />
-            <FormInput
-              placeholder="End Time"
-              type="text"
-              required
-              disabled={false}
-              value={endTime}
-              onChange={setEndTime}
-              name="end_time"
-            />
-            <FormLabel htmlFor="location" text="Location" />
-            <FormInput
-              placeholder="Location"
-              type="text"
-              required
-              disabled={false}
-              value={location}
-              onChange={setLocation}
-              name="location"
-            />
-            <FormLabel htmlFor="cost" text="Cost" />
-            <FormInput
-              placeholder="Cost"
-              type="string"
-              required
-              disabled={false}
-              value={cost}
-              onChange={setCost}
-              name="cost"
-            />
-          </fieldset>
-          <fieldset>
-            <FormLabel htmlFor="topics" text="Topics" />
-            <select
-              multiple={true}
-              value={topics}
-              onChange={(e) => changeTopics(e.target.value)}
-            >
-              {Topics.map((topic) => (
-                <option value={topic} key={topic}>
-                  {topic}
-                </option>
-              ))}
-            </select>
-          </fieldset>
-          <fieldset>
-            <FormLabel htmlFor="description" text="Description" />
+
+            <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
             <textarea
-              placeholder="Description"
+              placeholder="Custom Blurb"
               required
-              disabled={false}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              name="description"
-              rows={12}
+              value={customBlurb}
+              onChange={(e) => setCustomBlurb(e.target.value)}
+              name="custom_blurb"
             />
+
+            {eventDetails && eventDetails.id === "" && (
+              <BlankNewEventInputs
+                eventTitle={eventTitle}
+                setEventTitle={setEventTitle}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                startTime={startTime}
+                setStartTime={setStartTime}
+                endTime={endTime}
+                setEndTime={setEndTime}
+                location={location}
+                setLocation={setLocation}
+                cost={cost}
+                setCost={setCost}
+                currency={currency}
+                setCurrency={setCurrency}
+                summary={summary}
+                setSummary={setSummary}
+                url={url}
+                setUrl={setUrl}
+              />
+            )}
+
+            <TopicsChooser changeTopics={changeTopics} topics={topics} />
+
+            {eventDetails && eventDetails.id !== "" && (
+              <EventbriteEventInfo
+                title={eventTitle}
+                logo={eventDetails.logo}
+                start_date={startDate}
+                end_date={endDate}
+                start_time={startTime}
+                end_time={endTime}
+                location={location}
+                cost={cost}
+                currency={currency}
+                summary={summary}
+                url={url}
+              />
+            )}
+
             <FormLabel htmlFor="category" text="Category" />
             <select
               value={category}
@@ -236,6 +206,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               <option value={Category.Founders}>Founders</option>
               <option value={Category.StartupsForAll}>Startups For All</option>
             </select>
+
             <select
               value={categoryText}
               onChange={(e) => setCategoryText(e.target.value)}
@@ -271,7 +242,7 @@ export default EventDetailsForm;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-    fieldset {
+  fieldset {
     margin-inline-start: 0;
     margin-inline-end: 0;
     padding-block-start: 0;
@@ -280,10 +251,10 @@ const Wrapper = styled.div`
     padding-inline-end: 0;
     border: none;
     min-inline-size: min-content;
-}
-textArea{
-  width: 95%;
-}
+  }
+  textArea {
+    width: 95%;
+  }
 `;
 const EventsGreenDiv = styled.div`
   display: flex;
@@ -298,7 +269,7 @@ const EventsGreenDiv = styled.div`
 const FormFields = styled.div`
   position: relative;
   bottom: 90px;
-  `;
+`;
 const ButtonDiv = styled.div`
   position: fixed;
   right: 0;
