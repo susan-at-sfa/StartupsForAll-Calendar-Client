@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useSpring, animated } from 'react-spring';
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
+import { Topics } from '../../constants/Topics.enum';
 
 interface FilterModalProps {
   modalOpen: boolean;
@@ -10,6 +11,7 @@ interface FilterModalProps {
 const FilterModal: FC<FilterModalProps> = (props) => {
   const dispatch = useAppDispatch();
   const { modalOpen } = props;
+
   const animation = useSpring({
     config: {
       duration: 350
@@ -25,6 +27,12 @@ const FilterModal: FC<FilterModalProps> = (props) => {
           <animated.div style={animation}>
             <Wrapper>
               <button onClick={() => dispatch(setFilterModalOpen(false))} >Close</button>
+              {Topics.map((topic, index) => (
+                <label key={index} className="container">{topic}
+                  <input type="checkbox" />
+                  <span className="checkmark"></span>
+                </label>
+              ))}
             </Wrapper>
           </animated.div>
         </Background>)

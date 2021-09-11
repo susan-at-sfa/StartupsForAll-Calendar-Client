@@ -2,7 +2,8 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import { useAppDispatch } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice';
-
+import { topicsEmojis } from '../../constants/TopicsEmojiColors';
+import { categoryBackgroundColor } from '../../constants/CategoryColors';
 export interface ListEventProps {
   category: string;
   creator_name: string;
@@ -17,22 +18,6 @@ export interface ListEventProps {
 const ListEvent: FC<ListEventProps> = (props) => {
   const { id, category, title, date, start_time, end_time, creator_name, topics } = props;
   const dispatch = useAppDispatch();
-
-  const topicEmojis: Record<string, string> = {
-    '💵 Funding / Financial': '💵',
-    '☕️ Action Cafe': '☕️',
-    '🚀 Open Space': '🚀',
-    '🌎 Social Impact': '🌎',
-    '🧩 Strategy': '🧩',
-    '🔍 User Research': '🔍',
-  }
-
-  const categoryBackgroundColor: Record<string, string> = {
-    "Founder": "#9DD3C9",
-    "Expert": "#A0BAD2",
-    "Community": "#B6A5D3"
-  }
-
   const eventDate = new Date(date).toDateString()
 
   const onClickingEvent = (eventID: string) => {
@@ -54,7 +39,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
             {topics.map((topic, index) => {
               return (
                 <li key={index}>
-                  {topicEmojis[topic]}
+                  {topicsEmojis[topic]}
                 </li>
               )
             })}

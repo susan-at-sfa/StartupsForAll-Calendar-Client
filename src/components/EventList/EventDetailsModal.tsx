@@ -5,7 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice'
 import { useSpring, animated } from 'react-spring';
 import { BiVideo } from "react-icons/bi";
-
+import { topicsEmojiColors, topicsEmojis } from '../../constants/TopicsEmojiColors'
+import { categoryBackgroundColor } from '../../constants/CategoryColors'
 interface EventDetailsModalProps {
   selectedEventID: string
   modalOpen: boolean
@@ -30,30 +31,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     opacity: modalOpen ? 1 : 0,
     transform: modalOpen ? `translateY(0%)` : `translateY(-100%)`
   })
-
-  const topicEmojis: Record<string, string> = {
-    '💵 Funding / Financial': '💵',
-    '☕️ Action Cafe': '☕️',
-    '🚀 Open Space': '🚀',
-    '🌎 Social Impact': '🌎',
-    '🧩 Strategy': '🧩',
-    '🔍 User Research': '🔍',
-  }
-
-  const topicEmojiColors: Record<string, string> = {
-    '💵 Funding / Financial': '#EEF8E9',
-    '☕️ Action Cafe': '#F0F7FF',
-    '🚀 Open Space': '#E9F7F8',
-    '🌎 Social Impact': '#EFE9F8',
-    '🧩 Strategy': '#FFF0F0',
-    '🔍 User Research': '#FFFAF0',
-  }
-
-  const categoryBackgroundColor: Record<string, string> = {
-    "Founder": "#9DD3C9",
-    "Expert": "#A0BAD2",
-    "Community": "#B6A5D3"
-  }
 
   return (
     <>
@@ -83,7 +60,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           {topics.map((topic: string, index: number) => {
                             return (
                               <li key={index}>
-                                {topicEmojis[topic]}
+                                {topicsEmojis[topic]}
                               </li>
                             )
                           })}
@@ -127,7 +104,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         {topics.map((topic: string, index: number) => {
                           return (
                             <li key={index}>
-                              <p style={{ backgroundColor: topicEmojiColors[topic] }}>{topic}</p>
+                              <p style={{ backgroundColor: topicsEmojiColors[topic] }}>{topic}</p>
                             </li>
                           )
                         })}
