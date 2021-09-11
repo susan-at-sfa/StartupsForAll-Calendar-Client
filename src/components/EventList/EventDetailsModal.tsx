@@ -1,7 +1,7 @@
 import { FC, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { events } from '../../containers/Events/DummyEvents';
-import { useAppDispatch } from '../../hooks';
+// import { events } from '../../containers/Events/DummyEvents';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice'
 import { useSpring, animated } from 'react-spring';
 import { BiVideo } from "react-icons/bi";
@@ -12,8 +12,10 @@ interface EventDetailsModalProps {
 }
 
 const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
+
+  const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
   const { selectedEventID, modalOpen } = props;
-  const event = events.filter(e => e.id === selectedEventID)
+  const event = events.filter((e: any) => e.id === selectedEventID)
   const dispatch = useAppDispatch();
 
   const onClickingBack = () => {
@@ -57,7 +59,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     <>
       {modalOpen ? (
         <>
-          {event.map((e) => {
+          {event.map((e: any) => {
             const { id, category, cost, created_at, custom_blurb, logo, location, title, start_date, start_time, end_time, creator_name, topics, description, url } = e;
             const eventDate = new Date(start_date).toDateString();
             return (
@@ -78,7 +80,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <h2>{eventDate}</h2>
                         <p>{start_time} - {end_time}</p>
                         <ul>
-                          {topics.map((topic, index) => {
+                          {topics.map((topic: string, index: number) => {
                             return (
                               <li key={index}>
                                 {topicEmojis[topic]}
@@ -122,7 +124,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     </SecondSection>
                     <ModalFooter>
                       <ul>
-                        {topics.map((topic, index) => {
+                        {topics.map((topic: string, index: number) => {
                           return (
                             <li key={index}>
                               <p style={{ backgroundColor: topicEmojiColors[topic] }}>{topic}</p>

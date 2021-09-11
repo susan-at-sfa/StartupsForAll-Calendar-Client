@@ -1,7 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
 import ListEvent from "../../components/EventList/ListEvent";
-import { events } from "./DummyEvents";
+// import { events } from "./DummyEvents";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 export interface EventPageProps {
   id: string;
@@ -21,11 +22,12 @@ export interface EventPageProps {
 }
 
 const Events: FC = () => {
+  const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
 
   return (
     <ListEventContainer>
       <ul className="displayListEventList">
-        {events.map((event) => {
+        {events.map((event: any) => {
           const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
           return <ListEvent
             key={id}
