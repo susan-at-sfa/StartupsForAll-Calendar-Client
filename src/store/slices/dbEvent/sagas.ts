@@ -8,7 +8,6 @@ export function* fetchAllDbEvents() {
   const { success, data, error } = yield call(makeRequest, `${BASE_URL}/events`, "GET");
 
   if (success) {
-    console.log("EVENTS FROM DB!", data);
     yield put(setAllDbEvents(data));
   }
   if (error) {

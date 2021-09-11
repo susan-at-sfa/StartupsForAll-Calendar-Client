@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import ListEvent from "../../components/EventList/ListEvent";
 // import { events } from "./DummyEvents";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 
 export interface EventPageProps {
   id: string;

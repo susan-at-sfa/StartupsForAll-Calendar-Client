@@ -259,7 +259,7 @@ flex-direction: row;
 justify-content: flex-end;
 flex-wrap: wrap;
 p{
-  margin-left: 25px;
+  margin-left: 55px;
 }
 `
 const CustomBlurb = styled.div`
@@ -299,7 +299,8 @@ h2{
 }
 p{
   font-size: 15px;
-  margin: 0;
+  margin: 0 10px 0 0;
+  word-wrap: break-word;
 }
 h4{
   font-size: 15px;
@@ -323,6 +324,7 @@ h4{
 p{
   font-size: 15px;
   margin: 0;
+  word-break: break-all;
 }
 a{
   color: #7BB1A7;
@@ -340,7 +342,7 @@ ul{
 p{
   font-weight: 600;
   color: #A36760;
-  margin: 0 0 3px 0;
+  margin: 0 0px 3px 0;
   padding: 4px 50px 4px 10px;
   font-size: 14px;
 }

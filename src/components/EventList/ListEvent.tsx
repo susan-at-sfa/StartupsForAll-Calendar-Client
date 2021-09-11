@@ -116,7 +116,7 @@ display: flex;
 align-items: center;
 height: 15px;
 margin-bottom: -10px;
-margin-left: 20px;
+margin-left: 65px;
 padding-top: 0;
 font-size: 12px;
 `
