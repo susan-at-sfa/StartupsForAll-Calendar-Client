@@ -32,7 +32,6 @@ const Input = styled.input`
   height: 45px;
   padding-left: 15px;
   padding-right: 15px;
-  width: 300px;
   margin-bottom: 15px;
   &::placeholder {
     color: #e8d9d6;

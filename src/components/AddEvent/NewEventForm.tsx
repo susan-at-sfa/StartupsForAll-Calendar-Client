@@ -120,106 +120,105 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
 
   return (
     <Wrapper>
+      <Clearfix />
       <form onSubmit={submitForm}>
         <FormFields>
-          <fieldset>
-            <FormLabel htmlFor="url" text="Eventrite URL or ID" />
-            <FormInput
-              placeholder="URL"
-              type="text"
-              required
-              disabled={false}
-              value={url}
-              onChange={setUrl}
-              name="url"
+          <FormLabel htmlFor="url" text="Eventrite URL or ID" />
+          <FormInput
+            placeholder="URL"
+            type="text"
+            required
+            disabled={false}
+            value={url}
+            onChange={setUrl}
+            name="url"
+          />
+
+          <FormLabel htmlFor="creator_name" text="Event Posted By" />
+          <FormInput
+            placeholder="Event Posted By"
+            type="string"
+            required
+            value={creator_name}
+            onChange={() => null}
+            name="creator_name"
+          />
+
+          <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
+          <TextArea
+            placeholder="Custom Blurb"
+            required
+            value={customBlurb}
+            onChange={(e) => setCustomBlurb(e.target.value)}
+            name="custom_blurb"
+          />
+
+          {eventDetails && eventDetails.id === "" && (
+            <BlankNewEventInputs
+              eventTitle={eventTitle}
+              setEventTitle={setEventTitle}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              startTime={startTime}
+              setStartTime={setStartTime}
+              endTime={endTime}
+              setEndTime={setEndTime}
+              location={location}
+              setLocation={setLocation}
+              cost={cost}
+              setCost={setCost}
+              currency={currency}
+              setCurrency={setCurrency}
+              summary={summary}
+              setSummary={setSummary}
+              url={url}
+              setUrl={setUrl}
             />
+          )}
 
-            <FormLabel htmlFor="creator_name" text="Event Posted By" />
-            <FormInput
-              placeholder="Event Posted By"
-              type="string"
-              required
-              value={creator_name}
-              onChange={() => null}
-              name="creator_name"
+          <TopicsChooser changeTopics={changeTopics} topics={topics} />
+
+          {eventDetails && eventDetails.id !== "" && (
+            <EventbriteEventInfo
+              title={eventTitle}
+              logo={eventDetails.logo}
+              start_date={startDate}
+              end_date={endDate}
+              start_time={startTime}
+              end_time={endTime}
+              location={location}
+              cost={cost}
+              currency={currency}
+              summary={summary}
+              url={url}
             />
+          )}
 
-            <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
-            <textarea
-              placeholder="Custom Blurb"
-              required
-              value={customBlurb}
-              onChange={(e) => setCustomBlurb(e.target.value)}
-              name="custom_blurb"
-            />
+          <FormLabel htmlFor="category" text="Category" />
+          <SelectList
+            value={category}
+            defaultValue={Category.StartupsForAll}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value={Category.Experts}>Experts</option>
+            <option value={Category.Founders}>Founders</option>
+            <option value={Category.StartupsForAll}>Startups For All</option>
+          </SelectList>
 
-            {eventDetails && eventDetails.id === "" && (
-              <BlankNewEventInputs
-                eventTitle={eventTitle}
-                setEventTitle={setEventTitle}
-                startDate={startDate}
-                setStartDate={setStartDate}
-                endDate={endDate}
-                setEndDate={setEndDate}
-                startTime={startTime}
-                setStartTime={setStartTime}
-                endTime={endTime}
-                setEndTime={setEndTime}
-                location={location}
-                setLocation={setLocation}
-                cost={cost}
-                setCost={setCost}
-                currency={currency}
-                setCurrency={setCurrency}
-                summary={summary}
-                setSummary={setSummary}
-                url={url}
-                setUrl={setUrl}
-              />
-            )}
-
-            <TopicsChooser changeTopics={changeTopics} topics={topics} />
-
-            {eventDetails && eventDetails.id !== "" && (
-              <EventbriteEventInfo
-                title={eventTitle}
-                logo={eventDetails.logo}
-                start_date={startDate}
-                end_date={endDate}
-                start_time={startTime}
-                end_time={endTime}
-                location={location}
-                cost={cost}
-                currency={currency}
-                summary={summary}
-                url={url}
-              />
-            )}
-
-            <FormLabel htmlFor="category" text="Category" />
-            <select
-              value={category}
-              defaultValue={Category.StartupsForAll}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value={Category.Experts}>Experts</option>
-              <option value={Category.Founders}>Founders</option>
-              <option value={Category.StartupsForAll}>Startups For All</option>
-            </select>
-
-            <select
-              value={categoryText}
-              onChange={(e) => setCategoryText(e.target.value)}
-              defaultValue={CategoryText.StartupsForAll}
-            >
-              <option value={CategoryText.StartupsForAll}>
-                {CategoryText.StartupsForAll}
-              </option>
-              <option value={CategoryText.Community}>
-                {CategoryText.Community}
-              </option>
-            </select>
-          </fieldset>
+          <SelectList
+            value={categoryText}
+            onChange={(e) => setCategoryText(e.target.value)}
+            defaultValue={CategoryText.StartupsForAll}
+          >
+            <option value={CategoryText.StartupsForAll}>
+              {CategoryText.StartupsForAll}
+            </option>
+            <option value={CategoryText.Community}>
+              {CategoryText.Community}
+            </option>
+          </SelectList>
         </FormFields>
         <EventsGreenDiv>
           <ButtonDiv>
@@ -242,19 +241,6 @@ export default EventDetailsForm;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  fieldset {
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    padding-block-start: 0;
-    padding-block-end: 0;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
-    border: none;
-    min-inline-size: min-content;
-  }
-  textArea {
-    width: 95%;
-  }
 `;
 const EventsGreenDiv = styled.div`
   display: flex;
@@ -269,6 +255,8 @@ const EventsGreenDiv = styled.div`
 const FormFields = styled.div`
   position: relative;
   bottom: 90px;
+  padding-left: 12px;
+  top: 10px;
 `;
 const ButtonDiv = styled.div`
   position: fixed;
@@ -297,5 +285,35 @@ const ButtonDiv = styled.div`
     font-weight: bold;
     margin-bottom: 3px;
     color: white;
+  }
+`;
+const TextArea = styled.textarea`
+  color: #e8d9d6;
+  font-weight: bold;
+  border: 8px solid #e8d9d6;
+  border-right-width: 20px;
+  min-height: 45px;
+  padding: 0 15px;
+  margin-bottom: 15px;
+  max-width: 100%;
+  max-width: 100vw;
+`;
+const SelectList = styled.select`
+  color: #e8d9d6;
+  font-weight: bold;
+  border: 8px solid #e8d9d6;
+  border-right-width: 20px;
+  min-height: 45px;
+  padding: 0 15px;
+  margin-bottom: 15px;
+  max-width: 100%;
+  max-width: 100vw;
+`;
+const Clearfix = styled.div`
+  overflow: auto;
+  ::after {
+    content: "";
+    clear: both;
+    display: table;
   }
 `;

@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import React, { FC } from "react";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
@@ -97,7 +98,7 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
       />
 
       <FormLabel htmlFor="summary" text="summary" />
-      <textarea
+      <TextArea
         placeholder="summary"
         required
         disabled={false}
@@ -109,5 +110,18 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
     </>
   );
 };
+
+const TextArea = styled.textarea`
+  color: #e8d9d6;
+  font-weight: bold;
+  border: 8px solid #e8d9d6;
+  border-right-width: 20px;
+  min-height: 45px;
+  padding: 0 15px;
+  width: 300px;
+  margin-bottom: 15px;
+  max-width: 100%;
+  max-width: 100vw;
+`;
 
 export default BlankNewEventInputs;
