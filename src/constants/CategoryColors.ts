@@ -3,3 +3,10 @@ export const categoryBackgroundColor: Record<string, string> = {
   "Expert": "#A0BAD2",
   "Community": "#B6A5D3"
 }
+
+export const categories: string[] = [
+  "All",
+  "Founder",
+  "Expert",
+  "Community"
+]
