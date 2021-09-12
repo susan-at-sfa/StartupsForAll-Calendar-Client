@@ -62,10 +62,9 @@ const Events: FC = () => {
         <p> Filter</p>
       </FilterButton>
       <>{sections}</>
-      <ul className="displayListEventList">
+      {/* <ul className="displayListEventList">
         {events.map((event: any) => {
           const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
-          console.log("Event Date", event.start_date.substring(5, 7))
           return <ListEvent
             key={id}
             id={id}
@@ -79,7 +78,7 @@ const Events: FC = () => {
           />
         })
         }
-      </ul>
+      </ul> */}
     </ListEventContainer>
   );
 };
@@ -136,16 +135,16 @@ const DisplayEvents = styled.div`
 const ListEventContainer = styled.div`
   display: flex;
   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   .displayListEventList{
-  //     padding: 0;
-  //   margin: 0;
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: center;
-  //   flex-wrap: wrap;
-  //   list-style: none;
-  // }
+  /* align-items: center;
+  justify-content: center;
+  .displayListEventList{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+  } */
   `

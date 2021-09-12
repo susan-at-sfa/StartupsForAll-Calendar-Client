@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../hooks';
 import { setEventDetailsModalOpen, setSelectedEventID } from '../../store/slices/eventDetails/showEventDetailsSlice';
 import { topicsEmojis } from '../../constants/TopicsEmojiColors';
 import { categoryBackgroundColor } from '../../constants/CategoryColors';
+
 export interface ListEventProps {
   category: string;
   creator_name: string;

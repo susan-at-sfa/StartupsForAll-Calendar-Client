@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC } from 'react';
 import styled from '@emotion/styled';
 // import { events } from '../../containers/Events/DummyEvents';
 import { useAppDispatch, useAppSelector } from '../../hooks';

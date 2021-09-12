@@ -1,6 +1,6 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC } from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { useSpring, animated } from 'react-spring';
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 import { Topics } from '../../constants/Topics.enum';
@@ -27,8 +27,9 @@ const FilterModal: FC<FilterModalProps> = (props) => {
         ? (<Background>
           <animated.div style={animation}>
             <Wrapper>
-              <button onClick={() => dispatch(setFilterModalOpen(false))} >Close</button>
-              <SelectionDiv id="categories">
+              <button type="button" onClick={() => dispatch(setFilterModalOpen(false))} >Close</button>
+              <SelectionDiv className="categories">
+                <h2>Category</h2>
                 {categories.map((category, index) => (
                   <label key={index} className="container">{category}
                     <input type="checkbox" />
@@ -36,14 +37,16 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                   </label>
                 ))}
               </SelectionDiv>
-              <SelectionDiv id="topics">
+              <SelectionDiv className="topics">
+                <h2>Topics</h2>
                 {Topics.map((topic, index) => (
-                  <label key={index} className="container">{topic}
+                  <label key={index} className="container"><span id="topicText">{topic}</span>
                     <input type="checkbox" />
                     <span className="checkmark"></span>
                   </label>
                 ))}
               </SelectionDiv>
+              <button id="update" type="button">Update Results</button>
             </Wrapper>
           </animated.div>
         </Background>)
@@ -69,26 +72,50 @@ display: flex;
 flex-direction: column;
 margin-top: 10px;
 padding-top: 10px;
-padding-left: 10px;
 background-color: white;
 height: 90vh;
-width: 65vw;
+width: 75vw;
 z-index: 10;
 overflow: scroll;
+#update{
+  position: fixed;
+  bottom: 60px;
+  right: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  width: 260px;
+  padding-right: 30px;
+  height: 35px;
+  background-color: #a36760;
+}
 `
 const SelectionDiv = styled.div`
-margin-top: 100px;
-#categories{
+
+h2{
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #A36760;
 }
-#topics{
+#topicText{
+  background-color: red;
+}
+&.categories{
+margin-top: 65px;
+}
+&.topics{
+  margin-top: 15px;
 }
 .container {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 50px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -102,7 +129,7 @@ input {
   height: 0;
   width: 0;
   &:checked ~ .checkmark{
-    background-color: #2196F3;
+    border: 4px solid #A36760;
   }
   &:checked ~ .checkmark::after{
     display: block;
@@ -110,19 +137,21 @@ input {
 }
 .checkmark {
   position: absolute;
-  top: 4px;
-  left: 4px;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
+  margin-left: 15px;
+  top: 1px;
+  left: 3px;
+  border: 4px solid #F1F1F1;
+  height: 15px;
+  width: 15px;
+  background-color: white;
   &::after{
     content: "";
     position: absolute;
     display: none;
-    left: 9px;
-    top: 5px;
+    left: 8px;
+    top: -8px;
     width: 5px;
-    height: 10px;
+    height: 18px;
     border: solid #7BB1A7;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
