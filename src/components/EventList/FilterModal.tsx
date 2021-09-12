@@ -1,18 +1,22 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch } from '../../hooks';
+import { FiList } from 'react-icons/fi';
 import { useSpring, animated } from 'react-spring';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
+import { setTopicFilters } from '../../store/slices/dbEvent/dbEventSlice';
 import { Topics } from '../../constants/Topics.enum';
 import { categories, categoryBackgroundColor } from '../../constants/CategoryColors';
-import { FiList } from 'react-icons/fi';
 import { topicsEmojiColors } from '../../constants/TopicsEmojiColors';
 
 interface FilterModalProps {
   modalOpen: boolean;
 }
+
 const FilterModal: FC<FilterModalProps> = (props) => {
+  const topicFilters = useAppSelector(({ dbEvent }) => dbEvent.topicFilters)
   const dispatch = useAppDispatch();
+  console.log("Topics", topicFilters);
   const { modalOpen } = props;
 
   const animation = useSpring({
@@ -22,6 +26,14 @@ const FilterModal: FC<FilterModalProps> = (props) => {
     opacity: modalOpen ? 1 : 0,
     transform: modalOpen ? `translateY(0%)` : `translateY(-100%)`
   })
+
+  const onClickingTopic = (topic: string) => {
+    if (topicFilters.includes(topic)) {
+      dispatch(setTopicFilters(topicFilters.filter(topicFilter => topicFilter !== topic)))
+    } else {
+      dispatch(setTopicFilters([...topicFilters, topic]))
+    }
+  }
 
   return (
     <>
@@ -35,7 +47,11 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                   <p> Filters</p>
                 </div>
                 <div className="right">
-                  <button type="button" className="close" onClick={() => dispatch(setFilterModalOpen(false))} />
+                  <button
+                    type="button"
+                    className="close"
+                    onClick={() => dispatch(setFilterModalOpen(false))}
+                  />
                 </div>
               </FilterButton>
               <SelectionDiv className="categories">
@@ -55,13 +71,18 @@ const FilterModal: FC<FilterModalProps> = (props) => {
               <SelectionDiv className="topics">
                 <h2>Topics</h2>
                 {Topics.map((topic, index) => (
-                  <label key={index} className="container">
+                  <label
+                    key={index}
+                    className="container"
+                  >
                     <div
                       style={{ backgroundColor: topicsEmojiColors[topic] }}
                       id="topicText">
                       {topic}
                     </div>
-                    <input type="checkbox" />
+                    <input type="checkbox"
+                      onClick={() => onClickingTopic(topic)}
+                    />
                     <span className="checkmark"></span>
                   </label>
                 ))}
