@@ -6,6 +6,7 @@ import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterMod
 import { Topics } from '../../constants/Topics.enum';
 import { categories, categoryBackgroundColor } from '../../constants/CategoryColors';
 import { FiList } from 'react-icons/fi';
+import { topicsEmojiColors } from '../../constants/TopicsEmojiColors';
 
 interface FilterModalProps {
   modalOpen: boolean;
@@ -29,18 +30,23 @@ const FilterModal: FC<FilterModalProps> = (props) => {
           <animated.div style={animation}>
             <Wrapper>
               <FilterButton>
-                <div className="left">
+                <div className="left" onClick={() => dispatch(setFilterModalOpen(false))}>
                   <FiList id="filterIcon" />
                   <p> Filters</p>
                 </div>
                 <div className="right">
-                  <button type="button" className="close" onClick={() => dispatch(setFilterModalOpen(false))} ></button>
+                  <button type="button" className="close" onClick={() => dispatch(setFilterModalOpen(false))} />
                 </div>
               </FilterButton>
               <SelectionDiv className="categories">
                 <h2>Category</h2>
                 {categories.map((category, index) => (
-                  <label key={index} className="container">{category}
+                  <label key={index} className="container">
+                    <div
+                      style={{ backgroundColor: categoryBackgroundColor[category] }}
+                      id="categoryText">
+                      {category}
+                    </div>
                     <input type="checkbox" />
                     <span className="checkmark"></span>
                   </label>
@@ -49,7 +55,12 @@ const FilterModal: FC<FilterModalProps> = (props) => {
               <SelectionDiv className="topics">
                 <h2>Topics</h2>
                 {Topics.map((topic, index) => (
-                  <label key={index} className="container"><span id="topicText">{topic}</span>
+                  <label key={index} className="container">
+                    <div
+                      style={{ backgroundColor: topicsEmojiColors[topic] }}
+                      id="topicText">
+                      {topic}
+                    </div>
                     <input type="checkbox" />
                     <span className="checkmark"></span>
                   </label>
@@ -79,8 +90,6 @@ z-index: 7;
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
-margin-top: 10px;
-padding-top: 10px;
 background-color: white;
 height: 90vh;
 width: 75vw;
@@ -88,7 +97,7 @@ z-index: 10;
 overflow: scroll;
 #update{
   position: fixed;
-  bottom: 60px;
+  bottom: 110px;
   right: 0;
   color: white;
   font-weight: bold;
@@ -103,63 +112,59 @@ overflow: scroll;
 const FilterButton = styled.div`
 display: flex;
 justify-content: space-between;
-  .close {
+.close {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  border: 3px solid #CBCBCB;
+  background-color: white;
+  width: 23px;
+  height: 23px;
+  opacity: 0.8;
+  &::after{
+    transform: rotate(-45deg);
+  }
+  &::before{
+    transform: rotate(45deg);
+  }
+  &:hover {
+    opacity: 1;
+  }
+  &::before, ::after {
     position: absolute;
-    right: 5px;
-    top: 15px;
-    border: 3px solid #CBCBCB;
-    background-color: white;
-    width: 23px;
-    height: 23px;
-    opacity: 0.8;
-    &::after{
-      transform: rotate(-45deg);
-    }
-    &::before{
-      transform: rotate(45deg);
-    }
-    &:hover {
-      opacity: 1;
-    }
-    &::before, ::after {
-      position: absolute;
-      top: 0px;
-      left: 7px;
-      content: ' ';
-      height: 18px;
-      width: 3px;
-      background-color: #CBCBCB;
-}
+    top: 1px;
+    left: 7px;
+    content: ' ';
+    height: 15px;
+    width: 3px;
+    background-color: #CBCBCB;
+  }
 }
 &.left{
   flex: 0.5;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
 }
 &.right{
   flex: 0.5;
 }
-  p{
-    color: #CBCBCB;
-    margin: 0;
-    position: relative;
-    top: 0px;
-    left: 14px;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 0;
-    display: inline;
-  }
-  #filterIcon{
-    color: #CBCBCB;
-    margin: 0;
-    font-size: 17px;
-    position: relative;
-    top: 3px;
-    left: 15px;
-
-  }
+p{
+  color: #CBCBCB;
+  margin: 0;
+  position: relative;
+  top: 8px;
+  left: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0;
+  display: inline;
+}
+#filterIcon{
+  color: #CBCBCB;
+  margin: 0;
+  font-size: 17px;
+  position: relative;
+  top: 11px;
+  left: 15px;
+}
 `
 const SelectionDiv = styled.div`
 h2{
@@ -170,10 +175,17 @@ h2{
   color: #A36760;
 }
 #topicText{
-  background-color: red;
+  color: #A36760;
+  padding-bottom: 2px;
+  padding-left: 8px;
+}
+#categoryText{
+  color: white;
+  padding-bottom: 2px;
+  padding-left: 8px;
 }
 &.categories{
-margin-top: 45px;
+  margin-top: 35px;
 }
 &.topics{
   margin-top: 15px;
@@ -182,7 +194,7 @@ margin-top: 45px;
   display: block;
   position: relative;
   padding-left: 50px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;

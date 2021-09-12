@@ -76,8 +76,8 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-  height: 100vh;
-  width: 100vw;
+  max-height: 100%;
+  max-width: 100%;
 `;
 
 const Sections = styled.section`

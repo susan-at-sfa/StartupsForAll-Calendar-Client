@@ -85,6 +85,22 @@ const Events: FC = () => {
 
 export default Events;
 
+const ListEventContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center;
+  .displayListEventList{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+  } */
+  `
 const FilterButton = styled.div`
   position: fixed;
   display: flex;
@@ -93,6 +109,7 @@ const FilterButton = styled.div`
   width: 60px; 
   padding-left: 5px;
   background-color: white;
+  overflow-x: hidden;
   z-index: 2;
   p{
     color: #C79288;
@@ -132,19 +149,3 @@ const MonthHeader = styled.div`
 const DisplayEvents = styled.div`
   
 `
-const ListEventContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* align-items: center;
-  justify-content: center;
-  .displayListEventList{
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    list-style: none;
-  } */
-  `
