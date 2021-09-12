@@ -28,11 +28,14 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   })
 
   const onClickingTopic = (topic: string) => {
-    if (topicFilters.includes(topic)) {
-      dispatch(setTopicFilters(topicFilters.filter(topicFilter => topicFilter !== topic)))
-    } else {
-      dispatch(setTopicFilters([...topicFilters, topic]))
-    }
+    topicFilters.includes(topic)
+      ? dispatch(setTopicFilters(topicFilters.filter(topicFilter => topicFilter !== topic)))
+      : dispatch(setTopicFilters([...topicFilters, topic]))
+  }
+
+  const onClickingExit = () => {
+    dispatch(setTopicFilters([]));
+    dispatch(setFilterModalOpen(false));
   }
 
   return (
@@ -42,7 +45,7 @@ const FilterModal: FC<FilterModalProps> = (props) => {
           <animated.div style={animation}>
             <Wrapper>
               <FilterButton>
-                <div className="left" onClick={() => dispatch(setFilterModalOpen(false))}>
+                <div className="left" onClick={() => onClickingExit()}>
                   <FiList id="filterIcon" />
                   <p> Filters</p>
                 </div>
@@ -50,7 +53,7 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                   <button
                     type="button"
                     className="close"
-                    onClick={() => dispatch(setFilterModalOpen(false))}
+                    onClick={() => onClickingExit()}
                   />
                 </div>
               </FilterButton>
@@ -107,6 +110,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 z-index: 7;
+overflow-x: hidden;
 `
 const Wrapper = styled.div`
 display: flex;
@@ -115,7 +119,6 @@ background-color: white;
 height: 90vh;
 width: 75vw;
 z-index: 10;
-overflow: scroll;
 #update{
   position: fixed;
   bottom: 110px;

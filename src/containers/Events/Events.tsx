@@ -89,8 +89,8 @@ const ListEventContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center;
-  justify-content: center;
-  .displayListEventList{
+  justify-content: center; */
+  /* .displayListEventList{
     padding: 0;
     margin: 0;
     display: flex;
@@ -109,7 +109,6 @@ const FilterButton = styled.div`
   width: 60px; 
   padding-left: 5px;
   background-color: white;
-  overflow-x: hidden;
   z-index: 2;
   p{
     color: #C79288;

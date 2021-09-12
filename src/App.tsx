@@ -76,14 +76,14 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-  max-height: 100%;
-  max-width: 100%;
+  height: 100%;
+  width: 100%;
 `;
 
 const Sections = styled.section`
   width: 100vw;
-  max-height: calc(100vh - 250px);
-  position: absolute;
+  height: calc(100vh - 250px);
+  position: relative;
   top: 250px;
   scroll-behavior: smooth;
   scrollbar-width: none;
