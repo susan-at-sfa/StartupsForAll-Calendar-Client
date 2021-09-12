@@ -5,6 +5,7 @@ import { useSpring, animated } from 'react-spring';
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 import { Topics } from '../../constants/Topics.enum';
 import { categories, categoryBackgroundColor } from '../../constants/CategoryColors';
+import { FiList } from 'react-icons/fi';
 
 interface FilterModalProps {
   modalOpen: boolean;
@@ -27,7 +28,15 @@ const FilterModal: FC<FilterModalProps> = (props) => {
         ? (<Background>
           <animated.div style={animation}>
             <Wrapper>
-              <button type="button" onClick={() => dispatch(setFilterModalOpen(false))} >Close</button>
+              <FilterButton>
+                <div className="left">
+                  <FiList id="filterIcon" />
+                  <p> Filters</p>
+                </div>
+                <div className="right">
+                  <button type="button" className="close" onClick={() => dispatch(setFilterModalOpen(false))} ></button>
+                </div>
+              </FilterButton>
               <SelectionDiv className="categories">
                 <h2>Category</h2>
                 {categories.map((category, index) => (
@@ -91,8 +100,68 @@ overflow: scroll;
   background-color: #a36760;
 }
 `
-const SelectionDiv = styled.div`
+const FilterButton = styled.div`
+display: flex;
+justify-content: space-between;
+  .close {
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    border: 3px solid #CBCBCB;
+    background-color: white;
+    width: 23px;
+    height: 23px;
+    opacity: 0.8;
+    &::after{
+      transform: rotate(-45deg);
+    }
+    &::before{
+      transform: rotate(45deg);
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &::before, ::after {
+      position: absolute;
+      top: 0px;
+      left: 7px;
+      content: ' ';
+      height: 18px;
+      width: 3px;
+      background-color: #CBCBCB;
+}
+}
+&.left{
+  flex: 0.5;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+&.right{
+  flex: 0.5;
+}
+  p{
+    color: #CBCBCB;
+    margin: 0;
+    position: relative;
+    top: 0px;
+    left: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+    display: inline;
+  }
+  #filterIcon{
+    color: #CBCBCB;
+    margin: 0;
+    font-size: 17px;
+    position: relative;
+    top: 3px;
+    left: 15px;
 
+  }
+`
+const SelectionDiv = styled.div`
 h2{
   text-align: center;
   margin-bottom: 10px;
@@ -104,7 +173,7 @@ h2{
   background-color: red;
 }
 &.categories{
-margin-top: 65px;
+margin-top: 45px;
 }
 &.topics{
   margin-top: 15px;
