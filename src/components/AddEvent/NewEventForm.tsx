@@ -123,13 +123,12 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
       <form onSubmit={submitForm}>
         <FormFields>
           <FormLabel htmlFor="url" text="Eventrite URL or ID" />
-          <FormInput
+          <TextArea
             placeholder="URL"
-            type="text"
             required
             disabled={false}
             value={url}
-            onChange={setUrl}
+            onChange={(e) => setUrl(e.target.value)}
             name="url"
           />
 
@@ -219,6 +218,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
             </option>
           </SelectList>
         </FormFields>
+
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
@@ -244,14 +244,15 @@ const Wrapper = styled.div`
 const EventsGreenDiv = styled.div`
   display: flex;
   border: none;
+  padding: 10px 0 10px 18px;
   height: var(--submit-button-container-height);
   width: 100vw;
   background: #7bb1a7;
   z-index: 2;
 `;
 const FormFields = styled.div`
-  margin-bottom: var(--submit-button-container-height);
-  padding-left: 12px;
+  padding-left: 18px;
+  padding-top: 18px;
 `;
 const ButtonDiv = styled.div`
   #dark {
@@ -280,11 +281,10 @@ const ButtonDiv = styled.div`
   }
 `;
 const TextArea = styled.textarea`
-  color: #e8d9d6;
-  font-weight: bold;
+  font-size: 0.85rem;
   border: 8px solid #e8d9d6;
   border-right-width: 20px;
-  min-height: 45px;
+  min-height: 85px;
   padding: 0 15px;
   margin-bottom: 15px;
   max-width: 100%;

@@ -1,4 +1,4 @@
-import { FormEvent, FC, useState } from "react";
+import { FC, useState } from "react";
 import { useAppDispatch } from "../../hooks";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";

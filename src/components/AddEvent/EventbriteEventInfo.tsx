@@ -18,7 +18,7 @@ interface EventbriteEventInfoProps {
 const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
   return (
     <>
-      <h3>Imported Information</h3>
+      <HeaderText>Imported Information</HeaderText>
       <BrownSpan />
       <Text>{props.title}</Text>
       <Title>{props.start_date}</Title>
@@ -26,7 +26,9 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
         {props.start_time} - {props.end_time}
       </Text>
       {props.logo ? (
-        <img src={props.logo} alt="event logo" style={{ maxWidth: "100%" }} />
+        <ImageContainer>
+          <img src={props.logo} alt="event logo" />
+        </ImageContainer>
       ) : null}
       <Title>{props.title}</Title>
       <Text>An event by TODO:</Text>
@@ -41,23 +43,40 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
       <Text>{props.summary}</Text>
       TODO: buttons
       <Title>Event Link</Title>
-      <Text>{props.url}</Text>
+      <Text>
+        <Anchor href={props.url}>{props.url}</Anchor>
+      </Text>
     </>
   );
 };
 
 export default EventbriteEventInfo;
 
+const HeaderText = styled.div`
+  padding-top: 28px;
+`;
 const BrownSpan = styled.div`
   width: 100%;
   max-width: 100vw;
-  height: 12px;
+  height: 11px;
   background: #e8d9d6;
-  margin: 10px;
+  margin: 0 0 25px 0;
+`;
+const ImageContainer = styled.div`
+  width: calc(100% - 18px);
+  max-width: calc(100% - 18px);
+  img {
+    max-width: 100%;
+  }
 `;
 const Title = styled.div`
+  padding-top: 18px;
   font-weight: bold;
 `;
 const Text = styled.div`
   margin-bottom: 12px;
+`;
+const Anchor = styled.a`
+  text-decoration: none;
+  color: var(--submit-button-container-bg);
 `;
