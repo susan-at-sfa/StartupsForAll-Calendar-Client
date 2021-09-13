@@ -39,8 +39,8 @@ input {
   top: 1px;
   left: 3px;
   border: 4px solid #F1F1F1;
-  height: 23px;
-  width: 23px;
+  height: 24px;
+  width: 24px;
   background-color: white;
   &::after{
     content: "";

@@ -61,8 +61,8 @@ const Events: FC = () => {
         <FiList id="filterIcon" />
         <p> Filter</p>
       </FilterButton>
-      <>{sections}</>
-      {/* <ul className="displayListEventList">
+      {/* <>{sections}</> */}
+      <ul className="displayListEventList">
         {events.map((event: any) => {
           const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
           return <ListEvent
@@ -78,7 +78,7 @@ const Events: FC = () => {
           />
         })
         }
-      </ul> */}
+      </ul>
     </ListEventContainer>
   );
 };

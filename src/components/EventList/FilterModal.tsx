@@ -5,7 +5,6 @@ import { useSpring, animated } from 'react-spring';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 import { setTopicFilters, setCategoryFilters } from '../../store/slices/dbEvent/dbEventSlice';
-import { categories, categoryBackgroundColor } from '../../constants/CategoryColors';
 import TopicSelection from '../EventList/TopicSelection';
 import CategorySelection from '../EventList/CategorySelection';
 
