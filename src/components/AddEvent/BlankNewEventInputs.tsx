@@ -97,15 +97,14 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         name="cost"
       />
 
-      <FormLabel htmlFor="summary" text="summary" />
+      <FormLabel htmlFor="summary" text="Summary" />
       <TextArea
-        placeholder="summary"
+        placeholder="Summary"
         required
         disabled={false}
         value={props.summary}
         onChange={(e) => props.setSummary(e.target.value)}
         name="summary"
-        rows={12}
       />
     </>
   );

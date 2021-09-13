@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FormEvent, FC, useState } from "react";
 import { useAppDispatch } from "../../hooks";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
@@ -12,7 +12,8 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
   const [eventbriteID, setEventbriteID] = useState<string>("");
   const dispatch = useAppDispatch();
 
-  const getEventbriteData = async () => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!eventbriteID) {
       // TODO: add toast here to notify there is no ID input
       return;
@@ -23,20 +24,20 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
   return (
     <EventbritePasteWrapper>
       <PasteLinkContainer>
-        <FormLabel htmlFor="eventbriteID" text="Eventbrite Event URL or ID" />
-        <PasteLink>
-          <input
-            name="eventbriteID"
-            onChange={(e) => setEventbriteID(e.target.value)}
-            placeholder="EventBrite ID"
-            required
-            type="text"
-            value={eventbriteID}
-          />
-          <button type="button" onClick={getEventbriteData}>
-            Get Info
-          </button>
-        </PasteLink>
+        <form onSubmit={handleSubmit}>
+          <FormLabel htmlFor="eventbriteID" text="Eventbrite Event URL or ID" />
+          <PasteLink>
+            <input
+              name="eventbriteID"
+              onChange={(e) => setEventbriteID(e.target.value)}
+              placeholder="EventBrite ID"
+              required
+              type="text"
+              value={eventbriteID}
+            />
+            <button type="button">Get Info</button>
+          </PasteLink>
+        </form>
       </PasteLinkContainer>
       <SkipEventbrite>
         <p>Or</p>
