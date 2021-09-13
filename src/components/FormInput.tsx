@@ -32,7 +32,7 @@ const Input = styled.input`
   height: 45px;
   padding-left: 15px;
   padding-right: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   &::placeholder {
     color: #e8d9d6;
     font-weight: bold;

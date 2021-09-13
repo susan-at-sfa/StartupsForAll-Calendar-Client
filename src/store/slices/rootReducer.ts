@@ -7,9 +7,11 @@ import eventbriteReducer from './eventbrite/eventbriteSlice';
 import NewEvent from '../../constants/NewEvent.d';
 import { Reducer } from 'react';
 import eventModalReducer, { EventDetailsModalState } from './eventDetails/showEventDetailsSlice';
+import dbEventReducer, { DbEventState } from './dbEvent/dbEventSlice';
 
 type RootReducer = Reducer<CombinedState<{
   auth: AuthState;
+  dbEvent: DbEventState;
   eventbrite: NewEvent;
   eventModal: EventDetailsModalState;
   menu: MenuState;
@@ -20,6 +22,7 @@ type RootReducer = Reducer<CombinedState<{
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     auth: authReducer,
+    dbEvent: dbEventReducer,
     eventbrite: eventbriteReducer,
     eventModal: eventModalReducer,
     menu: menuOpenReducer,

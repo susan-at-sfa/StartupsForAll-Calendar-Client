@@ -15,6 +15,7 @@ const Label = styled.label`
   margin-bottom: 2px;
   font-size: 14px;
   font-weight: normal;
+  padding-top: 8px;
 `;
 
 export default FormLabel;
