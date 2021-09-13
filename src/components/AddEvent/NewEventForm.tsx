@@ -256,7 +256,6 @@ const FormFields = styled.div`
   position: relative;
   bottom: 90px;
   padding-left: 12px;
-  top: 10px;
 `;
 const ButtonDiv = styled.div`
   position: fixed;
