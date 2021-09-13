@@ -120,7 +120,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
 
   return (
     <Wrapper>
-      <Clearfix />
       <form onSubmit={submitForm}>
         <FormFields>
           <FormLabel htmlFor="url" text="Eventrite URL or ID" />
@@ -245,22 +244,16 @@ const Wrapper = styled.div`
 const EventsGreenDiv = styled.div`
   display: flex;
   border: none;
-  position: fixed;
-  height: 90px;
+  height: var(--submit-button-container-height);
   width: 100vw;
-  bottom: 0px;
   background: #7bb1a7;
   z-index: 2;
 `;
 const FormFields = styled.div`
-  position: relative;
-  bottom: 90px;
+  margin-bottom: var(--submit-button-container-height);
   padding-left: 12px;
 `;
 const ButtonDiv = styled.div`
-  position: fixed;
-  right: 0;
-  bottom: 20px;
   #dark {
     font-weight: 600;
     font-size: 15px;
@@ -307,12 +300,4 @@ const SelectList = styled.select`
   margin-bottom: 15px;
   max-width: 100%;
   max-width: 100vw;
-`;
-const Clearfix = styled.div`
-  overflow: auto;
-  ::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
 `;

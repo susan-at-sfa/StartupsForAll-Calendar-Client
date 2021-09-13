@@ -62,16 +62,9 @@ export default AuthorizeToAddEvents;
 
 const EventAuthPage = styled.div`
   display: flex;
-  position: fixed;
-  right: 0;
-  top: 275px;
 `;
 const ButtonDiv = styled.div`
   display: flex;
-  width: 350px;
-  position: fixed;
-  bottom: 185px;
-  right: 0;
   span {
     position: relative;
     left: -15px;

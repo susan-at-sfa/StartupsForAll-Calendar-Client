@@ -70,9 +70,7 @@ const Wrapper = styled.section`
 
 const Sections = styled.section`
   width: 100vw;
-  height: calc(100vh - 250px);
-  position: relative;
-  top: 250px;
+  margin-top: var(--header-height);
   scroll-behavior: smooth;
   scrollbar-width: none;
   &::-webkit-scrollbar {

@@ -52,17 +52,13 @@ const EventbritePasteWrapper = styled.div`
 `;
 const PasteLinkContainer = styled.div`
   display: flex;
-  position: fixed;
-  top: 285px;
   right: 0;
 `;
 const PasteLink = styled.div`
   display: flex;
   border: 8px solid #e8d9d6;
   height: 45px;
-  width: 350px;
   border-right-width: 0px;
-  right: 0;
   button {
     font-weight: bold;
     font-size: 14px;
@@ -95,17 +91,9 @@ const PasteLink = styled.div`
     }
   }
 `;
-const SkipEventbrite = styled.div`
-  position: fixed;
-  top: 375px;
-  left: 165px;
-`;
+const SkipEventbrite = styled.div``;
 const ButtonDiv = styled.div`
   display: flex;
-  width: 350px;
-  position: fixed;
-  top: 435px;
-  right: 0;
   span {
     position: relative;
     left: -20px;
