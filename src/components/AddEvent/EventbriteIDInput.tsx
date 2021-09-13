@@ -13,6 +13,7 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    console.log("getting eventbrite data from", eventbriteIDorUrl);
     event.preventDefault();
     if (!eventbriteIDorUrl) {
       // TODO: add toast here to notify there is no ID input
@@ -42,7 +43,7 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
               type="text"
               value={eventbriteIDorUrl}
             />
-            <button type="button">Get Info</button>
+            <button type="submit">Get Info</button>
           </PasteLink>
         </form>
       </PasteLinkContainer>
