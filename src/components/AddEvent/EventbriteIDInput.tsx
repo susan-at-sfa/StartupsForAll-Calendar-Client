@@ -1,5 +1,5 @@
 import { FormEvent, FC, useState } from "react";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, parseIdFromUrl } from "../../hooks";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
@@ -9,33 +9,41 @@ interface EventbriteIDInputProps {
 }
 
 const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
-  const [eventbriteID, setEventbriteID] = useState<string>("");
+  const [eventbriteIDorUrl, setEventbriteIDorUrl] = useState<string>("");
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    console.log("getting eventbrite data from", eventbriteIDorUrl);
     event.preventDefault();
-    if (!eventbriteID) {
+    if (!eventbriteIDorUrl) {
       // TODO: add toast here to notify there is no ID input
       return;
     }
-    dispatch(requestEventbriteEvent({ id: eventbriteID }));
+    const id = parseIdFromUrl(eventbriteIDorUrl);
+    if (!id) {
+      return;
+    }
+    dispatch(requestEventbriteEvent({ id }));
   };
 
   return (
     <EventbritePasteWrapper>
       <PasteLinkContainer>
         <form onSubmit={handleSubmit}>
-          <FormLabel htmlFor="eventbriteID" text="Eventbrite Event URL or ID" />
+          <FormLabel
+            htmlFor="eventbriteIDorUrl"
+            text="Eventbrite Event URL or ID"
+          />
           <PasteLink>
             <input
-              name="eventbriteID"
-              onChange={(e) => setEventbriteID(e.target.value)}
+              name="eventbriteIDorUrl"
+              onChange={(e) => setEventbriteIDorUrl(e.target.value)}
               placeholder="EventBrite ID"
               required
               type="text"
-              value={eventbriteID}
+              value={eventbriteIDorUrl}
             />
-            <button type="button">Get Info</button>
+            <button type="submit">Get Info</button>
           </PasteLink>
         </form>
       </PasteLinkContainer>
@@ -109,10 +117,6 @@ const SkipEventbrite = styled.div`
 `;
 const ButtonDiv = styled.div`
   display: flex;
-  span {
-    position: relative;
-    left: -20px;
-  }
   button {
     color: white;
     font-weight: bold;

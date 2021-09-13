@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC, FormEvent, useState } from "react";
+import { useHistory } from "react-router-dom";
 import NewEvent from "../../constants/NewEvent.d";
 import BlankNewEventInputs from "./BlankNewEventInputs";
 import EventbriteEventInfo from "./EventbriteEventInfo";
@@ -10,7 +11,8 @@ import styled from "@emotion/styled";
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
-import { useAppSelector, useAppDispatch } from "../../hooks";
+import { useAppSelector, useAppDispatch, parseIdFromUrl } from "../../hooks";
+import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 
 interface EventDetailsFormProps {
   eventDetails: NewEvent;
@@ -20,6 +22,7 @@ interface EventDetailsFormProps {
 const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const { eventDetails } = props;
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const token = useAppSelector(({ auth }) => auth.token);
 
   console.log("EventDetails component - got props:", eventDetails);
@@ -74,7 +77,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const fd: NewEvent = {
       category: category,
@@ -118,20 +121,40 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     }
   };
 
+  const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
+    console.log("getting new event details...");
+    event.preventDefault();
+    if (!url) {
+      // TODO: add toast here to notify there is no ID input
+      return;
+    }
+    const id = parseIdFromUrl(url);
+    if (!id) {
+      return;
+    }
+    dispatch(requestEventbriteEvent({ id }));
+    history.push("/add");
+  };
+
   return (
     <Wrapper>
+      <PasteLinkContainer>
+        <form onSubmit={getNewEventDetails}>
+          <FormLabel htmlFor="url" text="Eventbrite Event URL or ID" />
+          <PasteLink>
+            <TextArea
+              name="url"
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="EventBrite ID or URL"
+              required
+              value={url}
+            />
+            <button type="submit">Update</button>
+          </PasteLink>
+        </form>
+      </PasteLinkContainer>
       <form onSubmit={submitForm}>
         <FormFields>
-          <FormLabel htmlFor="url" text="Eventrite URL or ID" />
-          <TextArea
-            placeholder="URL"
-            required
-            disabled={false}
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            name="url"
-          />
-
           <FormLabel htmlFor="creator_name" text="Event Posted By" />
           <FormInput
             placeholder="Event Posted By"
@@ -241,6 +264,48 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const PasteLinkContainer = styled.div`
+  display: flex;
+  padding-left: 18px;
+  padding-top: 8px;
+`;
+const PasteLink = styled.div`
+  display: flex;
+  background-color: #e8d9d6;
+  border: 8px solid #e8d9d6;
+  border-right-width: 0px;
+  button {
+    font-weight: bold;
+    font-size: 14px;
+    flex: 0.4;
+    color: white;
+    height: 40px;
+    background-color: #a36760;
+    border: none;
+  }
+  &:focus-within {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  textarea {
+    flex: 0.6;
+    border: none;
+    &::placeholder {
+      color: #e8d9d6;
+      font-weight: bold;
+    }
+    &:focus {
+      outline: none;
+      border-color: #a36760;
+      transition: 0.75s ease;
+    }
+    &:focus::placeholder {
+      color: #a36760;
+      transition: 0.75s ease;
+    }
+  }
+`;
 const EventsGreenDiv = styled.div`
   display: flex;
   border: none;
@@ -252,7 +317,7 @@ const EventsGreenDiv = styled.div`
 `;
 const FormFields = styled.div`
   padding-left: 18px;
-  padding-top: 18px;
+  padding-top: 8px;
 `;
 const ButtonDiv = styled.div`
   #dark {
@@ -286,7 +351,6 @@ const TextArea = styled.textarea`
   border-right-width: 20px;
   min-height: 85px;
   padding: 0 15px;
-  margin-bottom: 15px;
   max-width: 100%;
   max-width: 100vw;
 `;
