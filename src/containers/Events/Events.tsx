@@ -56,42 +56,48 @@ const Events: FC = () => {
   })
 
   return (
-    <ListEventContainer>
+    <Wrapper>
       <FilterButton onClick={() => dispatch(setFilterModalOpen(true))}>
         <FiList id="filterIcon" />
         <p> Filter</p>
       </FilterButton>
       {/* <>{sections}</> */}
-      <ul className="displayListEventList">
-        {events.map((event: any) => {
-          const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
-          return <ListEvent
-            key={id}
-            id={id}
-            category={category}
-            title={title}
-            date={start_date}
-            start_time={start_time}
-            end_time={end_time}
-            creator_name={creator_name}
-            topics={topics}
-          />
-        })
-        }
-      </ul>
-    </ListEventContainer>
+      <ListEventContainer>
+        <ul className="displayListEventList">
+          {events.map((event: any) => {
+            const { id, category, title, start_date, start_time, end_time, creator_name, topics } = event;
+            return <ListEvent
+              key={id}
+              id={id}
+              category={category}
+              title={title}
+              date={start_date}
+              start_time={start_time}
+              end_time={end_time}
+              creator_name={creator_name}
+              topics={topics}
+            />
+          })
+          }
+        </ul>
+      </ListEventContainer>
+    </Wrapper>
+
   );
 };
 
 export default Events;
-
+const Wrapper = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+`
 const ListEventContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  /* align-items: center;
-  justify-content: center; */
-  /* .displayListEventList{
+  width: 340px;
+  ul{
+    padding: 0;
+  }
+  .displayListEventList{
     padding: 0;
     margin: 0;
     display: flex;
@@ -100,7 +106,7 @@ const ListEventContainer = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     list-style: none;
-  } */
+  }
   `
 const FilterButton = styled.div`
   position: fixed;
