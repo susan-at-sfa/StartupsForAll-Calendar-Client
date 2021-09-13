@@ -88,6 +88,7 @@ export default Events;
 const ListEventContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   /* align-items: center;
   justify-content: center; */
   /* .displayListEventList{
@@ -127,8 +128,8 @@ const MonthSection = styled.section`
   height: 125px;
 `
 const MonthHeader = styled.div`
-  position: sticky;;
-  top: 270px;
+  position: sticky;
+  top: 25px;
   h1 {
     color: #C79288;
     font-style: normal;

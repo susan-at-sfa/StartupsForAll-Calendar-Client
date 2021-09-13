@@ -4,10 +4,10 @@ import { FiList } from 'react-icons/fi';
 import { useSpring, animated } from 'react-spring';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
-import { setTopicFilters } from '../../store/slices/dbEvent/dbEventSlice';
-import { Topics } from '../../constants/Topics.enum';
+import { setTopicFilters, setCategoryFilters } from '../../store/slices/dbEvent/dbEventSlice';
 import { categories, categoryBackgroundColor } from '../../constants/CategoryColors';
-import { topicsEmojiColors } from '../../constants/TopicsEmojiColors';
+import TopicSelection from '../EventList/TopicSelection';
+import CategorySelection from '../EventList/CategorySelection';
 
 interface FilterModalProps {
   modalOpen: boolean;
@@ -15,8 +15,10 @@ interface FilterModalProps {
 
 const FilterModal: FC<FilterModalProps> = (props) => {
   const topicFilters = useAppSelector(({ dbEvent }) => dbEvent.topicFilters)
+  const categoryFilters = useAppSelector(({ dbEvent }) => dbEvent.categoryFilters)
   const dispatch = useAppDispatch();
   console.log("Topics", topicFilters);
+  console.log("Categories", categoryFilters);
   const { modalOpen } = props;
 
   const animation = useSpring({
@@ -33,8 +35,15 @@ const FilterModal: FC<FilterModalProps> = (props) => {
       : dispatch(setTopicFilters([...topicFilters, topic]))
   }
 
+  const onClickingCategory = (category: string) => {
+    categoryFilters.includes(category)
+      ? dispatch(setCategoryFilters(categoryFilters.filter(categoryFilter => categoryFilter !== category)))
+      : dispatch(setCategoryFilters([...categoryFilters, category]))
+  }
+
   const onClickingExit = () => {
     dispatch(setTopicFilters([]));
+    dispatch(setCategoryFilters([]));
     dispatch(setFilterModalOpen(false));
   }
 
@@ -57,39 +66,18 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                   />
                 </div>
               </FilterButton>
-              <SelectionDiv className="categories">
+              <div className="categories">
                 <h2>Category</h2>
-                {categories.map((category, index) => (
-                  <label key={index} className="container">
-                    <div
-                      style={{ backgroundColor: categoryBackgroundColor[category] }}
-                      id="categoryText">
-                      {category}
-                    </div>
-                    <input type="checkbox" />
-                    <span className="checkmark"></span>
-                  </label>
-                ))}
-              </SelectionDiv>
-              <SelectionDiv className="topics">
+                <CategorySelection
+                  textColor={"white"}
+                  onClick={onClickingCategory} />
+              </div>
+              <div className="topics">
                 <h2>Topics</h2>
-                {Topics.map((topic, index) => (
-                  <label
-                    key={index}
-                    className="container"
-                  >
-                    <div
-                      style={{ backgroundColor: topicsEmojiColors[topic] }}
-                      id="topicText">
-                      {topic}
-                    </div>
-                    <input type="checkbox"
-                      onClick={() => onClickingTopic(topic)}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
-                ))}
-              </SelectionDiv>
+                <TopicSelection
+                  textColor={"#A36760"}
+                  onClick={onClickingTopic} />
+              </div>
               <button id="update" type="button">Update Results</button>
             </Wrapper>
           </animated.div>
@@ -131,6 +119,17 @@ z-index: 10;
   padding-right: 30px;
   height: 35px;
   background-color: #a36760;
+}
+
+.topics, .categories{
+  margin-top: 5vh;
+  h2{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #A36760;
+  }
 }
 `
 const FilterButton = styled.div`
@@ -188,80 +187,5 @@ p{
   position: relative;
   top: 11px;
   left: 15px;
-}
-`
-const SelectionDiv = styled.div`
-h2{
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 17px;
-  font-weight: 600;
-  color: #A36760;
-}
-#topicText{
-  color: #A36760;
-  padding-bottom: 2px;
-  padding-left: 8px;
-}
-#categoryText{
-  color: white;
-  padding-bottom: 2px;
-  padding-left: 8px;
-}
-&.categories{
-  margin-top: 35px;
-}
-&.topics{
-  margin-top: 15px;
-}
-.container {
-  display: block;
-  position: relative;
-  padding-left: 50px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-  &:checked ~ .checkmark{
-    border: 4px solid #A36760;
-  }
-  &:checked ~ .checkmark::after{
-    display: block;
-  }
-}
-.checkmark {
-  position: absolute;
-  margin-left: 15px;
-  top: 1px;
-  left: 3px;
-  border: 4px solid #F1F1F1;
-  height: 15px;
-  width: 15px;
-  background-color: white;
-  &::after{
-    content: "";
-    position: absolute;
-    display: none;
-    left: 8px;
-    top: -8px;
-    width: 5px;
-    height: 18px;
-    border: solid #7BB1A7;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
 }
 `
