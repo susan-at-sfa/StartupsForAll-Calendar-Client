@@ -273,6 +273,7 @@ ul{
   flex-direction: row;
   justify-content: right;
   margin-top: 5px;
+}
   a {
     text-decoration: none;
     color: white;
