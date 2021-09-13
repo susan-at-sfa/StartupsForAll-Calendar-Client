@@ -9,3 +9,8 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const titleCase = (title: string): string => {
   return title[0].toUpperCase().concat(title.slice(1));
 }
+
+export const parseIdFromUrl = (url: string): string | null => {
+  const id = url.match(/[0-9]{12}/g);
+  return id ? id[0] : null;
+}
