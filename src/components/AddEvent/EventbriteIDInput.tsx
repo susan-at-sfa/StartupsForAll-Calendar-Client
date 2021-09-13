@@ -1,25 +1,31 @@
 import { FormEvent, FC, useState } from "react";
+import { useAppDispatch } from "../../hooks";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
+import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 
 interface EventbriteIDInputProps {
-  handleSubmit(value: string): void;
   newEvent(value: boolean): void;
 }
 
 const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
   const [eventbriteID, setEventbriteID] = useState<string>("");
+  const dispatch = useAppDispatch();
 
-  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.handleSubmit(eventbriteID);
+    if (!eventbriteID) {
+      // TODO: add toast here to notify there is no ID input
+      return;
+    }
+    dispatch(requestEventbriteEvent({ id: eventbriteID }));
   };
 
   return (
     <EventbritePasteWrapper>
       <PasteLinkContainer>
-        <form onSubmit={submitForm}>
-          <FormLabel htmlFor="eventbriteID" text="Enter Event Brite ID" />
+        <form onSubmit={handleSubmit}>
+          <FormLabel htmlFor="eventbriteID" text="Eventbrite Event URL or ID" />
           <PasteLink>
             <input
               name="eventbriteID"
@@ -29,12 +35,12 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
               type="text"
               value={eventbriteID}
             />
-            <button type="submit">Get Info</button>
+            <button type="button">Get Info</button>
           </PasteLink>
         </form>
       </PasteLinkContainer>
       <SkipEventbrite>
-        <p>OR</p>
+        <p>Or</p>
       </SkipEventbrite>
       <ButtonDiv>
         <button type="button" onClick={() => props.newEvent(true)}>
@@ -49,26 +55,24 @@ export default EventbriteIDInput;
 
 const EventbritePasteWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  padding-top: 14px;
+  padding-left: 14px;
 `;
 const PasteLinkContainer = styled.div`
   display: flex;
-  position: fixed;
-  top: 285px;
-  right: 0;
 `;
 const PasteLink = styled.div`
   display: flex;
   border: 8px solid #e8d9d6;
-  height: 45px;
-  width: 350px;
+  height: 56px;
   border-right-width: 0px;
-  right: 0;
   button {
     font-weight: bold;
     font-size: 14px;
     flex: 0.4;
     color: white;
-    height: 45px;
+    height: 40px;
     background-color: #a36760;
     border: none;
   }
@@ -80,6 +84,7 @@ const PasteLink = styled.div`
   input {
     flex: 0.6;
     border: none;
+    padding: 0 6px;
     &::placeholder {
       color: #e8d9d6;
       font-weight: bold;
@@ -96,16 +101,14 @@ const PasteLink = styled.div`
   }
 `;
 const SkipEventbrite = styled.div`
-  position: fixed;
-  top: 375px;
-  left: 165px;
+  display: flex;
+  margin: 30px 0;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
 `;
 const ButtonDiv = styled.div`
   display: flex;
-  width: 350px;
-  position: fixed;
-  top: 435px;
-  right: 0;
   span {
     position: relative;
     left: -20px;

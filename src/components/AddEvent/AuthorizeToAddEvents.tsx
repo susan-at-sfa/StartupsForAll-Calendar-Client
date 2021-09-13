@@ -21,7 +21,16 @@ const AuthorizeToAddEvents: FC = () => {
   return (
     <EventAuthPage>
       <form onSubmit={submitForm}>
-        <FormLabel htmlFor="name" text="Name" />
+        <FormLabel htmlFor="password" text="SFA Password" />
+        <FormInput
+          name="password"
+          onChange={setPassword}
+          required
+          placeholder="Enter Password..."
+          type="password"
+          value={password}
+        />
+        <FormLabel htmlFor="name" text="Your Name" />
         <FormInput
           name="name"
           onChange={setName}
@@ -30,7 +39,7 @@ const AuthorizeToAddEvents: FC = () => {
           type="text"
           value={name}
         />
-        <FormLabel htmlFor="email" text="Email Address" />
+        <FormLabel htmlFor="email" text="Your Email" />
         <FormInput
           name="email"
           onChange={setEmail}
@@ -38,15 +47,6 @@ const AuthorizeToAddEvents: FC = () => {
           required
           type="email"
           value={email}
-        />
-        <FormLabel htmlFor="password" text="Password" />
-        <FormInput
-          name="password"
-          onChange={setPassword}
-          required
-          placeholder="Password"
-          type="password"
-          value={password}
         />
         <ButtonDiv>
           <button type="submit">
@@ -62,27 +62,21 @@ export default AuthorizeToAddEvents;
 
 const EventAuthPage = styled.div`
   display: flex;
-  position: fixed;
-  right: 0;
-  top: 275px;
+  padding-left: 14px;
+  padding-top: 14px;
 `;
 const ButtonDiv = styled.div`
   display: flex;
-  width: 350px;
-  position: fixed;
-  bottom: 185px;
-  right: 0;
-  span {
-    position: relative;
-    left: -15px;
-  }
+  width: 68%;
+  margin-top: 25px;
+  margin-left: auto;
   button {
     color: white;
     font-weight: bold;
     font-size: 14px;
     border: none;
     width: 100%;
-    height: 35px;
+    height: 37px;
     background-color: #a36760;
   }
 `;
