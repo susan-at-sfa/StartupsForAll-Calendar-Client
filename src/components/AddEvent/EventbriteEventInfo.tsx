@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 interface EventbriteEventInfoProps {
   title: string;
   logo?: string;
+  creator_name?: string;
   start_date: Date | string;
   end_date: Date | string;
   start_time: string;
@@ -20,28 +21,38 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
     <>
       <HeaderText>Imported Information</HeaderText>
       <BrownSpan />
-      <Text>{props.title}</Text>
-      <Title>{props.start_date}</Title>
-      <Text>
-        {props.start_time} - {props.end_time}
-      </Text>
+      <FlexTwoRow>
+        <div>
+          <Text>{props.title}</Text>
+          <Text>{props.creator_name}</Text>
+        </div>
+        <div>
+          <Title>{props.start_date}</Title>
+          <Text>
+            {props.start_time} - {props.end_time}
+          </Text>
+          TODO: Emojis TODO: Category
+        </div>
+      </FlexTwoRow>
       {props.logo ? (
         <ImageContainer>
           <img src={props.logo} alt="event logo" />
         </ImageContainer>
       ) : null}
       <Title>{props.title}</Title>
-      <Text>An event by TODO:</Text>
+      <Text>
+        An event by <Anchor>{props.creator_name}</Anchor>
+      </Text>
       <Title>Location</Title>
       <Text>{props.location}</Text>
       <Title>Price</Title>
       <Text>
-        {props.currency}
-        {props.cost}
+        {props.cost === 0 || props.cost === "0"
+          ? "Free"
+          : `${props.currency} $${props.cost}`}
       </Text>
       <Title>Event Summary from Eventbrite</Title>
       <Text>{props.summary}</Text>
-      TODO: buttons
       <Title>Event Link</Title>
       <Text>
         <Anchor href={props.url}>{props.url}</Anchor>
@@ -74,9 +85,16 @@ const Title = styled.div`
   font-weight: bold;
 `;
 const Text = styled.div`
+  line-height: 105%;
   margin-bottom: 12px;
+  font-size: 0.9rem;
 `;
 const Anchor = styled.a`
   text-decoration: none;
   color: var(--submit-button-container-bg);
+`;
+const FlexTwoRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8rem;
 `;

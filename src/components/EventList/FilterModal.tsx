@@ -1,21 +1,29 @@
-import { FC } from 'react';
-import styled from '@emotion/styled';
-import { FiList } from 'react-icons/fi';
-import { useSpring, animated } from 'react-spring';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { FC } from "react";
+import styled from "@emotion/styled";
+import { FiList } from "react-icons/fi";
+import { useSpring, animated } from "react-spring";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
-import { setTopicFilters, setCategoryFilters } from '../../store/slices/dbEvent/dbEventSlice';
-import { categories, categoryBackgroundColor } from '../../constants/CategoryColors';
-import TopicSelection from '../EventList/TopicSelection';
-import CategorySelection from '../EventList/CategorySelection';
+import {
+  setTopicFilters,
+  setCategoryFilters,
+} from "../../store/slices/dbEvent/dbEventSlice";
+import {
+  categories,
+  categoryBackgroundColor,
+} from "../../constants/CategoryColors";
+import TopicSelection from "../EventList/TopicSelection";
+import CategorySelection from "../EventList/CategorySelection";
 
 interface FilterModalProps {
   modalOpen: boolean;
 }
 
 const FilterModal: FC<FilterModalProps> = (props) => {
-  const topicFilters = useAppSelector(({ dbEvent }) => dbEvent.topicFilters)
-  const categoryFilters = useAppSelector(({ dbEvent }) => dbEvent.categoryFilters)
+  const topicFilters = useAppSelector(({ dbEvent }) => dbEvent.topicFilters);
+  const categoryFilters = useAppSelector(
+    ({ dbEvent }) => dbEvent.categoryFilters
+  );
   const dispatch = useAppDispatch();
   console.log("Topics", topicFilters);
   console.log("Categories", categoryFilters);
@@ -23,34 +31,44 @@ const FilterModal: FC<FilterModalProps> = (props) => {
 
   const animation = useSpring({
     config: {
-      duration: 350
+      duration: 350,
     },
     opacity: modalOpen ? 1 : 0,
-    transform: modalOpen ? `translateY(0%)` : `translateY(-100%)`
-  })
+    transform: modalOpen ? `translateY(0%)` : `translateY(-100%)`,
+  });
 
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
-      ? dispatch(setTopicFilters(topicFilters.filter(topicFilter => topicFilter !== topic)))
-      : dispatch(setTopicFilters([...topicFilters, topic]))
-  }
+      ? dispatch(
+          setTopicFilters(
+            topicFilters.filter((topicFilter) => topicFilter !== topic)
+          )
+        )
+      : dispatch(setTopicFilters([...topicFilters, topic]));
+  };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
-      ? dispatch(setCategoryFilters(categoryFilters.filter(categoryFilter => categoryFilter !== category)))
-      : dispatch(setCategoryFilters([...categoryFilters, category]))
-  }
+      ? dispatch(
+          setCategoryFilters(
+            categoryFilters.filter(
+              (categoryFilter) => categoryFilter !== category
+            )
+          )
+        )
+      : dispatch(setCategoryFilters([...categoryFilters, category]));
+  };
 
   const onClickingExit = () => {
     dispatch(setTopicFilters([]));
     dispatch(setCategoryFilters([]));
     dispatch(setFilterModalOpen(false));
-  }
+  };
 
   return (
     <>
-      {modalOpen
-        ? (<Background>
+      {modalOpen ? (
+        <Background>
           <animated.div style={animation}>
             <Wrapper>
               <FilterButton>
@@ -68,124 +86,124 @@ const FilterModal: FC<FilterModalProps> = (props) => {
               </FilterButton>
               <div className="categories">
                 <h2>Category</h2>
-                <CategorySelection
-                  textColor={"white"}
-                  onClick={onClickingCategory} />
+                <CategorySelection onClick={onClickingCategory} />
               </div>
               <div className="topics">
                 <h2>Topics</h2>
-                <TopicSelection
-                  textColor={"#A36760"}
-                  onClick={onClickingTopic} />
+                <TopicSelection onClick={onClickingTopic} />
               </div>
-              <button id="update" type="button">Update Results</button>
+              <button id="update" type="button">
+                Update Results
+              </button>
             </Wrapper>
           </animated.div>
-        </Background>)
-        : null}
+        </Background>
+      ) : null}
     </>
-  )
-}
+  );
+};
 
 export default FilterModal;
 
 const Background = styled.div`
-width: 100vw;
-height: 100vh;
-background: rgba(0, 0, 0, 0.8);
-position: fixed;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 7;
-overflow-x: hidden;
-`
-const Wrapper = styled.div`
-display: flex;
-flex-direction: column;
-background-color: white;
-height: 90vh;
-width: 75vw;
-z-index: 10;
-#update{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  bottom: 110px;
-  right: 0;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  border: none;
-  width: 260px;
-  padding-right: 30px;
-  height: 35px;
-  background-color: #a36760;
-}
-
-.topics, .categories{
-  margin-top: 5vh;
-  h2{
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 17px;
-    font-weight: 600;
-    color: #A36760;
-  }
-}
-`
-const FilterButton = styled.div`
-display: flex;
-justify-content: space-between;
-.close {
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  border: 3px solid #CBCBCB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+  overflow-x: hidden;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: white;
-  width: 23px;
-  height: 23px;
-  opacity: 0.8;
-  &::after{
-    transform: rotate(-45deg);
+  height: 90vh;
+  width: 75vw;
+  z-index: 10;
+  #update {
+    position: fixed;
+    bottom: 110px;
+    right: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    width: 260px;
+    padding-right: 30px;
+    height: 35px;
+    background-color: #a36760;
   }
-  &::before{
-    transform: rotate(45deg);
+
+  .topics,
+  .categories {
+    margin-top: 5vh;
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #a36760;
+    }
   }
-  &:hover {
-    opacity: 1;
-  }
-  &::before, ::after {
+`;
+const FilterButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  .close {
     position: absolute;
-    top: 1px;
-    left: 7px;
-    content: ' ';
-    height: 15px;
-    width: 3px;
-    background-color: #CBCBCB;
+    right: 4px;
+    top: 4px;
+    border: 3px solid #cbcbcb;
+    background-color: white;
+    width: 23px;
+    height: 23px;
+    opacity: 0.8;
+    &::after {
+      transform: rotate(-45deg);
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &::before,
+    ::after {
+      position: absolute;
+      top: 1px;
+      left: 7px;
+      content: " ";
+      height: 15px;
+      width: 3px;
+      background-color: #cbcbcb;
+    }
   }
-}
-&.left{
-  flex: 0.5;
-}
-&.right{
-  flex: 0.5;
-}
-p{
-  color: #CBCBCB;
-  margin: 0;
-  position: relative;
-  top: 8px;
-  left: 14px;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 0;
-  display: inline;
-}
-#filterIcon{
-  color: #CBCBCB;
-  margin: 0;
-  font-size: 17px;
-  position: relative;
-  top: 11px;
-  left: 15px;
-}
-`
+  &.left {
+    flex: 0.5;
+  }
+  &.right {
+    flex: 0.5;
+  }
+  p {
+    color: #cbcbcb;
+    margin: 0;
+    position: relative;
+    top: 8px;
+    left: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+    display: inline;
+  }
+  #filterIcon {
+    color: #cbcbcb;
+    margin: 0;
+    font-size: 17px;
+    position: relative;
+    top: 11px;
+    left: 15px;
+  }
+`;

@@ -26,7 +26,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const history = useHistory();
   const token = useAppSelector(({ auth }) => auth.token);
 
-  console.log("EventDetails component - got props:", eventDetails);
   const { creator_name, creator_email } = useAppSelector(({ user }) => ({
     creator_email: user.email,
     creator_name: user.name,
@@ -34,7 +33,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
 
   const [customBlurb, setCustomBlurb] = useState<string>("");
   const [eventTitle, setEventTitle] = useState<string>(
-    eventDetails.title || ""
+    eventDetails.title || eventDetails.name || ""
   );
   const [category, setCategory] = useState<Category | string>(
     Category.StartupsForAll
@@ -46,31 +45,28 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   const [currency, setCurrency] = useState<string>(
     eventDetails.currency || "USD"
   );
-  const [description, setDescription] = useState<string>(
-    eventDetails.description || ""
-  );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
   const [startDate, setStartDate] = useState<Date | string>(
     eventDetails.start_date
       ? new Date(Date.parse(eventDetails.start_date))
           .toISOString()
           .split("T")[0]
-      : ""
+      : new Date(Date.parse(eventDetails.start.utc)).toISOString().split("T")[0]
   );
   const [endDate, setEndDate] = useState<Date | string>(
     eventDetails.end_date
       ? new Date(Date.parse(eventDetails.end_date)).toISOString().split("T")[0]
-      : ""
+      : new Date(Date.parse(eventDetails.end.utc)).toISOString().split("T")[0]
   );
   const [endTime, setEndTime] = useState<string>(
     eventDetails.end_time
       ? new Date(Date.parse(eventDetails.end_time)).toLocaleTimeString()
-      : ""
+      : new Date(Date.parse(eventDetails.end.utc)).toLocaleTimeString()
   );
   const [startTime, setStartTime] = useState<string>(
     eventDetails.start_time
       ? new Date(Date.parse(eventDetails.start_time)).toLocaleTimeString()
-      : ""
+      : new Date(Date.parse(eventDetails.start.utc)).toLocaleTimeString()
   );
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
@@ -89,7 +85,6 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
       creator_email: creator_email,
       creator_name: creator_name,
       currency: currency,
-      description: description,
       end_date: eventDetails.end_date || eventDetails.start_date || startDate,
       end_time: endTime,
       eventbrite_id: eventDetails.id,
@@ -101,13 +96,15 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
       summary: "",
       title: eventTitle,
       topics: topics,
-      url: url,
     };
     if (eventDetails.logo) {
       fd.logo = eventDetails.logo;
     }
     if (eventDetails.summary) {
       fd.summary = eventDetails.summary;
+    }
+    if (url) {
+      fd.url = url;
     }
     dispatch(saveNewEvent({ form: fd, token: token }));
   };
@@ -123,6 +120,8 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   };
 
   const changeCategory = (category: string) => {
+    console.log("change category clicked", category);
+    setCategory("");
     setCategory(category);
   };
 
@@ -141,6 +140,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     history.push("/add");
   };
 
+  console.log("NewEventForm component - got props:", eventDetails);
   return (
     <Wrapper>
       <PasteLinkContainer>
@@ -206,12 +206,12 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
 
           <FormLabel htmlFor="category" text="Category" />
           <StyledContainer>
-            <CategorySelection textColor={"white"} onClick={changeCategory} />
+            <CategorySelection multi={false} onClick={changeCategory} />
           </StyledContainer>
 
           <FormLabel htmlFor="topics" text="Add Topics Emojis" />
           <StyledContainer>
-            <TopicSelection textColor={"#A36760"} onClick={changeTopics} />
+            <TopicSelection onClick={changeTopics} />
           </StyledContainer>
 
           {eventDetails && eventDetails.id !== "" && (
@@ -224,6 +224,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
               end_time={endTime}
               location={location}
               cost={cost}
+              creator_name={creator_name}
               currency={currency}
               summary={summary}
               url={url}

@@ -1,5 +1,6 @@
 import { Category } from "./Category.enum";
 import { CategoryText } from "./CategoryText.enum";
+import EventbriteDateObject from "../../constants/EventbriteDateObject";
 
 export default interface NewEvent {
   changed?: DateString | string;
@@ -17,12 +18,15 @@ export default interface NewEvent {
   logo?: string;
   promoted?: boolean;
   series_dates?: EventbriteSeries[];
+  start?: EventbriteDateObject;
+  end?: EventbriteDateObject;
   start_date?: DateString | string;
   end_date?: DateString | string;
   start_time: DateString | string;
   end_time: DateString | string;
   summary?: string;
+  name?: string;
   title: string;
   topics?: string[];
-  url?: string;
+  url?: string | null;
 }
