@@ -201,7 +201,7 @@ const Background = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0 10px 15px;
   background-color: white;
   height: 90vh;
   width: 90vw;
@@ -232,6 +232,7 @@ const TopButtonDiv = styled.div`
     padding: 1px 10px 1px 10px;
     border: none;
     height: 30px;
+    width: 75px;
     background-color: #6073a3;
     color: white;
     font-weight: 600;
@@ -384,6 +385,7 @@ a {
     padding: 1px 10px 1px 10px;
     border: none;
     height: 30px;
+    width: 64px;
     background-color: #6073a3;
     color: white;
     font-weight: 600;
@@ -404,7 +406,7 @@ a {
     padding: 1px 10px 1px 10px;
     border: none;
     height: 30px;
-    width: 172px;
+    width: 198px;
     background-color: #a36760;
     color: white;
     font-weight: 600;
