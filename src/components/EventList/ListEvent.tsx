@@ -40,28 +40,32 @@ const ListEvent: FC<ListEventProps> = (props) => {
 
   return (
     <Wrapper key={id} onClick={() => onClickingEvent(id)}>
-      <LeftDisplay>
-        <Title>{title}</Title>
-        <CreatedBy>{creator_name}</CreatedBy>
-      </LeftDisplay>
-      <RightDisplay>
-        <DateDisplay>{eventDate}</DateDisplay>
-        <TimeDisplay>
-          {start_time} - {end_time}
-        </TimeDisplay>
-        <TopicsDisplay>
-          <ul>
-            {topics.map((topic, index) => {
-              return <li key={index}>{topicsEmojis[topic]}</li>;
-            })}
-          </ul>
-        </TopicsDisplay>
-        <CategoryDisplay
-          style={{ backgroundColor: categoryBackgroundColor[category] }}
-        >
-          {category}
-        </CategoryDisplay>
-      </RightDisplay>
+      <SmallHeader>
+        <SmallHeaderLeft>
+          <h2>{title}</h2>
+          <p>{creator_name}</p>
+        </SmallHeaderLeft>
+        <SmallHeaderRight>
+          <h2>{eventDate}</h2>
+          <p>
+            {start_time} - {end_time}
+          </p>
+          <div className="topicsAndCategories">
+            <ul>
+              {topics.map((topic: string, index: number) => {
+                return <li key={index}>{topicsEmojis[topic]}</li>;
+              })}
+            </ul>
+            <h3
+              style={{
+                backgroundColor: categoryBackgroundColor[category],
+              }}
+            >
+              {category}
+            </h3>
+          </div>
+        </SmallHeaderRight>
+      </SmallHeader>
     </Wrapper>
   );
 };
@@ -70,72 +74,62 @@ export default ListEvent;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   height: 80px;
+  width: 100%;
   padding: 0px 10px;
   margin-top: 10px;
+  justify-content: space-between;
   &:hover {
     cursor: pointer;
     background-color: #f1f1f1;
   }
 `;
-const LeftDisplay = styled.div`
-  flex: 0.55;
-  display: flex;
-  flex-direction: column;
-`;
-const Title = styled.div`
-  display: flex;
-  align-items: flex-start;
-  padding-top: 10px;
+const SmallHeader = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-top: 15px;
+margin-bottom: 5px;
+h2{
   font-size: 15px;
-  font-weight: bold;
-`;
-const CreatedBy = styled.div`
-  display: flex;
-  font-size: 12px;
-`;
-const RightDisplay = styled.div`
-  flex: 0.45;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: right;
-`;
-const DateDisplay = styled.div`
-  display: flex;
-  font-size: 14px;
-  font-weight: bold;
-  align-items: flex-end;
-  padding-bottom: 0;
-`;
-const TimeDisplay = styled.div`
-  display: flex;
-  align-items: center;
-  height: 15px;
-  margin-bottom: -10px;
-  margin-left: 65px;
-  padding-top: 0;
-  font-size: 12px;
-`;
-const TopicsDisplay = styled.div`
-  display: flex;
-  height: 20px;
-  padding: 0;
-  ul {
-    display: flex;
-    font-size: 12px;
-    padding: 0;
-    list-style: none;
-  }
-  li {
-    display: flex;
-    margin: 0 5px 0px 5px;
-  }
-`;
-const CategoryDisplay = styled.div`
-  display: flex;
+  margin: 0;
+  line-height: 17px;
+}
+h3 {
   font-size: 13px;
   color: white;
   height: 19px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+}
+p{
+  font-size: 12px;
+  margin: 0;
+  line-height: 17px;
+}
+ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+li{
+  font-size: 14px;
+  padding: 0 3px 0 0;
+  margin: 0 3px 0 0;
+  display: inline;
+}
+`;
+const SmallHeaderLeft = styled.div`
+  flex: 0.55;
+`;
+const SmallHeaderRight = styled.div`
+  text-align: right;
+  flex: 0.45;
+  .topicsAndCategories{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
 `;

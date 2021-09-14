@@ -8,10 +8,6 @@ import {
   setTopicFilters,
   setCategoryFilters,
 } from "../../store/slices/dbEvent/dbEventSlice";
-import {
-  categories,
-  categoryBackgroundColor,
-} from "../../constants/CategoryColors";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
 
@@ -117,36 +113,41 @@ const Background = styled.div`
   overflow-x: hidden;
 `;
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  height: 90vh;
-  width: 75vw;
-  z-index: 10;
-  #update {
-    position: fixed;
-    bottom: 110px;
-    right: 0;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    border: none;
-    width: 260px;
-    padding-right: 30px;
-    height: 35px;
-    background-color: #a36760;
+display: flex;
+flex-direction: column;
+background-color: white;
+height: 90vh;
+max-height: 724px;
+width: 70vw;
+max-width: 263px;
+min-width: 263px;
+z-index: 10;
+#update{
+  position: fixed;
+  bottom: 110px;
+  right: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  width: 65vw;
+  max-width: 245px;
+  padding-right: 30px;
+  height: 35px;
+  background-color: #a36760;
+  &:hover{
+    background-color: #C79288;
   }
-
-  .topics,
-  .categories {
-    margin-top: 5vh;
-    h2 {
-      text-align: center;
-      margin-bottom: 10px;
-      font-size: 17px;
-      font-weight: 600;
-      color: #a36760;
-    }
+}
+.topics, .categories{
+  margin-top: 5vh;
+  max-width: 263px;
+  h2{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #A36760;
   }
 `;
 const FilterButton = styled.div`

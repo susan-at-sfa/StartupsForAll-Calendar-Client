@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 const Navbar: FC = () => {
   const [selected, setSelected] = useState('/')
   const location = useLocation();
-  console.log("Selected", selected)
 
   useEffect(() => {
     setSelected(location.pathname)
