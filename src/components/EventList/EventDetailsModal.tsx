@@ -210,6 +210,11 @@ const Wrapper = styled.div`
   min-width: 357px;
   z-index: 10;
   overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const TopButtonDiv = styled.div`
   margin-top: 5px;
