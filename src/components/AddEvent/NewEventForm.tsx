@@ -5,7 +5,6 @@ import BlankNewEventInputs from "./BlankNewEventInputs";
 import EventbriteEventInfo from "./EventbriteEventInfo";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
-import TopicsChooser from "./TopicsChooser";
 import styled from "@emotion/styled";
 
 import { Category } from "../../constants/Category.enum";
@@ -13,6 +12,8 @@ import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import { useAppSelector, useAppDispatch, parseIdFromUrl } from "../../hooks";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
+import TopicSelection from "../EventList/TopicSelection";
+import CategorySelection from "../EventList/CategorySelection";
 
 interface EventDetailsFormProps {
   eventDetails: NewEvent;
@@ -39,7 +40,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     Category.StartupsForAll
   );
   const [categoryText, setCategoryText] = useState<CategoryText | string>(
-    CategoryText.StartupsForAll
+    CategoryText.Community
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
@@ -121,6 +122,10 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     }
   };
 
+  const changeCategory = (category: string) => {
+    setCategory(category);
+  };
+
   const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
     console.log("getting new event details...");
     event.preventDefault();
@@ -199,7 +204,15 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
             />
           )}
 
-          <TopicsChooser changeTopics={changeTopics} topics={topics} />
+          <FormLabel htmlFor="category" text="Category" />
+          <StyledContainer>
+            <CategorySelection textColor={"white"} onClick={changeCategory} />
+          </StyledContainer>
+
+          <FormLabel htmlFor="topics" text="Add Topics Emojis" />
+          <StyledContainer>
+            <TopicSelection textColor={"#A36760"} onClick={changeTopics} />
+          </StyledContainer>
 
           {eventDetails && eventDetails.id !== "" && (
             <EventbriteEventInfo
@@ -217,29 +230,12 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
             />
           )}
 
-          <FormLabel htmlFor="category" text="Category" />
-          <SelectList
-            value={category}
-            defaultValue={Category.StartupsForAll}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value={Category.Experts}>Experts</option>
-            <option value={Category.Founders}>Founders</option>
-            <option value={Category.StartupsForAll}>Startups For All</option>
-          </SelectList>
-
-          <SelectList
+          <input
+            type="hidden"
+            name="category_text"
             value={categoryText}
             onChange={(e) => setCategoryText(e.target.value)}
-            defaultValue={CategoryText.StartupsForAll}
-          >
-            <option value={CategoryText.StartupsForAll}>
-              {CategoryText.StartupsForAll}
-            </option>
-            <option value={CategoryText.Community}>
-              {CategoryText.Community}
-            </option>
-          </SelectList>
+          />
         </FormFields>
 
         <EventsGreenDiv>
@@ -364,4 +360,11 @@ const SelectList = styled.select`
   margin-bottom: 15px;
   max-width: 100%;
   max-width: 100vw;
+`;
+const StyledContainer = styled.div`
+  padding: 8px;
+  padding-bottom: 0;
+  border: 8px solid #e8d9d6;
+  border-right-width: 20px;
+  margin-bottom: 20px;
 `;

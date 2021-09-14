@@ -3,13 +3,13 @@ import styled from "@emotion/styled";
 export const SelectionDiv = styled.div`
 #displayText{
   color: #A36760;
-  padding-bottom: 2px;
-  padding-left: 8px;
+  padding: 2px;
+  padding-left: 7px;
 }
 .container {
   display: block;
   position: relative;
-  padding-left: 50px;
+  padding-left: 30px;
   margin-bottom: 8px;
   cursor: pointer;
   font-size: 15px;
@@ -18,6 +18,9 @@ export const SelectionDiv = styled.div`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  last-of-type: {
+    margin-bottom: 0;
+  }
 }
 input {
   position: absolute;
@@ -35,12 +38,11 @@ input {
 }
 .checkmark {
   position: absolute;
-  margin-left: 15px;
   top: 1px;
-  left: 3px;
+  left: 1px;
   border: 4px solid #F1F1F1;
-  height: 23px;
-  width: 23px;
+  height: 25px;
+  width: 25px;
   background-color: white;
   &::after{
     content: "";
