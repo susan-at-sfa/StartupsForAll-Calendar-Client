@@ -11,9 +11,11 @@ const dispatch = useAppDispatch();
   return (
     <Wrapper>
       <ListEventContainer>
-        <FilterButton onClick={() => dispatch(setFilterModalOpen(true))}>
+        <FilterButton >
+          <div id='filterClick' onClick={() => dispatch(setFilterModalOpen(true))}>
           <FiList id="filterIcon" />
-          <p> Filter</p>
+          <p> Filters</p>
+          </div>
         </FilterButton>
         <OrganizedEventsComponent/>
       </ListEventContainer>
@@ -33,11 +35,17 @@ const ListEventContainer = styled.div`
   `
 const FilterButton = styled.div`
 position: sticky;
-top: 20px;
-width: 75px;
+top: 15px;
+width: 100%;
 text-align: right;
 z-index: 2;
-background-color: white;
+#filterClick{
+  display: flex;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  width: 75px;
+}
 p{
     display: inline;
     color: #C79288;
