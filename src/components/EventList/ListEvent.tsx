@@ -91,7 +91,6 @@ flex-direction: row;
 justify-content: space-between;
 margin-top: 15px;
 margin-bottom: 5px;
-margin-right: 10px;
 h2{
   font-size: 15px;
   margin: 0;
@@ -116,6 +115,7 @@ ul{
   list-style: none;
 }
 li{
+  font-size: 14px;
   padding: 0 3px 0 0;
   margin: 0 3px 0 0;
   display: inline;

@@ -44,7 +44,9 @@ z-index: 2;
   background-color: white;
   position: absolute;
   right: 0;
+  margin: 0;
   width: 75px;
+  padding-left: 12px;
 }
 p{
     display: inline;
@@ -54,6 +56,6 @@ p{
   }
   #filterIcon{
     color: #C79288;
-    margin: 2px 2px 0 0;
+    margin: 2px 2px 0 0px;
   }
 `

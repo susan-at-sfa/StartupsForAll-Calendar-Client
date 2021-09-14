@@ -79,7 +79,7 @@ const MonthHeader = styled.div`
     font-style: normal;
     font-size: 13px;
     font-weight: bold;
-    width: 95%;
+    width: 100%;
     text-align: left;
     border-bottom: 1px solid #C79288;
     line-height: 2px;
@@ -87,6 +87,6 @@ const MonthHeader = styled.div`
   } 
   span{
     background:#fff;
-    padding:0 15px 0 5px;
+    padding:0 5px 0 5px;
   }
   `
