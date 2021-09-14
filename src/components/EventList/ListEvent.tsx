@@ -50,7 +50,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
           <p>
             {start_time} - {end_time}
           </p>
-          <div>
+          <div className="topicsAndCategories">
             <ul>
               {topics.map((topic: string, index: number) => {
                 return <li key={index}>{topicsEmojis[topic]}</li>;
@@ -101,8 +101,8 @@ h3 {
   font-size: 13px;
   color: white;
   height: 19px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 4px;
+  padding-right: 4px;
   margin: 0;
 }
 p{
@@ -115,13 +115,21 @@ ul{
   margin: 0;
   list-style: none;
 }
+li{
+  padding: 0 3px 0 0;
+  margin: 0 3px 0 0;
+  display: inline;
+}
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
 `;
 const SmallHeaderRight = styled.div`
+  text-align: right;
   flex: 0.45;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  .topicsAndCategories{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
 `;

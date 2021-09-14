@@ -12,13 +12,14 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
+import {events} from '../../constants/DummyEvents';
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
 }
 
 const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
-  const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
+  // const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
   const { selectedEventID, modalOpen } = props;
   const event = events.filter((e: any) => e.id === selectedEventID);
   const dispatch = useAppDispatch();
@@ -91,6 +92,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           {start_time} - {end_time}
                         </p>
                         <div>
+                          <div className="topicsAndCategories">
                           <ul>
                             {topics.map((topic: string, index: number) => {
                               return <li key={index}>{topicsEmojis[topic]}</li>;
@@ -103,6 +105,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           >
                             {category}
                           </h3>
+                          </div>
                         </div>
                       </SmallHeaderRight>
                     </SmallHeader>
@@ -248,6 +251,9 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover{
+      background-color: #a36760;
+    }
   }
   #viewPage {
     padding: 1px 10px 1px 10px;
@@ -258,6 +264,9 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover{
+      background-color: #C79288;
+    }
   }
 `;
 const SmallHeader = styled.div`
@@ -276,8 +285,8 @@ h3 {
   font-size: 13px;
   color: white;
   height: 19px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 4px;
+  padding-right: 4px;
   margin: 0;
 }
 p{
@@ -290,15 +299,23 @@ ul{
   margin: 0;
   list-style: none;
 }
+li{
+  padding: 0 3px 0 0;
+  margin: 0 3px 0 0;
+  display: inline;
+}
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
-`;
+  `;
 const SmallHeaderRight = styled.div`
+  text-align: right;
   flex: 0.45;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  .topicsAndCategories{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
 `;
 
 const CustomBlurb = styled.div`
@@ -401,6 +418,9 @@ a {
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover{
+      background-color: #a36760;
+    }
   }
   #viewPage {
     padding: 1px 10px 1px 10px;
@@ -411,6 +431,9 @@ a {
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover{
+      background-color: #C79288;
+    }
   }
 `
 const ModalFooter = styled.div`

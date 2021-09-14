@@ -104,7 +104,10 @@ display: flex;
 flex-direction: column;
 background-color: white;
 height: 90vh;
-width: 75vw;
+max-height: 724px;
+width: 70vw;
+max-width: 263px;
+min-width: 263px;
 z-index: 10;
 #update{
   position: fixed;
@@ -114,14 +117,18 @@ z-index: 10;
   font-weight: bold;
   font-size: 14px;
   border: none;
-  width: 260px;
+  width: 65vw;
+  max-width: 245px;
   padding-right: 30px;
   height: 35px;
   background-color: #a36760;
+  &:hover{
+    background-color: #C79288;
+  }
 }
-
 .topics, .categories{
   margin-top: 5vh;
+  max-width: 263px;
   h2{
     text-align: center;
     margin-bottom: 10px;

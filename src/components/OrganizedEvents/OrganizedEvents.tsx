@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useAppSelector } from '../../hooks';
 import { MonthObject } from '../../constants/MonthObject';
 import ListEvent from '../EventList/ListEvent';
+import { events } from '../../constants/DummyEvents';
 
 const OrganizedEventsComponent: FC = () => {
   interface OrganizedEvents {
@@ -10,8 +11,8 @@ const OrganizedEventsComponent: FC = () => {
       [key: string]: any
     }
   }
-  const events: Record<any, any> = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
-
+  // const events: Record<any, any> = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
+console.log("Events", events)
   const organizedEvents: OrganizedEvents = {};
 
   events.forEach((event: any) => {
