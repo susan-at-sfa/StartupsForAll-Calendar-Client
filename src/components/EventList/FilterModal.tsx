@@ -36,22 +36,22 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
       ? dispatch(
-          setTopicFilters(
-            topicFilters.filter((topicFilter) => topicFilter !== topic)
-          )
+        setTopicFilters(
+          topicFilters.filter((topicFilter) => topicFilter !== topic)
         )
+      )
       : dispatch(setTopicFilters([...topicFilters, topic]));
   };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
       ? dispatch(
-          setCategoryFilters(
-            categoryFilters.filter(
-              (categoryFilter) => categoryFilter !== category
-            )
+        setCategoryFilters(
+          categoryFilters.filter(
+            (categoryFilter) => categoryFilter !== category
           )
         )
+      )
       : dispatch(setCategoryFilters([...categoryFilters, category]));
   };
 
@@ -88,9 +88,11 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                 <h2>Topics</h2>
                 <TopicSelection onClick={onClickingTopic} />
               </div>
-              <button id="update" type="button">
-                Update Results
-              </button>
+              <div id="updateButtonDiv">
+                <button id="update" type="button">
+                  Update Results
+                </button>
+              </div>
             </Wrapper>
           </animated.div>
         </Background>
@@ -118,19 +120,23 @@ flex-direction: column;
 background-color: white;
 height: 90vh;
 max-height: 724px;
+min-height: 500px;
 width: 70vw;
 max-width: 263px;
 min-width: 263px;
 z-index: 10;
+#updateButtonDiv{
+display: flex;
+position: relative;
+justify-content: flex-end;
+margin-top: 20%;
+}
 #update{
-  position: fixed;
-  bottom: 110px;
-  right: 0;
   color: white;
   font-weight: bold;
   font-size: 14px;
   border: none;
-  width: 65vw;
+  width: 95%;
   max-width: 245px;
   padding-right: 30px;
   height: 35px;
@@ -140,7 +146,8 @@ z-index: 10;
   }
 }
 .topics, .categories{
-  margin-top: 5vh;
+  margin-top: 15%;
+  padding-left: 5%;
   max-width: 263px;
   h2{
     text-align: center;
@@ -149,6 +156,7 @@ z-index: 10;
     font-weight: 600;
     color: #A36760;
   }
+}
 `;
 const FilterButton = styled.div`
   display: flex;
