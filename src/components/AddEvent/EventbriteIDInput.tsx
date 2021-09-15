@@ -3,6 +3,7 @@ import { useAppDispatch, parseIdFromUrl } from "../../hooks";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
+import { toast } from "react-toastify";
 
 interface EventbriteIDInputProps {
   newEvent(value: boolean): void;
@@ -16,11 +17,14 @@ const EventbriteIDInput: FC<EventbriteIDInputProps> = (props) => {
     console.log("getting eventbrite data from", eventbriteIDorUrl);
     event.preventDefault();
     if (!eventbriteIDorUrl) {
-      // TODO: add toast here to notify there is no ID input
+      toast("Please enter an Eventbrite ID or Event URL.");
       return;
     }
     const id = parseIdFromUrl(eventbriteIDorUrl);
     if (!id) {
+      toast(
+        "That is not a valid Eventbrite ID or Event URL. Please try again."
+      );
       return;
     }
     dispatch(requestEventbriteEvent({ id }));

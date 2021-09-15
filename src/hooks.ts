@@ -14,3 +14,11 @@ export const parseIdFromUrl = (url: string): string | null => {
   const id = url.match(/[0-9]{12}/g);
   return id ? id[0] : null;
 }
+
+export const toLocalDate = (dateString: string): string | Date => {
+  return new Date(Date.parse(dateString)).toISOString().split("T")[0];
+}
+
+export const toLocalTime = (dateString: string): string => {
+  return new Date(Date.parse(dateString)).toLocaleTimeString();
+}

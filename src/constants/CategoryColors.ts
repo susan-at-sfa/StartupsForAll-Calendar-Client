@@ -1,11 +1,11 @@
 export const categoryBackgroundColor: Record<string, string> = {
-  "Founder": "#9DD3C9",
-  "Expert": "#A0BAD2",
+  "Founders": "#9DD3C9",
+  "Experts": "#A0BAD2",
   "Community": "#B6A5D3"
 }
 
 export const categories: string[] = [
-  "Founder",
-  "Expert",
+  "Founders",
+  "Experts",
   "Community"
 ]
