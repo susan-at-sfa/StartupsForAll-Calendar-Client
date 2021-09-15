@@ -50,7 +50,7 @@ const OrganizedEventsComponent: FC = () => {
           <React.Fragment key={year}>
             {Object.entries(months).map(([month, displayEvents]) => {
               return (
-                <MonthSection key={month} id={month}>
+                <MonthSection key={`${year}-${month}`} id={month}>
                   <MonthHeader>
                     <h1>
                       <span>
