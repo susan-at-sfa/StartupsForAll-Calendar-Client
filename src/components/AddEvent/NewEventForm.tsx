@@ -6,21 +6,28 @@ import EventbriteEventInfo from "./EventbriteEventInfo";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
+import { toast } from "react-toastify";
 
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
-import { useAppSelector, useAppDispatch, parseIdFromUrl } from "../../hooks";
+import {
+  useAppSelector,
+  useAppDispatch,
+  parseIdFromUrl,
+  toLocalDate,
+  toLocalTime,
+} from "../../hooks";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
 
-interface EventDetailsFormProps {
+interface NewEventFormProps {
   eventDetails: NewEvent;
   cancelEvent(): void;
 }
 
-const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
+const NewEventForm: FC<NewEventFormProps> = (props) => {
   const { eventDetails } = props;
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -47,26 +54,32 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
   const [startDate, setStartDate] = useState<Date | string>(
-    eventDetails.start_date
-      ? new Date(Date.parse(eventDetails.start_date))
-          .toISOString()
-          .split("T")[0]
-      : new Date(Date.parse(eventDetails.start.utc)).toISOString().split("T")[0]
+    eventDetails.id !== ""
+      ? Object.keys(eventDetails.start).length > 0
+        ? toLocalDate(eventDetails.start.utc)
+        : new Date()
+      : ""
   );
   const [endDate, setEndDate] = useState<Date | string>(
-    eventDetails.end_date
-      ? new Date(Date.parse(eventDetails.end_date)).toISOString().split("T")[0]
-      : new Date(Date.parse(eventDetails.end.utc)).toISOString().split("T")[0]
+    eventDetails.id !== ""
+      ? Object.keys(eventDetails.end).length > 0
+        ? toLocalDate(eventDetails.end.utc)
+        : new Date()
+      : ""
   );
   const [endTime, setEndTime] = useState<string>(
     eventDetails.end_time
-      ? new Date(Date.parse(eventDetails.end_time)).toLocaleTimeString()
-      : new Date(Date.parse(eventDetails.end.utc)).toLocaleTimeString()
+      ? toLocalTime(eventDetails.end_time)
+      : eventDetails.end
+      ? toLocalTime(eventDetails.end.utc)
+      : ""
   );
   const [startTime, setStartTime] = useState<string>(
     eventDetails.start_time
-      ? new Date(Date.parse(eventDetails.start_time)).toLocaleTimeString()
-      : new Date(Date.parse(eventDetails.start.utc)).toLocaleTimeString()
+      ? toLocalTime(eventDetails.start_time)
+      : eventDetails.start
+      ? toLocalTime(eventDetails.start.utc)
+      : ""
   );
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
@@ -107,6 +120,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
       fd.url = url;
     }
     dispatch(saveNewEvent({ form: fd, token: token }));
+    history.push("/");
   };
 
   const changeTopics = (topic: string) => {
@@ -129,18 +143,21 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
     console.log("getting new event details...");
     event.preventDefault();
     if (!url) {
-      // TODO: add toast here to notify there is no ID input
+      toast("Please include a valid Eventbrite Event URL or ID.");
       return;
     }
     const id = parseIdFromUrl(url);
     if (!id) {
+      toast(
+        "That is not a valid Eventbrite Event URL or ID. Please try again."
+      );
       return;
     }
     dispatch(requestEventbriteEvent({ id }));
     history.push("/add");
   };
 
-  console.log("NewEventForm component - got props:", eventDetails);
+  console.log("NewEventForm component - got props.eventDetails:", eventDetails);
   return (
     <Wrapper>
       <PasteLinkContainer>
@@ -255,7 +272,7 @@ const EventDetailsForm: FC<EventDetailsFormProps> = (props) => {
   );
 };
 
-export default EventDetailsForm;
+export default NewEventForm;
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,5 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { login, setToken } from './authSlice';
 import { setUser } from '../user/userSlice';
 import { makeRequest } from '../../utils/makeRequest';
@@ -32,11 +33,14 @@ function* loginUser(action: PayloadAction<{ username?: string; password: string;
     console.log('SUCCESS LOGIN', data);
     yield put(setUser(finalPayload));
     yield put(setToken({ token: data.access_token }));
+    toast("Approved to create events!");
   }
   if (error) {
     // handle api error
-    console.log('FAIL LOGIN');
-    console.error(error);
+    error.json().then((errData: any) => {
+      toast(`Error verifying credentials. Please try again. ${errData.message}.`);
+      console.log('failed login to create events...', errData);
+    })
   }
 }
 

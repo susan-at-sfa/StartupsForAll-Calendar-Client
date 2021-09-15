@@ -1,4 +1,5 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import { makeRequest } from '../../utils/makeRequest';
 import { setAllDbEvents, getAllDbEvents } from './dbEventSlice';
 
@@ -13,7 +14,10 @@ export function* fetchAllDbEvents() {
     yield put(setAllDbEvents(data));
   }
   if (error) {
-    console.log(error)
+    error.json().then((errData: any) => {
+      toast(`Error getting events info. Please try again. ${errData.message}.`);
+      console.log('Unable to pull events data from API:', errData);
+    })
   }
 }
 

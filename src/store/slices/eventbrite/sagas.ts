@@ -2,6 +2,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { setEventbrite, requestEventbriteEvent } from './eventbriteSlice';
 import { makeRequest } from '../../utils/makeRequest';
+import { toast } from 'react-toastify';
 
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:1323';
 
@@ -11,10 +12,14 @@ function* fetchEventbriteEvent(action: PayloadAction<{ id: string }>) {
 
   if (success) {
     console.log('got eventbrite data. formatting... unformatted', data);
+    toast("Eventbrite Event data retrieved successfully.");
     yield put(setEventbrite(data));
   }
   if (error) {
-    console.error(error);
+    error.json().then((errData: any) => {
+      toast(`Error getting Eventbrite event data. Please try again. ${errData.message}.`);
+      console.log('Error accessing Eventbrite API:', errData);
+    })
   }
 }
 

@@ -9,6 +9,8 @@ import { Routes } from "./constants/routes";
 import { useAppSelector, useAppDispatch } from "./hooks";
 import styled from "styled-components";
 import { getAllDbEvents } from "./store/slices/dbEvent/dbEventSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //components
 import Events from "./containers/Events";
 import Login from "./containers/Login";
@@ -19,10 +21,9 @@ import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import FilterModal from "./components/EventList/FilterModal";
 
 const App: FC = () => {
-
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getAllDbEvents())
+    dispatch(getAllDbEvents());
   }, [dispatch]);
 
   const token = useAppSelector(({ auth }) => auth.token);
@@ -58,6 +59,7 @@ const App: FC = () => {
 
   return (
     <Wrapper>
+      <ToastContainer autoClose={2200} />
       <Router>
         <EventDetailsModal
           selectedEventID={selectedEventID}

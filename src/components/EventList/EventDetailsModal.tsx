@@ -12,14 +12,14 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
-import {events} from '../../constants/DummyEvents';
+// import {events} from '../../constants/DummyEvents';
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
 }
 
 const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
-  // const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
+  const events = useAppSelector(({ dbEvent }) => dbEvent.dbEvents);
   const { selectedEventID, modalOpen } = props;
   const event = events.filter((e: any) => e.id === selectedEventID);
   const dispatch = useAppDispatch();
@@ -75,8 +75,10 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </button>
                       </div>
                       <div className="topButtonsRight">
-                        <button id="calendarAdd" type="button">+ Cal</button>
-                        <button id="viewPage" type="button" >
+                        <button id="calendarAdd" type="button">
+                          + Cal
+                        </button>
+                        <button id="viewPage" type="button">
                           <a href={url}>View More Details </a>
                         </button>
                       </div>
@@ -93,18 +95,21 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </p>
                         <div>
                           <div className="topicsAndCategories">
-                          <ul>
-                            {topics.map((topic: string, index: number) => {
-                              return <li key={index}>{topicsEmojis[topic]}</li>;
-                            })}
-                          </ul>
-                          <h3
-                            style={{
-                              backgroundColor: categoryBackgroundColor[category],
-                            }}
-                          >
-                            {category}
-                          </h3>
+                            <ul>
+                              {topics.map((topic: string, index: number) => {
+                                return (
+                                  <li key={index}>{topicsEmojis[topic]}</li>
+                                );
+                              })}
+                            </ul>
+                            <h3
+                              style={{
+                                backgroundColor:
+                                  categoryBackgroundColor[category],
+                              }}
+                            >
+                              {category}
+                            </h3>
                           </div>
                         </div>
                       </SmallHeaderRight>
@@ -146,7 +151,9 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         >
                           Back
                         </button>
-                        <button id="calendarAdd" type="button">+ Cal</button>
+                        <button id="calendarAdd" type="button">
+                          + Cal
+                        </button>
                         <button id="viewPage" type="button">
                           <a href={url}>View More Details</a>
                         </button>
@@ -161,7 +168,8 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <ul>
                           {topics.map((topic: string, index: number) => {
                             return (
-                              <li key={index}
+                              <li
+                                key={index}
                                 style={{
                                   backgroundColor: topicsEmojiColors[topic],
                                 }}
@@ -230,7 +238,7 @@ const TopButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
   }
-#back {
+  #back {
     align-self: flex-start;
     padding: 1px 10px 1px 10px;
     border: none;
@@ -251,7 +259,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       background-color: #a36760;
     }
   }
@@ -264,58 +272,58 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
-      background-color: #C79288;
+    &:hover {
+      background-color: #c79288;
     }
   }
 `;
 const SmallHeader = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-margin-top: 15px;
-margin-bottom: 5px;
-margin-right: 10px;
-h2{
-  font-size: 15px;
-  margin: 0;
-  line-height: 17px;
-}
-h3 {
-  font-size: 13px;
-  color: white;
-  height: 19px;
-  padding-left: 4px;
-  padding-right: 4px;
-  margin: 0;
-}
-p{
-  font-size: 12px;
-  margin: 0;
-  line-height: 17px;
-}
-ul{
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-li{
-  padding: 0 3px 0 0;
-  margin: 0 3px 0 0;
-  display: inline;
-}
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  h2 {
+    font-size: 15px;
+    margin: 0;
+    line-height: 17px;
+  }
+  h3 {
+    font-size: 13px;
+    color: white;
+    height: 19px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: 0;
+  }
+  p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 17px;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  li {
+    padding: 0 3px 0 0;
+    margin: 0 3px 0 0;
+    display: inline;
+  }
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
-  `;
+`;
 const SmallHeaderRight = styled.div`
   text-align: right;
   flex: 0.45;
-  .topicsAndCategories{
+  .topicsAndCategories {
     display: flex;
     align-items: center;
     justify-content: right;
-}
+  }
 `;
 
 const CustomBlurb = styled.div`
@@ -390,13 +398,13 @@ const SecondSection = styled.div`
   }
 `;
 const BottomButtonDiv = styled.div`
-a {
+  a {
     text-decoration: none;
     color: white;
     font-weight: 600;
     font-size: 14px;
   }
-#back {
+  #back {
     margin: 0px 5px 10px 0px;
     align-self: flex-start;
     padding: 1px 10px 1px 10px;
@@ -418,7 +426,7 @@ a {
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       background-color: #a36760;
     }
   }
@@ -431,14 +439,14 @@ a {
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
-      background-color: #C79288;
+    &:hover {
+      background-color: #c79288;
     }
   }
-`
+`;
 const ModalFooter = styled.div`
   align-self: flex-end;
-  margin-top: 20px; 
+  margin-top: 20px;
   max-width: 275px;
   width: 50%;
   ul {
@@ -446,16 +454,16 @@ const ModalFooter = styled.div`
     padding: 0;
     margin: 0 0 5px 0;
   }
-  li{
+  li {
     padding-left: 5px;
     font-weight: 600;
     font-size: 14px;
     color: #a36760;
   }
-p {
-  padding-right: 0;
-  font-size: 14px;
-  margin: 0;
-  line-height: 20px;
-}
+  p {
+    padding-right: 0;
+    font-size: 14px;
+    margin: 0;
+    line-height: 20px;
+  }
 `;
