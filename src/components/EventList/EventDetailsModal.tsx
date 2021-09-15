@@ -12,7 +12,7 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
-import {events} from '../../constants/DummyEvents';
+import { events } from '../../constants/DummyEvents';
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
@@ -93,18 +93,18 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </p>
                         <div>
                           <div className="topicsAndCategories">
-                          <ul>
-                            {topics.map((topic: string, index: number) => {
-                              return <li key={index}>{topicsEmojis[topic]}</li>;
-                            })}
-                          </ul>
-                          <h3
-                            style={{
-                              backgroundColor: categoryBackgroundColor[category],
-                            }}
-                          >
-                            {category}
-                          </h3>
+                            <ul>
+                              {topics.map((topic: string, index: number) => {
+                                return <li key={index}>{topicsEmojis[topic]}</li>;
+                              })}
+                            </ul>
+                            <h3
+                              style={{
+                                backgroundColor: categoryBackgroundColor[category],
+                              }}
+                            >
+                              {category}
+                            </h3>
                           </div>
                         </div>
                       </SmallHeaderRight>
