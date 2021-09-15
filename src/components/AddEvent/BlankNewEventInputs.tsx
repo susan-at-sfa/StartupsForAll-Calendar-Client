@@ -42,15 +42,26 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         name="title"
       />
 
-      <FormLabel htmlFor="start_date" text="Date" />
+      <FormLabel htmlFor="start_date" text="Start Date" />
       <FormInput
-        placeholder="Date"
+        placeholder="Start Date"
         type="date"
         required
         disabled={false}
         value={props.startDate}
         onChange={props.setStartDate}
         name="start_date"
+      />
+
+      <FormLabel htmlFor="end_date" text="End Date" />
+      <FormInput
+        placeholder="End Date"
+        type="date"
+        required
+        disabled={false}
+        value={props.endDate}
+        onChange={props.setEndDate}
+        name="end_date"
       />
 
       <FormLabel htmlFor="start_time" text="Start Time" />

@@ -17,10 +17,12 @@ import {
   parseIdFromUrl,
   toLocalDate,
   toLocalTime,
+  toUtcDateTime,
 } from "../../hooks";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
+import { getAllDbEvents } from "../../store/slices/dbEvent/dbEventSlice";
 
 interface NewEventFormProps {
   eventDetails: NewEvent;
@@ -98,13 +100,11 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       creator_email: creator_email,
       creator_name: creator_name,
       currency: currency,
-      end_date: eventDetails.end_date || eventDetails.start_date || startDate,
       end_time: endTime,
       eventbrite_id: eventDetails.id,
       location: location,
       logo: "",
       promoted: false,
-      start_date: startDate,
       start_time: startTime,
       summary: "",
       title: eventTitle,
@@ -116,10 +116,19 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (eventDetails.summary) {
       fd.summary = eventDetails.summary;
     }
+    if (endDate.toString().includes("Z")) {
+      fd.end_date = endDate;
+      fd.start_date = startDate;
+    } else {
+      fd.end_date = toUtcDateTime(endDate, endTime);
+      fd.start_date = toUtcDateTime(startDate, startTime);
+    }
     if (url) {
       fd.url = url;
     }
+    console.log("NEW EVENT FORM SUBMITTED", fd);
     dispatch(saveNewEvent({ form: fd, token: token }));
+    dispatch(getAllDbEvents());
     history.push("/");
   };
 

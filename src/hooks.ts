@@ -22,3 +22,12 @@ export const toLocalDate = (dateString: string): string | Date => {
 export const toLocalTime = (dateString: string): string => {
   return new Date(Date.parse(dateString)).toLocaleTimeString();
 }
+
+export const toUtcDateTime = (date: string | Date, time: string): string => {
+  console.log('toUtcDateTime got date time', date, time);
+  const dateString = date + " " + time;
+  const localDateTime = new Date(dateString);
+  const utcDateTime = localDateTime.toISOString();
+  console.log('after formatting, got utc date time:', utcDateTime);
+  return utcDateTime;
+}
