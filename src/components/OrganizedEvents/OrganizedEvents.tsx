@@ -126,7 +126,8 @@ export default OrganizedEventsComponent;
 
 const MonthHeader = styled.div`
   position: sticky;
-  top: 25px;
+  top: 98px;
+  z-index: 1;
   h1 {
     color: #c79288;
     font-style: normal;

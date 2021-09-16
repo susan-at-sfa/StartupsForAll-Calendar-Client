@@ -29,7 +29,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     dispatch(setEventDetailsModalOpen(false));
   };
 
-
   const animation = useSpring({
     config: {
       duration: 350,
@@ -58,18 +57,18 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               creator_name,
               topics,
               description,
+              summary,
               url,
             } = e;
 
             const eventDate = new Date(start_date).toDateString();
-            const localPostedBy = new Date(created_at)
-              .toLocaleString([], {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-              });
+            const localPostedBy = new Date(created_at).toLocaleString([], {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
 
             return (
               <Background key={id}>
@@ -151,7 +150,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <span id="cost">+ taxes & fees where applicable</span>
                       </p>
                       <h4>Summary</h4>
-                      <p>{description}</p>
+                      <p>{summary}</p>
                     </ModalHeader>
                     <SecondSection>
                       <BottomButtonDiv>

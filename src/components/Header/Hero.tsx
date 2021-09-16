@@ -2,6 +2,7 @@ import { FC } from "react";
 import styled from "@emotion/styled";
 import { useLocation } from "react-router";
 import { useAppSelector } from "../../hooks";
+import stars from "../../assets/images/stars.png";
 
 const Hero: FC = () => {
   const menuOpen = useAppSelector(({ menu }) => menu.menuOpen);
@@ -22,7 +23,12 @@ const Hero: FC = () => {
 export default Hero;
 
 const HeroContainer = styled.div`
-  height: 250px;
+  height: 200px;
+  background-image: url(${stars});
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const Title = styled.div`
   font-style: normal;

@@ -1,7 +1,6 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
-import { useState, useEffect } from "react";
 
 const Navbar: FC = () => {
   const [selected, setSelected] = useState("/");
@@ -40,13 +39,15 @@ const Navbar: FC = () => {
 export default Navbar;
 
 const Wrapper = styled.section`
+  position: sticky;
+  top: 40px;
+  z-index: 2;
   display: flex;
   align-items: center;
   width: 100%;
   height: 48px;
   background-color: #a36760;
   bottom: 0;
-  overflow: hidden;
   ul {
     display: flex;
     list-style: none;

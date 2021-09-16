@@ -19,10 +19,14 @@ import {
   toLocalTime,
   toUtcDateTime,
 } from "../../hooks";
-import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
+import {
+  requestEventbriteEvent,
+  resetEventBrite,
+} from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
 import { getAllDbEvents } from "../../store/slices/dbEvent/dbEventSlice";
+import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {
   eventDetails: NewEvent;
@@ -46,9 +50,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   );
   const [category, setCategory] = useState<Category | string>(
     Category.StartupsForAll
-  );
-  const [categoryText, setCategoryText] = useState<CategoryText | string>(
-    CategoryText.Community
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
@@ -93,7 +94,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     event.preventDefault();
     const fd: NewEvent = {
       category: category,
-      category_text: categoryText,
+      category_text: getCategoryText(),
       changed: eventDetails.changed,
       cost: Number(cost.toString().substring(1)),
       created: eventDetails.created,
@@ -106,7 +107,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       logo: "",
       promoted: false,
       start_time: startTime,
-      summary: "",
+      summary: summary,
       title: eventTitle,
       topics: topics,
     };
@@ -148,6 +149,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     setCategory(category);
   };
 
+  const getCategoryText = (): string => {
+    if (category === Category.StartupsForAll)
+      return CategoryText.StartupsForAll;
+    return CategoryText.Community;
+  };
+
   const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
     console.log("getting new event details...");
     event.preventDefault();
@@ -162,6 +169,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       );
       return;
     }
+    dispatch(resetEventBrite(emptyEvent));
     dispatch(requestEventbriteEvent({ id }));
     history.push("/add");
   };
@@ -256,13 +264,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
               url={url}
             />
           )}
-
-          <input
-            type="hidden"
-            name="category_text"
-            value={categoryText}
-            onChange={(e) => setCategoryText(e.target.value)}
-          />
         </FormFields>
 
         <EventsGreenDiv>
@@ -337,10 +338,14 @@ const EventsGreenDiv = styled.div`
   width: 100vw;
   background: #7bb1a7;
   z-index: 2;
+  position: fixed;
+  bottom: 0;
 `;
 const FormFields = styled.div`
   padding-left: 18px;
   padding-top: 8px;
+  padding-bottom: 20px;
+  margin-bottom: var(--submit-button-container-height);
 `;
 const ButtonDiv = styled.div`
   #dark {
