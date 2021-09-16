@@ -16,7 +16,9 @@ import Events from "./containers/Events";
 import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
-import Header from "./components/header";
+import LogoMenu from "./components/Header/LogoMenu";
+import Hero from "./components/Header/Hero";
+import Navbar from "./components/Header/Navbar";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import FilterModal from "./components/EventList/FilterModal";
 
@@ -66,8 +68,10 @@ const App: FC = () => {
           modalOpen={eventDetailsModalOpen}
         />
         <FilterModal modalOpen={filterModalOpen} />
-        <Header />
         <Sections>
+          <LogoMenu />
+          <Hero />
+          <Navbar />
           <Switch>{routes}</Switch>
         </Sections>
       </Router>
@@ -78,16 +82,12 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-  height: 100%;
+  height: 100vh;
   width: 100%;
 `;
 
 const Sections = styled.section`
   width: 100vw;
-  height: calc(100vh - 250px);
-  position: absolute;
-  overflow-y: scroll;
-  top: 250px;
   scroll-behavior: smooth;
   scrollbar-width: none;
   &::-webkit-scrollbar {
