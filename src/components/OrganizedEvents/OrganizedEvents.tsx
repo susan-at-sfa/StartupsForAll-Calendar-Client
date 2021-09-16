@@ -1,16 +1,26 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "../EventList/ListEvent";
-// import { events } from '../../constants/DummyEvents';
 
 const OrganizedEventsComponent: FC = () => {
+  const [dateToday, setDateToday] = useState("")
   interface OrganizedEvents {
     [key: string]: {
       [key: string]: any;
     };
   }
+
+  useEffect(() => {
+    const today = new Date()
+      .toLocaleDateString([], {
+        year: 'numeric',
+        month: '2-digit'
+      })
+    setDateToday(today)
+  }, [])
+
   const events: Record<any, any> = useAppSelector(
     ({ dbEvent }) => dbEvent.dbEvents
   );
@@ -49,49 +59,61 @@ const OrganizedEventsComponent: FC = () => {
         return (
           <React.Fragment key={year}>
             {Object.entries(months).map(([month, displayEvents]) => {
-              return (
-                <MonthSection key={`${year}-${month}`} id={month}>
-                  <MonthHeader>
-                    <h1>
-                      <span>
-                        {MonthObject[month]} {year}
-                      </span>
-                    </h1>
-                  </MonthHeader>
-                  {displayEvents.length ? (
-                    displayEvents.map((displayEvent: any) => {
-                      const {
-                        id,
-                        category,
-                        title,
-                        start_date,
-                        start_time,
-                        end_time,
-                        creator_name,
-                        topics,
-                      } = displayEvent;
+              const returnEventsDate =
+                new Date(parseInt(year), parseInt(month))
+                  .toLocaleDateString([], {
+                    year: 'numeric',
+                    month: '2-digit'
+                  })
+              if (returnEventsDate >= dateToday) {
+                return (
+                  < MonthSection key={`${year}-${month}`
+                  } id={month} >
+                    <MonthHeader>
+                      <h1>
+                        <span>
+                          {MonthObject[month]} {year}
+                        </span>
+                      </h1>
+                    </MonthHeader>
+                    {displayEvents.length ? (
+                      displayEvents.map((displayEvent: any) => {
+                        const {
+                          id,
+                          category,
+                          title,
+                          start_date,
+                          start_time,
+                          end_time,
+                          creator_name,
+                          topics,
+                        } = displayEvent;
 
-                      return (
-                        <ListEvent
-                          key={id}
-                          id={id}
-                          category={category}
-                          title={title}
-                          date={start_date}
-                          start_time={start_time}
-                          end_time={end_time}
-                          creator_name={creator_name}
-                          topics={topics}
-                        />
-                      )
-                    })
-                  ) : (
-                    <div id="noEvents">
-                      <h1>No Events</h1>
-                    </div>
-                  )}
-                </MonthSection>
-              )
+                        return (
+                          <ListEvent
+                            key={id}
+                            id={id}
+                            category={category}
+                            title={title}
+                            date={start_date}
+                            start_time={start_time}
+                            end_time={end_time}
+                            creator_name={creator_name}
+                            topics={topics}
+                          />
+                        )
+                      })
+                    ) : (
+                      <div id="noEvents">
+                        <h1>No Events</h1>
+                      </div>
+                    )
+                    }
+                  </MonthSection>
+                )
+              } else {
+                return;
+              }
             })}
           </React.Fragment>
         )
