@@ -38,7 +38,7 @@ const ListEventContainer = styled.div`
 `;
 const FilterButton = styled.div`
   position: sticky;
-  top: 15px;
+  top: 90px; /* logo header + navbar */
   width: 100%;
   text-align: right;
   z-index: 2;

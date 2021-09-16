@@ -344,7 +344,8 @@ const EventsGreenDiv = styled.div`
 const FormFields = styled.div`
   padding-left: 18px;
   padding-top: 8px;
-  margin-bottom: calc(2 * var(--submit-button-container-height));
+  padding-bottom: 20px;
+  margin-bottom: var(--submit-button-container-height);
 `;
 const ButtonDiv = styled.div`
   #dark {

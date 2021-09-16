@@ -30,6 +30,7 @@ export default LogoMenu;
 const TopSticky = styled.div`
   position: sticky;
   top: 0;
+  z-index: 2;
   height: 40px;
   background: black;
 `;

@@ -88,7 +88,6 @@ const Wrapper = styled.section`
 
 const Sections = styled.section`
   width: 100vw;
-  height: 100%;
   scroll-behavior: smooth;
   scrollbar-width: none;
   &::-webkit-scrollbar {
