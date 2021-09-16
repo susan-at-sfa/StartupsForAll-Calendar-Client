@@ -107,7 +107,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       logo: "",
       promoted: false,
       start_time: startTime,
-      summary: "",
+      summary: summary,
       title: eventTitle,
       topics: topics,
     };

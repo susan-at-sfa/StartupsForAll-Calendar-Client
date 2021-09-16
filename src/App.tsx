@@ -17,8 +17,8 @@ import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
 import LogoMenu from "./components/Header/LogoMenu";
-import Hero from "./components/Header/Hero";
 import Navbar from "./components/Header/Navbar";
+import Hero from "./components/Header/Hero";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import FilterModal from "./components/EventList/FilterModal";
 
