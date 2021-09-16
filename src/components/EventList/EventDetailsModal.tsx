@@ -29,6 +29,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     dispatch(setEventDetailsModalOpen(false));
   };
 
+
   const animation = useSpring({
     config: {
       duration: 350,
@@ -59,7 +60,17 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               description,
               url,
             } = e;
+
             const eventDate = new Date(start_date).toDateString();
+            const localPostedBy = new Date(created_at)
+              .toLocaleString([], {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+              });
+
             return (
               <Background key={id}>
                 <animated.div style={animation}>
@@ -182,7 +193,8 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </div>
                       <div>
                         <p>Posted</p>
-                        <p>{created_at}</p>
+                        {/* <p>{created_at}</p> */}
+                        <p>{localPostedBy}</p>
                         <p>by {creator_name}</p>
                       </div>
                     </ModalFooter>
@@ -308,6 +320,7 @@ const SmallHeader = styled.div`
     list-style: none;
   }
   li {
+    font-size: 12px;
     padding: 0 3px 0 0;
     margin: 0 3px 0 0;
     display: inline;

@@ -115,7 +115,7 @@ ul{
   list-style: none;
 }
 li{
-  font-size: 14px;
+  font-size: 12px;
   padding: 0 3px 0 0;
   margin: 0 3px 0 0;
   display: inline;
