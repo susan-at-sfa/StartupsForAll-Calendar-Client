@@ -1,8 +1,9 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import logo from "../assets/images/S4ALogo.png";
+import logo from "../../assets/images/S4ALogo.png";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { setMenuOpen } from "../../store/slices/menu/menuOpenSlice";
+import Menu from "./Menu";
 
 const LogoMenu: FC = () => {
   const menuOpen = useAppSelector(({ menu }) => menu.menuOpen);
@@ -19,6 +20,7 @@ const LogoMenu: FC = () => {
         <span id="line2" />
         <span id="line3" />
       </Hamburger>
+      {menuOpen && <Menu />}
     </TopSticky>
   );
 };
@@ -29,11 +31,13 @@ const TopSticky = styled.div`
   position: sticky;
   top: 0;
   height: 40px;
+  background: black;
 `;
 const Logo = styled.img`
   height: auto;
   width: 200px;
   z-index: 4;
+  padding: 10px 0 0 10px;
 `;
 const Hamburger = styled.div`
   width: 34px;

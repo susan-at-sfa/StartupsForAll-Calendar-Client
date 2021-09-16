@@ -16,7 +16,9 @@ import Events from "./containers/Events";
 import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
-import Header from "./components/Header/Hero";
+import LogoMenu from "./components/Header/LogoMenu";
+import Hero from "./components/Header/Hero";
+import Navbar from "./components/Header/Navbar";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import FilterModal from "./components/EventList/FilterModal";
 
@@ -66,8 +68,10 @@ const App: FC = () => {
           modalOpen={eventDetailsModalOpen}
         />
         <FilterModal modalOpen={filterModalOpen} />
-        <Header />
         <Sections>
+          <LogoMenu />
+          <Hero />
+          <Navbar />
           <Switch>{routes}</Switch>
         </Sections>
       </Router>
