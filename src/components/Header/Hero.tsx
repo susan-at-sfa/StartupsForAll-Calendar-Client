@@ -23,7 +23,7 @@ const Hero: FC = () => {
 export default Hero;
 
 const HeroContainer = styled.div`
-  height: 250px;
+  height: 200px;
   background-image: url(${stars});
   background-size: cover;
   display: flex;

@@ -85,19 +85,25 @@ const Menu: FC = () => {
 };
 
 const MenuContainer = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   height: 100vh;
   width: 100vw;
   background: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 8;
 `;
 const HamburgerMenu = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   a {
     color: black;
     text-decoration: none;
@@ -106,10 +112,14 @@ const HamburgerMenu = styled.div`
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-left: 0;
     font-size: 30px;
     font-weight: 300;
     font-style: normal;
     text-align: center;
+    li {
+      cursor: pointer;
+    }
   }
 `;
 
