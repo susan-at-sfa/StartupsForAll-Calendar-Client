@@ -16,7 +16,7 @@ import Events from "./containers/Events";
 import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
-import Header from "./components/header";
+import Header from "./components/Header/Hero";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import FilterModal from "./components/EventList/FilterModal";
 
@@ -78,16 +78,13 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-  height: 100%;
+  height: 100vh;
   width: 100%;
 `;
 
 const Sections = styled.section`
   width: 100vw;
-  height: calc(100vh - 250px);
-  position: absolute;
-  overflow-y: scroll;
-  top: 250px;
+  height: 100%;
   scroll-behavior: smooth;
   scrollbar-width: none;
   &::-webkit-scrollbar {
