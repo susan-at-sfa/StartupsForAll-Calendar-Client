@@ -32,6 +32,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
   } = props;
   const dispatch = useAppDispatch();
   const eventDate = new Date(date).toDateString();
+  console.log("START TIME", start_time);
 
   const onClickingEvent = (eventID: string) => {
     dispatch(setSelectedEventID(eventID));

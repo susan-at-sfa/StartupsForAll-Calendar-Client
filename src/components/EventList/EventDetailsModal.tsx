@@ -86,7 +86,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </div>
                       <div className="topButtonsRight">
                         <button id="calendarAdd" type="button">
-                          + Cal
+                          Button
                         </button>
                         <button id="viewPage" type="button">
                           <a href={url}>View More Details </a>
@@ -162,7 +162,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           Back
                         </button>
                         <button id="calendarAdd" type="button">
-                          + Cal
+                          Button
                         </button>
                         <button id="viewPage" type="button">
                           <a href={url}>View More Details</a>
