@@ -10,6 +10,7 @@ export const emptyEvent: NewEvent = {
   created: '',
   creator_name: '',
   creator_email: '',
+  custom_blurb: '',
   description: '',
   id: '',
   location: '',

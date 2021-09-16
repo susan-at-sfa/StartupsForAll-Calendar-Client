@@ -11,6 +11,7 @@ export default interface NewEvent {
   creator_email?: string;
   creator_name?: string;
   currency?: string;
+  custom_blurb?: string;
   description?: string;
   id?: string;
   eventbrite_id?: string;

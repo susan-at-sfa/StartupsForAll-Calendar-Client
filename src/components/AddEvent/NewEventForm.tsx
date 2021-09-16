@@ -101,6 +101,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       creator_email: creator_email,
       creator_name: creator_name,
       currency: currency,
+      custom_blurb: customBlurb,
       end_time: endTime,
       eventbrite_id: eventDetails.id,
       location: location,
