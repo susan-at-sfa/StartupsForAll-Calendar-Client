@@ -39,7 +39,7 @@ const OrganizedEventsComponent: FC = () => {
       if (monthsInYear.includes(String(month))) {
         return;
       }
-      organizedEvents[year][month] = [{ display: "No Events" }];
+      organizedEvents[year][month] = [];
     });
   });
 
@@ -58,47 +58,47 @@ const OrganizedEventsComponent: FC = () => {
                       </span>
                     </h1>
                   </MonthHeader>
-                  {displayEvents.map((displayEvent: any) => {
-                    const {
-                      id,
-                      category,
-                      title,
-                      start_date,
-                      start_time,
-                      end_time,
-                      creator_name,
-                      topics,
-                    } = displayEvent;
-                    if (displayEvent.display) {
+                  {displayEvents.length ? (
+                    displayEvents.map((displayEvent: any) => {
+                      const {
+                        id,
+                        category,
+                        title,
+                        start_date,
+                        start_time,
+                        end_time,
+                        creator_name,
+                        topics,
+                      } = displayEvent;
+
                       return (
-                        <div id="noEvents">
-                          <h1>{displayEvent.display}</h1>
-                        </div>
-                      );
-                    }
-                    return (
-                      <ListEvent
-                        key={id}
-                        id={id}
-                        category={category}
-                        title={title}
-                        date={start_date}
-                        start_time={start_time}
-                        end_time={end_time}
-                        creator_name={creator_name}
-                        topics={topics}
-                      />
-                    );
-                  })}
+                        <ListEvent
+                          key={id}
+                          id={id}
+                          category={category}
+                          title={title}
+                          date={start_date}
+                          start_time={start_time}
+                          end_time={end_time}
+                          creator_name={creator_name}
+                          topics={topics}
+                        />
+                      )
+                    })
+                  ) : (
+                    <div id="noEvents">
+                      <h1>No Events</h1>
+                    </div>
+                  )}
                 </MonthSection>
-              );
+              )
             })}
           </React.Fragment>
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 export default OrganizedEventsComponent;
 
