@@ -39,7 +39,7 @@ const Logo = styled.img`
   width: 200px;
   position: relative;
   z-index: 4;
-  padding: 13px 0 3px 10px;
+  padding: 10px 0 3px 10px;
 `;
 const Hamburger = styled.div`
   width: 34px;
