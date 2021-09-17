@@ -24,7 +24,6 @@ import {
 } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
-import { getAllDbEvents } from "../../store/slices/dbEvent/dbEventSlice";
 import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {
@@ -135,7 +134,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       saveNewEvent({
         form: fd,
         token: token,
-        onSuccess: () => dispatch(getAllDbEvents()),
       })
     );
     history.push("/");
