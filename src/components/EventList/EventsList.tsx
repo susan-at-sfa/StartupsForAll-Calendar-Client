@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
 import { currentMonthEpochTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
-import ListEvent from "../EventList/ListEvent";
+import ListEvent from "./ListEvent";
 
-const OrganizedEventsComponent: FC = () => {
-  interface OrganizedEvents {
+const EventsListComponent: FC = () => {
+  interface EventsList {
     [key: string]: {
       [key: string]: any;
     };
@@ -15,38 +15,38 @@ const OrganizedEventsComponent: FC = () => {
   const events: Record<any, any> = useAppSelector(
     ({ dbEvent }) => dbEvent.dbEvents
   );
-  const organizedEvents: OrganizedEvents = {};
+  const eventsList: EventsList = {};
 
   events.forEach((event: any) => {
     const date = new Date(event.start_date);
     const year = date.getFullYear();
     const month = date.getMonth();
 
-    if (organizedEvents[year] === undefined) {
-      organizedEvents[year] = {};
+    if (eventsList[year] === undefined) {
+      eventsList[year] = {};
     }
 
-    if (organizedEvents[year][month] === undefined) {
-      organizedEvents[year][month] = [];
+    if (eventsList[year][month] === undefined) {
+      eventsList[year][month] = [];
     }
 
-    organizedEvents[year][month].push(event);
+    eventsList[year][month].push(event);
   });
 
-  Object.entries(organizedEvents).forEach(([year, monthData]) => {
+  Object.entries(eventsList).forEach(([year, monthData]) => {
     const months: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const monthsInYear = Object.keys(monthData);
     months.forEach((month) => {
       if (monthsInYear.includes(String(month))) {
         return;
       }
-      organizedEvents[year][month] = [];
+      eventsList[year][month] = [];
     });
   });
 
   return (
     <>
-      {Object.entries(organizedEvents).map(([year, months]) => {
+      {Object.entries(eventsList).map(([year, months]) => {
         return (
           <React.Fragment key={year}>
             {Object.entries(months).map(([month, eventsThatMonth]) => {
@@ -108,12 +108,12 @@ const OrganizedEventsComponent: FC = () => {
   );
 };
 
-export default OrganizedEventsComponent;
+export default EventsListComponent;
 
 const MonthHeader = styled.div`
   position: sticky;
   top: 98px;
-  z-index: 1;
+  z-index: 2;
   h1 {
     color: #c79288;
     font-style: normal;

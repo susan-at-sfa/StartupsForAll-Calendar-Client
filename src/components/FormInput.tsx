@@ -22,6 +22,7 @@ const FormInput: FC<FormInputProps> = (props) => {
       onChange={(e) => props.onChange(e.target.value)}
       value={props.value}
       name={props.name}
+      onFocus={(e) => window.scrollTo(0, e.target.offsetTop - 125)}
     />
   );
 };

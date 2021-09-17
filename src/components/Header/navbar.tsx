@@ -41,11 +41,11 @@ export default Navbar;
 const Wrapper = styled.section`
   position: sticky;
   top: 40px;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   align-items: center;
   width: 100%;
-  height: 48px;
+  height: 50px;
   background-color: #a36760;
   bottom: 0;
   ul {
