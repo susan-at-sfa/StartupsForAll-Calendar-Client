@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
@@ -12,7 +12,7 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
-// import {events} from '../../constants/DummyEvents';
+import UserAddToGoogle from '../Google/Google';
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
