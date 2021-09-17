@@ -11,21 +11,19 @@ import { toast } from "react-toastify";
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 import {
-  useAppSelector,
-  useAppDispatch,
   parseIdFromUrl,
   toLocalDate,
   toLocalTime,
   toUtcDateTime,
-} from "../../hooks";
+} from "../../helpers";
 import {
   requestEventbriteEvent,
   resetEventBrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
-import { getAllDbEvents } from "../../store/slices/dbEvent/dbEventSlice";
 import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {
@@ -56,31 +54,31 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.currency || "USD"
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
-  const [startDate, setStartDate] = useState<Date | string>(
+  const [startDate, setStartDate] = useState<string>(
     eventDetails.id !== ""
       ? Object.keys(eventDetails.start).length > 0
         ? toLocalDate(eventDetails.start.utc)
-        : new Date()
+        : ""
       : ""
   );
-  const [endDate, setEndDate] = useState<Date | string>(
+  const [endDate, setEndDate] = useState<string>(
     eventDetails.id !== ""
       ? Object.keys(eventDetails.end).length > 0
         ? toLocalDate(eventDetails.end.utc)
-        : new Date()
+        : ""
       : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end_time
+    eventDetails.end_time !== ""
       ? toLocalTime(eventDetails.end_time)
-      : eventDetails.end
+      : Object.keys(eventDetails.end).length > 0
       ? toLocalTime(eventDetails.end.utc)
       : ""
   );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.start_time
+    eventDetails.start_time !== ""
       ? toLocalTime(eventDetails.start_time)
-      : eventDetails.start
+      : Object.keys(eventDetails.start).length > 0
       ? toLocalTime(eventDetails.start.utc)
       : ""
   );
@@ -121,6 +119,9 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (endDate.toString().includes("Z")) {
       fd.end_date = endDate;
       fd.start_date = startDate;
+    } else if (Object.keys(eventDetails.end).length > 0) {
+      fd.end_date = eventDetails.end.utc;
+      fd.start_date = eventDetails.start.utc;
     } else {
       fd.end_date = toUtcDateTime(endDate, endTime);
       fd.start_date = toUtcDateTime(startDate, startTime);
@@ -129,8 +130,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       fd.url = url;
     }
     console.log("NEW EVENT FORM SUBMITTED", fd);
-    dispatch(saveNewEvent({ form: fd, token: token }));
-    dispatch(getAllDbEvents());
+    dispatch(
+      saveNewEvent({
+        form: fd,
+        token: token,
+      })
+    );
     history.push("/");
   };
 

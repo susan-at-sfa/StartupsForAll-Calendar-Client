@@ -131,7 +131,8 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     {logo ?
                       <ModalImg>
                         <img src={logo} alt={title + "logo"} />
-                      </ModalImg> : null}
+                      </ModalImg>
+                      : null}
                     <ModalHeader>
                       <h2>{title}</h2>
                       <p>
