@@ -72,15 +72,15 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.end_time !== ""
       ? toLocalTime(eventDetails.end_time)
       : Object.keys(eventDetails.end).length > 0
-      ? toLocalTime(eventDetails.end.utc)
-      : ""
+        ? toLocalTime(eventDetails.end.utc)
+        : ""
   );
   const [startTime, setStartTime] = useState<string>(
     eventDetails.start_time !== ""
       ? toLocalTime(eventDetails.start_time)
       : Object.keys(eventDetails.start).length > 0
-      ? toLocalTime(eventDetails.start.utc)
-      : ""
+        ? toLocalTime(eventDetails.start.utc)
+        : ""
   );
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
@@ -387,6 +387,19 @@ const TextArea = styled.textarea`
   padding: 0 15px;
   max-width: 100%;
   max-width: 100vw;
+    &::placeholder {
+      color: #e8d9d6;
+      font-weight: bold;
+    }
+    &:focus {
+      outline: none;
+      border-color: #a36760;
+      transition: 0.75s ease;
+    }
+    &:focus::placeholder {
+      color: #a36760;
+      transition: 0.75s ease;
+    }
 `;
 const SelectList = styled.select`
   color: #e8d9d6;
