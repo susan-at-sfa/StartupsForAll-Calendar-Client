@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
 import { MonthObject } from "../../constants/MonthObject";
@@ -50,9 +50,8 @@ const OrganizedEventsComponent: FC = () => {
           <React.Fragment key={year}>
             {Object.entries(months).map(([month, displayEvents]) => {
               const eventDate = new Date(+year, +month).getTime();
-              if (eventDate >= Date.now()) {
-                console.log("event is in the future");
-                return (
+              return (
+                eventDate >= Date.now() && (
                   <MonthSection key={`${year}-${month}`} id={month}>
                     <MonthHeader>
                       <h1>
@@ -94,10 +93,8 @@ const OrganizedEventsComponent: FC = () => {
                       </div>
                     )}
                   </MonthSection>
-                );
-              } else {
-                return;
-              }
+                )
+              );
             })}
           </React.Fragment>
         );
