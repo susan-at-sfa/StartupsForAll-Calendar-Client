@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
+import { currentMonthEpochTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "../EventList/ListEvent";
 
@@ -48,10 +49,14 @@ const OrganizedEventsComponent: FC = () => {
       {Object.entries(organizedEvents).map(([year, months]) => {
         return (
           <React.Fragment key={year}>
-            {Object.entries(months).map(([month, displayEvents]) => {
-              const eventDate = new Date(+year, +month).getTime();
+            {Object.entries(months).map(([month, eventsThatMonth]) => {
+              const calendarMonth = new Date(+year, +month).getTime();
+              const currentMonthStart = currentMonthEpochTime();
+              console.log(
+                `${year} ${month} comparing calendarMonth ${calendarMonth} with current time ${currentMonthStart}`
+              );
               return (
-                eventDate >= Date.now() && (
+                calendarMonth >= currentMonthStart && (
                   <MonthSection key={`${year}-${month}`} id={month}>
                     <MonthHeader>
                       <h1>
@@ -60,8 +65,8 @@ const OrganizedEventsComponent: FC = () => {
                         </span>
                       </h1>
                     </MonthHeader>
-                    {displayEvents.length ? (
-                      displayEvents.map((displayEvent: any) => {
+                    {eventsThatMonth.length ? (
+                      eventsThatMonth.map((displayEvent: any) => {
                         const {
                           id,
                           category,
