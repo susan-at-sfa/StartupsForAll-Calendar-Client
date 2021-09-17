@@ -6,18 +6,18 @@ import { makeRequest } from '../../utils/makeRequest';
 import NewEvent from '../../../constants/NewEvent.d';
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:1323';
 
-function* saveNewEventSaga(action: PayloadAction<{ form: NewEvent, token: string }>) {
+function* saveNewEventSaga(action: PayloadAction<{ form: NewEvent, token: string, onSuccess?: null | (() => void) }>) {
   let endpoint = `events`
   console.log('savenewEventSaga with action.payload:', action.payload);
   const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}`, 'POST', action.payload.form, action.payload.token);
   if (success) {
     toast("New Event created successfully!");
-    console.log('success saving new event', data);
+    console.log('SUCCESS saving new event', data);
   }
   if (error) {
     error.json().then((errData: any) => {
       toast(`Error creating new event. Please try again. ${errData.message}.`);
-      console.log('failed to save new event', errData);
+      console.log('FAILURE to save new event', errData);
     })
   }
 }

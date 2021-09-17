@@ -13,7 +13,7 @@ const newEventSlice = createSlice({
       let eventData = action.payload;
       return { ...eventData };
     },
-    saveNewEvent(state, action: PayloadAction<{form: NewEvent, token: string}>) {}
+    saveNewEvent(state, action: PayloadAction<{form: NewEvent, token: string, onSuccess?: null | (() => void) }>) {}
   }
 });
 

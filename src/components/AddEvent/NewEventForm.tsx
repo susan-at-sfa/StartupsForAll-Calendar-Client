@@ -131,8 +131,13 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       fd.url = url;
     }
     console.log("NEW EVENT FORM SUBMITTED", fd);
-    dispatch(saveNewEvent({ form: fd, token: token }));
-    dispatch(getAllDbEvents());
+    dispatch(
+      saveNewEvent({
+        form: fd,
+        token: token,
+        onSuccess: () => dispatch(getAllDbEvents()),
+      })
+    );
     history.push("/");
   };
 
