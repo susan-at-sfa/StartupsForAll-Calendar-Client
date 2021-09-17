@@ -75,10 +75,10 @@ export default ListEvent;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 80px;
+  height: 78px;
   width: 100%;
-  padding: 0px 10px;
-  margin-top: 10px;
+  margin-top: 15px;
+  padding: 10px 10px 10px 10px;
   justify-content: space-between;
   &:hover {
     cursor: pointer;
@@ -89,20 +89,20 @@ const SmallHeader = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-margin-top: 15px;
-margin-bottom: 5px;
 h2{
-  font-size: 15px;
-  margin: 0;
-  line-height: 17px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 18px;
 }
 h3 {
-  font-size: 13px;
+  line-height: 17px;
+  font-size: 12px;
   color: white;
   height: 19px;
   padding-left: 4px;
   padding-right: 4px;
-  margin: 0;
 }
 p{
   font-size: 12px;

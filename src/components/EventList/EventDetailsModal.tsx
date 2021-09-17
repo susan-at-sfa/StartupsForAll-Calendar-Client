@@ -170,7 +170,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </BottomButtonDiv>
                       <h4>Event Link</h4>
                       <p>
-                        <a href={url}>{url}</a>
+                        <a id="link" href={url}>{url}</a>
                       </p>
                     </SecondSection>
                     <ModalFooter>
@@ -219,7 +219,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 7;
-`;
+  `;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -232,14 +232,16 @@ const Wrapper = styled.div`
   min-width: 357px;
   z-index: 10;
   overflow: scroll;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
-`;
+  `;
 const TopButtonDiv = styled.div`
   margin-top: 5px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -250,10 +252,11 @@ const TopButtonDiv = styled.div`
     font-size: 14px;
   }
   #back {
+    text-align: right;
     align-self: flex-start;
-    padding: 1px 10px 1px 10px;
+    padding: 0px 5px 5px 10px;
     border: none;
-    height: 30px;
+    height: 20px;
     width: 75px;
     background-color: #6073a3;
     color: white;
@@ -264,7 +267,7 @@ const TopButtonDiv = styled.div`
     padding: 1px 10px 1px 10px;
     margin-right: 5px;
     border: none;
-    height: 30px;
+    height: 33px;
     width: 65px;
     background-color: #c79288;
     color: white;
@@ -277,7 +280,7 @@ const TopButtonDiv = styled.div`
   #viewPage {
     padding: 1px 10px 1px 10px;
     border: none;
-    height: 30px;
+    height: 33px;
     width: 172px;
     background-color: #a36760;
     color: white;
@@ -293,24 +296,26 @@ const SmallHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   margin-right: 10px;
   h2 {
-    font-size: 15px;
-    margin: 0;
-    line-height: 17px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 18px;
   }
   h3 {
-    font-size: 13px;
+    line-height: 17px;
+    font-size: 12px;
     color: white;
     height: 19px;
     padding-left: 4px;
     padding-right: 4px;
-    margin: 0;
   }
   p {
+    margin-bottom: 5px;
     font-size: 12px;
-    margin: 0;
     line-height: 17px;
   }
   ul {
@@ -341,13 +346,13 @@ const SmallHeaderRight = styled.div`
 const CustomBlurb = styled.div`
   align-self: flex-end;
   width: 100%;
-  margin: 5px 0px 10px 0;
+  margin: 5px 0px 20px 0;
   background-color: #fdfbe4;
   padding: 15px 20px 15px 15px;
   h2 {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 23px;
     font-weight: bold;
-    margin: 0;
   }
   p {
     margin: 0;
@@ -356,7 +361,6 @@ const CustomBlurb = styled.div`
 `;
 const ModalImg = styled.div`
   display: flex;
-  margin-right: 10px;
   flex-direction: column;
   align-items: center;
   margin-top: 8px;
@@ -367,25 +371,31 @@ const ModalImg = styled.div`
 `;
 const ModalHeader = styled.div`
   width: 100%;
-  margin-top: 15px;
+  margin-top: 25px;
   margin-bottom: 20px;
+  margin-right: 10px;
   h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    margin: 0 10px 0 0;
+    margin: 0 10px 8px 0;
     line-height: 22px;
   }
   p {
-    font-size: 15px;
-    margin: 0 10px 0 0;
+    font-size: 14px;
+    line-height: 17px;
     word-wrap: break-word;
   }
   h4 {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 19px;
     font-weight: bold;
-    margin: 10px 0px 0px;
+    margin-top: 30px;
+    margin-bottom: 5px;
   }
   span {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 600;
     color: #7bb1a7;
   }
   #cost {
@@ -393,23 +403,25 @@ const ModalHeader = styled.div`
   }
 `;
 const SecondSection = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
   h4 {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 17px;
     font-weight: bold;
     margin-bottom: 1px;
   }
   p {
-    font-size: 15px;
-    margin: 0;
+    font-size: 14px;
+    margin-right: 10px;
     word-break: break-all;
   }
-  a {
+  #link{
     color: #7bb1a7;
     text-decoration: none;
   }
 `;
 const BottomButtonDiv = styled.div`
+margin-bottom: 35px;
   a {
     text-decoration: none;
     color: white;
@@ -421,7 +433,7 @@ const BottomButtonDiv = styled.div`
     align-self: flex-start;
     padding: 1px 10px 1px 10px;
     border: none;
-    height: 30px;
+    height: 36px;
     width: 64px;
     background-color: #6073a3;
     color: white;
@@ -432,7 +444,7 @@ const BottomButtonDiv = styled.div`
     padding: 1px 10px 1px 10px;
     margin-right: 5px;
     border: none;
-    height: 30px;
+    height: 36px;
     width: 65px;
     background-color: #c79288;
     color: white;
@@ -445,7 +457,7 @@ const BottomButtonDiv = styled.div`
   #viewPage {
     padding: 1px 10px 1px 10px;
     border: none;
-    height: 30px;
+    height: 36px;
     width: 198px;
     background-color: #a36760;
     color: white;
@@ -458,24 +470,26 @@ const BottomButtonDiv = styled.div`
 `;
 const ModalFooter = styled.div`
   align-self: flex-end;
-  margin-top: 20px;
+  margin-top: 35px;
+  margin-bottom: 25px;
   max-width: 275px;
   width: 50%;
   ul {
     list-style: none;
     padding: 0;
     margin: 0 0 5px 0;
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 600;
   }
   li {
-    padding-left: 5px;
-    font-weight: 600;
-    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 10px;
     color: #a36760;
   }
   p {
     padding-right: 0;
-    font-size: 14px;
-    margin: 0;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 17px;
   }
 `;
