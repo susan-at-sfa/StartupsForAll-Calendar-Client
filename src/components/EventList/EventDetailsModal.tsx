@@ -128,9 +128,10 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <h2>Info from {creator_name}</h2>
                       <p>{custom_blurb}</p>
                     </CustomBlurb>
-                    <ModalImg>
-                      <img src={logo} alt={title + "logo"} />
-                    </ModalImg>
+                    {logo &&
+                      <ModalImg>
+                        <img src={logo} alt={title + "logo"} />
+                      </ModalImg>}
                     <ModalHeader>
                       <h2>{title}</h2>
                       <p>
