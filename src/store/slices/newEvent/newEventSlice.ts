@@ -11,7 +11,6 @@ const newEventSlice = createSlice({
   reducers: {
     resetEvent(state, action: PayloadAction<NewEvent>) {
       let eventData = action.payload;
-      toast("Event creation cancelled.");
       return { ...eventData };
     },
     saveNewEvent(state, action: PayloadAction<{form: NewEvent, token: string}>) {}

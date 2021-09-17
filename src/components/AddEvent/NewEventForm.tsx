@@ -11,14 +11,13 @@ import { toast } from "react-toastify";
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 import {
-  useAppSelector,
-  useAppDispatch,
   parseIdFromUrl,
   toLocalDate,
   toLocalTime,
   toUtcDateTime,
-} from "../../hooks";
+} from "../../helpers";
 import {
   requestEventbriteEvent,
   resetEventBrite,
@@ -71,16 +70,16 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end_time
+    eventDetails.end_time !== ""
       ? toLocalTime(eventDetails.end_time)
-      : eventDetails.end
+      : Object.keys(eventDetails.end).length > 0
       ? toLocalTime(eventDetails.end.utc)
       : ""
   );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.start_time
+    eventDetails.start_time !== ""
       ? toLocalTime(eventDetails.start_time)
-      : eventDetails.start
+      : Object.keys(eventDetails.start).length > 0
       ? toLocalTime(eventDetails.start.utc)
       : ""
   );
