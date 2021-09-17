@@ -112,7 +112,7 @@ const OrganizedEventsComponent: FC = () => {
                   </MonthSection>
                 )
               } else {
-                return;
+                return null;
               }
             })}
           </React.Fragment>
