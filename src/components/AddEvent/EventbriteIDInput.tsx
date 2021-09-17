@@ -1,5 +1,6 @@
 import { FormEvent, FC, useState } from "react";
-import { useAppDispatch, parseIdFromUrl } from "../../hooks";
+import { useAppDispatch } from "../../hooks";
+import { parseIdFromUrl } from "../../helpers";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";

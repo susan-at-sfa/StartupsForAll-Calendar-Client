@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { makeRequest } from '../../utils/makeRequest';
 import { setAllDbEvents, getAllDbEvents } from './dbEventSlice';
@@ -22,5 +22,5 @@ export function* fetchAllDbEvents() {
 }
 
 export function* watchAllDbEvent() {
-  yield takeLatest(getAllDbEvents, fetchAllDbEvents);
+  yield takeEvery(getAllDbEvents, fetchAllDbEvents);
 }

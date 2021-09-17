@@ -1,25 +1,16 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
+import { currentMonthEpochTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "../EventList/ListEvent";
 
 const OrganizedEventsComponent: FC = () => {
-  const [dateToday, setDateToday] = useState("")
   interface OrganizedEvents {
     [key: string]: {
       [key: string]: any;
     };
   }
-
-  useEffect(() => {
-    const today = new Date()
-      .toLocaleDateString([], {
-        year: 'numeric',
-        month: '2-digit'
-      })
-    setDateToday(today)
-  }, [])
 
   const events: Record<any, any> = useAppSelector(
     ({ dbEvent }) => dbEvent.dbEvents
@@ -58,17 +49,15 @@ const OrganizedEventsComponent: FC = () => {
       {Object.entries(organizedEvents).map(([year, months]) => {
         return (
           <React.Fragment key={year}>
-            {Object.entries(months).map(([month, displayEvents]) => {
-              const returnEventsDate =
-                new Date(parseInt(year), parseInt(month))
-                  .toLocaleDateString([], {
-                    year: 'numeric',
-                    month: '2-digit'
-                  })
-              if (returnEventsDate >= dateToday) {
-                return (
-                  < MonthSection key={`${year}-${month}`
-                  } id={month} >
+            {Object.entries(months).map(([month, eventsThatMonth]) => {
+              const calendarMonth = new Date(+year, +month).getTime();
+              const currentMonthStart = currentMonthEpochTime();
+              console.log(
+                `${year} ${month} comparing calendarMonth ${calendarMonth} with current time ${currentMonthStart}`
+              );
+              return (
+                calendarMonth >= currentMonthStart && (
+                  <MonthSection key={`${year}-${month}`} id={month}>
                     <MonthHeader>
                       <h1>
                         <span>
@@ -76,8 +65,8 @@ const OrganizedEventsComponent: FC = () => {
                         </span>
                       </h1>
                     </MonthHeader>
-                    {displayEvents.length ? (
-                      displayEvents.map((displayEvent: any) => {
+                    {eventsThatMonth.length ? (
+                      eventsThatMonth.map((displayEvent: any) => {
                         const {
                           id,
                           category,
@@ -101,26 +90,23 @@ const OrganizedEventsComponent: FC = () => {
                             creator_name={creator_name}
                             topics={topics}
                           />
-                        )
+                        );
                       })
                     ) : (
                       <div id="noEvents">
                         <h1>No Events</h1>
                       </div>
-                    )
-                    }
+                    )}
                   </MonthSection>
                 )
-              } else {
-                return;
-              }
+              );
             })}
           </React.Fragment>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
 export default OrganizedEventsComponent;
 

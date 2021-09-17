@@ -61,7 +61,7 @@ const App: FC = () => {
 
   return (
     <Wrapper>
-      <ToastContainer autoClose={2200} />
+      <ToastContainer autoClose={3500} />
       <Router>
         <EventDetailsModal
           selectedEventID={selectedEventID}
