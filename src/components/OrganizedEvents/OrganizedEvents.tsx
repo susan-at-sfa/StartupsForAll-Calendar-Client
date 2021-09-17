@@ -5,21 +5,11 @@ import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "../EventList/ListEvent";
 
 const OrganizedEventsComponent: FC = () => {
-  const [dateToday, setDateToday] = useState("")
   interface OrganizedEvents {
     [key: string]: {
       [key: string]: any;
     };
   }
-
-  useEffect(() => {
-    const today = new Date()
-      .toLocaleDateString([], {
-        year: 'numeric',
-        month: '2-digit'
-      })
-    setDateToday(today)
-  }, [])
 
   const events: Record<any, any> = useAppSelector(
     ({ dbEvent }) => dbEvent.dbEvents
@@ -59,16 +49,11 @@ const OrganizedEventsComponent: FC = () => {
         return (
           <React.Fragment key={year}>
             {Object.entries(months).map(([month, displayEvents]) => {
-              const returnEventsDate =
-                new Date(parseInt(year), parseInt(month))
-                  .toLocaleDateString([], {
-                    year: 'numeric',
-                    month: '2-digit'
-                  })
-              if (returnEventsDate >= dateToday) {
+              const eventDate = new Date(+year, +month).getTime();
+              if (eventDate >= Date.now()) {
+                console.log("event is in the future");
                 return (
-                  < MonthSection key={`${year}-${month}`
-                  } id={month} >
+                  <MonthSection key={`${year}-${month}`} id={month}>
                     <MonthHeader>
                       <h1>
                         <span>
@@ -101,26 +86,25 @@ const OrganizedEventsComponent: FC = () => {
                             creator_name={creator_name}
                             topics={topics}
                           />
-                        )
+                        );
                       })
                     ) : (
                       <div id="noEvents">
                         <h1>No Events</h1>
                       </div>
-                    )
-                    }
+                    )}
                   </MonthSection>
-                )
+                );
               } else {
                 return;
               }
             })}
           </React.Fragment>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
 export default OrganizedEventsComponent;
 
