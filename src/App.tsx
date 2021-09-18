@@ -29,7 +29,6 @@ const App: FC = () => {
   }, [dispatch]);
 
   const token = useAppSelector(({ auth }) => auth.token);
-  // const user = useAppSelector(({ user }) => user);
   const selectedEventID = useAppSelector(
     ({ eventModal }) => eventModal.selectedEventID
   );

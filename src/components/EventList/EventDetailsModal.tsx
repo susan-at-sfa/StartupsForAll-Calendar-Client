@@ -12,7 +12,7 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
-import UserAddToGoogle from '../Google/Google';
+import { handleGoogleClick } from '../Google/UserGoogle'
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
@@ -56,7 +56,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               end_time,
               creator_name,
               topics,
-              description,
               summary,
               url,
             } = e;
@@ -85,7 +84,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </button>
                       </div>
                       <div className="topButtonsRight">
-                        <button id="calendarAdd" type="button">
+                        <button id="calendarAdd" type="button" onClick={() => handleGoogleClick(e)}>
                           Button
                         </button>
                         <button id="viewPage" type="button">
@@ -194,7 +193,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </div>
                       <div>
                         <p>Posted</p>
-                        {/* <p>{created_at}</p> */}
                         <p>{localPostedBy}</p>
                         <p>by {creator_name}</p>
                       </div>

@@ -52,9 +52,6 @@ const OrganizedEventsComponent: FC = () => {
             {Object.entries(months).map(([month, eventsThatMonth]) => {
               const calendarMonth = new Date(+year, +month).getTime();
               const currentMonthStart = currentMonthEpochTime();
-              console.log(
-                `${year} ${month} comparing calendarMonth ${calendarMonth} with current time ${currentMonthStart}`
-              );
               return (
                 calendarMonth >= currentMonthStart && (
                   <MonthSection key={`${year}-${month}`} id={month}>
