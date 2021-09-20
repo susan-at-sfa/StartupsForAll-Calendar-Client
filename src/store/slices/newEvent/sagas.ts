@@ -2,9 +2,11 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { makeRequest } from '../../utils/makeRequest';
-import { saveNewEvent } from './newEventSlice';
+import { resetEvent, saveNewEvent } from './newEventSlice';
 import { getAllDbEvents } from "../dbEvent/dbEventSlice";
 import NewEvent from '../../../constants/NewEvent.d';
+import { emptyEvent } from '../../../constants/NewEvent';
+import { resetEventBrite } from '../eventbrite/eventbriteSlice';
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:1323';
 
 function* saveNewEventSaga(action: PayloadAction<{ form: NewEvent, token: string }>) {
@@ -14,13 +16,19 @@ function* saveNewEventSaga(action: PayloadAction<{ form: NewEvent, token: string
   if (success) {
     toast("New Event created successfully!");
     console.log('SUCCESS saving new event', data);
-    yield put(getAllDbEvents())
+    yield put(resetEvent(emptyEvent));
+    yield put(resetEventBrite(emptyEvent));
+    yield put(getAllDbEvents());
   }
   if (error) {
-    error.json().then((errData: any) => {
-      toast(`Error creating new event. Please try again. ${errData.message}.`);
-      console.log('FAILURE to save new event', errData);
-    })
+    console.log("FAILED TO SAVE EVENT. got raw error of:", error);
+    if (error.status === 400) {
+      toast("This event already exists on the calendar.");
+      yield put(resetEvent(emptyEvent));
+      yield put(resetEventBrite(emptyEvent));
+    } else {
+      toast(`Error creating new event. Please try again. ${error.message}.`);
+    }
   }
 }
 
