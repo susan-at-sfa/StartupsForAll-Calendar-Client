@@ -131,6 +131,19 @@ const TextArea = styled.textarea`
   margin-bottom: 15px;
   max-width: 100%;
   max-width: 100vw;
+    &::placeholder {
+      color: #e8d9d6;
+      font-weight: bold;
+    }
+    &:focus {
+      outline: none;
+      border-color: #a36760;
+      transition: 0.75s ease;
+    }
+    &:focus::placeholder {
+      color: #a36760;
+      transition: 0.75s ease;
+    }
 `;
 
 export default BlankNewEventInputs;

@@ -57,7 +57,7 @@ const Wrapper = styled.section`
   li {
     margin-right: 15px;
     border-bottom: 3px solid transparent;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     padding-top: 10px;
     &.active {
       border-bottom: 4px solid white;
@@ -69,5 +69,6 @@ const Link = styled(NavLink)`
   text-decoration: none;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 24px;
 `;
