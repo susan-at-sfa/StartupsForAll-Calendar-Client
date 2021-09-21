@@ -8,7 +8,7 @@ import { emptyEvent } from "../../constants/NewEvent";
 
 import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
 import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
-import EventDetailsForm from "../../components/AddEvent/NewEventForm";
+import NewEventForm from "../../components/AddEvent/NewEventForm";
 
 const Add: FC = () => {
   const history = useHistory();
@@ -30,10 +30,7 @@ const Add: FC = () => {
 
   return (eventbriteDetails && eventbriteDetails.id) ||
     isCreatingNewEmptyEvent ? (
-    <EventDetailsForm
-      cancelEvent={cancelEvent}
-      eventDetails={eventbriteDetails}
-    />
+    <NewEventForm cancelEvent={cancelEvent} eventDetails={eventbriteDetails} />
   ) : (
     <EventbriteIDInput newEvent={setCreatingNewEmptyEvent} />
   );

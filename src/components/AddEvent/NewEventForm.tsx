@@ -55,32 +55,16 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
   const [startDate, setStartDate] = useState<string>(
-    eventDetails.id !== ""
-      ? Object.keys(eventDetails.start).length > 0
-        ? toLocalDate(eventDetails.start.utc)
-        : ""
-      : ""
+    eventDetails.start !== "" ? toLocalDate(eventDetails.start) : ""
   );
   const [endDate, setEndDate] = useState<string>(
-    eventDetails.id !== ""
-      ? Object.keys(eventDetails.end).length > 0
-        ? toLocalDate(eventDetails.end.utc)
-        : ""
-      : ""
+    eventDetails.end !== "" ? toLocalDate(eventDetails.end.utc) : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end_time !== ""
-      ? toLocalTime(eventDetails.end_time)
-      : Object.keys(eventDetails.end).length > 0
-        ? toLocalTime(eventDetails.end.utc)
-        : ""
+    eventDetails.end !== "" ? toLocalTime(eventDetails.end.utc) : ""
   );
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.start_time !== ""
-      ? toLocalTime(eventDetails.start_time)
-      : Object.keys(eventDetails.start).length > 0
-        ? toLocalTime(eventDetails.start.utc)
-        : ""
+    eventDetails.end !== "" ? toLocalTime(eventDetails.start.utc) : ""
   );
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
@@ -100,31 +84,16 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       creator_name: creator_name,
       currency: currency,
       custom_blurb: customBlurb,
-      end_time: endTime,
-      eventbrite_id: eventDetails.id,
+      start_date: toUtcDateTime(startDate, startTime),
+      end_date: toUtcDateTime(endDate, endTime),
       location: location,
-      logo: "",
       promoted: false,
-      start_time: startTime,
       summary: summary,
       title: eventTitle,
       topics: topics,
     };
     if (eventDetails.logo) {
       fd.logo = eventDetails.logo;
-    }
-    if (eventDetails.summary) {
-      fd.summary = eventDetails.summary;
-    }
-    if (endDate.toString().includes("Z")) {
-      fd.end_date = endDate;
-      fd.start_date = startDate;
-    } else if (Object.keys(eventDetails.end).length > 0) {
-      fd.end_date = eventDetails.end.utc;
-      fd.start_date = eventDetails.start.utc;
-    } else {
-      fd.end_date = toUtcDateTime(endDate, endTime);
-      fd.start_date = toUtcDateTime(startDate, startTime);
     }
     if (url) {
       fd.url = url;
@@ -387,19 +356,19 @@ const TextArea = styled.textarea`
   padding: 0 15px;
   max-width: 100%;
   max-width: 100vw;
-    &::placeholder {
-      color: #e8d9d6;
-      font-weight: bold;
-    }
-    &:focus {
-      outline: none;
-      border-color: #a36760;
-      transition: 0.75s ease;
-    }
-    &:focus::placeholder {
-      color: #a36760;
-      transition: 0.75s ease;
-    }
+  &::placeholder {
+    color: #e8d9d6;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  &:focus::placeholder {
+    color: #a36760;
+    transition: 0.75s ease;
+  }
 `;
 const SelectList = styled.select`
   color: #e8d9d6;

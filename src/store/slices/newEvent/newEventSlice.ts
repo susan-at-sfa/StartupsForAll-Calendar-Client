@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import NewEvent from '../../../constants/NewEvent.d';
 import { emptyEvent } from '../../../constants/NewEvent';
-import { toast } from 'react-toastify';
 
 const initialState: NewEvent = emptyEvent;
 

@@ -12,9 +12,7 @@ export default interface NewEvent {
   creator_name?: string;
   currency?: string;
   custom_blurb?: string;
-  description?: string;
   id?: string;
-  eventbrite_id?: string;
   location?: string;
   logo?: string;
   promoted?: boolean;
@@ -23,8 +21,8 @@ export default interface NewEvent {
   end?: EventbriteDateObject;
   start_date?: DateString | string;
   end_date?: DateString | string;
-  start_time: DateString | string;
-  end_time: DateString | string;
+  start_time?: DateString | string;
+  end_time?: DateString | string;
   summary?: string;
   name?: string;
   title: string;

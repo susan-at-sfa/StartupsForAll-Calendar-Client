@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useAppDispatch } from "../../hooks";
 import { FiList } from "react-icons/fi";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
-import OrganizedEventsComponent from "../../components/OrganizedEvents/OrganizedEvents";
-import GoogleCalendar from '../../components/Google/GoogleCalendar';
+import EventsList from "../../components/EventList/EventsList";
+import GoogleCalendar from "../../components/Google/GoogleCalendar";
 
 const Events: FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const Events: FC = () => {
             <p> Filters</p>
           </div>
         </FilterButton>
-        <OrganizedEventsComponent />
+        <EventsList />
       </ListEventContainer>
       <GoogleCalendar />
     </Wrapper >
@@ -43,7 +43,8 @@ const FilterButton = styled.div`
   top: 90px; /* logo header + navbar */
   width: 100%;
   text-align: right;
-  z-index: 2;
+  z-index: 3;
+  background: white;
   #filterClick {
     display: flex;
     background-color: white;

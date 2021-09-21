@@ -11,21 +11,19 @@ const eventbriteSlice = createSlice({
     requestEventbriteEvent(state, action: PayloadAction<{id: string}>) {},
     setEventbrite(state, action: PayloadAction<NewEvent>) {
       let eventData = action.payload;
-      // eventData.start_date = eventData.start_date;
-      // eventData.end_date = eventData.end_date;
       if (action.payload.start_time) {
-        eventData.start_time = eventData.start_date;
+        eventData.start = eventData.start_date;
       }
       if (Object.keys(action.payload.start).length > 0) {
-        eventData.start_time = eventData.start.utc;
+        eventData.start = eventData.start.utc;
       }
       if (action.payload.end_time) {
-        eventData.end_time = eventData.end_date;
+        eventData.end = eventData.end_date;
       }
       if (Object.keys(action.payload.end).length > 0) {
-        eventData.end_time = eventData.end.utc;
+        eventData.end = eventData.end.utc;
       }
-      console.log("eventbriteSlice - setEventbrite reduceer - eventData:", eventData);
+      console.log("eventbriteSlice - setEventbrite reducer - eventData:", eventData);
       return { ...eventData };
     },
     resetEventBrite(state, action: PayloadAction<NewEvent>) {

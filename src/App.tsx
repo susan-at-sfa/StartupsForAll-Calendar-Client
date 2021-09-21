@@ -20,7 +20,7 @@ import LogoMenu from "./components/Header/LogoMenu";
 import Hero from "./components/Header/Hero";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
 import FilterModal from "./components/EventList/FilterModal";
-import Navbar from "./components/Header/Navbar";
+import Navbar from "./components/Header/Nav";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
