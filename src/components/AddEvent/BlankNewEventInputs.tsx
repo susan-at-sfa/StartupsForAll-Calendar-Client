@@ -7,9 +7,9 @@ interface BlankNewEventInputsProps {
   eventTitle: string;
   setEventTitle(value: string): void;
   startDate: Date | string;
-  setStartDate(value: string): void;
+  setStartDate(value: Date): void;
   endDate: Date | string;
-  setEndDate(value: string): void;
+  setEndDate(value: Date): void;
   startTime: string;
   setStartTime(value: string): void;
   endTime: string;
@@ -25,6 +25,14 @@ interface BlankNewEventInputsProps {
   url: string;
   setUrl(value: string): void;
 }
+
+const formatSetEndDate = (val: string) => {
+  console.log("FORMATTING DATE", val);
+};
+
+const formatSetStartDate = (val: string) => {
+  console.log("FORMATTING DATE", val);
+};
 
 const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
   console.log("BlankNewEventInputs component - got props:", props);
@@ -49,7 +57,7 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         required
         disabled={false}
         value={props.startDate}
-        onChange={props.setStartDate}
+        onChange={formatSetStartDate}
         name="start_date"
       />
 
@@ -60,7 +68,7 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         required
         disabled={false}
         value={props.endDate}
-        onChange={props.setEndDate}
+        onChange={formatSetEndDate}
         name="end_date"
       />
 
@@ -131,19 +139,19 @@ const TextArea = styled.textarea`
   margin-bottom: 15px;
   max-width: 100%;
   max-width: 100vw;
-    &::placeholder {
-      color: #e8d9d6;
-      font-weight: bold;
-    }
-    &:focus {
-      outline: none;
-      border-color: #a36760;
-      transition: 0.75s ease;
-    }
-    &:focus::placeholder {
-      color: #a36760;
-      transition: 0.75s ease;
-    }
+  &::placeholder {
+    color: #e8d9d6;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  &:focus::placeholder {
+    color: #a36760;
+    transition: 0.75s ease;
+  }
 `;
 
 export default BlankNewEventInputs;

@@ -14,7 +14,7 @@ import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import {
   parseIdFromUrl,
-  toLocalDate,
+  // toLocalDate,
   toLocalTime,
   toUtcDateTime,
 } from "../../helpers";
@@ -54,18 +54,17 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.currency || "USD"
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
-  const [startDate, setStartDate] = useState<string>(
-    eventDetails.start !== "" ? toLocalDate(eventDetails.start) : ""
-  );
-  const [endDate, setEndDate] = useState<string>(
-    eventDetails.end !== "" ? toLocalDate(eventDetails.end.utc) : ""
+
+  // Dates
+  const [startDate, setStartDate] = useState<Date>(eventDetails.start);
+  const [endDate, setEndDate] = useState<Date>(eventDetails.end);
+  const [startTime, setStartTime] = useState<string>(
+    toLocalTime(eventDetails.start) || ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end !== "" ? toLocalTime(eventDetails.end.utc) : ""
+    toLocalTime(eventDetails.end) || ""
   );
-  const [startTime, setStartTime] = useState<string>(
-    eventDetails.end !== "" ? toLocalTime(eventDetails.start.utc) : ""
-  );
+
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
   );

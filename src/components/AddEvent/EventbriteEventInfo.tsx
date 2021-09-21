@@ -5,8 +5,8 @@ interface EventbriteEventInfoProps {
   title: string;
   logo?: string;
   creator_name?: string;
-  start_date: Date | string;
-  end_date: Date | string;
+  start_date: Date;
+  end_date: Date;
   start_time: string;
   end_time: string;
   location: string;
@@ -17,6 +17,7 @@ interface EventbriteEventInfoProps {
 }
 
 const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
+  console.log("EVENT BRITE EVENT INFO component - ", props);
   return (
     <>
       <HeaderText>Imported Information</HeaderText>
@@ -27,7 +28,7 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
           <Text>{props.creator_name}</Text>
         </div>
         <div>
-          <Title>{props.start_date}</Title>
+          <Title>{new Date(props.start_date).toLocaleDateString()}</Title>
           <Text>
             {props.start_time} - {props.end_time}
           </Text>
