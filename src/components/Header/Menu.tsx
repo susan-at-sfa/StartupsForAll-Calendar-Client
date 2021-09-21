@@ -132,6 +132,7 @@ const HamburgerMenu = styled.div`
     text-align: center;
     li {
       cursor: pointer;
+      margin-top: 20px;
     }
   }
 `;
