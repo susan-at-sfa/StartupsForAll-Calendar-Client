@@ -12,7 +12,6 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
-import { handleGoogleClick } from '../Google/UserGoogle'
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
@@ -85,7 +84,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </button>
                       </div>
                       <div className="topButtonsRight">
-                        <button id="calendarAdd" type="button" onClick={() => handleGoogleClick(e)}>
+                        <button id="calendarAdd" type="button">
                           Button
                         </button>
                         <button id="viewPage" type="button">
