@@ -8,11 +8,14 @@ export const parseIdFromUrl = (url: string): string | null => {
 }
 
 export const toLocalDate = (dateString: string): string => {
-  return new Date(Date.parse(dateString)).toISOString().split("T")[0];
+  const ISO8601 = new Date(dateString).toISOString();
+  return new Date(ISO8601).toLocaleDateString();
+  // return new Date(dateString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 }
 
 export const toLocalTime = (dateString: string): string => {
-  return new Date(Date.parse(dateString)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  const ISO8601 = new Date(dateString).toISOString();
+  return new Date(ISO8601).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 }
 
 export const toUtcDateTime = (date: string, time: string): string => {
@@ -23,9 +26,15 @@ export const toUtcDateTime = (date: string, time: string): string => {
   // -1 because months are 0-indexed 0-11 but passed as strings 1-12
   const month = +splitDate[1] - 1
   const day = +splitDate[2]
-  const splitTime = time.split(":")
-  const hour = +splitTime[0]
-  const minute = +splitTime[1]
+  const splitTime = time.split(/[:\s]/g);
+  console.log("raw split time:", splitTime);
+  let hour = +splitTime[0]
+  const minute = splitTime[1] === "00" ? 0 : +splitTime[1]
+  if (splitTime.length === 3) {
+    if (splitTime[2] === 'PM' && hour < 12) {
+      hour += 12;
+    }
+  }
   console.log('date time split:', year, month, day, hour, minute);
   const localDateTime = new Date(year, month, day, hour, minute);
   console.log('got local datetime of', localDateTime);
