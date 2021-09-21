@@ -56,13 +56,18 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
 
   // Dates
+  console.log(
+    "NEW EVENT FORM, start and end time:",
+    Object.keys(eventDetails.start).length,
+    eventDetails.end
+  );
   const [startDate, setStartDate] = useState<Date>(eventDetails.start);
   const [endDate, setEndDate] = useState<Date>(eventDetails.end);
   const [startTime, setStartTime] = useState<string>(
-    toLocalTime(eventDetails.start) || ""
+    eventDetails.start !== "" ? toLocalTime(eventDetails.start) : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    toLocalTime(eventDetails.end) || ""
+    eventDetails.end !== "" ? toLocalTime(eventDetails.end) : ""
   );
 
   const [location, setLocation] = useState<string>(
@@ -187,7 +192,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             name="custom_blurb"
           />
 
-          {eventDetails && eventDetails.id === "" && (
+          {eventDetails && eventDetails.summary === "" && (
             <BlankNewEventInputs
               eventTitle={eventTitle}
               setEventTitle={setEventTitle}
@@ -222,7 +227,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             <TopicSelection onClick={changeTopics} />
           </StyledContainer>
 
-          {eventDetails && eventDetails.id !== "" && (
+          {eventDetails && eventDetails.summary !== "" && (
             <EventbriteEventInfo
               title={eventTitle}
               logo={eventDetails.logo}

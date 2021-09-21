@@ -7,15 +7,17 @@ export const parseIdFromUrl = (url: string): string | null => {
   return id ? id[0] : null;
 }
 
-export const toLocalDate = (dateString: string): string | Date => {
-  console.log("helpers - to localdate:", dateString);
-  // const ISO8601 = dateString.includes("Z") ? dateString : new Date(dateString).toISOString();
-  // return new Date(ISO8601).toLocaleDateString();
-  // return new Date(dateString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  return dateString.includes("Z") ? new Date(dateString) : new Date(new Date(dateString).toISOString()).toLocaleDateString();
-}
+// export const toLocalDate = (dateString: Date): Date => {
+//   console.log("helpers - to localdate:", dateString);
+//   // const ISO8601 = dateString.includes("Z") ? dateString : new Date(dateString).toISOString();
+//   // return new Date(ISO8601).toLocaleDateString();
+//   // return new Date(dateString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+//   return dateString.includes("Z") ? new Date(dateString) : new Date(new Date(dateString).toISOString()).toLocaleDateString();
+// }
 
 export const toLocalTime = (dateString: string): string => {
+  console.log('calling tolocaltime on', dateString);
+  if (dateString === "" || !dateString) return "";
   return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 }
 
