@@ -109,7 +109,10 @@ export default EventsListComponent;
 
 const MonthHeader = styled.div`
   position: sticky;
-  top: 98px;
+  @media(max-width: 700px){
+    top: 98px;
+  }
+  top:15px;
   z-index: 2;
   h1 {
     color: #c79288;

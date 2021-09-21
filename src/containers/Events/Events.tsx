@@ -10,37 +10,74 @@ const Events: FC = () => {
   const dispatch = useAppDispatch();
 
   return (
+    // <Wrapper>
+    //   <ListEventContainer>
+    //     <FilterButton>
+    //       <div
+    //         id="filterClick"
+    //         onClick={() => dispatch(setFilterModalOpen(true))}
+    //       >
+    //         <FiList id="filterIcon" />
+    //         <p> Filters</p>
+    //       </div>
+    //     </FilterButton>
+    //     <EventsList />
+    //   </ListEventContainer>
+    // </Wrapper >
     <Wrapper>
-      <ListEventContainer>
-        <FilterButton>
-          <div
-            id="filterClick"
-            onClick={() => dispatch(setFilterModalOpen(true))}
-          >
-            <FiList id="filterIcon" />
-            <p> Filters</p>
-          </div>
-        </FilterButton>
-        <EventsList />
-      </ListEventContainer>
-      <GoogleCalendar />
+      <div className="eventBox">
+        <ListEventContainer>
+          <FilterButton>
+            <div
+              id="filterClick"
+              onClick={() => dispatch(setFilterModalOpen(true))}
+            >
+              <FiList id="filterIcon" />
+              <p> Filters</p>
+            </div>
+          </FilterButton>
+          <EventsList />
+        </ListEventContainer>
+      </div>
+      <CalendarDiv>
+        <GoogleCalendar />
+      </CalendarDiv>
     </Wrapper >
   );
 };
 
 export default Events;
 
+const CalendarDiv = styled.div`
+@media (max-width: 900px){
+  display: none;
+}
+`
 const Wrapper = styled.div`
-  display: flex;
+display: flex;
+padding-top: 5%;
+align-items: center;
+justify-content: space-evenly;
+@media (max-width: 700px){
   align-items: center;
   justify-content: center;
+}
+.eventBox{
+  @media(min-width: 700px){
+max-height: 600px;
+overflow: scroll;
+}
+}
 `;
 const ListEventContainer = styled.div`
   width: 340px;
 `;
 const FilterButton = styled.div`
-  position: sticky;
+@media (max-width: 700px){
   top: 90px; /* logo header + navbar */
+}
+  position: sticky;
+  top: 10px; /* logo header + navbar */
   width: 100%;
   text-align: right;
   z-index: 3;

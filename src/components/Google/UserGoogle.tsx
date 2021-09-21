@@ -81,7 +81,3 @@ export async function handleGoogleClick(event: any) {
       })
   })
 }
-
-
-
-

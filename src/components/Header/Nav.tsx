@@ -58,9 +58,9 @@ const Wrapper = styled.section`
     margin-right: 15px;
     border-bottom: 3px solid transparent;
     padding-bottom: 10px;
-    padding-top: 10px;
+    padding-top: 12px;
     &.active {
-      border-bottom: 4px solid white;
+      border-bottom: 5px solid white;
     }
   }
 `;
