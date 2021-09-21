@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../hooks";
 import { FiList } from "react-icons/fi";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 import OrganizedEventsComponent from "../../components/OrganizedEvents/OrganizedEvents";
+import GoogleCalendar from '../../components/Google/GoogleCalendar';
 
 const Events: FC = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +23,8 @@ const Events: FC = () => {
         </FilterButton>
         <OrganizedEventsComponent />
       </ListEventContainer>
-    </Wrapper>
+      <GoogleCalendar />
+    </Wrapper >
   );
 };
 
