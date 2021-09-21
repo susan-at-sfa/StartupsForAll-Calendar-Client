@@ -31,8 +31,8 @@ const ListEvent: FC<ListEventProps> = (props) => {
     topics,
   } = props;
   const dispatch = useAppDispatch();
+  const eventTitle = (title.length > 40) ? title.substr(0, 39) + '...' : title;
   const eventDate = new Date(date).toDateString();
-  console.log("START TIME", start_time);
 
   const onClickingEvent = (eventID: string) => {
     dispatch(setSelectedEventID(eventID));
@@ -43,7 +43,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
     <Wrapper key={id} onClick={() => onClickingEvent(id)}>
       <SmallHeader>
         <SmallHeaderLeft>
-          <h2>{title}</h2>
+          <h2>{eventTitle}</h2>
           <p>{creator_name}</p>
         </SmallHeaderLeft>
         <SmallHeaderRight>
@@ -96,6 +96,7 @@ h2{
   font-style: normal;
   font-weight: bold;
   line-height: 18px;
+  word-break: break-all;
 }
 h3 {
   line-height: 17px;

@@ -60,6 +60,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               url,
             } = e;
 
+            const eventTitle = (title.length > 40) ? title.substr(0, 39) + '...' : title;
             const eventDate = new Date(start_date).toDateString();
             const localPostedBy = new Date(created_at).toLocaleString([], {
               year: "numeric",
@@ -94,7 +95,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     </TopButtonDiv>
                     <SmallHeader>
                       <SmallHeaderLeft>
-                        <h2>{title}</h2>
+                        <h2>{eventTitle}</h2>
                         <p>{creator_name}</p>
                       </SmallHeaderLeft>
                       <SmallHeaderRight>
@@ -129,11 +130,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     </CustomBlurb>
                     {logo ?
                       <ModalImg>
-                        <img src={logo} alt={title + "logo"} />
+                        <img src={logo} alt={eventTitle + "logo"} />
                       </ModalImg>
                       : null}
                     <ModalHeader>
-                      <h2>{title}</h2>
+                      <h2>{eventTitle}</h2>
                       <p>
                         Referred by <span>{creator_name}</span>
                       </p>
