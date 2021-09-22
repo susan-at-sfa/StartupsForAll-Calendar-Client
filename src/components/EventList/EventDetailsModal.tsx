@@ -63,17 +63,24 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
-              hour: "2-digit",
+              hour: "numeric",
               minute: "2-digit",
             });
-            const start_time = new Date(start_date).toLocaleTimeString([], {
-              hour: "2-digit",
+            // TODO: import this interface...
+            // const timeOptions: DateTimeFormatOptions = {
+            const timeOptions: any = {
+              hour: "numeric",
               minute: "2-digit",
-            });
-            const end_time = new Date(end_date).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            });
+              timeZoneName: "short",
+            };
+            const start_time = new Date(start_date).toLocaleTimeString(
+              [],
+              timeOptions
+            );
+            const end_time = new Date(end_date).toLocaleTimeString(
+              [],
+              timeOptions
+            );
 
             return (
               <Background key={id}>
