@@ -146,8 +146,6 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
 };
 
 const TextArea = styled.textarea`
-  color: #e8d9d6;
-  font-weight: bold;
   border: 8px solid #e8d9d6;
   border-right-width: 20px;
   min-height: 45px;
