@@ -18,7 +18,6 @@ import {
   resetEventBrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
-import CategorySelection from "../EventList/CategorySelection";
 import CategoryRadio from "../EventList/CategoryRadio";
 import { emptyEvent } from "../../constants/NewEvent";
 
@@ -102,7 +101,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     } else {
       fd.end_date = toUtcDateTime(endDate, endTime);
     }
-    console.log("after converting times", fd);
     dispatch(
       saveNewEvent({
         form: fd,
@@ -123,7 +121,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   };
 
   const changeCategory = (category: string) => {
-    console.log("change category clicked", category);
     setCategory("");
     setCategory(category);
   };
@@ -134,7 +131,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   };
 
   const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
-    console.log("getting new event details...");
     event.preventDefault();
     if (!url) {
       toast("Please include a valid Eventbrite Event URL or ID.");
@@ -152,7 +148,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     history.push("/add");
   };
 
-  console.log("NewEventForm component - got props.eventDetails:", eventDetails);
   return (
     <Wrapper>
       <PasteLinkContainer>

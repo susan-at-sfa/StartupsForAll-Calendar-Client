@@ -1,52 +1,48 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "@emotion/styled";
 
 interface CategoryRadioProps {
-  onChange: (a: any) => void;
+  onChange: (a: string) => void;
   selectedCategory: string;
 }
 
-const CategoryRadio: FC<CategoryRadioProps> = (props) => {
-  console.log("Category Radio component. Props:", props);
-
-  return (
-    <CategoryDiv>
-      <label className="container">
-        <div id="community">Community</div>
-        <input
-          type="radio"
-          name="category"
-          value="Community"
-          checked={props.selectedCategory === "Community"}
-          onChange={(e) => props.onChange(e.target.value)}
-        />
-        <span className="checkmark"></span>
-      </label>
-      <label className="container">
-        <div id="founders">Founders</div>
-        <input
-          type="radio"
-          name="category"
-          value="Founders"
-          checked={props.selectedCategory === "Founders"}
-          onChange={(e) => props.onChange(e.target.value)}
-        />
-        <span className="checkmark"></span>
-      </label>
-      <label className="container">
-        <div id="experts">Experts</div>
-        <input
-          type="radio"
-          name="category"
-          value="Experts"
-          checked={props.selectedCategory === "Experts"}
-          onChange={(e) => props.onChange(e.target.value)}
-        />
-        <span className="checkmark"></span>
-      </label>
-    </CategoryDiv>
-  );
-};
+const CategoryRadio: FC<CategoryRadioProps> = (props) => (
+  <CategoryDiv>
+    <label className="container">
+      <div id="community">Community</div>
+      <input
+        type="radio"
+        name="category"
+        value="Community"
+        checked={props.selectedCategory === "Community"}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+      <span className="checkmark"></span>
+    </label>
+    <label className="container">
+      <div id="founders">Founders</div>
+      <input
+        type="radio"
+        name="category"
+        value="Founders"
+        checked={props.selectedCategory === "Founders"}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+      <span className="checkmark"></span>
+    </label>
+    <label className="container">
+      <div id="experts">Experts</div>
+      <input
+        type="radio"
+        name="category"
+        value="Experts"
+        checked={props.selectedCategory === "Experts"}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+      <span className="checkmark"></span>
+    </label>
+  </CategoryDiv>
+);
 
 export default CategoryRadio;
 
