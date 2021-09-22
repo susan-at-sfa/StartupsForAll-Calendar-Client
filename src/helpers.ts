@@ -21,8 +21,23 @@ export const toLocalTime = (dateString: string): string => {
   return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 }
 
-export const toUtcDateTime = (date: string | Date, time: string): string | Date => {
+const convertTimeStringToMilliseconds = (time: string): number => {
+  const split = time.split(":");
+  const hours = Number(split[0]) * 60 * 60 * 1000;
+  const minutes = Number(split[1]) * 60 * 1000;
+  return (hours + minutes);
+}
+
+export const toUtcDateTime = (date: Date, time: string): string | Date => {
+  // in case the browser/js engine implementation adds a default time when you call "new Date()"
+  // first remove those from the date by calling setHours to 0 for hours, mins, seconds, ms
   console.log('toUtcDateTime got date time', date, time);
+  const epochD = date.setHours(0,0,0,0);
+  const epochT = convertTimeStringToMilliseconds(time);
+  console.log("got epoch date and time", epochD, epochT);
+  const sum = epochD + epochT;
+  const dateString = new Date(sum);
+  console.log("GOT final date epoch and date of:", sum, dateString);
   return ""
   // const splitDate = date.split("-");
   // // + converts string into integer

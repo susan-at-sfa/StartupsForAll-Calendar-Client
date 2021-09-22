@@ -56,11 +56,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
 
   // Dates
-  console.log(
-    "NEW EVENT FORM, start and end time:",
-    Object.keys(eventDetails.start).length,
-    eventDetails.end
-  );
   const [startDate, setStartDate] = useState<Date>(eventDetails.start);
   const [endDate, setEndDate] = useState<Date>(eventDetails.end);
   const [startTime, setStartTime] = useState<string>(
@@ -82,14 +77,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       category: category,
       category_text: getCategoryText(),
       changed: eventDetails.changed,
-      cost: Number(cost.toString().substring(1)),
+      cost: Number(cost),
       created: eventDetails.created,
       creator_email: creator_email,
       creator_name: creator_name,
       currency: currency,
       custom_blurb: customBlurb,
-      start_date: toUtcDateTime(startDate, startTime),
-      end_date: toUtcDateTime(endDate, endTime),
       location: location,
       promoted: false,
       summary: summary,
@@ -102,14 +95,26 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (url) {
       fd.url = url;
     }
-    console.log("NEW EVENT FORM SUBMITTED", fd);
-    dispatch(
-      saveNewEvent({
-        form: fd,
-        token: token,
-      })
-    );
-    history.push("/");
+    console.log("NEW EVENT FORM SUBMITTED, before converting times", fd);
+    // eventbrite events start and end dates are already in UTC format (eg they contain the Z)
+    if (startDate.toString().includes("Z")) {
+      fd.start_date = startDate;
+    } else {
+      fd.start_date = toUtcDateTime(startDate, startTime);
+    }
+    if (endDate.toString().includes("Z")) {
+      fd.end_date = endDate;
+    } else {
+      fd.end_date = toUtcDateTime(endDate, endTime);
+    }
+    console.log("after converting times", fd);
+    // dispatch(
+    //   saveNewEvent({
+    //     form: fd,
+    //     token: token,
+    //   })
+    // );
+    // history.push("/");
   };
 
   const changeTopics = (topic: string) => {
@@ -181,6 +186,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             value={creator_name}
             onChange={() => null}
             name="creator_name"
+            onBlur={() => null}
           />
 
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />

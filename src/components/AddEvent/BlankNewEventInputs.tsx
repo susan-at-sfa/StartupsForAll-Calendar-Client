@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 
@@ -26,16 +26,32 @@ interface BlankNewEventInputsProps {
   setUrl(value: string): void;
 }
 
-const formatSetEndDate = (val: string) => {
-  console.log("FORMATTING DATE", val);
-};
-
-const formatSetStartDate = (val: string) => {
-  console.log("FORMATTING DATE", val);
-};
-
 const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
   console.log("BlankNewEventInputs component - got props:", props);
+
+  const [localStartDate, setLocalStartDate] = useState<string>("");
+  const [localEndDate, setLocalEndDate] = useState<string>("");
+  const [localStartTime, setLocalStartTime] = useState<string>("");
+  const [localEndTime, setLocalEndTime] = useState<string>("");
+
+  const handleChange = (value: string, which: string) => {
+    console.log("handling date/time change...", value, which);
+    if (which === "et") {
+      setLocalEndTime(value);
+      props.setEndTime(value);
+    } else if (which === "st") {
+      setLocalStartTime(value);
+      props.setStartTime(value);
+    } else if (which === "sd") {
+      // TODO: localStartDate is accurate, calling props.setStartDate converts the time wrongly
+      // TODO: convert it first to UTC, drop hours/mins/sec/ms, then call props.setstartdate
+      setLocalStartDate(value);
+      props.setStartDate(new Date(value));
+    } else if (which === "ed") {
+      setLocalEndDate(value);
+      props.setEndDate(new Date(value));
+    }
+  };
 
   return (
     <>
@@ -56,8 +72,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="date"
         required
         disabled={false}
-        value={props.startDate}
-        onChange={formatSetStartDate}
+        value={localStartDate}
+        onChange={(value) => handleChange(value, "sd")}
         name="start_date"
       />
 
@@ -67,8 +83,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="date"
         required
         disabled={false}
-        value={props.endDate}
-        onChange={formatSetEndDate}
+        value={localEndDate}
+        onChange={(value) => handleChange(value, "ed")}
         name="end_date"
       />
 
@@ -78,8 +94,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="time"
         required
         disabled={false}
-        value={props.startTime}
-        onChange={props.setStartTime}
+        value={localStartTime}
+        onChange={(value) => handleChange(value, "st")}
         name="start_time"
       />
 
@@ -89,8 +105,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="time"
         required
         disabled={false}
-        value={props.endTime}
-        onChange={props.setEndTime}
+        value={localEndTime}
+        onChange={(value) => handleChange(value, "et")}
         name="end_time"
       />
 
