@@ -61,6 +61,7 @@ input {
   width: 0;
   &:checked ~ .checkmark{
     border: 4px solid #A36760;
+    background-color: #7BB1A7;
   }
   &:checked ~ .checkmark::after{
     display: block;
@@ -72,22 +73,9 @@ input {
   left: 1px;
   bottom: 1px;
   border: 4px solid #F1F1F1;
+  border-radius: 50%;
   height: 25px;
   width: 25px;
   background-color: white;
-    &::after{
-    content: "";
-    position: absolute;
-    display: none;
-    left: 8px;
-    top: -8px;
-    width: 5px;
-    height: 18px;
-    border: solid #7BB1A7;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
 }
 `

@@ -4,13 +4,14 @@ import { useAppDispatch } from "../../hooks";
 import { FiList } from "react-icons/fi";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 import EventsList from "../../components/EventList/EventsList";
+import CategoryRadio from "../../components/EventList/CategoryRadio";
 
 const Events: FC = () => {
   const dispatch = useAppDispatch();
 
   return (
     <Wrapper>
-      <ListEventContainer>
+      {/* <ListEventContainer>
         <FilterButton>
           <div
             id="filterClick"
@@ -21,7 +22,10 @@ const Events: FC = () => {
           </div>
         </FilterButton>
         <EventsList />
-      </ListEventContainer>
+      </ListEventContainer> */}
+      <div id="this">
+        <CategoryRadio />
+      </div>
     </Wrapper>
   );
 };
@@ -32,6 +36,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  #this{
+    margin-top: 50px;
+    width: 150px;
+  }
 `;
 const ListEventContainer = styled.div`
   width: 340px;
