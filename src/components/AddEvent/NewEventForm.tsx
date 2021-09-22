@@ -56,8 +56,8 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
 
   // Dates
-  const [startDate, setStartDate] = useState<Date>(eventDetails.start);
-  const [endDate, setEndDate] = useState<Date>(eventDetails.end);
+  const [startDate, setStartDate] = useState<string>(eventDetails.start);
+  const [endDate, setEndDate] = useState<string>(eventDetails.end);
   const [startTime, setStartTime] = useState<string>(
     eventDetails.start !== "" ? toLocalTime(eventDetails.start) : ""
   );
@@ -96,7 +96,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       fd.url = url;
     }
     console.log("NEW EVENT FORM SUBMITTED, before converting times", fd);
-    // eventbrite events start and end dates are already in UTC format (eg they contain the Z)
+    // eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
     if (startDate.toString().includes("Z")) {
       fd.start_date = startDate;
     } else {
@@ -108,13 +108,13 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       fd.end_date = toUtcDateTime(endDate, endTime);
     }
     console.log("after converting times", fd);
-    // dispatch(
-    //   saveNewEvent({
-    //     form: fd,
-    //     token: token,
-    //   })
-    // );
-    // history.push("/");
+    dispatch(
+      saveNewEvent({
+        form: fd,
+        token: token,
+      })
+    );
+    history.push("/");
   };
 
   const changeTopics = (topic: string) => {
