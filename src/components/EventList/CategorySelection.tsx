@@ -11,7 +11,7 @@ interface CategorySelectionProps {
 }
 
 const CategorySelection: FC<CategorySelectionProps> = (props) => {
-  const { onClick, multi } = props;
+  const { onClick } = props;
   return (
     <SelectionDiv>
       {categories.map((category: string) => (
