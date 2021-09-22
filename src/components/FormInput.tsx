@@ -5,7 +5,8 @@ interface FormInputProps {
   placeholder?: string;
   type?: string;
   required?: boolean;
-  onChange(value: string): void;
+  onChange(value: any | null): void;
+  onBlur?(value: any): void;
   value?: string | number | Date | string[] | any;
   name?: string;
   disabled?: boolean;

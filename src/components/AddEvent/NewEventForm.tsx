@@ -14,7 +14,7 @@ import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import {
   parseIdFromUrl,
-  toLocalDate,
+  // toLocalDate,
   toLocalTime,
   toUtcDateTime,
 } from "../../helpers";
@@ -54,18 +54,17 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.currency || "USD"
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
-  const [startDate, setStartDate] = useState<string>(
-    eventDetails.start !== "" ? toLocalDate(eventDetails.start) : ""
-  );
-  const [endDate, setEndDate] = useState<string>(
-    eventDetails.end !== "" ? toLocalDate(eventDetails.end.utc) : ""
+
+  // Dates
+  const [startDate, setStartDate] = useState<Date>(eventDetails.start);
+  const [endDate, setEndDate] = useState<Date>(eventDetails.end);
+  const [startTime, setStartTime] = useState<string>(
+    eventDetails.start !== "" ? toLocalTime(eventDetails.start) : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end !== "" ? toLocalTime(eventDetails.end.utc) : ""
+    eventDetails.end !== "" ? toLocalTime(eventDetails.end) : ""
   );
-  const [startTime, setStartTime] = useState<string>(
-    eventDetails.end !== "" ? toLocalTime(eventDetails.start.utc) : ""
-  );
+
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
   );
@@ -78,14 +77,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       category: category,
       category_text: getCategoryText(),
       changed: eventDetails.changed,
-      cost: Number(cost.toString().substring(1)),
+      cost: Number(cost),
       created: eventDetails.created,
       creator_email: creator_email,
       creator_name: creator_name,
       currency: currency,
       custom_blurb: customBlurb,
-      start_date: toUtcDateTime(startDate, startTime),
-      end_date: toUtcDateTime(endDate, endTime),
       location: location,
       promoted: false,
       summary: summary,
@@ -98,14 +95,26 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (url) {
       fd.url = url;
     }
-    console.log("NEW EVENT FORM SUBMITTED", fd);
-    dispatch(
-      saveNewEvent({
-        form: fd,
-        token: token,
-      })
-    );
-    history.push("/");
+    console.log("NEW EVENT FORM SUBMITTED, before converting times", fd);
+    // eventbrite events start and end dates are already in UTC format (eg they contain the Z)
+    if (startDate.toString().includes("Z")) {
+      fd.start_date = startDate;
+    } else {
+      fd.start_date = toUtcDateTime(startDate, startTime);
+    }
+    if (endDate.toString().includes("Z")) {
+      fd.end_date = endDate;
+    } else {
+      fd.end_date = toUtcDateTime(endDate, endTime);
+    }
+    console.log("after converting times", fd);
+    // dispatch(
+    //   saveNewEvent({
+    //     form: fd,
+    //     token: token,
+    //   })
+    // );
+    // history.push("/");
   };
 
   const changeTopics = (topic: string) => {
@@ -177,6 +186,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             value={creator_name}
             onChange={() => null}
             name="creator_name"
+            onBlur={() => null}
           />
 
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
@@ -188,7 +198,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             name="custom_blurb"
           />
 
-          {eventDetails && eventDetails.id === "" && (
+          {eventDetails && eventDetails.summary === "" && (
             <BlankNewEventInputs
               eventTitle={eventTitle}
               setEventTitle={setEventTitle}
@@ -223,7 +233,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             <TopicSelection onClick={changeTopics} />
           </StyledContainer>
 
-          {eventDetails && eventDetails.id !== "" && (
+          {eventDetails && eventDetails.summary !== "" && (
             <EventbriteEventInfo
               title={eventTitle}
               logo={eventDetails.logo}
