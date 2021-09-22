@@ -7,9 +7,9 @@ interface BlankNewEventInputsProps {
   eventTitle: string;
   setEventTitle(value: string): void;
   startDate: Date | string;
-  setStartDate(value: Date): void;
+  setStartDate(value: string): void;
   endDate: Date | string;
-  setEndDate(value: Date): void;
+  setEndDate(value: string): void;
   startTime: string;
   setStartTime(value: string): void;
   endTime: string;
@@ -43,13 +43,15 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
       setLocalStartTime(value);
       props.setStartTime(value);
     } else if (which === "sd") {
-      // TODO: localStartDate is accurate, calling props.setStartDate converts the time wrongly
-      // TODO: convert it first to UTC, drop hours/mins/sec/ms, then call props.setstartdate
       setLocalStartDate(value);
-      props.setStartDate(new Date(value));
+      // calling toString() ensures it is saved as a string formatted YYYY-MM-DD
+      // without toString it will be converted to a Date eg: "Date Fri Oct 22 2021 17:00:00 GMT-0700 (Pacific Daylight Time)"
+      // having a Date saved in state in this way makes it much harder to combine
+      // Date+Time to generate an accurate UTC/ISO8601 formatted date for the back end
+      props.setStartDate(value.toString());
     } else if (which === "ed") {
       setLocalEndDate(value);
-      props.setEndDate(new Date(value));
+      props.setEndDate(value.toString());
     }
   };
 
