@@ -31,7 +31,6 @@ const ListEvent: FC<ListEventProps> = (props) => {
     topics,
   } = props;
   const dispatch = useAppDispatch();
-  const eventTitle = (title.length > 40) ? title.substr(0, 39) + '...' : title;
   const eventDate = new Date(date).toDateString();
 
   const onClickingEvent = (eventID: string) => {
@@ -43,8 +42,12 @@ const ListEvent: FC<ListEventProps> = (props) => {
     <Wrapper key={id} onClick={() => onClickingEvent(id)}>
       <SmallHeader>
         <SmallHeaderLeft>
-          <h2>{eventTitle}</h2>
-          <p>{creator_name}</p>
+          <div id="title">
+            <h2>{title}</h2>
+          </div>
+          <div id="creatorName">
+            <p>{creator_name}</p>
+          </div>
         </SmallHeaderLeft>
         <SmallHeaderRight>
           <h2>{eventDate}</h2>
@@ -67,7 +70,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
           </div>
         </SmallHeaderRight>
       </SmallHeader>
-    </Wrapper>
+    </Wrapper >
   );
 };
 
@@ -90,13 +93,13 @@ const SmallHeader = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+max-width: 350px;
 h2{
   margin-bottom: 5px;
   font-size: 14px;
   font-style: normal;
   font-weight: bold;
   line-height: 18px;
-  word-break: break-all;
 }
 h3 {
   line-height: 17px;
@@ -125,6 +128,20 @@ li{
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  h2{
+    max-width: 175px;
+    overflow-wrap: break-word;
+  }
+  #title{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 `;
 const SmallHeaderRight = styled.div`
   text-align: right;

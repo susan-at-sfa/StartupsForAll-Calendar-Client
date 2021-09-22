@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 const Menu: FC = () => {
   const [cohortMenuOpen, setCohortMenuOpen] = useState(false);
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
+  const [adminMenuOpen, setAdminMenuOpen] = useState(false);
 
   const startUpsURL: string = "https://startupsforall.org/";
   const codaLink: string =
@@ -36,7 +37,7 @@ const Menu: FC = () => {
   return (
     <MenuContainer>
       <HamburgerMenu>
-        {!cohortMenuOpen && !dashboardMenuOpen ? (
+        {!cohortMenuOpen && !dashboardMenuOpen && !adminMenuOpen ? (
           <ul>
             <li onClick={() => setCohortMenuOpen(true)}>
               <p>{"Meet The Founders >"}</p>
@@ -49,11 +50,14 @@ const Menu: FC = () => {
             <li onClick={() => setDashboardMenuOpen(true)}>
               <p>{"Cohort Dashboards >"}</p>
             </li>
+            <li onClick={() => setAdminMenuOpen(true)}>
+              <p>{"Admin >"}</p>
+            </li>
           </ul>
         ) : cohortMenuOpen ? (
           <ul>
             <li onClick={() => setCohortMenuOpen(false)}>
-              <p>{"<Back"}</p>
+              <p>{"< Back"}</p>
             </li>
             {cohortLinks.map((item) => {
               const { id, title, link } = item;
@@ -67,7 +71,7 @@ const Menu: FC = () => {
         ) : dashboardMenuOpen ? (
           <ul>
             <li onClick={() => setDashboardMenuOpen(false)}>
-              <p>{"<Back"}</p>
+              <p>{"< Back"}</p>
             </li>
             {dashboardLinks.map((item) => {
               const { id, title, link } = item;
@@ -78,7 +82,16 @@ const Menu: FC = () => {
               );
             })}
           </ul>
-        ) : null}
+        ) : adminMenuOpen ?
+          <ul>
+            <li onClick={() => setAdminMenuOpen(false)}>
+              <p>{"< Back"}</p>
+            </li>
+            <li>
+              <a href="/login">Admin Login</a>
+            </li>
+          </ul>
+          : null}
       </HamburgerMenu>
     </MenuContainer>
   );
@@ -119,6 +132,7 @@ const HamburgerMenu = styled.div`
     text-align: center;
     li {
       cursor: pointer;
+      margin-top: 20px;
     }
   }
 `;

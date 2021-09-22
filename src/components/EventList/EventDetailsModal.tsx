@@ -59,7 +59,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               url,
             } = e;
 
-            const eventTitle = (title.length > 40) ? title.substr(0, 39) + '...' : title;
             const eventDate = new Date(start_date).toDateString();
             const localPostedBy = new Date(created_at).toLocaleString([], {
               year: "numeric",
@@ -94,8 +93,12 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     </TopButtonDiv>
                     <SmallHeader>
                       <SmallHeaderLeft>
-                        <h2>{eventTitle}</h2>
-                        <p>{creator_name}</p>
+                        <div id="title">
+                          <h2>{title}</h2>
+                        </div>
+                        <div id="creatorName">
+                          <p>{creator_name}</p>
+                        </div>
                       </SmallHeaderLeft>
                       <SmallHeaderRight>
                         <h2>{eventDate}</h2>
@@ -129,11 +132,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     </CustomBlurb>
                     {logo ?
                       <ModalImg>
-                        <img src={logo} alt={eventTitle + "logo"} />
+                        <img src={logo} alt={title + "logo"} />
                       </ModalImg>
                       : null}
                     <ModalHeader>
-                      <h2>{eventTitle}</h2>
+                      <h2>{title}</h2>
                       <p>
                         Referred by <span>{creator_name}</span>
                       </p>
@@ -332,6 +335,17 @@ const SmallHeader = styled.div`
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
+    h2{
+    max-width: 175px;
+    overflow-wrap: break-word;
+  }
+  #title{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 `;
 const SmallHeaderRight = styled.div`
   text-align: right;

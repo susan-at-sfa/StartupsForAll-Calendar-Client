@@ -12,7 +12,7 @@ const Hero: FC = () => {
     <HeroContainer>
       {!menuOpen && location.pathname === "/" && <Title>Events</Title>}
       {!menuOpen && location.pathname === "/add" && <Title>Add Event</Title>}
-      {!menuOpen && location.pathname === "/login" && <Title>Login</Title>}
+      {!menuOpen && location.pathname === "/login" && <Title>Admin Login</Title>}
       {!menuOpen && location.pathname === "/admin" && (
         <Title>Admin Events</Title>
       )}

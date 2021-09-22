@@ -12,7 +12,7 @@ export const SelectionDiv = styled.div`
   padding-left: 30px;
   margin-bottom: 8px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   -webkit-user-select: none;
   -moz-user-select: none;
