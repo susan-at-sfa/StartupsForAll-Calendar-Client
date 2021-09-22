@@ -19,6 +19,7 @@ import {
 } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
 import CategorySelection from "../EventList/CategorySelection";
+import CategoryRadio from "../EventList/CategoryRadio";
 import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {
@@ -42,7 +43,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.title || eventDetails.name || ""
   );
   const [category, setCategory] = useState<Category | string>(
-    Category.StartupsForAll
+    Category.Community
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
@@ -128,8 +129,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   };
 
   const getCategoryText = (): string => {
-    if (category === Category.StartupsForAll)
-      return CategoryText.StartupsForAll;
+    if (category === Category.Community) return CategoryText.StartupsForAll;
     return CategoryText.Community;
   };
 
@@ -219,7 +219,10 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           <FormLabel htmlFor="category" text="Category" />
           <StyledContainer>
-            <CategorySelection multi={false} onClick={changeCategory} />
+            <CategoryRadio
+              selectedCategory={category}
+              onChange={changeCategory}
+            />
           </StyledContainer>
 
           <FormLabel htmlFor="topics" text="Add Topics Emojis" />
