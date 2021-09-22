@@ -57,8 +57,8 @@ const Wrapper = styled.section`
   li {
     margin-right: 15px;
     border-bottom: 3px solid transparent;
-    padding-bottom: 10px;
-    padding-top: 12px;
+    padding-bottom: 8px;
+    padding-top: 15px;
     &.active {
       border-bottom: 5px solid white;
     }

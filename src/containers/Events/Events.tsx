@@ -70,8 +70,8 @@ overflow: scroll;
 }
 `;
 const ListEventContainer = styled.div`
-  width: 340px;
-`;
+      width: 340px;
+      `;
 const FilterButton = styled.div`
 @media (max-width: 700px){
   top: 90px; /* logo header + navbar */
@@ -91,14 +91,14 @@ const FilterButton = styled.div`
     width: 75px;
     padding-left: 12px;
   }
-  p {
-    display: inline;
-    color: #c79288;
-    font-size: 14px;
-    font-weight: bold;
+      p {
+        display: inline;
+      color: #c79288;
+      font-size: 14px;
+      font-weight: bold;
   }
-  #filterIcon {
-    color: #c79288;
-    margin: 2px 2px 0 0px;
+      #filterIcon {
+        color: #c79288;
+      margin: 2px 2px 0 0px;
   }
-`;
+      `;

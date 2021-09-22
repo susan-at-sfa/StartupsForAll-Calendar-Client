@@ -12,12 +12,7 @@ import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import {
-  parseIdFromUrl,
-  // toLocalDate,
-  toLocalTime,
-  toUtcDateTime,
-} from "../../helpers";
+import { parseIdFromUrl, toLocalTime, toUtcDateTime } from "../../helpers";
 import {
   requestEventbriteEvent,
   resetEventBrite,
@@ -95,8 +90,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (url) {
       fd.url = url;
     }
-    console.log("NEW EVENT FORM SUBMITTED, before converting times", fd);
-    // eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
+    // Eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
     if (startDate.toString().includes("Z")) {
       fd.start_date = startDate;
     } else {

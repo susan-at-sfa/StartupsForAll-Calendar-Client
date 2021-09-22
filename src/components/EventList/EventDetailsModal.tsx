@@ -46,16 +46,15 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               category,
               cost,
               created_at,
+              creator_name,
               custom_blurb,
+              end_date,
+              start_date,
               logo,
               location,
-              title,
-              start_date,
-              start_time,
-              end_time,
-              creator_name,
-              topics,
               summary,
+              title,
+              topics,
               url,
             } = e;
 
@@ -64,9 +63,24 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
-              hour: "2-digit",
+              hour: "numeric",
               minute: "2-digit",
             });
+            // TODO: import this interface...
+            // const timeOptions: DateTimeFormatOptions = {
+            const timeOptions: any = {
+              hour: "numeric",
+              minute: "2-digit",
+              timeZoneName: "short",
+            };
+            const start_time = new Date(start_date).toLocaleTimeString(
+              [],
+              timeOptions
+            );
+            const end_time = new Date(end_date).toLocaleTimeString(
+              [],
+              timeOptions
+            );
 
             return (
               <Background key={id}>
@@ -87,7 +101,9 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           Button
                         </button>
                         <button id="viewPage" type="button">
-                          <a href={url}>View More Details </a>
+                          <a href={url} target="_blank" rel="noreferrer">
+                            View More Details
+                          </a>
                         </button>
                       </div>
                     </TopButtonDiv>
@@ -130,11 +146,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <h2>Info from {creator_name}</h2>
                       <p>{custom_blurb}</p>
                     </CustomBlurb>
-                    {logo ?
+                    {logo ? (
                       <ModalImg>
                         <img src={logo} alt={title + "logo"} />
                       </ModalImg>
-                      : null}
+                    ) : null}
                     <ModalHeader>
                       <h2>{title}</h2>
                       <p>
@@ -174,7 +190,9 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </BottomButtonDiv>
                       <h4>Event Link</h4>
                       <p>
-                        <a id="link" href={url}>{url}</a>
+                        <a id="link" href={url}>
+                          {url}
+                        </a>
                       </p>
                     </SecondSection>
                     <ModalFooter>
@@ -222,7 +240,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 7;
-  `;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -241,7 +259,7 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  `;
+`;
 const TopButtonDiv = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
@@ -335,17 +353,17 @@ const SmallHeader = styled.div`
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
-    h2{
+  h2 {
     max-width: 175px;
     overflow-wrap: break-word;
   }
-  #title{
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  #title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 const SmallHeaderRight = styled.div`
   text-align: right;
@@ -429,13 +447,13 @@ const SecondSection = styled.div`
     margin-right: 10px;
     word-break: break-all;
   }
-  #link{
+  #link {
     color: #7bb1a7;
     text-decoration: none;
   }
 `;
 const BottomButtonDiv = styled.div`
-margin-bottom: 35px;
+  margin-bottom: 35px;
   a {
     text-decoration: none;
     color: white;
