@@ -11,7 +11,7 @@ const Events: FC = () => {
 
   return (
     <Wrapper>
-      {/* <ListEventContainer>
+      <ListEventContainer>
         <FilterButton>
           <div
             id="filterClick"
@@ -22,10 +22,7 @@ const Events: FC = () => {
           </div>
         </FilterButton>
         <EventsList />
-      </ListEventContainer> */}
-      <div id="this">
-        <CategoryRadio />
-      </div>
+      </ListEventContainer>
     </Wrapper>
   );
 };
@@ -33,41 +30,37 @@ const Events: FC = () => {
 export default Events;
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  #this{
-    margin-top: 50px;
-    width: 150px;
-  }
-`;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      `;
 const ListEventContainer = styled.div`
-  width: 340px;
-`;
+      width: 340px;
+      `;
 const FilterButton = styled.div`
-  position: sticky;
-  top: 90px; /* logo header + navbar */
-  width: 100%;
-  text-align: right;
-  z-index: 3;
-  background: white;
-  #filterClick {
-    display: flex;
-    background-color: white;
-    position: absolute;
-    right: 0;
-    margin: 0;
-    width: 75px;
-    padding-left: 12px;
+      position: sticky;
+      top: 90px; /* logo header + navbar */
+      width: 100%;
+      text-align: right;
+      z-index: 3;
+      background: white;
+      #filterClick {
+        display: flex;
+      background-color: white;
+      position: absolute;
+      right: 0;
+      margin: 0;
+      width: 75px;
+      padding-left: 12px;
   }
-  p {
-    display: inline;
-    color: #c79288;
-    font-size: 14px;
-    font-weight: bold;
+      p {
+        display: inline;
+      color: #c79288;
+      font-size: 14px;
+      font-weight: bold;
   }
-  #filterIcon {
-    color: #c79288;
-    margin: 2px 2px 0 0px;
+      #filterIcon {
+        color: #c79288;
+      margin: 2px 2px 0 0px;
   }
-`;
+      `;
