@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import styled from "@emotion/styled";
 import { useAppDispatch } from "../../hooks";
 import { login } from "../../store/slices/auth/authSlice";
 import RedButton from "../../components/RedButton";
@@ -11,28 +12,41 @@ const Login: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  function handleLogin() {
+  function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     const payload = { username, password };
     dispatch(login(payload));
   }
   return (
-    <div className="Login">
+    <Wrapper onSubmit={handleLogin}>
       <FormLabel htmlFor="username" text="Username" />
-      <FormInput value={username} onChange={setUsername} name="username" />
+      <FormInput
+        value={username}
+        onChange={setUsername}
+        name="username"
+        placeholder="Username"
+      />
       <FormLabel htmlFor="password" text="Password" />
       <FormInput
         value={password}
         onChange={setPassword}
         name="password"
         type="password"
+        placeholder="Password"
       />
-      <RedButton
-        buttonText="submit"
-        onClick={handleLogin}
-        buttonType="submit"
-      />
-    </div>
+      <Separator />
+      <RedButton buttonText="Log In" buttonType="submit" />
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.form`
+  padding-left: 14px;
+  padding-top: 14px;
+`;
+
+const Separator = styled.div`
+  margin: 46px;
+`;
 
 export default Login;
