@@ -1,15 +1,21 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import { useAppDispatch } from "../../hooks";
+import { useHistory } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import "./index.css";
 
-const Ratings: FC = () => {
+const Admin: FC | any = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(({ user }) => user);
+  console.log("Loaded Admin page with user:", user);
+  const history = useHistory();
 
   function handleLogout() {
     dispatch(setToken({ token: "" }));
   }
+
+  if (!user || !user.isAdmin) return history.push("/");
 
   return (
     <Wrapper>
@@ -26,4 +32,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-export default Ratings;
+export default Admin;

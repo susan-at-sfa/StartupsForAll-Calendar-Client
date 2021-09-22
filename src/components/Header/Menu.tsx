@@ -82,7 +82,7 @@ const Menu: FC = () => {
               );
             })}
           </ul>
-        ) : adminMenuOpen ?
+        ) : adminMenuOpen ? (
           <ul>
             <li onClick={() => setAdminMenuOpen(false)}>
               <p>{"< Back"}</p>
@@ -90,8 +90,11 @@ const Menu: FC = () => {
             <li>
               <a href="/login">Admin Login</a>
             </li>
+            <li>
+              <a href="/admin">Admin Home</a>
+            </li>
           </ul>
-          : null}
+        ) : null}
       </HamburgerMenu>
     </MenuContainer>
   );
