@@ -21,7 +21,8 @@ const dbEventSlice = createSlice({
   name: 'dbEvent',
   initialState,
   reducers: {
-    getAllDbEvents() { },
+    getAllDbEvents() {},
+    getDbEventsByFilter(state, action: PayloadAction<{ topics?: any; categories?: any; }>) {},
     setTopicFilters(state, action: PayloadAction<string[]>) {
       const topicFilters = action.payload;
       return { ...state, topicFilters }
@@ -46,6 +47,6 @@ const dbEventSlice = createSlice({
   }
 })
 
-export const { setAllDbEvents, getAllDbEvents, setTopicFilters, setCategoryFilters } = dbEventSlice.actions;
+export const { setAllDbEvents, getAllDbEvents, setTopicFilters, setCategoryFilters, getDbEventsByFilter } = dbEventSlice.actions;
 
 export default dbEventSlice.reducer;
