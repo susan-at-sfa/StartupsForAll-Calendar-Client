@@ -5,7 +5,7 @@ import { FiList } from "react-icons/fi";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
 import EventsList from "../../components/EventList/EventsList";
 import GoogleCalendar from "../../components/Google/GoogleCalendar";
-import AdminGoogle from "../../components/Google/AdminGoogle";
+// import AdminGoogle from "../../components/Google/AdminGoogle";
 
 const Events: FC = () => {
   const dispatch = useAppDispatch();
@@ -25,28 +25,28 @@ const Events: FC = () => {
     //     <EventsList />
     //   </ListEventContainer>
     // </Wrapper >
-    // <Wrapper>
-    //   <div className="eventBox">
-    //     <ListEventContainer>
-    //       <FilterButton>
-    //         <div
-    //           id="filterClick"
-    //           onClick={() => dispatch(setFilterModalOpen(true))}
-    //         >
-    //           <FiList id="filterIcon" />
-    //           <p> Filters</p>
-    //         </div>
-    //       </FilterButton>
-    //       <EventsList />
-    //     </ListEventContainer>
-    //   </div>
-    //   <CalendarDiv>
-    //     <GoogleCalendar />
-    //   </CalendarDiv>
-    // </Wrapper >
     <Wrapper>
-      <AdminGoogle />
-    </Wrapper>
+      <div className="eventBox">
+        <ListEventContainer>
+          <FilterButton>
+            <div
+              id="filterClick"
+              onClick={() => dispatch(setFilterModalOpen(true))}
+            >
+              <FiList id="filterIcon" />
+              <p> Filters</p>
+            </div>
+          </FilterButton>
+          <EventsList />
+        </ListEventContainer>
+      </div>
+      <CalendarDiv>
+        <GoogleCalendar />
+      </CalendarDiv>
+    </Wrapper >
+    //   <Wrapper>
+    //     <AdminGoogle />
+    //   </Wrapper>
   );
 };
 
