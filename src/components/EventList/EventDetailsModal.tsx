@@ -100,11 +100,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <button id="calendarAdd" type="button">
                           Button
                         </button>
-                        <button id="viewPage" type="button">
-                          <a href={url} target="_blank" rel="noreferrer">
+                        <a href={url} target="_blank" rel="noreferrer">
+                          <button id="viewPage" type="button">
                             View More Details
-                          </a>
-                        </button>
+                          </button>
+                        </a>
                       </div>
                     </TopButtonDiv>
                     <SmallHeader>
@@ -184,9 +184,10 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <button id="calendarAdd" type="button">
                           Button
                         </button>
-                        <button id="viewPage" type="button">
-                          <a href={url}>View More Details</a>
-                        </button>
+                        <a href={url} target="_blank" rel="noopener noreferrer">
+                          <button id="viewPage" type="button">View More Details
+                          </button>
+                        </a>
                       </BottomButtonDiv>
                       <h4>Event Link</h4>
                       <p>
@@ -283,6 +284,9 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover{
+      cursor: pointer;
+    }
   }
   #calendarAdd {
     padding: 1px 10px 1px 10px;
@@ -296,6 +300,7 @@ const TopButtonDiv = styled.div`
     font-size: 14px;
     &:hover {
       background-color: #a36760;
+      cursor: pointer;
     }
   }
   #viewPage {
@@ -309,6 +314,7 @@ const TopButtonDiv = styled.div`
     font-size: 14px;
     &:hover {
       background-color: #c79288;
+      cursor: pointer;
     }
   }
 `;
@@ -471,6 +477,9 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover{
+      cursor: pointer;
+    }
   }
   #calendarAdd {
     padding: 1px 10px 1px 10px;
@@ -484,6 +493,7 @@ const BottomButtonDiv = styled.div`
     font-size: 14px;
     &:hover {
       background-color: #a36760;
+      cursor: pointer;
     }
   }
   #viewPage {
@@ -497,6 +507,7 @@ const BottomButtonDiv = styled.div`
     font-size: 14px;
     &:hover {
       background-color: #c79288;
+      cursor: pointer;
     }
   }
 `;

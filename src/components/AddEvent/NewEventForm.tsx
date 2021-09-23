@@ -7,6 +7,7 @@ import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { toast } from "react-toastify";
+import { device } from "../../constants/Device";
 
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
@@ -264,6 +265,12 @@ export default NewEventForm;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+   @media ${device.desktop}{
+    display: block;
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 const PasteLinkContainer = styled.div`
   display: flex;
@@ -317,6 +324,12 @@ const EventsGreenDiv = styled.div`
   z-index: 2;
   position: fixed;
   bottom: 0;
+    @media ${device.desktop}{
+    display: flex;
+    width: 48%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 const FormFields = styled.div`
   padding-left: 18px;

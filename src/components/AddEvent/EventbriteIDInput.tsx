@@ -5,6 +5,7 @@ import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import { toast } from "react-toastify";
+import { device } from '../../constants/Device'
 
 interface EventbriteIDInputProps {
   newEvent(value: boolean): void;
@@ -71,6 +72,12 @@ const EventbritePasteWrapper = styled.div`
   flex-direction: column;
   padding-top: 14px;
   padding-left: 14px;
+  @media ${device.desktop}{
+    display: block;
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 const PasteLinkContainer = styled.div`
   display: flex;

@@ -5,10 +5,12 @@ import { useAppSelector } from "../../hooks";
 import { resetEvent } from "../../store/slices/newEvent/newEventSlice";
 import { resetEventBrite } from "../../store/slices/eventbrite/eventbriteSlice";
 import { emptyEvent } from "../../constants/NewEvent";
+import styled from '@emotion/styled'
 
 import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
 import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
 import NewEventForm from "../../components/AddEvent/NewEventForm";
+import { device } from "../../constants/Device";
 
 const Add: FC = () => {
   const history = useHistory();
@@ -25,7 +27,11 @@ const Add: FC = () => {
   };
 
   if (!token) {
-    return <AuthorizeToAddEvents />;
+    return (
+      <Wrapper>
+        <AuthorizeToAddEvents />
+      </Wrapper>
+    )
   }
 
   return (eventbriteDetails && eventbriteDetails.id) ||
@@ -37,3 +43,7 @@ const Add: FC = () => {
 };
 
 export default Add;
+
+const Wrapper = styled.div`
+
+`

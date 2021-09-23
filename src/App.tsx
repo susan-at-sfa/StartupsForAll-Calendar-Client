@@ -93,7 +93,6 @@ const Wrapper = styled.section`
     max-width: 1500px;
   }
 `;
-
 const Sections = styled.section`
   width: 100vw;
   scroll-behavior: smooth;
