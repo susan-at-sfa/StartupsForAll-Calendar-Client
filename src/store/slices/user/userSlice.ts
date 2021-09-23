@@ -4,6 +4,7 @@ export interface UserState {
   name?: string;
   username?: string;
   status: 'idle' | 'loading' | 'failed';
+  isAdmin?: boolean;
   email?: string;
   id?: string;
   created_at?: string;
@@ -15,6 +16,7 @@ const initialState: UserState = {
   username: '',
   status: 'idle',
   email: '',
+  isAdmin: false,
   id: '',
   created_at: '',
   updated_at: '',

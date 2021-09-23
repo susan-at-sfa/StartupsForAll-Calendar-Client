@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
-import { currentMonthEpochTime } from "../../helpers";
+import { currentMonthEpochTime, toLocalTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "./ListEvent";
 
@@ -69,11 +69,11 @@ const EventsListComponent: FC = () => {
                           category,
                           title,
                           start_date,
-                          start_time,
-                          end_time,
                           creator_name,
                           topics,
                         } = displayEvent;
+                        const start_time = toLocalTime(start_date);
+                        const end_time = toLocalTime(displayEvent.end_date);
 
                         return (
                           <ListEvent

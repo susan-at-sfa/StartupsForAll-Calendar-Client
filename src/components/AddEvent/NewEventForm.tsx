@@ -18,7 +18,7 @@ import {
   resetEventBrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
 import TopicSelection from "../EventList/TopicSelection";
-import CategorySelection from "../EventList/CategorySelection";
+import CategoryRadio from "../EventList/CategoryRadio";
 import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {
@@ -42,7 +42,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.title || eventDetails.name || ""
   );
   const [category, setCategory] = useState<Category | string>(
-    Category.StartupsForAll
+    Category.Community
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
@@ -101,7 +101,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     } else {
       fd.end_date = toUtcDateTime(endDate, endTime);
     }
-    console.log("after converting times", fd);
     dispatch(
       saveNewEvent({
         form: fd,
@@ -122,19 +121,16 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   };
 
   const changeCategory = (category: string) => {
-    console.log("change category clicked", category);
     setCategory("");
     setCategory(category);
   };
 
   const getCategoryText = (): string => {
-    if (category === Category.StartupsForAll)
-      return CategoryText.StartupsForAll;
+    if (category === Category.Community) return CategoryText.StartupsForAll;
     return CategoryText.Community;
   };
 
   const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
-    console.log("getting new event details...");
     event.preventDefault();
     if (!url) {
       toast("Please include a valid Eventbrite Event URL or ID.");
@@ -152,7 +148,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     history.push("/add");
   };
 
-  console.log("NewEventForm component - got props.eventDetails:", eventDetails);
   return (
     <Wrapper>
       <PasteLinkContainer>
@@ -219,7 +214,10 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           <FormLabel htmlFor="category" text="Category" />
           <StyledContainer>
-            <CategorySelection multi={false} onClick={changeCategory} />
+            <CategoryRadio
+              selectedCategory={category}
+              onChange={changeCategory}
+            />
           </StyledContainer>
 
           <FormLabel htmlFor="topics" text="Add Topics Emojis" />
