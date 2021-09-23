@@ -8,7 +8,6 @@ export const parseIdFromUrl = (url: string): string | null => {
 }
 
 export const toLocalTime = (dateString: string): string => {
-  console.log('calling tolocaltime on', dateString);
   if (dateString === "" || !dateString) return "";
   return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
 }

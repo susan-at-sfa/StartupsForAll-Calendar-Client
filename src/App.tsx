@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import { Routes } from "./constants/routes";
 import { useAppSelector, useAppDispatch } from "./hooks";
-import styled from "styled-components";
 import { getAllDbEvents } from "./store/slices/dbEvent/dbEventSlice";
 import { ToastContainer } from "react-toastify";
+import styled from "styled-components";
 import "react-toastify/dist/ReactToastify.css";
 //components
 import Events from "./containers/Events";
