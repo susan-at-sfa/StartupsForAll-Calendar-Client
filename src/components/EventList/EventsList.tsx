@@ -4,6 +4,7 @@ import { useAppSelector } from "../../hooks";
 import { currentMonthEpochTime, toLocalTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "./ListEvent";
+import { device } from "../../constants/Device";
 
 const EventsListComponent: FC = () => {
   interface EventsList {
@@ -109,10 +110,7 @@ export default EventsListComponent;
 
 const MonthHeader = styled.div`
   position: sticky;
-  @media(max-width: 700px){
-    top: 98px;
-  }
-  top:15px;
+  top: 20px;
   z-index: 2;
   h1 {
     color: #c79288;

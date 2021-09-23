@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { getAllDbEvents } from "./store/slices/dbEvent/dbEventSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { device } from './constants/Device'
 //components
 import Events from "./containers/Events";
 import Login from "./containers/Login";
@@ -83,8 +84,14 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  @media ${device.mobile} {
+    max-width: 800px;
+  }
+  @media ${device.desktop}{
+    max-width: 1500px;
+  }
 `;
 
 const Sections = styled.section`
