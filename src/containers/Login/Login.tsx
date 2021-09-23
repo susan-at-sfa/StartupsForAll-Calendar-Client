@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { login } from "../../store/slices/auth/authSlice";
 import RedButton from "../../components/RedButton";
 import FormInput from "../../components/FormInput";
@@ -8,13 +8,16 @@ import FormLabel from "../../components/FormLabel";
 const Login: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const user = useAppSelector(({ user }) => user);
+  console.log("USER", user)
   const dispatch = useAppDispatch();
 
   function handleLogin() {
     const payload = { username, password };
     dispatch(login(payload));
   }
+
+
   return (
     <div className="Login">
       <FormLabel htmlFor="username" text="Username" />
