@@ -5,12 +5,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import Loading from "./components/Loading";
 
-import configureStore from "./store/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { persistor } from "./store/store";
+import configureStore from "./store/store";
+
 const initialState = {};
-const store = configureStore(initialState);
+const { store, persistor } = configureStore(initialState);
 
 ReactDOM.render(
   <React.StrictMode>
