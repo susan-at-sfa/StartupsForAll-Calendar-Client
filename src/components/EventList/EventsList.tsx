@@ -110,7 +110,7 @@ const EventsListComponent: FC = () => {
 
 export default EventsListComponent;
 const Wrapper = styled.div`
-background-color: white;
+background-color: white; 
 z-index: 5;
 `
 const MonthHeader = styled.div`
@@ -146,7 +146,6 @@ const MonthSection = styled.section`
     top: 90px;
     z-index: 2;
     @media ${device.desktop}{
-      position: -webkit-sticky;
       position: sticky;
       top: 0px;
     }
