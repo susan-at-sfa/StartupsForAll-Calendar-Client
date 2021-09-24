@@ -265,11 +265,13 @@ export default NewEventForm;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-   @media ${device.desktop}{
+  background-color: white;
+  @media ${device.forms}{
     display: block;
-    width: 45%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    max-width: 650px;
   }
 `;
 const PasteLinkContainer = styled.div`
@@ -290,6 +292,13 @@ const PasteLink = styled.div`
     height: 40px;
     background-color: #a36760;
     border: none;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+      box-shadow: 0 8px 4px -4px #a36760;
+    }
   }
   &:focus-within {
     outline: none;
@@ -319,16 +328,15 @@ const EventsGreenDiv = styled.div`
   border: none;
   padding: 10px 0 10px 18px;
   height: var(--submit-button-container-height);
-  width: 100vw;
+  width: 100%;
   background: #7bb1a7;
   z-index: 2;
   position: fixed;
   bottom: 0;
-    @media ${device.desktop}{
-    display: flex;
-    width: 48%;
-    margin-left: auto;
-    margin-right: auto;
+  left: 0;
+    @media ${device.forms}{
+    display: block;
+    width: 100%;
   }
 `;
 const FormFields = styled.div`
@@ -338,24 +346,53 @@ const FormFields = styled.div`
   margin-bottom: var(--submit-button-container-height);
 `;
 const ButtonDiv = styled.div`
+  display: block;
+  width: 100%;
+  margin-right: 0;
+  margin-left: auto;
+  @media ${device.forms}{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+  }
   #dark {
     font-weight: 600;
     font-size: 15px;
     color: white;
-    width: 100px;
+    margin: 0;
+    width: 30%;
+    min-width: 80px;
+    max-width: 110px;
     display: inline;
     height: 35px;
     background-color: #9dd3c9;
     border: none;
+    &:hover{
+      color: #518077;
+      background-color:#c0e3dc;
+      transition: 0.5s ease;
+      cursor: pointer;
+    }
   }
   #light {
     font-weight: 600;
     font-size: 15px;
     color: #518077;
-    width: 250px;
+    margin: 0;
+    width: 70%;
+    min-width: 150px;
+    max-width: 250px;
     height: 35px;
     background-color: #e0f0f1;
     border: none;
+    &:hover{
+      color: white;
+      background-color:#689da6;
+      transition: 0.5s ease;
+      cursor: pointer;
+    }
   }
   p {
     font-weight: bold;

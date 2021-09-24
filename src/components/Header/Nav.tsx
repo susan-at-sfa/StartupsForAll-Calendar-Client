@@ -45,7 +45,6 @@ const Wrapper = styled.section`
   z-index: 3;
   display: flex;
   align-items: center;
-  /* width: 100%; */
   height: 50px;
   background-color: #a36760;
   bottom: 0;

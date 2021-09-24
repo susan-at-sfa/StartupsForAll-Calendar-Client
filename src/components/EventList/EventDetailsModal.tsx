@@ -298,9 +298,11 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover {
+    &:hover{
+      color: #e8d9d6;
       background-color: #a36760;
       cursor: pointer;
+      transition: 0.5s ease;
     }
   }
   #viewPage {
@@ -312,9 +314,11 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover {
-      background-color: #c79288;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
       cursor: pointer;
+      transition: 0.5s ease;
     }
   }
 `;
@@ -493,9 +497,11 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover {
+    &:hover{
+      color: #e8d9d6;
       background-color: #a36760;
       cursor: pointer;
+      transition: 0.5s ease;
     }
   }
   #viewPage {
@@ -507,9 +513,11 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover {
-      background-color: #c79288;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
       cursor: pointer;
+      transition: 0.5s ease;
     }
   }
 `;

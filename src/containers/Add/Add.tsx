@@ -36,14 +36,19 @@ const Add: FC = () => {
 
   return (eventbriteDetails && eventbriteDetails.id) ||
     isCreatingNewEmptyEvent ? (
-    <NewEventForm cancelEvent={cancelEvent} eventDetails={eventbriteDetails} />
+    <Wrapper>
+      <NewEventForm cancelEvent={cancelEvent} eventDetails={eventbriteDetails} />
+    </Wrapper>
   ) : (
-    <EventbriteIDInput newEvent={setCreatingNewEmptyEvent} />
+    <Wrapper>
+      <EventbriteIDInput newEvent={setCreatingNewEmptyEvent} />
+    </Wrapper>
   );
 };
 
 export default Add;
 
 const Wrapper = styled.div`
-
+background-color: white;
+z-index: 5;
 `

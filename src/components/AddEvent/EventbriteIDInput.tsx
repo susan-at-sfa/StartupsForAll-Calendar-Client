@@ -96,6 +96,12 @@ const PasteLink = styled.div`
     height: 40px;
     background-color: #a36760;
     border: none;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
   }
   &:focus-within {
     outline: none;
@@ -138,5 +144,11 @@ const ButtonDiv = styled.div`
     width: 100%;
     height: 35px;
     background-color: #a36760;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
   }
 `;

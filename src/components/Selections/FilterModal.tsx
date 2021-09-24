@@ -141,8 +141,11 @@ const Wrapper = styled.div`
     padding-right: 30px;
     height: 35px;
     background-color: #a36760;
-    &:hover {
-      background-color: #c79288;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
     }
   }
   .topics,
