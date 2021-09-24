@@ -7,31 +7,22 @@ export const parseIdFromUrl = (url: string): string | null => {
   return id ? id[0] : null;
 }
 
-export const toLocalDate = (dateString: string): string => {
-  return new Date(Date.parse(dateString)).toISOString().split("T")[0];
-}
-
 export const toLocalTime = (dateString: string): string => {
-  return new Date(Date.parse(dateString)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  if (dateString === "" || !dateString) return "";
+  return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
 }
 
-export const toUtcDateTime = (date: string, time: string): string => {
-  console.log('toUtcDateTime got date time', date, time);
-  const splitDate = date.split("-");
-  // + converts string into integer
-  const year = +splitDate[0]
-  // -1 because months are 0-indexed 0-11 but passed as strings 1-12
-  const month = +splitDate[1] - 1
-  const day = +splitDate[2]
-  const splitTime = time.split(":")
-  const hour = +splitTime[0]
-  const minute = +splitTime[1]
-  console.log('date time split:', year, month, day, hour, minute);
-  const localDateTime = new Date(year, month, day, hour, minute);
-  console.log('got local datetime of', localDateTime);
-  const utcDateTime = localDateTime.toISOString();
-  console.log('after formatting, got utc date time:', utcDateTime);
-  return utcDateTime;
+export const toUtcDateTime = (dateString: string, time: string): string | Date => {
+  const dateArray = dateString.split("-");
+  const year = Number(dateArray[0]);
+  // minus one as the months are 0th indexed 0-11 and date string is 1-12
+  const month = Number(dateArray[1]) - 1;
+  const day = Number(dateArray[2]);
+  const timeArray = time.split(":")
+  const hours = Number(timeArray[0]);
+  const mins = Number(timeArray[1]);
+  const localDateTime = new Date(year, month, day, hours, mins);
+  return localDateTime.toISOString();
 }
 
 export const currentMonthEpochTime = (): number => {

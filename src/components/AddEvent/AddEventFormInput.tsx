@@ -25,25 +25,26 @@ const AddEventFormInput: FC<AddEventFormInputProps> = (props) => {
 };
 
 const Input = styled.input`
-          border: 8px solid #e8d9d6;
-          border-right-width: 20px;
-          height: 45px;
-          padding-left: 15px;
-          padding-right: 15px;
-          width: 300px;
-          margin-bottom: 15px;
-          &::placeholder {
-            color: #e8d9d6;
-            font-weight: bold;
-          }
-          &:focus {
-            outline: none;
-            border-color: #a36760;
-            transition: 0.75s ease;
-          }
-          &:focus::placeholder {
-            color: #a36760;
-            transition: 0.75s ease;
-          }
-        `;
+  border: 8px solid #e8d9d6;
+  border-right-width: 20px;
+  height: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 300px;
+  margin-bottom: 15px;
+  &::placeholder {
+    color: #e8d9d6;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  &:focus::placeholder {
+    color: #a36760;
+    transition: 0.75s ease;
+  }
+`;
+
 export default AddEventFormInput;

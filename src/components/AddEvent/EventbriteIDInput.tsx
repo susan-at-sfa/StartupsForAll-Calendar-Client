@@ -5,6 +5,7 @@ import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import { toast } from "react-toastify";
+import { device } from '../../constants/Device'
 
 interface EventbriteIDInputProps {
   newEvent(value: boolean): void;
@@ -71,6 +72,13 @@ const EventbritePasteWrapper = styled.div`
   flex-direction: column;
   padding-top: 14px;
   padding-left: 14px;
+@media ${device.forms}{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 650px;
+  }
 `;
 const PasteLinkContainer = styled.div`
   display: flex;
@@ -88,6 +96,12 @@ const PasteLink = styled.div`
     height: 40px;
     background-color: #a36760;
     border: none;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
   }
   &:focus-within {
     outline: none;
@@ -130,5 +144,11 @@ const ButtonDiv = styled.div`
     width: 100%;
     height: 35px;
     background-color: #a36760;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
   }
 `;

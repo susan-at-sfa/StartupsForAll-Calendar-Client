@@ -5,7 +5,8 @@ interface FormInputProps {
   placeholder?: string;
   type?: string;
   required?: boolean;
-  onChange(value: string): void;
+  onChange(value: any | null): void;
+  onBlur?(value: any): void;
   value?: string | number | Date | string[] | any;
   name?: string;
   disabled?: boolean;
@@ -22,6 +23,7 @@ const FormInput: FC<FormInputProps> = (props) => {
       onChange={(e) => props.onChange(e.target.value)}
       value={props.value}
       name={props.name}
+      onFocus={(e) => window.scrollTo(0, e.target.offsetTop - 125)}
     />
   );
 };

@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 import { Routes } from "./constants/routes";
 import { useAppSelector, useAppDispatch } from "./hooks";
-import styled from "styled-components";
 import { getAllDbEvents } from "./store/slices/dbEvent/dbEventSlice";
 import { ToastContainer } from "react-toastify";
+import styled from "styled-components";
 import "react-toastify/dist/ReactToastify.css";
+import { device } from './constants/Device'
 //components
 import Events from "./containers/Events";
 import Login from "./containers/Login";
@@ -19,8 +20,8 @@ import Add from "./containers/Add";
 import LogoMenu from "./components/Header/LogoMenu";
 import Hero from "./components/Header/Hero";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
-import FilterModal from "./components/EventList/FilterModal";
-import Navbar from "./components/Header/Navbar";
+import FilterModal from "./components/Selections/FilterModal";
+import Navbar from "./components/Header/Nav";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +30,8 @@ const App: FC = () => {
   }, [dispatch]);
 
   const token = useAppSelector(({ auth }) => auth.token);
-  // const user = useAppSelector(({ user }) => user);
+  const user = useAppSelector(({ user }) => user);
+  console.log("  MAIN APP  \nuser:", user);
   const selectedEventID = useAppSelector(
     ({ eventModal }) => eventModal.selectedEventID
   );
@@ -68,9 +70,9 @@ const App: FC = () => {
           modalOpen={eventDetailsModalOpen}
         />
         <FilterModal modalOpen={filterModalOpen} />
+        <LogoMenu />
+        <Hero />
         <Sections>
-          <LogoMenu />
-          <Hero />
           <Navbar />
           <Switch>{routes}</Switch>
         </Sections>
@@ -84,13 +86,28 @@ export default App;
 const Wrapper = styled.section`
   height: 100vh;
   width: 100%;
-`;
-
-const Sections = styled.section`
-  width: 100vw;
   scroll-behavior: smooth;
+  -ms-overflow-style: none;
   scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+  ::-webkit-scrollbar{
+  display: none;
+    }
+  @media ${device.mobile} {
+    overflow-x: hidden;
   }
+  @media ${device.desktop}{
+  }
+`;
+const Sections = styled.section`
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  max-height: calc(100% - 45px);
+  overflow: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar{
+  display: none;
+    }
 `;

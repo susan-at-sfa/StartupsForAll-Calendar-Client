@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 
@@ -29,6 +29,32 @@ interface BlankNewEventInputsProps {
 const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
   console.log("BlankNewEventInputs component - got props:", props);
 
+  const [localStartDate, setLocalStartDate] = useState<string>("");
+  const [localEndDate, setLocalEndDate] = useState<string>("");
+  const [localStartTime, setLocalStartTime] = useState<string>("");
+  const [localEndTime, setLocalEndTime] = useState<string>("");
+
+  const handleChange = (value: string, which: string) => {
+    console.log("handling date/time change...", value, which);
+    if (which === "et") {
+      setLocalEndTime(value);
+      props.setEndTime(value);
+    } else if (which === "st") {
+      setLocalStartTime(value);
+      props.setStartTime(value);
+    } else if (which === "sd") {
+      setLocalStartDate(value);
+      // calling toString() ensures it is saved as a string formatted YYYY-MM-DD
+      // without toString it will be converted to a Date eg: "Date Fri Oct 22 2021 17:00:00 GMT-0700 (Pacific Daylight Time)"
+      // having a Date saved in state in this way makes it much harder to combine
+      // Date+Time to generate an accurate UTC/ISO8601 formatted date for the back end
+      props.setStartDate(value.toString());
+    } else if (which === "ed") {
+      setLocalEndDate(value);
+      props.setEndDate(value.toString());
+    }
+  };
+
   return (
     <>
       <FormLabel htmlFor="title" text="Title" />
@@ -48,8 +74,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="date"
         required
         disabled={false}
-        value={props.startDate}
-        onChange={props.setStartDate}
+        value={localStartDate}
+        onChange={(value) => handleChange(value, "sd")}
         name="start_date"
       />
 
@@ -59,8 +85,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="date"
         required
         disabled={false}
-        value={props.endDate}
-        onChange={props.setEndDate}
+        value={localEndDate}
+        onChange={(value) => handleChange(value, "ed")}
         name="end_date"
       />
 
@@ -70,8 +96,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="time"
         required
         disabled={false}
-        value={props.startTime}
-        onChange={props.setStartTime}
+        value={localStartTime}
+        onChange={(value) => handleChange(value, "st")}
         name="start_time"
       />
 
@@ -81,8 +107,8 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         type="time"
         required
         disabled={false}
-        value={props.endTime}
-        onChange={props.setEndTime}
+        value={localEndTime}
+        onChange={(value) => handleChange(value, "et")}
         name="end_time"
       />
 
@@ -122,8 +148,6 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
 };
 
 const TextArea = styled.textarea`
-  color: #e8d9d6;
-  font-weight: bold;
   border: 8px solid #e8d9d6;
   border-right-width: 20px;
   min-height: 45px;
@@ -131,19 +155,19 @@ const TextArea = styled.textarea`
   margin-bottom: 15px;
   max-width: 100%;
   max-width: 100vw;
-    &::placeholder {
-      color: #e8d9d6;
-      font-weight: bold;
-    }
-    &:focus {
-      outline: none;
-      border-color: #a36760;
-      transition: 0.75s ease;
-    }
-    &:focus::placeholder {
-      color: #a36760;
-      transition: 0.75s ease;
-    }
+  &::placeholder {
+    color: #e8d9d6;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  &:focus::placeholder {
+    color: #a36760;
+    transition: 0.75s ease;
+  }
 `;
 
 export default BlankNewEventInputs;

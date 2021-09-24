@@ -4,6 +4,7 @@ import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { useAppDispatch } from "../../hooks";
 import { login } from "../../store/slices/auth/authSlice";
+import { device } from "../../constants/Device";
 
 const AuthorizeToAddEvents: FC = () => {
   const [name, setName] = useState<string>("");
@@ -64,6 +65,14 @@ const EventAuthPage = styled.div`
   display: flex;
   padding-left: 14px;
   padding-top: 14px;
+  width: 100%;
+  @media ${device.forms}{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 650px;
+  }
 `;
 const ButtonDiv = styled.div`
   display: flex;
@@ -78,5 +87,11 @@ const ButtonDiv = styled.div`
     width: 100%;
     height: 37px;
     background-color: #a36760;
+      &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
   }
 `;

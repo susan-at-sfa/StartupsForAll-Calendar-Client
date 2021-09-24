@@ -1,64 +1,61 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useAppDispatch } from "../../hooks";
-import { FiList } from "react-icons/fi";
-import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
-import OrganizedEventsComponent from "../../components/OrganizedEvents/OrganizedEvents";
+import EventsList from "../../components/EventList/EventsList";
+import GoogleCalendar from "../../components/Google/GoogleCalendar";
+import FilterButton from "../../components/Selections/Filter Button";
+import { device } from "../../constants/Device";
 
 const Events: FC = () => {
-  const dispatch = useAppDispatch();
 
   return (
     <Wrapper>
-      <ListEventContainer>
-        <FilterButton>
-          <div
-            id="filterClick"
-            onClick={() => dispatch(setFilterModalOpen(true))}
-          >
-            <FiList id="filterIcon" />
-            <p> Filters</p>
-          </div>
-        </FilterButton>
-        <OrganizedEventsComponent />
-      </ListEventContainer>
-    </Wrapper>
+      <div className="eventBox">
+        <ListEventContainer>
+          <FilterButton />
+          <EventsList />
+        </ListEventContainer>
+      </div>
+      <CalendarDiv>
+        <GoogleCalendar />
+      </CalendarDiv>
+    </Wrapper >
   );
 };
 
 export default Events;
 
 const Wrapper = styled.div`
-  display: flex;
+display: flex;
+padding-top: 2%;
+align-items: center;
+justify-content: center;
+background-color: white;
+width: 100%;
+z-index: 2;
+position: relative;
+@media ${device.mobile}{
   align-items: center;
   justify-content: center;
+}
+.eventBox{
+  @media ${device.desktop}{
+    max-height: 600px;
+    overflow: scroll;
+    margin-right: 2%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar{
+      display: none;
+    }
+  }
+}
 `;
 const ListEventContainer = styled.div`
-  width: 340px;
+width: 340px;
 `;
-const FilterButton = styled.div`
-  position: sticky;
-  top: 90px; /* logo header + navbar */
-  width: 100%;
-  text-align: right;
-  z-index: 2;
-  #filterClick {
-    display: flex;
-    background-color: white;
-    position: absolute;
-    right: 0;
-    margin: 0;
-    width: 75px;
-    padding-left: 12px;
-  }
-  p {
-    display: inline;
-    color: #c79288;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  #filterIcon {
-    color: #c79288;
-    margin: 2px 2px 0 0px;
-  }
-`;
+const CalendarDiv = styled.div`
+display: none;
+@media ${device.desktop}{
+  display: block;
+}
+`

@@ -12,7 +12,6 @@ import {
   topicsEmojis,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
-// import {events} from '../../constants/DummyEvents';
 interface EventDetailsModalProps {
   selectedEventID: string;
   modalOpen: boolean;
@@ -47,27 +46,39 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               category,
               cost,
               created_at,
+              creator_name,
               custom_blurb,
+              end_date,
+              start_date,
               logo,
               location,
-              title,
-              start_date,
-              start_time,
-              end_time,
-              creator_name,
-              topics,
-              description,
               summary,
+              title,
+              topics,
               url,
             } = e;
 
             const eventDate = new Date(start_date).toDateString();
-            const localPostedBy = new Date(created_at).toLocaleString([], {
+            const localeCreatedAt = new Date(created_at).toLocaleString([], {
               year: "numeric",
-              month: "2-digit",
+              month: "numeric",
               day: "2-digit",
-              hour: "2-digit",
+              hour: "numeric",
               minute: "2-digit",
+            });
+            // TODO: import this interface...
+            // const timeOptions: DateTimeFormatOptions = {
+            const timeOptions: any = {
+              hour: "numeric",
+              minute: "2-digit",
+            };
+            const start_time = new Date(start_date).toLocaleTimeString(
+              [],
+              timeOptions
+            );
+            const end_time = new Date(end_date).toLocaleTimeString([], {
+              ...timeOptions,
+              timeZoneName: "short",
             });
 
             return (
@@ -86,17 +97,23 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </div>
                       <div className="topButtonsRight">
                         <button id="calendarAdd" type="button">
-                          + Cal
+                          Button
                         </button>
-                        <button id="viewPage" type="button">
-                          <a href={url}>View More Details </a>
-                        </button>
+                        <a href={url} target="_blank" rel="noopener noreferrer">
+                          <button id="viewPage" type="button">
+                            View More Details
+                          </button>
+                        </a>
                       </div>
                     </TopButtonDiv>
                     <SmallHeader>
                       <SmallHeaderLeft>
-                        <h2>{title}</h2>
-                        <p>{creator_name}</p>
+                        <div id="title">
+                          <h2>{title}</h2>
+                        </div>
+                        <div id="creatorName">
+                          <p>{creator_name}</p>
+                        </div>
                       </SmallHeaderLeft>
                       <SmallHeaderRight>
                         <h2>{eventDate}</h2>
@@ -128,11 +145,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       <h2>Info from {creator_name}</h2>
                       <p>{custom_blurb}</p>
                     </CustomBlurb>
-                    {logo ?
+                    {logo ? (
                       <ModalImg>
                         <img src={logo} alt={title + "logo"} />
                       </ModalImg>
-                      : null}
+                    ) : null}
                     <ModalHeader>
                       <h2>{title}</h2>
                       <p>
@@ -143,9 +160,9 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         {start_time} - {end_time}
                       </p>
                       <h4>Location</h4>
-                      <p>
+                      <Centered>
                         <BiVideo /> {location}
-                      </p>
+                      </Centered>
                       <h4>Price</h4>
                       <p>
                         {cost}{" "}
@@ -164,15 +181,24 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           Back
                         </button>
                         <button id="calendarAdd" type="button">
-                          + Cal
+                          Button
                         </button>
-                        <button id="viewPage" type="button">
-                          <a href={url}>View More Details</a>
-                        </button>
+                        <a href={url} target="_blank" rel="noopener noreferrer">
+                          <button id="viewPage" type="button">
+                            View More Details
+                          </button>
+                        </a>
                       </BottomButtonDiv>
                       <h4>Event Link</h4>
                       <p>
-                        <a id="link" href={url}>{url}</a>
+                        <a
+                          id="link"
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {url}
+                        </a>
                       </p>
                     </SecondSection>
                     <ModalFooter>
@@ -194,8 +220,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </div>
                       <div>
                         <p>Posted</p>
-                        {/* <p>{created_at}</p> */}
-                        <p>{localPostedBy}</p>
+                        <p>{localeCreatedAt}</p>
                         <p>by {creator_name}</p>
                       </div>
                     </ModalFooter>
@@ -213,15 +238,15 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
 export default EventDetailsModal;
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 7;
-  `;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -231,7 +256,7 @@ const Wrapper = styled.div`
   width: 90vw;
   max-width: 720px;
   max-height: 1055px;
-  min-width: 357px;
+  min-width: 320px;
   z-index: 10;
   overflow: scroll;
   overflow-x: hidden;
@@ -240,12 +265,12 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  `;
+`;
 const TopButtonDiv = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
+  width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   a {
     text-decoration: none;
@@ -264,6 +289,9 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   #calendarAdd {
     padding: 1px 10px 1px 10px;
@@ -276,7 +304,10 @@ const TopButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
     &:hover {
+      color: #e8d9d6;
       background-color: #a36760;
+      cursor: pointer;
+      transition: 0.5s ease;
     }
   }
   #viewPage {
@@ -289,7 +320,10 @@ const TopButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
     &:hover {
-      background-color: #c79288;
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
     }
   }
 `;
@@ -334,6 +368,17 @@ const SmallHeader = styled.div`
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
+  h2 {
+    max-width: 175px;
+    overflow-wrap: break-word;
+  }
+  #title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 const SmallHeaderRight = styled.div`
   text-align: right;
@@ -417,13 +462,15 @@ const SecondSection = styled.div`
     margin-right: 10px;
     word-break: break-all;
   }
-  #link{
+  #link {
     color: #7bb1a7;
     text-decoration: none;
   }
 `;
 const BottomButtonDiv = styled.div`
-margin-bottom: 35px;
+  display: flex;
+  margin-bottom: 35px;
+  width: 100%;
   a {
     text-decoration: none;
     color: white;
@@ -441,6 +488,9 @@ margin-bottom: 35px;
     color: white;
     font-weight: 600;
     font-size: 14px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   #calendarAdd {
     padding: 1px 10px 1px 10px;
@@ -453,7 +503,10 @@ margin-bottom: 35px;
     font-weight: 600;
     font-size: 14px;
     &:hover {
+      color: #e8d9d6;
       background-color: #a36760;
+      cursor: pointer;
+      transition: 0.5s ease;
     }
   }
   #viewPage {
@@ -466,7 +519,10 @@ margin-bottom: 35px;
     font-weight: 600;
     font-size: 14px;
     &:hover {
-      background-color: #c79288;
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
     }
   }
 `;
@@ -493,5 +549,13 @@ const ModalFooter = styled.div`
     padding-right: 0;
     font-size: 12px;
     line-height: 17px;
+  }
+`;
+const Centered = styled.p`
+  display: flex;
+  align-items: center;
+  align-content: center;
+  svg {
+    margin-right: 4px;
   }
 `;

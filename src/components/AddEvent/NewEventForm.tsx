@@ -7,23 +7,19 @@ import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { toast } from "react-toastify";
+import { device } from "../../constants/Device";
 
 import { Category } from "../../constants/Category.enum";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import {
-  parseIdFromUrl,
-  toLocalDate,
-  toLocalTime,
-  toUtcDateTime,
-} from "../../helpers";
+import { parseIdFromUrl, toLocalTime, toUtcDateTime } from "../../helpers";
 import {
   requestEventbriteEvent,
   resetEventBrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
-import TopicSelection from "../EventList/TopicSelection";
-import CategorySelection from "../EventList/CategorySelection";
+import TopicSelection from "../Selections/TopicSelection";
+import CategoryRadio from "../Selections/CategoryRadio";
 import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {
@@ -47,41 +43,24 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.title || eventDetails.name || ""
   );
   const [category, setCategory] = useState<Category | string>(
-    Category.StartupsForAll
+    Category.Community
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
   const [currency, setCurrency] = useState<string>(
     eventDetails.currency || "USD"
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
-  const [startDate, setStartDate] = useState<string>(
-    eventDetails.id !== ""
-      ? Object.keys(eventDetails.start).length > 0
-        ? toLocalDate(eventDetails.start.utc)
-        : ""
-      : ""
-  );
-  const [endDate, setEndDate] = useState<string>(
-    eventDetails.id !== ""
-      ? Object.keys(eventDetails.end).length > 0
-        ? toLocalDate(eventDetails.end.utc)
-        : ""
-      : ""
+
+  // Dates
+  const [startDate, setStartDate] = useState<string>(eventDetails.start);
+  const [endDate, setEndDate] = useState<string>(eventDetails.end);
+  const [startTime, setStartTime] = useState<string>(
+    eventDetails.start !== "" ? toLocalTime(eventDetails.start) : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end_time !== ""
-      ? toLocalTime(eventDetails.end_time)
-      : Object.keys(eventDetails.end).length > 0
-        ? toLocalTime(eventDetails.end.utc)
-        : ""
+    eventDetails.end !== "" ? toLocalTime(eventDetails.end) : ""
   );
-  const [startTime, setStartTime] = useState<string>(
-    eventDetails.start_time !== ""
-      ? toLocalTime(eventDetails.start_time)
-      : Object.keys(eventDetails.start).length > 0
-        ? toLocalTime(eventDetails.start.utc)
-        : ""
-  );
+
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
   );
@@ -94,18 +73,14 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       category: category,
       category_text: getCategoryText(),
       changed: eventDetails.changed,
-      cost: Number(cost.toString().substring(1)),
+      cost: Number(cost),
       created: eventDetails.created,
       creator_email: creator_email,
       creator_name: creator_name,
       currency: currency,
       custom_blurb: customBlurb,
-      end_time: endTime,
-      eventbrite_id: eventDetails.id,
       location: location,
-      logo: "",
       promoted: false,
-      start_time: startTime,
       summary: summary,
       title: eventTitle,
       topics: topics,
@@ -113,23 +88,20 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (eventDetails.logo) {
       fd.logo = eventDetails.logo;
     }
-    if (eventDetails.summary) {
-      fd.summary = eventDetails.summary;
-    }
-    if (endDate.toString().includes("Z")) {
-      fd.end_date = endDate;
-      fd.start_date = startDate;
-    } else if (Object.keys(eventDetails.end).length > 0) {
-      fd.end_date = eventDetails.end.utc;
-      fd.start_date = eventDetails.start.utc;
-    } else {
-      fd.end_date = toUtcDateTime(endDate, endTime);
-      fd.start_date = toUtcDateTime(startDate, startTime);
-    }
     if (url) {
       fd.url = url;
     }
-    console.log("NEW EVENT FORM SUBMITTED", fd);
+    // Eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
+    if (startDate.toString().includes("Z")) {
+      fd.start_date = startDate;
+    } else {
+      fd.start_date = toUtcDateTime(startDate, startTime);
+    }
+    if (endDate.toString().includes("Z")) {
+      fd.end_date = endDate;
+    } else {
+      fd.end_date = toUtcDateTime(endDate, endTime);
+    }
     dispatch(
       saveNewEvent({
         form: fd,
@@ -150,19 +122,16 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   };
 
   const changeCategory = (category: string) => {
-    console.log("change category clicked", category);
     setCategory("");
     setCategory(category);
   };
 
   const getCategoryText = (): string => {
-    if (category === Category.StartupsForAll)
-      return CategoryText.StartupsForAll;
+    if (category === Category.Community) return CategoryText.StartupsForAll;
     return CategoryText.Community;
   };
 
   const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
-    console.log("getting new event details...");
     event.preventDefault();
     if (!url) {
       toast("Please include a valid Eventbrite Event URL or ID.");
@@ -180,7 +149,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     history.push("/add");
   };
 
-  console.log("NewEventForm component - got props.eventDetails:", eventDetails);
   return (
     <Wrapper>
       <PasteLinkContainer>
@@ -208,6 +176,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             value={creator_name}
             onChange={() => null}
             name="creator_name"
+            onBlur={() => null}
           />
 
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
@@ -219,7 +188,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             name="custom_blurb"
           />
 
-          {eventDetails && eventDetails.id === "" && (
+          {eventDetails && eventDetails.summary === "" && (
             <BlankNewEventInputs
               eventTitle={eventTitle}
               setEventTitle={setEventTitle}
@@ -246,7 +215,10 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           <FormLabel htmlFor="category" text="Category" />
           <StyledContainer>
-            <CategorySelection multi={false} onClick={changeCategory} />
+            <CategoryRadio
+              selectedCategory={category}
+              onChange={changeCategory}
+            />
           </StyledContainer>
 
           <FormLabel htmlFor="topics" text="Add Topics Emojis" />
@@ -254,7 +226,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             <TopicSelection onClick={changeTopics} />
           </StyledContainer>
 
-          {eventDetails && eventDetails.id !== "" && (
+          {eventDetails && eventDetails.summary !== "" && (
             <EventbriteEventInfo
               title={eventTitle}
               logo={eventDetails.logo}
@@ -293,6 +265,14 @@ export default NewEventForm;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: white;
+  @media ${device.forms}{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 650px;
+  }
 `;
 const PasteLinkContainer = styled.div`
   display: flex;
@@ -312,6 +292,13 @@ const PasteLink = styled.div`
     height: 40px;
     background-color: #a36760;
     border: none;
+    &:hover{
+      color: #a36760;
+      background-color: #e8d9d6;
+      cursor: pointer;
+      transition: 0.5s ease;
+      box-shadow: 0 8px 4px -4px #a36760;
+    }
   }
   &:focus-within {
     outline: none;
@@ -341,11 +328,16 @@ const EventsGreenDiv = styled.div`
   border: none;
   padding: 10px 0 10px 18px;
   height: var(--submit-button-container-height);
-  width: 100vw;
+  width: 100%;
   background: #7bb1a7;
   z-index: 2;
   position: fixed;
   bottom: 0;
+  left: 0;
+    @media ${device.forms}{
+    display: block;
+    width: 100%;
+  }
 `;
 const FormFields = styled.div`
   padding-left: 18px;
@@ -354,24 +346,53 @@ const FormFields = styled.div`
   margin-bottom: var(--submit-button-container-height);
 `;
 const ButtonDiv = styled.div`
+  display: block;
+  width: 100%;
+  margin-right: 0;
+  margin-left: auto;
+  @media ${device.forms}{
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+  }
   #dark {
     font-weight: 600;
     font-size: 15px;
     color: white;
-    width: 100px;
+    margin: 0;
+    width: 30%;
+    min-width: 80px;
+    max-width: 110px;
     display: inline;
     height: 35px;
     background-color: #9dd3c9;
     border: none;
+    &:hover{
+      color: #518077;
+      background-color:#c0e3dc;
+      transition: 0.5s ease;
+      cursor: pointer;
+    }
   }
   #light {
     font-weight: 600;
     font-size: 15px;
     color: #518077;
-    width: 250px;
+    margin: 0;
+    width: 70%;
+    min-width: 150px;
+    max-width: 250px;
     height: 35px;
     background-color: #e0f0f1;
     border: none;
+    &:hover{
+      color: white;
+      background-color:#689da6;
+      transition: 0.5s ease;
+      cursor: pointer;
+    }
   }
   p {
     font-weight: bold;
@@ -387,19 +408,19 @@ const TextArea = styled.textarea`
   padding: 0 15px;
   max-width: 100%;
   max-width: 100vw;
-    &::placeholder {
-      color: #e8d9d6;
-      font-weight: bold;
-    }
-    &:focus {
-      outline: none;
-      border-color: #a36760;
-      transition: 0.75s ease;
-    }
-    &:focus::placeholder {
-      color: #a36760;
-      transition: 0.75s ease;
-    }
+  &::placeholder {
+    color: #e8d9d6;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+    border-color: #a36760;
+    transition: 0.75s ease;
+  }
+  &:focus::placeholder {
+    color: #a36760;
+    transition: 0.75s ease;
+  }
 `;
 const SelectList = styled.select`
   color: #e8d9d6;

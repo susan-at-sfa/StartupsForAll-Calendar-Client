@@ -30,9 +30,10 @@ export default LogoMenu;
 const TopSticky = styled.div`
   position: sticky;
   top: 0;
+  margin: 0;
   z-index: 4;
   height: 45px;
-  background: black;
+  background:transparent;
 `;
 const Logo = styled.img`
   height: auto;
@@ -50,7 +51,7 @@ const Hamburger = styled.div`
   position: fixed;
   top: 10px;
   right: 15px;
-  z-index: 10;
+  z-index: 100;
   cursor: pointer;
   &.active {
     span {

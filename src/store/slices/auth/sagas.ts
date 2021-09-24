@@ -30,10 +30,13 @@ function* loginUser(action: PayloadAction<{ username?: string; password: string;
   const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}`, 'POST', action.payload);
 
   if (success) {
-    console.log('SUCCESS LOGIN', data);
     yield put(setUser(finalPayload));
     yield put(setToken({ token: data.access_token }));
-    toast("Approved to create events!");
+    if (action.payload.email) {
+      toast("Approved to create events!");
+    } else {
+      toast("Welcome SFA Events Calendar Admin!");
+    }
   }
   if (error) {
     // handle api error

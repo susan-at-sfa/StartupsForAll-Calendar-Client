@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 const Menu: FC = () => {
   const [cohortMenuOpen, setCohortMenuOpen] = useState(false);
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
+  const [adminMenuOpen, setAdminMenuOpen] = useState(false);
 
   const startUpsURL: string = "https://startupsforall.org/";
   const codaLink: string =
@@ -36,7 +37,7 @@ const Menu: FC = () => {
   return (
     <MenuContainer>
       <HamburgerMenu>
-        {!cohortMenuOpen && !dashboardMenuOpen ? (
+        {!cohortMenuOpen && !dashboardMenuOpen && !adminMenuOpen ? (
           <ul>
             <li onClick={() => setCohortMenuOpen(true)}>
               <p>{"Meet The Founders >"}</p>
@@ -49,11 +50,14 @@ const Menu: FC = () => {
             <li onClick={() => setDashboardMenuOpen(true)}>
               <p>{"Cohort Dashboards >"}</p>
             </li>
+            <li onClick={() => setAdminMenuOpen(true)}>
+              <p>{"Admin >"}</p>
+            </li>
           </ul>
         ) : cohortMenuOpen ? (
           <ul>
             <li onClick={() => setCohortMenuOpen(false)}>
-              <p>{"<Back"}</p>
+              <p>{"< Back"}</p>
             </li>
             {cohortLinks.map((item) => {
               const { id, title, link } = item;
@@ -67,7 +71,7 @@ const Menu: FC = () => {
         ) : dashboardMenuOpen ? (
           <ul>
             <li onClick={() => setDashboardMenuOpen(false)}>
-              <p>{"<Back"}</p>
+              <p>{"< Back"}</p>
             </li>
             {dashboardLinks.map((item) => {
               const { id, title, link } = item;
@@ -78,6 +82,18 @@ const Menu: FC = () => {
               );
             })}
           </ul>
+        ) : adminMenuOpen ? (
+          <ul>
+            <li onClick={() => setAdminMenuOpen(false)}>
+              <p>{"< Back"}</p>
+            </li>
+            <li>
+              <a href="/login">Admin Login</a>
+            </li>
+            <li>
+              <a href="/admin">Admin Home</a>
+            </li>
+          </ul>
         ) : null}
       </HamburgerMenu>
     </MenuContainer>
@@ -85,25 +101,25 @@ const Menu: FC = () => {
 };
 
 const MenuContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
+  z-index: 15;
   top: 0;
   bottom: 0;
-  z-index: 8;
 `;
 const HamburgerMenu = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 9;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  z-index: 15;
+  top: 0;
+  bottom: 0;
   a {
     color: black;
     text-decoration: none;
@@ -119,6 +135,7 @@ const HamburgerMenu = styled.div`
     text-align: center;
     li {
       cursor: pointer;
+      margin-top: 20px;
     }
   }
 `;
