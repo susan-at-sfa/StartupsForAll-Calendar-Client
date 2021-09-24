@@ -66,7 +66,7 @@ const EventAuthPage = styled.div`
   padding-left: 14px;
   padding-top: 14px;
   width: 100%;
-  @media (min-width: 650px){
+  @media ${device.forms}{
     display: block;
     width: 100%;
     margin-left: auto;

@@ -72,11 +72,12 @@ const EventbritePasteWrapper = styled.div`
   flex-direction: column;
   padding-top: 14px;
   padding-left: 14px;
-  @media ${device.desktop}{
+@media ${device.forms}{
     display: block;
-    width: 45%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    max-width: 650px;
   }
 `;
 const PasteLinkContainer = styled.div`
