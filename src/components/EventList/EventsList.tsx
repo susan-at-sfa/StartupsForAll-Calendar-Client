@@ -72,11 +72,24 @@ const EventsListComponent: FC = () => {
                           category,
                           title,
                           start_date,
+                          end_date,
                           creator_name,
                           topics,
                         } = displayEvent;
-                        const start_time = toLocalTime(start_date);
-                        const end_time = toLocalTime(displayEvent.end_date);
+                        const timeOptions: any = {
+                          hour: "numeric",
+                          minute: "2-digit",
+                        };
+                        const start_time = new Date(
+                          start_date
+                        ).toLocaleTimeString([], timeOptions);
+                        const end_time = new Date(end_date).toLocaleTimeString(
+                          [],
+                          {
+                            ...timeOptions,
+                            timeZoneName: "short",
+                          }
+                        );
 
                         return (
                           <ListEvent
@@ -110,9 +123,9 @@ const EventsListComponent: FC = () => {
 
 export default EventsListComponent;
 const Wrapper = styled.div`
-background-color: white; 
-z-index: 5;
-`
+  background-color: white;
+  z-index: 5;
+`;
 const MonthHeader = styled.div`
   h1 {
     color: #c79288;
@@ -137,7 +150,7 @@ const MonthSection = styled.section`
     color: #c4c4c4;
     padding: 20px 10px;
   }
-  .stickyBackground{
+  .stickyBackground {
     background-color: white;
     height: 21px;
     padding-top: 1px;
@@ -145,9 +158,9 @@ const MonthSection = styled.section`
     position: sticky;
     top: 48px;
     z-index: 2;
-    @media ${device.desktop}{
+    @media ${device.desktop} {
       position: sticky;
       top: 0px;
     }
   }
-`
+`;
