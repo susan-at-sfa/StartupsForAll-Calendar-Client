@@ -31,7 +31,8 @@ align-items: center;
 justify-content: center;
 background-color: white;
 width: 100%;
-z-index: 3;
+z-index: 2;
+position: relative;
 @media ${device.mobile}{
   align-items: center;
   justify-content: center;
@@ -51,8 +52,6 @@ z-index: 3;
 `;
 const ListEventContainer = styled.div`
 width: 340px;
-position: sticky;
-top: 95px;
 `;
 const CalendarDiv = styled.div`
 display: none;
