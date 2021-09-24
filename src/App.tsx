@@ -20,7 +20,7 @@ import Add from "./containers/Add";
 import LogoMenu from "./components/Header/LogoMenu";
 import Hero from "./components/Header/Hero";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
-import FilterModal from "./components/EventList/FilterModal";
+import FilterModal from "./components/Selections/FilterModal";
 import Navbar from "./components/Header/Nav";
 
 const App: FC = () => {
@@ -71,10 +71,12 @@ const App: FC = () => {
         />
         <FilterModal modalOpen={filterModalOpen} />
         <LogoMenu />
-        <Hero />
         <Sections>
+          <Hero />
           <Navbar />
-          <Switch>{routes}</Switch>
+          <div>
+            <Switch>{routes}</Switch>
+          </div>
         </Sections>
       </Router>
     </Wrapper>
@@ -84,7 +86,7 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   scroll-behavior: smooth;
   -ms-overflow-style: none;

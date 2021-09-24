@@ -8,8 +8,8 @@ import {
   setTopicFilters,
   setCategoryFilters,
 } from "../../store/slices/dbEvent/dbEventSlice";
-import TopicSelection from "../EventList/TopicSelection";
-import CategorySelection from "../EventList/CategorySelection";
+import TopicSelection from "./TopicSelection";
+import CategorySelection from "./CategorySelection";
 
 interface FilterModalProps {
   modalOpen: boolean;
@@ -36,22 +36,22 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
       ? dispatch(
-          setTopicFilters(
-            topicFilters.filter((topicFilter) => topicFilter !== topic)
-          )
+        setTopicFilters(
+          topicFilters.filter((topicFilter) => topicFilter !== topic)
         )
+      )
       : dispatch(setTopicFilters([...topicFilters, topic]));
   };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
       ? dispatch(
-          setCategoryFilters(
-            categoryFilters.filter(
-              (categoryFilter) => categoryFilter !== category
-            )
+        setCategoryFilters(
+          categoryFilters.filter(
+            (categoryFilter) => categoryFilter !== category
           )
         )
+      )
       : dispatch(setCategoryFilters([...categoryFilters, category]));
   };
 

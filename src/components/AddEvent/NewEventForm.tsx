@@ -18,8 +18,8 @@ import {
   requestEventbriteEvent,
   resetEventBrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
-import TopicSelection from "../EventList/TopicSelection";
-import CategoryRadio from "../EventList/CategoryRadio";
+import TopicSelection from "../Selections/TopicSelection";
+import CategoryRadio from "../Selections/CategoryRadio";
 import { emptyEvent } from "../../constants/NewEvent";
 
 interface NewEventFormProps {

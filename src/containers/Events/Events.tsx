@@ -62,6 +62,8 @@ z-index: 3;
 `;
 const ListEventContainer = styled.div`
 width: 340px;
+position: sticky;
+top: 95px;
 `;
 const FilterButton = styled.div`
 position: sticky;
@@ -71,7 +73,7 @@ text-align: right;
 z-index: 3;
 background: white;
 @media ${device.mobile}{
-  top: 92px;
+  top: 0px;
 }
 #filterClick {
   display: flex;

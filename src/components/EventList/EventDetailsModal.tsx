@@ -264,8 +264,8 @@ const Wrapper = styled.div`
 const TopButtonDiv = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
+  width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   a {
     text-decoration: none;
@@ -459,7 +459,9 @@ const SecondSection = styled.div`
   }
 `;
 const BottomButtonDiv = styled.div`
+  display: flex;
   margin-bottom: 35px;
+  width: 100%;
   a {
     text-decoration: none;
     color: white;

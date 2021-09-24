@@ -3,7 +3,7 @@ import {
   categories,
   categoryBackgroundColor,
 } from "../../constants/CategoryColors";
-import { SelectionDiv } from "../EventList/SelectionTheme";
+import { SelectionDiv } from "./SelectionTheme";
 
 interface CategorySelectionProps {
   onClick: (a: string) => void;
