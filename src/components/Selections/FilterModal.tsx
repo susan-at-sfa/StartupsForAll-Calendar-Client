@@ -35,22 +35,22 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
       ? dispatch(
-        setTopicFilters(
-          topicFilters.filter((topicFilter) => topicFilter !== topic)
+          setTopicFilters(
+            topicFilters.filter((topicFilter) => topicFilter !== topic)
+          )
         )
-      )
       : dispatch(setTopicFilters([...topicFilters, topic]));
   };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
       ? dispatch(
-        setCategoryFilters(
-          categoryFilters.filter(
-            (categoryFilter) => categoryFilter !== category
+          setCategoryFilters(
+            categoryFilters.filter(
+              (categoryFilter) => categoryFilter !== category
+            )
           )
         )
-      )
       : dispatch(setCategoryFilters([...categoryFilters, category]));
   };
 
@@ -64,10 +64,14 @@ const FilterModal: FC<FilterModalProps> = (props) => {
     console.log("submit filter query clicked");
     console.log("Topics", topicFilters);
     console.log("Categories", categoryFilters);
-    const payload = {
-      topics: [...topicFilters],
-      categories: [...categoryFilters],
-    };
+    let payload: any = {};
+    if (topicFilters.length > 0) {
+      payload.topics = [...topicFilters];
+    }
+    if (categoryFilters.length > 0) {
+      payload.categories = [...categoryFilters];
+    }
+    console.log("dispatching query:", payload);
     dispatch(getDbEventsByFilter(payload));
   };
 
@@ -151,7 +155,7 @@ const Wrapper = styled.div`
     padding-right: 30px;
     height: 35px;
     background-color: #a36760;
-    &:hover{
+    &:hover {
       color: #a36760;
       background-color: #e8d9d6;
       cursor: pointer;
