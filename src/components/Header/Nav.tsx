@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
+import { device } from "../../constants/Device";
 
 const Navbar: FC = () => {
   const [selected, setSelected] = useState("/");
@@ -55,12 +56,20 @@ const Wrapper = styled.section`
     margin: 15px;
   }
   li {
-    padding-right: 15px;
     border-bottom: 3px solid transparent;
-    padding-bottom: 8px;
-    padding-top: 15px;
+    @media ${device.desktop}{
+      padding-top: 14px;
+      padding-bottom: 9px;
+    }
+    @media ${device.mobile}{
+      padding-top: 12px;
+      padding-bottom: 8px;
+    }
     &.active {
-      border-bottom: 5px solid white;
+      border-bottom: 4px solid white;
+    }
+    &:first-of-type{
+      margin-right: 40px;
     }
   }
 `;
