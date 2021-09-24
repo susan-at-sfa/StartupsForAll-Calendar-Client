@@ -59,9 +59,9 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
             } = e;
 
             const eventDate = new Date(start_date).toDateString();
-            const localPostedBy = new Date(created_at).toLocaleString([], {
+            const localeCreatedAt = new Date(created_at).toLocaleString([], {
               year: "numeric",
-              month: "2-digit",
+              month: "numeric",
               day: "2-digit",
               hour: "numeric",
               minute: "2-digit",
@@ -99,7 +99,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <button id="calendarAdd" type="button">
                           Button
                         </button>
-                        <a href={url} target="_blank" rel="noreferrer">
+                        <a href={url} target="_blank" rel="noopener noreferrer">
                           <button id="viewPage" type="button">
                             View More Details
                           </button>
@@ -160,9 +160,9 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         {start_time} - {end_time}
                       </p>
                       <h4>Location</h4>
-                      <p>
+                      <Centered>
                         <BiVideo /> {location}
-                      </p>
+                      </Centered>
                       <h4>Price</h4>
                       <p>
                         {cost}{" "}
@@ -184,13 +184,19 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           Button
                         </button>
                         <a href={url} target="_blank" rel="noopener noreferrer">
-                          <button id="viewPage" type="button">View More Details
+                          <button id="viewPage" type="button">
+                            View More Details
                           </button>
                         </a>
                       </BottomButtonDiv>
                       <h4>Event Link</h4>
                       <p>
-                        <a id="link" href={url}>
+                        <a
+                          id="link"
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {url}
                         </a>
                       </p>
@@ -214,7 +220,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </div>
                       <div>
                         <p>Posted</p>
-                        <p>{localPostedBy}</p>
+                        <p>{localeCreatedAt}</p>
                         <p>by {creator_name}</p>
                       </div>
                     </ModalFooter>
@@ -283,7 +289,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
@@ -297,7 +303,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: #e8d9d6;
       background-color: #a36760;
       cursor: pointer;
@@ -313,7 +319,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: #a36760;
       background-color: #e8d9d6;
       cursor: pointer;
@@ -482,7 +488,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
@@ -496,7 +502,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: #e8d9d6;
       background-color: #a36760;
       cursor: pointer;
@@ -512,7 +518,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: #a36760;
       background-color: #e8d9d6;
       cursor: pointer;
@@ -543,5 +549,13 @@ const ModalFooter = styled.div`
     padding-right: 0;
     font-size: 12px;
     line-height: 17px;
+  }
+`;
+const Centered = styled.p`
+  display: flex;
+  align-items: center;
+  align-content: center;
+  svg {
+    margin-right: 4px;
   }
 `;
