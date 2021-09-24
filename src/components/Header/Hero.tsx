@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "@emotion/styled";
 import { useLocation } from "react-router";
 import { useAppSelector } from "../../hooks";
-import stars from "../../assets/images/stars.png";
+import stars from "../../assets/images/stars.jpeg";
 
 const Hero: FC = () => {
   const menuOpen = useAppSelector(({ menu }) => menu.menuOpen);
@@ -23,18 +23,23 @@ const Hero: FC = () => {
 export default Hero;
 
 const HeroContainer = styled.div`
-  height: 200px;
+  height: 225px;
   background-image: url(${stars});
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: -20;
 `;
 const Title = styled.div`
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 36px;
   line-height: 54px;
   text-align: center;
   color: #c79288;
+  letter-spacing: 2px;
 `;

@@ -46,7 +46,7 @@ const EventsListComponent: FC = () => {
   });
 
   return (
-    <>
+    <Wrapper>
       {Object.entries(eventsList).map(([year, months]) => {
         return (
           <React.Fragment key={year}>
@@ -56,13 +56,15 @@ const EventsListComponent: FC = () => {
               return (
                 calendarMonth >= currentMonthStart && (
                   <MonthSection key={`${year}-${month}`} id={month}>
-                    <MonthHeader>
-                      <h1>
-                        <span>
-                          {MonthObject[month]} {year}
-                        </span>
-                      </h1>
-                    </MonthHeader>
+                    <div className="stickyBackground">
+                      <MonthHeader>
+                        <h1>
+                          <span>
+                            {MonthObject[month]} {year}
+                          </span>
+                        </h1>
+                      </MonthHeader>
+                    </div>
                     {eventsThatMonth.length ? (
                       eventsThatMonth.map((displayEvent: any) => {
                         const {
@@ -102,16 +104,16 @@ const EventsListComponent: FC = () => {
           </React.Fragment>
         );
       })}
-    </>
+    </Wrapper>
   );
 };
 
 export default EventsListComponent;
-
+const Wrapper = styled.div`
+background-color: white;
+z-index: 5;
+`
 const MonthHeader = styled.div`
-  position: sticky;
-  top: 20px;
-  z-index: 2;
   h1 {
     color: #c79288;
     font-style: normal;
@@ -120,12 +122,12 @@ const MonthHeader = styled.div`
     width: 100%;
     text-align: left;
     line-height: 2px;
-    margin: 10px 0 10px 0px;
+    margin: 10px 0 20px 0px;
     border-bottom: 1px solid #c79288;
   }
   span {
     background: #fff;
-    padding: 0 5px 0 5px;
+    padding: 0 10px 0 5px;
   }
 `;
 const MonthSection = styled.section`
@@ -135,4 +137,18 @@ const MonthSection = styled.section`
     color: #c4c4c4;
     padding: 20px 10px;
   }
-`;
+  .stickyBackground{
+    background-color: white;
+    height: 21px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    position: sticky;
+    top: 90px;
+    z-index: 2;
+    @media ${device.desktop}{
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0px;
+    }
+  }
+`

@@ -101,25 +101,25 @@ const Menu: FC = () => {
 };
 
 const MenuContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
+  z-index: 15;
   top: 0;
   bottom: 0;
-  z-index: 8;
 `;
 const HamburgerMenu = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 9;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  z-index: 15;
+  top: 0;
+  bottom: 0;
   a {
     color: black;
     text-decoration: none;

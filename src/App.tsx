@@ -70,9 +70,9 @@ const App: FC = () => {
           modalOpen={eventDetailsModalOpen}
         />
         <FilterModal modalOpen={filterModalOpen} />
+        <LogoMenu />
+        <Hero />
         <Sections>
-          <LogoMenu />
-          <Hero />
           <Navbar />
           <Switch>{routes}</Switch>
         </Sections>
@@ -86,18 +86,24 @@ export default App;
 const Wrapper = styled.section`
   height: 100%;
   width: 100%;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar{
+  display: none;
+    }
   @media ${device.mobile} {
-    max-width: 800px;
+    overflow-x: hidden;
   }
   @media ${device.desktop}{
-    max-width: 1500px;
   }
 `;
 const Sections = styled.section`
-  width: 100vw;
+  width: 100%;
   scroll-behavior: smooth;
+  -ms-overflow-style: none;
   scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  ::-webkit-scrollbar{
+  display: none;
+    }
 `;

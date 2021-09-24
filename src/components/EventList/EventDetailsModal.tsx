@@ -233,8 +233,8 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
 export default EventDetailsModal;
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   display: flex;
@@ -251,7 +251,7 @@ const Wrapper = styled.div`
   width: 90vw;
   max-width: 720px;
   max-height: 1055px;
-  min-width: 357px;
+  min-width: 320px;
   z-index: 10;
   overflow: scroll;
   overflow-x: hidden;

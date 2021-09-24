@@ -40,6 +40,9 @@ display: flex;
 padding-top: 2%;
 align-items: center;
 justify-content: center;
+background-color: white;
+width: 100%;
+z-index: 3;
 @media ${device.mobile}{
   align-items: center;
   justify-content: center;
@@ -67,6 +70,9 @@ width: 100%;
 text-align: right;
 z-index: 3;
 background: white;
+@media ${device.mobile}{
+  top: 92px;
+}
 #filterClick {
   display: flex;
   background-color: white;
