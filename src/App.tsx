@@ -71,12 +71,10 @@ const App: FC = () => {
         />
         <FilterModal modalOpen={filterModalOpen} />
         <LogoMenu />
+        <Hero />
         <Sections>
-          <Hero />
           <Navbar />
-          <div>
-            <Switch>{routes}</Switch>
-          </div>
+          <Switch>{routes}</Switch>
         </Sections>
       </Router>
     </Wrapper>
@@ -102,6 +100,10 @@ const Wrapper = styled.section`
 `;
 const Sections = styled.section`
   width: 100%;
+  position: sticky;
+  top: 0px;
+  max-height: calc(100% - 45px);
+  overflow: scroll;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -66,11 +66,12 @@ const EventAuthPage = styled.div`
   padding-left: 14px;
   padding-top: 14px;
   width: 100%;
-  @media ${device.desktop}{
+  @media (min-width: 650px){
     display: block;
-    width: 45%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    max-width: 650px;
   }
 `;
 const ButtonDiv = styled.div`

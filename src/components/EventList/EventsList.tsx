@@ -143,7 +143,7 @@ const MonthSection = styled.section`
     padding-top: 1px;
     padding-bottom: 10px;
     position: sticky;
-    top: 90px;
+    top: 48px;
     z-index: 2;
     @media ${device.desktop}{
       position: sticky;

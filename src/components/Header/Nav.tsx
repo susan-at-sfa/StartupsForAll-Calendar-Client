@@ -41,7 +41,7 @@ export default Navbar;
 const Wrapper = styled.section`
   position: sticky;
   margin-top: 165px;
-  top: 42px;
+  top: 0px;
   z-index: 3;
   display: flex;
   align-items: center;

@@ -31,7 +31,7 @@ margin: 0;
 margin-bottom: -21px;
 z-index: 8;
 position: sticky;
-top: 91px;
+top: 49px;
 @media ${device.desktop}{
   position: sticky;
   top: 0;
