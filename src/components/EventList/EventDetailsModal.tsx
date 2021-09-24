@@ -71,16 +71,15 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
             const timeOptions: any = {
               hour: "numeric",
               minute: "2-digit",
-              timeZoneName: "short",
             };
             const start_time = new Date(start_date).toLocaleTimeString(
               [],
               timeOptions
             );
-            const end_time = new Date(end_date).toLocaleTimeString(
-              [],
-              timeOptions
-            );
+            const end_time = new Date(end_date).toLocaleTimeString([], {
+              ...timeOptions,
+              timeZoneName: "short",
+            });
 
             return (
               <Background key={id}>

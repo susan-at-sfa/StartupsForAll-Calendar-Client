@@ -1,21 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import configureStore from './store/store';
-import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import Loading from "./components/Loading";
 
+import configureStore from "./store/store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./store/store";
 const initialState = {};
 const store = configureStore(initialState);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={<Loading />} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

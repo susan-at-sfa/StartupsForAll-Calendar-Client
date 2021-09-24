@@ -7,6 +7,7 @@ import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterMod
 import {
   setTopicFilters,
   setCategoryFilters,
+  getDbEventsByFilter,
 } from "../../store/slices/dbEvent/dbEventSlice";
 import TopicSelection from "./TopicSelection";
 import CategorySelection from "./CategorySelection";
@@ -21,8 +22,6 @@ const FilterModal: FC<FilterModalProps> = (props) => {
     ({ dbEvent }) => dbEvent.categoryFilters
   );
   const dispatch = useAppDispatch();
-  console.log("Topics", topicFilters);
-  console.log("Categories", categoryFilters);
   const { modalOpen } = props;
 
   const animation = useSpring({
@@ -61,6 +60,17 @@ const FilterModal: FC<FilterModalProps> = (props) => {
     dispatch(setFilterModalOpen(false));
   };
 
+  const submitFilterQuery = () => {
+    console.log("submit filter query clicked");
+    console.log("Topics", topicFilters);
+    console.log("Categories", categoryFilters);
+    const payload = {
+      topics: [...topicFilters],
+      categories: [...categoryFilters],
+    };
+    dispatch(getDbEventsByFilter(payload));
+  };
+
   return (
     <>
       {modalOpen ? (
@@ -89,7 +99,7 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                 <TopicSelection onClick={onClickingTopic} />
               </div>
               <div id="updateButtonDiv">
-                <button id="update" type="button">
+                <button id="update" type="button" onClick={submitFilterQuery}>
                   Update Results
                 </button>
               </div>
@@ -121,9 +131,9 @@ const Wrapper = styled.div`
   height: 90vh;
   max-height: 724px;
   min-height: 500px;
+  max-width: 90vw;
   width: 70vw;
-  max-width: 263px;
-  min-width: 263px;
+  min-width: 288px;
   z-index: 10;
   #updateButtonDiv {
     display: flex;
