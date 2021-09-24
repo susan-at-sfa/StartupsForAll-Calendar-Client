@@ -42,10 +42,10 @@ const ListEvent: FC<ListEventProps> = (props) => {
     <Wrapper key={id} onClick={() => onClickingEvent(id)}>
       <SmallHeader>
         <SmallHeaderLeft>
-          <div id="title">
+          <div className="title">
             <h2>{title}</h2>
           </div>
-          <div id="creatorName">
+          <div className="creatorName">
             <p>{creator_name}</p>
           </div>
         </SmallHeaderLeft>
@@ -70,7 +70,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
           </div>
         </SmallHeaderRight>
       </SmallHeader>
-    </Wrapper >
+    </Wrapper>
   );
 };
 
@@ -90,65 +90,67 @@ const Wrapper = styled.div`
   }
 `;
 const SmallHeader = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-max-width: 350px;
-h2{
-  margin-bottom: 5px;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 18px;
-}
-h3 {
-  line-height: 17px;
-  font-size: 12px;
-  color: white;
-  height: 19px;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-p{
-  font-size: 12px;
-  margin: 0;
-  line-height: 17px;
-}
-ul{
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-li{
-  font-size: 12px;
-  padding: 0 3px 0 0;
-  margin: 0 3px 0 0;
-  display: inline;
-}
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 350px;
+  h2 {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 18px;
+  }
+  h3 {
+    line-height: 17px;
+    font-size: 12px;
+    color: white;
+    height: 19px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 17px;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  li {
+    font-size: 12px;
+    padding: 0 3px 0 0;
+    margin: 0 3px 0 0;
+    display: inline;
+  }
 `;
 const SmallHeaderLeft = styled.div`
   flex: 0.55;
   display: flex;
   flex-direction: column;
   align-content: space-around;
-  h2{
+  h2 {
     max-width: 175px;
     overflow-wrap: break-word;
+    margin: 0;
+    padding: 0;
   }
-  #title{
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  .title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 const SmallHeaderRight = styled.div`
   text-align: right;
   flex: 0.45;
-  .topicsAndCategories{
+  .topicsAndCategories {
     display: flex;
     align-items: center;
     justify-content: right;
-}
+  }
 `;
