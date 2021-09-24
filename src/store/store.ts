@@ -21,6 +21,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
+  blacklist: ['menu', 'filterModal', 'eventModal'],
 };
 
 export default function configureAppStore(initialState = {}) {
