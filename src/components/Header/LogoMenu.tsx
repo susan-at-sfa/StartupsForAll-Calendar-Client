@@ -58,7 +58,7 @@ const Hamburger = styled.div`
       &:first-of-type {
         background-color: gray;
         transform: rotate(45deg);
-        width: 75%;
+        width: 80%;
       }
       &:nth-of-type(2) {
         opacity: 0;
@@ -67,16 +67,16 @@ const Hamburger = styled.div`
         opacity: 100;
         background-color: gray;
         transform: rotate(-45deg);
-        width: 75%;
+        width: 80%;
       }
     }
   }
   span {
     width: 100%;
-    height: 1px;
+    height: 2px;
     background-color: #c79288;
     transform-origin: left;
-    transition: all 1s ease;
+    transition: all 0.25s ease;
     &:nth-of-type(3) {
       opacity: 0;
     }
