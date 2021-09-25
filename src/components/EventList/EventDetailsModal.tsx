@@ -305,15 +305,9 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-<<<<<<< HEAD
     &:hover{
       color: white;
       background-color: var(--add-button-hover);
-=======
-    &:hover {
-      color: #e8d9d6;
-      background-color: #a36760;
->>>>>>> dev
       cursor: pointer;
       transition: 0.5s ease;
     }
@@ -327,15 +321,9 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-<<<<<<< HEAD
     &:hover{
       color: white;
       background-color: var(--button-dark-hover);
-=======
-    &:hover {
-      color: #a36760;
-      background-color: #e8d9d6;
->>>>>>> dev
       cursor: pointer;
       transition: 0.5s ease;
     }
@@ -518,15 +506,9 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-<<<<<<< HEAD
     &:hover{
       color: white;
       background-color: var(--add-button-hover);
-=======
-    &:hover {
-      color: #e8d9d6;
-      background-color: #a36760;
->>>>>>> dev
       cursor: pointer;
       transition: 0.5s ease;
     }
@@ -540,15 +522,9 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-<<<<<<< HEAD
     &:hover{
       color: white;
       background-color: var(--add-button-hover);
-=======
-    &:hover {
-      color: #a36760;
-      background-color: #e8d9d6;
->>>>>>> dev
       cursor: pointer;
       transition: 0.5s ease;
     }
