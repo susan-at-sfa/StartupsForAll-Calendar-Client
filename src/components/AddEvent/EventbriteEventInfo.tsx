@@ -22,19 +22,6 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
     <>
       <HeaderText>Imported Information</HeaderText>
       <BrownSpan />
-      <FlexTwoRow>
-        <div>
-          <Text>{props.title}</Text>
-          <Text>{props.creator_name}</Text>
-        </div>
-        <div>
-          <Title>{new Date(props.start_date).toLocaleDateString()}</Title>
-          <Text>
-            {props.start_time} - {props.end_time}
-          </Text>
-          TODO: Emojis TODO: Category
-        </div>
-      </FlexTwoRow>
       {props.logo ? (
         <ImageContainer>
           <img src={props.logo} alt="event logo" />
@@ -56,7 +43,7 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
       <Text>{props.summary}</Text>
       <Title>Event Link</Title>
       <Text>
-        <Anchor href={props.url}>{props.url}</Anchor>
+        <Anchor target="_blank" rel="noopener noreferrer" href={props.url}>{props.url}</Anchor>
       </Text>
     </>
   );
@@ -86,16 +73,13 @@ const Title = styled.div`
   font-weight: bold;
 `;
 const Text = styled.div`
-  line-height: 105%;
+  line-height: 23px;
   margin-bottom: 12px;
-  font-size: 0.9rem;
+  font-size: 14px;
+  font-weight: 300;
 `;
 const Anchor = styled.a`
   text-decoration: none;
   color: var(--submit-button-container-bg);
 `;
-const FlexTwoRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 0.8rem;
-`;
+

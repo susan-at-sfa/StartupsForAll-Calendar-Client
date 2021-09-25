@@ -51,4 +51,6 @@ export default Add;
 const Wrapper = styled.div`
 background-color: white;
 z-index: 5;
+padding-bottom: 80px;
+padding-top: 24px;
 `

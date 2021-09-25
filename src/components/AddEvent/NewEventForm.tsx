@@ -168,7 +168,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       </PasteLinkContainer>
       <form onSubmit={submitForm}>
         <FormFields>
-          <FormLabel htmlFor="creator_name" text="Event Posted By" />
+          {/* <FormLabel htmlFor="creator_name" text="Event Posted By" />
           <FormInput
             placeholder="Event Posted By"
             type="string"
@@ -177,7 +177,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             onChange={() => null}
             name="creator_name"
             onBlur={() => null}
-          />
+          /> */}
 
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
           <TextArea
@@ -221,7 +221,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             />
           </StyledContainer>
 
-          <FormLabel htmlFor="topics" text="Add Topics Emojis" />
+          <FormLabel htmlFor="topics" text="Add Topics" />
           <StyledContainer>
             <TopicSelection onClick={changeTopics} />
           </StyledContainer>
@@ -308,6 +308,8 @@ const PasteLink = styled.div`
   textarea {
     flex: 0.6;
     border: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
     &::placeholder {
       color: #e8d9d6;
       font-weight: bold;
@@ -405,7 +407,7 @@ const TextArea = styled.textarea`
   border: 8px solid #e8d9d6;
   border-right-width: 20px;
   min-height: 85px;
-  padding: 0 15px;
+  padding: 12px 15px;
   max-width: 100%;
   max-width: 100vw;
   &::placeholder {
