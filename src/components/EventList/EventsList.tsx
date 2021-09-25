@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useAppSelector } from "../../hooks";
-import { currentMonthEpochTime, toLocalTime } from "../../helpers";
+import { currentMonthEpochTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "./ListEvent";
 import { device } from "../../constants/Device";

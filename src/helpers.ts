@@ -3,7 +3,12 @@ export const titleCase = (title: string): string => {
 }
 
 export const parseIdFromUrl = (url: string): string | null => {
-  const id = url.match(/[0-9]{12}/g);
+  // regular express matches the number in the provided url
+  // as long as it is 9 or more consecutive numbers
+  // eventbrite URLs contain the EB ID which has been between 9 and 11 numbers in length
+  // left the regex as "at least 9" for future proofing
+  const id = url.match(/[0-9]{9,}/g);
+  console.log(`parsed event brite id ${id} from url ${url}`);
   return id ? id[0] : null;
 }
 
