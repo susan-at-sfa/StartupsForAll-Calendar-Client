@@ -18,6 +18,21 @@ interface EventbriteEventInfoProps {
 
 const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
   console.log("EVENT BRITE EVENT INFO component - ", props);
+
+  const eventDate = new Date(props.start_date).toDateString();
+
+  const timeOptions: any = {
+    hour: "numeric",
+    minute: "2-digit",
+  };
+  const start_time = new Date(props.start_date).toLocaleTimeString(
+    [],
+    timeOptions
+  );
+  const end_time = new Date(props.end_date).toLocaleTimeString([], {
+    ...timeOptions,
+    timeZoneName: "short",
+  });
   return (
     <>
       <HeaderText>Imported Information</HeaderText>
@@ -31,6 +46,8 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
       <Text>
         An event by <Anchor>{props.creator_name}</Anchor>
       </Text>
+      <Title>{eventDate}</Title>
+      <Text>{start_time} - {end_time}</Text>
       <Title>Location</Title>
       <Text>{props.location}</Text>
       <Title>Price</Title>
@@ -62,10 +79,8 @@ const BrownSpan = styled.div`
   margin: 0 0 25px 0;
 `;
 const ImageContainer = styled.div`
-  width: calc(100% - 18px);
-  max-width: calc(100% - 18px);
   img {
-    max-width: 100%;
+    width: 100%;
   }
 `;
 const Title = styled.div`

@@ -168,16 +168,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       </PasteLinkContainer>
       <form onSubmit={submitForm}>
         <FormFields>
-          {/* <FormLabel htmlFor="creator_name" text="Event Posted By" />
-          <FormInput
-            placeholder="Event Posted By"
-            type="string"
-            required
-            value={creator_name}
-            onChange={() => null}
-            name="creator_name"
-            onBlur={() => null}
-          /> */}
 
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
           <TextArea
