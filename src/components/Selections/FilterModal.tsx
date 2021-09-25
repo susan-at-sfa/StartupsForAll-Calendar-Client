@@ -156,11 +156,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  height: 90vh;
   max-height: 724px;
   min-height: 500px;
-  max-width: 90vw;
-  width: 70vw;
   min-width: 288px;
   z-index: 10;
   #updateButtonDiv {
@@ -220,6 +217,7 @@ const FilterButton = styled.div`
     }
     &:hover {
       opacity: 1;
+      cursor: pointer;
     }
     &::before,
     ::after {

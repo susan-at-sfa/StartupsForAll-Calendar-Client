@@ -3,11 +3,10 @@ import React, { FC } from 'react';
 const GoogleCalendar: FC = () => {
 
   const calendarStyles = {
-    border: "solid 1px #777",
     width: "800px",
     height: "600px",
-    frameborder: "0",
-    scrolling: "no"
+    scrolling: "no",
+    border: "none"
   }
 
   return (
