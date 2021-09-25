@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
@@ -22,6 +22,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
   const { selectedEventID, modalOpen } = props;
   const event = events.filter((e: any) => e.id === selectedEventID);
   const dispatch = useAppDispatch();
+  const modalRef: any = useRef();
 
   const onClickingBack = () => {
     dispatch(setSelectedEventID(""));
@@ -35,6 +36,29 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
     opacity: modalOpen ? 1 : 0,
     transform: modalOpen ? `translateY(0%)` : `translateY(-100%)`,
   });
+
+  const closeModal = (e: any) => {
+    if (modalRef.current === e.target) {
+      dispatch(setEventDetailsModalOpen(false))
+    }
+  }
+
+  const keyPress = useCallback(
+    e => {
+      if (e.key === 'Escape' && modalOpen) {
+        dispatch(setEventDetailsModalOpen(false))
+      }
+    },
+    [setEventDetailsModalOpen, modalOpen]
+  );
+
+  useEffect(
+    () => {
+      document.addEventListener('keydown', keyPress);
+      return () => document.removeEventListener('keydown', keyPress);
+    },
+    [keyPress]
+  );
 
   return (
     <>
@@ -82,7 +106,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
             });
 
             return (
-              <Background key={id}>
+              <Background onClick={closeModal} ref={modalRef} key={id}>
                 <animated.div style={animation}>
                   <Wrapper>
                     <TopButtonDiv>
