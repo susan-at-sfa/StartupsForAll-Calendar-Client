@@ -285,6 +285,8 @@ const TopButtonDiv = styled.div`
     font-size: 14px;
     &:hover{
       cursor: pointer;
+      background-color: var(--back-button-hover);
+      transition: 0.5s ease;
     }
   }
   #calendarAdd {
@@ -298,8 +300,8 @@ const TopButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
     &:hover{
-      color: #e8d9d6;
-      background-color: #a36760;
+      color: white;
+      background-color: var(--add-button-hover);
       cursor: pointer;
       transition: 0.5s ease;
     }
@@ -314,8 +316,8 @@ const TopButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
     &:hover{
-      color: #a36760;
-      background-color: #e8d9d6;
+      color: white;
+      background-color: var(--button-dark-hover);
       cursor: pointer;
       transition: 0.5s ease;
     }
@@ -484,6 +486,8 @@ const BottomButtonDiv = styled.div`
     font-size: 14px;
     &:hover{
       cursor: pointer;
+      background-color: var(--back-button-hover);
+      transition: 0.5s ease;
     }
   }
   #calendarAdd {
@@ -497,8 +501,8 @@ const BottomButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
     &:hover{
-      color: #e8d9d6;
-      background-color: #a36760;
+      color: white;
+      background-color: var(--add-button-hover);
       cursor: pointer;
       transition: 0.5s ease;
     }
@@ -513,8 +517,8 @@ const BottomButtonDiv = styled.div`
     font-weight: 600;
     font-size: 14px;
     &:hover{
-      color: #a36760;
-      background-color: #e8d9d6;
+      color: white;
+      background-color: var(--add-button-hover);
       cursor: pointer;
       transition: 0.5s ease;
     }

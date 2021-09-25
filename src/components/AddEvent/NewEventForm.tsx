@@ -247,10 +247,10 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
-            <button type="button" id="dark" onClick={props.cancelEvent}>
+            <button type="button" id="cancel" onClick={props.cancelEvent}>
               Cancel
             </button>
-            <button type="submit" id="light">
+            <button type="submit" id="submitButton">
               Submit
             </button>
           </ButtonDiv>
@@ -293,16 +293,16 @@ const PasteLink = styled.div`
     background-color: #a36760;
     border: none;
     &:hover{
-      color: #a36760;
-      background-color: #e8d9d6;
+      color: white;
+      background-color: var(--button-dark-hover);
       cursor: pointer;
       transition: 0.5s ease;
-      box-shadow: 0 8px 4px -4px #a36760;
     }
   }
   &:focus-within {
     outline: none;
-    border-color: #a36760;
+    background-color: var(--input-focus);
+    border-color: var(--input-focus);
     transition: 0.75s ease;
   }
   textarea {
@@ -314,11 +314,11 @@ const PasteLink = styled.div`
     }
     &:focus {
       outline: none;
-      border-color: #a36760;
+      border-color: var(--input-focus);
       transition: 0.75s ease;
     }
     &:focus::placeholder {
-      color: #a36760;
+      color: var(--input-focus);
       transition: 0.75s ease;
     }
   }
@@ -357,7 +357,7 @@ const ButtonDiv = styled.div`
     margin-right: auto;
     max-width: 400px;
   }
-  #dark {
+  #cancel {
     font-weight: 600;
     font-size: 15px;
     color: white;
@@ -376,7 +376,7 @@ const ButtonDiv = styled.div`
       cursor: pointer;
     }
   }
-  #light {
+  #submitButton {
     font-weight: 600;
     font-size: 15px;
     color: #518077;
@@ -388,8 +388,8 @@ const ButtonDiv = styled.div`
     background-color: #e0f0f1;
     border: none;
     &:hover{
-      color: white;
-      background-color:#689da6;
+      color: #375F57;
+      background-color: #FFF;
       transition: 0.5s ease;
       cursor: pointer;
     }
@@ -414,24 +414,13 @@ const TextArea = styled.textarea`
   }
   &:focus {
     outline: none;
-    border-color: #a36760;
+    border-color: var(--input-focus);
     transition: 0.75s ease;
   }
   &:focus::placeholder {
-    color: #a36760;
+    color: var(--input-focus);
     transition: 0.75s ease;
   }
-`;
-const SelectList = styled.select`
-  color: #e8d9d6;
-  font-weight: bold;
-  border: 8px solid #e8d9d6;
-  border-right-width: 20px;
-  min-height: 45px;
-  padding: 0 15px;
-  margin-bottom: 15px;
-  max-width: 100%;
-  max-width: 100vw;
 `;
 const StyledContainer = styled.div`
   padding: 8px;

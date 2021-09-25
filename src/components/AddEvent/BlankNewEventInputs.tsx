@@ -161,11 +161,11 @@ const TextArea = styled.textarea`
   }
   &:focus {
     outline: none;
-    border-color: #a36760;
+    border-color: var(--input-focus);
     transition: 0.75s ease;
   }
   &:focus::placeholder {
-    color: #a36760;
+    color: var(--input-focus);
     transition: 0.75s ease;
   }
 `;

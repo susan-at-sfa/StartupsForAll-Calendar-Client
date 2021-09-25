@@ -6,6 +6,10 @@
   --bg-brown: #a36760;
   --header-text-color: #c79288;
   --input-border-color: #e8d9d6;
+  --input-focus: #9dd3c9;
+  --button-dark-hover: #894D46;
+  --back-button-hover: #29417E;
+  --add-button-hover: #894D46;
 }
 
 @font-face {
