@@ -88,8 +88,8 @@ const ButtonDiv = styled.div`
     height: 37px;
     background-color: #a36760;
       &:hover{
-      color: #a36760;
-      background-color: #e8d9d6;
+      color: white;
+      background-color: var(--button-dark-hover);
       cursor: pointer;
       transition: 0.5s ease;
     }

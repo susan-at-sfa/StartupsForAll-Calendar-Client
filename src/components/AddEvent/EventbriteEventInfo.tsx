@@ -17,7 +17,7 @@ interface EventbriteEventInfoProps {
 }
 
 const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
-  console.log("EVENT BRITE EVENT INFO component - ", props);
+  // console.log("EVENT BRITE EVENT INFO component - ", props);
 
   const eventDate = new Date(props.start_date).toDateString();
 
