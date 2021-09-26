@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react';
+import { useAppSelector } from '../../hooks';
 
 const AdminGoogle: FC = () => {
   const [consentURL, setConsentURL] = useState('')
@@ -8,6 +9,9 @@ const AdminGoogle: FC = () => {
   //User will be taken to url to authorize consent
   //User will be redirected to localhost:3000
   //Code will be sent to ? Database(store refresh token) : Front End(store in admin user)
+
+  const user = useAppSelector(({ user }) => user)
+  console.log("User", user)
 
   useEffect(() => {
     getConsentURL();
@@ -21,7 +25,6 @@ const AdminGoogle: FC = () => {
       setConsentURL(returnedConsentURL)
     )
   }
-
 
   return (
     <div>
