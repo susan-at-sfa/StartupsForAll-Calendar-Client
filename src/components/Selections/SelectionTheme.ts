@@ -9,11 +9,12 @@ export const SelectionDiv = styled.div`
 .container {
   display: block;
   position: relative;
-  padding-left: 30px;
+  padding-left: 39px;
   margin-bottom: 8px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
+  line-height: 24px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -38,11 +39,11 @@ input {
 }
 .checkmark {
   position: absolute;
-  top: 1px;
-  left: 1px;
+  top: 0px;
+  left: 0px;
   border: 4px solid #F1F1F1;
-  height: 25px;
-  width: 25px;
+  height: 28px;
+  width: 28px;
   background-color: white;
   &::after{
     content: "";

@@ -142,8 +142,8 @@ const FilterModal: FC<FilterModalProps> = (props) => {
 export default FilterModal;
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   display: flex;
@@ -156,15 +156,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  max-height: 724px;
-  min-height: 500px;
-  min-width: 288px;
+  width: 90vw;
+  max-width: 263px;
   z-index: 10;
   #updateButtonDiv {
     display: flex;
     position: relative;
     justify-content: flex-end;
-    margin-top: 20%;
+    padding-top: 45px;
+    padding-bottom: 24px;
   }
   #update {
     color: white;
@@ -174,24 +174,25 @@ const Wrapper = styled.div`
     width: 95%;
     max-width: 245px;
     padding-right: 30px;
-    height: 35px;
+    height: 36px;
     background-color: #a36760;
     &:hover {
-      color: #a36760;
-      background-color: #e8d9d6;
+      color: white;
+      background-color: var(--button-dark-hover);
       cursor: pointer;
       transition: 0.5s ease;
     }
   }
   .topics,
   .categories {
-    margin-top: 15%;
+    padding-top: 24px;
     padding-left: 5%;
+    padding-right: 18px;
     max-width: 263px;
     h2 {
       text-align: center;
       margin-bottom: 10px;
-      font-size: 17px;
+      font-size: 14px;
       font-weight: 600;
       color: #a36760;
     }
