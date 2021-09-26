@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import EventsList from "../../components/EventList/EventsList";
+import AdminGoogle from "../../components/Google/AdminGoogle";
 import GoogleCalendar from "../../components/Google/GoogleCalendar";
 import FilterButton from "../../components/Selections/Filter Button";
 import { device } from "../../constants/Device";
@@ -8,17 +9,20 @@ import { device } from "../../constants/Device";
 const Events: FC = () => {
 
   return (
+    // <Wrapper>
+    //   <div className="eventBox">
+    //     <ListEventContainer>
+    //       <FilterButton />
+    //       <EventsList />
+    //     </ListEventContainer>
+    //   </div>
+    //   <CalendarDiv>
+    //     <GoogleCalendar />
+    //   </CalendarDiv>
+    // </Wrapper >
     <Wrapper>
-      <div className="eventBox">
-        <ListEventContainer>
-          <FilterButton />
-          <EventsList />
-        </ListEventContainer>
-      </div>
-      <CalendarDiv>
-        <GoogleCalendar />
-      </CalendarDiv>
-    </Wrapper >
+      <AdminGoogle />
+    </Wrapper>
   );
 };
 
