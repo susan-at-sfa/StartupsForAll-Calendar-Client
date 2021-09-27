@@ -1,76 +1,83 @@
 import { FC, FormEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { ListEventProps } from "./ListEvent";
 import { useHistory } from "react-router";
 import { Category } from "../../constants/Category.enum";
-import { parseIdFromUrl, toLocalTime, toUtcDateTime } from "../../helpers";
 import NewEvent from "../../constants/NewEvent.d";
-import { emptyEvent } from "../../constants/NewEvent";
 import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
 import { toast } from "react-toastify";
 import { CategoryText } from "../../constants/CategoryText.enum";
-import {
-  requestEventbriteEvent,
-  resetEventBrite,
-} from "../../store/slices/eventbrite/eventbriteSlice";
 import FormLabel from "../FormLabel";
 import BlankNewEventInputs from "../AddEvent/BlankNewEventInputs";
 import CategoryRadio from "../Selections/CategoryRadio";
 import TopicSelection from "../Selections/TopicSelection";
 import { device } from "../../constants/Device";
+import { toLocalTime, toUtcDateTime } from "../../helpers";
 
-const EditEventModal: FC<any> = (props) => {
+interface EditEventModalProps {
+  id: string;
+}
+
+const EditEventModal: FC<EditEventModalProps> = (props) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const token = useAppSelector(({ auth }) => auth.token);
+  const thisEvent: Record<any, any> = useAppSelector(({ dbEvent }) =>
+    dbEvent.dbEvents.filter((ev: any) => ev.id === props.id)
+  )[0];
+  console.log("EDIT EVENT MODAL WITH ID, EVENT", props.id, thisEvent);
 
-  const { creator_name, creator_email } = useAppSelector(({ user }) => ({
-    creator_email: user.email,
-    creator_name: user.name,
-  }));
-
-  const [customBlurb, setCustomBlurb] = useState<string>("");
-  const [eventTitle, setEventTitle] = useState<string>(props.title || "");
   const [category, setCategory] = useState<Category | string>(
-    Category.Community
+    thisEvent.category
   );
-  const [cost, setCost] = useState<string | number>(props.cost || 0);
-  const [summary, setSummary] = useState<string>(props.summary || "");
-
+  const [cost, setCost] = useState<string | number>(thisEvent.cost);
+  const [creatorName, setCreatorName] = useState<string>(
+    thisEvent.creator_name
+  );
+  const [creatorEmail, setCreatorEmail] = useState<string>(
+    thisEvent.creator_email
+  );
+  const [customBlurb, setCustomBlurb] = useState<string>(
+    thisEvent.custom_blurb
+  );
   // Dates
-  const [startDate, setStartDate] = useState<string>(props.start || "");
-  const [endDate, setEndDate] = useState<string>(props.end || "");
+  const [startDate, setStartDate] = useState<string>(thisEvent.start_date);
+  const [endDate, setEndDate] = useState<string>(thisEvent.end_date);
   const [startTime, setStartTime] = useState<string>(
-    props.start !== "" ? toLocalTime(props.start || "") : ""
+    toLocalTime(thisEvent.start_date)
   );
   const [endTime, setEndTime] = useState<string>(
-    props.end !== "" ? toLocalTime(props.end || "") : ""
+    toLocalTime(thisEvent.end_date)
   );
-
-  const [location, setLocation] = useState<string>(props.location || "Online");
-  const [url, setUrl] = useState<string>(props.url || "");
-  const [topics, setTopics] = useState<string[]>([]);
+  const [location, setLocation] = useState<string>(thisEvent.location);
+  const [promoted, setPromoted] = useState<boolean>(thisEvent.promoted);
+  const [summary, setSummary] = useState<string>(thisEvent.summary);
+  const [title, setTitle] = useState<string>(thisEvent.title);
+  const [topics, setTopics] = useState<string[]>(thisEvent.topics);
+  const [url, setUrl] = useState<string>(thisEvent.url);
 
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const fd: NewEvent = {
       category: category,
       category_text: getCategoryText(),
-      changed: props.changed,
+      changed: thisEvent.changed,
       cost: Number(cost),
-      created: props.created,
-      creator_email: creator_email,
-      creator_name: creator_name,
+      created: thisEvent.created,
+      creator_email: creatorEmail,
+      creator_name: creatorName,
       custom_blurb: customBlurb,
       location: location,
-      promoted: false,
+      promoted: promoted,
       summary: summary,
-      title: eventTitle,
+      title: title,
       topics: topics,
     };
     if (url) {
       fd.url = url;
+    }
+    if (category !== thisEvent.category) {
+      // TODO: change category text so it matches expected for the new category
     }
     // Eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
     if (startDate.toString().includes("Z")) {
@@ -83,6 +90,7 @@ const EditEventModal: FC<any> = (props) => {
     } else {
       fd.end_date = toUtcDateTime(endDate, endTime);
     }
+    return console.log("SUBMITTED CHANGED EVENT", thisEvent.id, fd);
     dispatch(
       saveNewEvent({
         form: fd,
@@ -94,9 +102,6 @@ const EditEventModal: FC<any> = (props) => {
 
   const changeTopics = (topic: string) => {
     const alreadyInList = topics.includes(topic);
-    console.log(
-      `New topic ${topic}. Previous Topics list ${topics}. Was in the last already? ${alreadyInList}`
-    );
     if (!alreadyInList) {
       if (topics.length >= 2) {
         return toast("Please limit to two Topics max.");
@@ -118,45 +123,12 @@ const EditEventModal: FC<any> = (props) => {
     return CategoryText.Community;
   };
 
-  const getNewprops = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!url) {
-      toast("Please include a valid Eventbrite Event URL or ID.");
-      return;
-    }
-    const id = parseIdFromUrl(url);
-    if (!id) {
-      toast(
-        "That is not a valid Eventbrite Event URL or ID. Please try again."
-      );
-      return;
-    }
-    dispatch(resetEventBrite(emptyEvent));
-    dispatch(requestEventbriteEvent({ id }));
-    history.push("/add");
-  };
-
   const cancelEvent = () => {
     console.log("event changes cancelled");
   };
 
   return (
     <Wrapper>
-      <PasteLinkContainer>
-        <form onSubmit={getNewprops}>
-          <FormLabel htmlFor="url" text="Eventbrite Event URL or ID" />
-          <PasteLink>
-            <TextArea
-              name="url"
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="EventBrite ID or URL"
-              required
-              value={url}
-            />
-            <button type="submit">Update</button>
-          </PasteLink>
-        </form>
-      </PasteLinkContainer>
       <form onSubmit={submitForm}>
         <FormFields>
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
@@ -169,8 +141,8 @@ const EditEventModal: FC<any> = (props) => {
           />
 
           <BlankNewEventInputs
-            eventTitle={eventTitle}
-            setEventTitle={setEventTitle}
+            eventTitle={title}
+            setEventTitle={setTitle}
             startDate={startDate}
             setStartDate={setStartDate}
             endDate={endDate}

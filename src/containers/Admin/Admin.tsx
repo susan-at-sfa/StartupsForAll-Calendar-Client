@@ -91,6 +91,7 @@ const AdminWrapper = styled.div`
   }
 `;
 const LogoutButton = styled.button`
+  cursor: pointer;
   position: absolute;
   right: 0;
   color: white;
