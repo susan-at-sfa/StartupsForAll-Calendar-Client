@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import { resetUser } from "../../store/slices/user/userSlice";
@@ -10,15 +10,15 @@ import "./index.css";
 const Admin: FC | any = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  console.log("Loaded Admin page with user:", user);
-  const history = useHistory();
 
   const handleLogout = () => {
     dispatch(setToken({ token: "" }));
     dispatch(resetUser());
   };
 
-  if (!user || !user.isAdmin) return history.push("/");
+  if (!user || !user.isAdmin) {
+    return <Redirect to={"/"} />;
+  }
 
   return (
     <Wrapper>

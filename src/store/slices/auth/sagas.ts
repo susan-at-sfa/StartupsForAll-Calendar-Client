@@ -23,6 +23,8 @@ function* loginUser(action: PayloadAction<{ username?: string; password: string;
     // admin user login
     endpoint = 'login'
     finalPayload = {
+      name: "SFA",
+      email: "susan@startupsforall.org",
       username: action.payload.username,
       isAdmin: true
     }
