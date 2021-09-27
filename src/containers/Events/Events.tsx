@@ -9,20 +9,20 @@ import AdminGoogle from "../../components/Google/AdminGoogle";
 const Events: FC = () => {
 
   return (
+    // <Wrapper>
+    //   <div className="eventBox">
+    //     <ListEventContainer>
+    //       <FilterButton />
+    //       <EventsList />
+    //     </ListEventContainer>
+    //   </div>
+    //   <CalendarDiv>
+    //     <GoogleCalendar />
+    //   </CalendarDiv>
+    // </Wrapper >
     <Wrapper>
-      <div className="eventBox">
-        <ListEventContainer>
-          <FilterButton />
-          <EventsList />
-        </ListEventContainer>
-      </div>
-      <CalendarDiv>
-        <GoogleCalendar />
-      </CalendarDiv>
-    </Wrapper >
-    //   <Wrapper>
-    //     <AdminGoogle />
-    //   </Wrapper>
+      <AdminGoogle />
+    </Wrapper>
   );
 };
 
