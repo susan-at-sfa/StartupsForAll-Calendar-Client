@@ -20,7 +20,7 @@ import CategoryRadio from "../Selections/CategoryRadio";
 import TopicSelection from "../Selections/TopicSelection";
 import { device } from "../../constants/Device";
 
-const EditEvent: FC<ListEventProps> = (props) => {
+const EditEventModal: FC<any> = (props) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const token = useAppSelector(({ auth }) => auth.token);
@@ -234,7 +234,7 @@ const Wrapper = styled.div`
 const PasteLinkContainer = styled.div`
   display: flex;
   padding-left: 18px;
-  padding-top: 8px;
+  padding-top: 14px;
 `;
 const PasteLink = styled.div`
   display: flex;
@@ -302,7 +302,6 @@ const FormFields = styled.div`
   padding-left: 18px;
   padding-top: 8px;
   padding-bottom: 20px;
-  margin-bottom: var(--submit-button-container-height);
 `;
 const ButtonDiv = styled.div`
   display: block;
@@ -389,4 +388,4 @@ const StyledContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-export default EditEvent;
+export default EditEventModal;

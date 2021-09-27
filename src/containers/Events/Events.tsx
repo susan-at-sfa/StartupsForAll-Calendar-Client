@@ -6,7 +6,6 @@ import FilterButton from "../../components/Selections/Filter Button";
 import { device } from "../../constants/Device";
 
 const Events: FC = () => {
-
   return (
     <Wrapper>
       <div className="eventBox">
@@ -18,44 +17,44 @@ const Events: FC = () => {
       <CalendarDiv>
         <GoogleCalendar />
       </CalendarDiv>
-    </Wrapper >
+    </Wrapper>
   );
 };
 
 export default Events;
 
 const Wrapper = styled.div`
-display: flex;
-padding-top: 2%;
-align-items: center;
-justify-content: center;
-background-color: white;
-width: 100%;
-z-index: 2;
-position: relative;
-@media ${device.mobile}{
+  display: flex;
+  padding-top: 2%;
   align-items: center;
   justify-content: center;
-}
-.eventBox{
-  @media ${device.desktop}{
-    max-height: 600px;
-    overflow: scroll;
-    margin-right: 2%;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    ::-webkit-scrollbar{
-      display: none;
+  background-color: white;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  @media ${device.mobile} {
+    align-items: center;
+    justify-content: center;
+  }
+  .eventBox {
+    @media ${device.desktop} {
+      max-height: 600px;
+      overflow: scroll;
+      margin-right: 2%;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      ::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
-}
 `;
 const ListEventContainer = styled.div`
-width: 340px;
+  width: 340px;
 `;
 const CalendarDiv = styled.div`
-display: none;
-@media ${device.desktop}{
-  display: block;
-}
-`
+  display: none;
+  @media ${device.desktop} {
+    display: block;
+  }
+`;

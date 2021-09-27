@@ -5,7 +5,7 @@ import { useAppSelector } from "../../hooks";
 import { resetEvent } from "../../store/slices/newEvent/newEventSlice";
 import { resetEventBrite } from "../../store/slices/eventbrite/eventbriteSlice";
 import { emptyEvent } from "../../constants/NewEvent";
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 import AuthorizeToAddEvents from "../../components/AddEvent/AuthorizeToAddEvents";
 import EventbriteIDInput from "../../components/AddEvent/EventbriteIDInput";
@@ -31,13 +31,16 @@ const Add: FC = () => {
       <Wrapper>
         <AuthorizeToAddEvents />
       </Wrapper>
-    )
+    );
   }
 
   return (eventbriteDetails && eventbriteDetails.id) ||
     isCreatingNewEmptyEvent ? (
     <Wrapper>
-      <NewEventForm cancelEvent={cancelEvent} eventDetails={eventbriteDetails} />
+      <NewEventForm
+        cancelEvent={cancelEvent}
+        eventDetails={eventbriteDetails}
+      />
     </Wrapper>
   ) : (
     <Wrapper>
@@ -49,8 +52,8 @@ const Add: FC = () => {
 export default Add;
 
 const Wrapper = styled.div`
-background-color: white;
-z-index: 5;
-padding-bottom: 80px;
-padding-top: 24px;
-`
+  background-color: white;
+  z-index: 5;
+  padding-bottom: 80px;
+  padding-top: 24px;
+`;

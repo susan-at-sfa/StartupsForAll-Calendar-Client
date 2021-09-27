@@ -25,6 +25,7 @@ export interface ListEventProps {
   start_time: string;
   end?: string;
   end_date?: string;
+  selectEvent?(id: string): () => void;
   summary?: string;
   title: string;
   topics: string[];
@@ -65,7 +66,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
   };
 
   const editEvent = (id: string) => {
-    console.log("edit event clicked, id:", id);
+    if (props.selectEvent) props.selectEvent(id);
   };
 
   return (

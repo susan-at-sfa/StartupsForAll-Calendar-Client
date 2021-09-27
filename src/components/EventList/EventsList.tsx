@@ -7,7 +7,7 @@ import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "./ListEvent";
 import { device } from "../../constants/Device";
 
-const EventsListComponent: FC = () => {
+const EventsListComponent: FC<any> = (props) => {
   const location = useLocation();
   interface EventsList {
     [key: string]: {
@@ -107,6 +107,7 @@ const EventsListComponent: FC = () => {
                               creator_name={creator_name}
                               topics={topics}
                               isAdmin={true}
+                              selectEvent={props.selectEvent}
                             />
                           );
                         } else {
