@@ -15,9 +15,11 @@ export interface ListEventProps {
   end_time: string;
   id: string;
   isAdmin?: boolean;
+  onGCal?: boolean;
   start_time: string;
   title: string;
   topics: string[];
+  viewed?: boolean;
 }
 
 const ListEvent: FC<ListEventProps> = (props) => {
@@ -26,10 +28,13 @@ const ListEvent: FC<ListEventProps> = (props) => {
     category,
     title,
     date,
+    isAdmin,
+    onGCal,
     start_time,
     end_time,
     creator_name,
     topics,
+    viewed,
   } = props;
   const dispatch = useAppDispatch();
   const eventDate = new Date(date).toDateString();
@@ -43,46 +48,43 @@ const ListEvent: FC<ListEventProps> = (props) => {
     console.log("edit event clicked, id:", id);
   };
 
-  const promoteEvent = (id: string) => {
-    console.log("promote event clicked. id:", id);
-  };
-
   return (
-    <Wrapper key={id}>
-      <Button onClick={() => editEvent(id)}>Edit</Button>
-      <Button onClick={() => promoteEvent(id)}>Promote</Button>
-      <ViewDetailsWrapper onClick={() => onClickingEvent(id)}>
-        <SmallHeader>
-          <SmallHeaderLeft>
-            <div className="title">
-              <h2>{title}</h2>
-            </div>
-            <div className="creatorName">
-              <p>{creator_name}</p>
-            </div>
-          </SmallHeaderLeft>
-          <SmallHeaderRight>
-            <h2>{eventDate}</h2>
-            <p>
-              {start_time} - {end_time}
-            </p>
-            <div className="topicsAndCategories">
-              <ul>
-                {topics.map((topic: string, index: number) => {
-                  return <li key={index}>{topicsEmojis[topic]}</li>;
-                })}
-              </ul>
-              <h3
-                style={{
-                  backgroundColor: categoryBackgroundColor[category],
-                }}
-              >
-                {category}
-              </h3>
-            </div>
-          </SmallHeaderRight>
-        </SmallHeader>
-      </ViewDetailsWrapper>
+    <Wrapper
+      key={id}
+      onClick={() => {
+        isAdmin ? editEvent(id) : onClickingEvent(id);
+      }}
+    >
+      <SmallHeader>
+        <SmallHeaderLeft>
+          <div className="title">
+            <h2>{title}</h2>
+          </div>
+          <div className="creatorName">
+            <p>{creator_name}</p>
+          </div>
+        </SmallHeaderLeft>
+        <SmallHeaderRight>
+          <h2>{eventDate}</h2>
+          <p>
+            {start_time} - {end_time}
+          </p>
+          <div className="topicsAndCategories">
+            <ul>
+              {topics.map((topic: string, index: number) => {
+                return <li key={index}>{topicsEmojis[topic]}</li>;
+              })}
+            </ul>
+            <h3
+              style={{
+                backgroundColor: categoryBackgroundColor[category],
+              }}
+            >
+              {category}
+            </h3>
+          </div>
+        </SmallHeaderRight>
+      </SmallHeader>
     </Wrapper>
   );
 };
@@ -90,14 +92,6 @@ const ListEvent: FC<ListEventProps> = (props) => {
 export default ListEvent;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const ViewDetailsWrapper = styled.div`
-  flex: 7;
   display: flex;
   flex-direction: column;
   height: 78px;
@@ -173,17 +167,4 @@ const SmallHeaderRight = styled.div`
     align-items: center;
     justify-content: right;
   }
-`;
-
-const Button = styled.button`
-  cursor: pointer;
-  flex: 1;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  border: none;
-  width: 100%;
-  height: 35px;
-  background-color: #a36760;
-  margin-left: 3px;
 `;

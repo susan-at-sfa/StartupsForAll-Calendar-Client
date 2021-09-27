@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   width: 100vw;
   max-width: 100%;
   padding-top: 14px;
-  max-width: 800px;
+  max-width: 345px;
   margin: 0 auto;
 `;
 
