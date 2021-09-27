@@ -97,7 +97,7 @@ const SmallHeader = styled.div`
   h2 {
     font-size: 14px;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     line-height: 18px;
   }
   h3 {

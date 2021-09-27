@@ -161,7 +161,7 @@ const Wrapper = styled.div`
   }
   #update {
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     border: none;
     width: 95%;
@@ -236,7 +236,7 @@ const FilterButton = styled.div`
     top: 8px;
     left: 14px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     padding: 0;
     display: inline;
   }

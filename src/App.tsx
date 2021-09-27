@@ -10,8 +10,10 @@ import { useAppSelector, useAppDispatch } from "./hooks";
 import { getAllDbEvents } from "./store/slices/dbEvent/dbEventSlice";
 import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
+import Poppins from "./assets/fonts/Poppins-Medium.ttf";
+import PoppinsBold from "./assets/fonts/Poppins-Bold.ttf";
 import "react-toastify/dist/ReactToastify.css";
-import { device } from './constants/Device'
+import { device } from "./constants/Device";
 //components
 import Events from "./containers/Events";
 import Login from "./containers/Login";
@@ -84,18 +86,30 @@ const App: FC = () => {
 export default App;
 
 const Wrapper = styled.section`
+  @font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+    src: url(${Poppins});
+  }
+  @font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    src: url(${PoppinsBold});
+  }
   height: 100vh;
   width: 100%;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  ::-webkit-scrollbar{
-  display: none;
-    }
+  ::-webkit-scrollbar {
+    display: none;
+  }
   @media ${device.mobile} {
     overflow-x: hidden;
   }
-  @media ${device.desktop}{
+  @media ${device.desktop} {
   }
 `;
 const Sections = styled.section`
@@ -107,7 +121,7 @@ const Sections = styled.section`
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  ::-webkit-scrollbar{
-  display: none;
-    }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;

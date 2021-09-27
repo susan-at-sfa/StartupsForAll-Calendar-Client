@@ -360,7 +360,7 @@ const SmallHeader = styled.div`
   h2 {
     font-size: 14px;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     line-height: 18px;
   }
   h3 {
@@ -421,7 +421,7 @@ const CustomBlurb = styled.div`
   h2 {
     font-size: 14px;
     line-height: 23px;
-    font-weight: bold;
+    font-weight: 600;
   }
   p {
     margin: 0;
@@ -445,7 +445,7 @@ const ModalHeader = styled.div`
   margin-right: 10px;
   h2 {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin: 0 10px 8px 0;
     line-height: 22px;
   }
@@ -457,7 +457,7 @@ const ModalHeader = styled.div`
   h4 {
     font-size: 14px;
     line-height: 19px;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 30px;
     margin-bottom: 5px;
   }
@@ -476,7 +476,7 @@ const SecondSection = styled.div`
   h4 {
     font-size: 14px;
     line-height: 17px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 1px;
   }
   p {

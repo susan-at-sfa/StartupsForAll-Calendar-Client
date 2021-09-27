@@ -131,7 +131,7 @@ const MonthHeader = styled.div`
     color: #c79288;
     font-style: normal;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 600;
     width: 100%;
     text-align: left;
     line-height: 2px;

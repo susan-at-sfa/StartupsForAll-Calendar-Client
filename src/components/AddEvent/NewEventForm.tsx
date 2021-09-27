@@ -280,7 +280,7 @@ const PasteLink = styled.div`
   border: 8px solid #e8d9d6;
   border-right-width: 0px;
   button {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     flex: 0.4;
     color: white;
@@ -307,7 +307,7 @@ const PasteLink = styled.div`
     padding-bottom: 12px;
     &::placeholder {
       color: #e8d9d6;
-      font-weight: bold;
+      font-weight: 600;
     }
     &:focus {
       outline: none;
@@ -392,7 +392,7 @@ const ButtonDiv = styled.div`
     }
   }
   p {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 3px;
     color: white;
   }
@@ -407,7 +407,7 @@ const TextArea = styled.textarea`
   max-width: 100vw;
   &::placeholder {
     color: #e8d9d6;
-    font-weight: bold;
+    font-weight: 600;
   }
   &:focus {
     outline: none;

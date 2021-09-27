@@ -66,7 +66,7 @@ const EventAuthPage = styled.div`
   padding-left: 14px;
   padding-top: 14px;
   width: 100%;
-  @media ${device.forms}{
+  @media ${device.forms} {
     display: block;
     width: 100%;
     margin-left: auto;
@@ -81,13 +81,13 @@ const ButtonDiv = styled.div`
   margin-left: auto;
   button {
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     border: none;
     width: 100%;
     height: 37px;
     background-color: #a36760;
-      &:hover{
+    &:hover {
       color: #a36760;
       background-color: #e8d9d6;
       cursor: pointer;

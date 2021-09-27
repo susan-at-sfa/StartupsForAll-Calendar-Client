@@ -57,18 +57,18 @@ const Wrapper = styled.section`
   }
   li {
     border-bottom: 3px solid transparent;
-    @media ${device.desktop}{
+    @media ${device.desktop} {
       padding-top: 14px;
       padding-bottom: 9px;
     }
-    @media ${device.mobile}{
+    @media ${device.mobile} {
       padding-top: 12px;
       padding-bottom: 8px;
     }
     &.active {
       border-bottom: 4px solid white;
     }
-    &:first-of-type{
+    &:first-of-type {
       margin-right: 40px;
     }
   }
@@ -77,7 +77,7 @@ const Link = styled(NavLink)`
   color: #ffffff;
   text-decoration: none;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 16px;
   line-height: 24px;
 `;
