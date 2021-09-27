@@ -1,11 +1,12 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import { resetUser } from "../../store/slices/user/userSlice";
 import EventsList from "../../components/EventList/EventsList";
 import "./index.css";
+import AdminGoogle from "../../components/Google/AdminGoogle";
 
 const Admin: FC | any = () => {
   const dispatch = useAppDispatch();
@@ -26,6 +27,7 @@ const Admin: FC | any = () => {
       <h1>Admin page</h1>
       <div className="button">
         <button onClick={handleLogout}>Log Out</button>
+        <AdminGoogle />
       </div>
       <EventsList />
     </Wrapper>

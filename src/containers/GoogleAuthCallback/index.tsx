@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom';
 import { makeRequest } from '../../store/utils/makeRequest';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 
 const GoogleAuthCallback = () => {
   const location = useLocation();
   const history = useHistory();
-  const dispatch = useAppDispatch();
   const token = useAppSelector(({ auth }) => auth.token);
 
   const params = new URLSearchParams(location.search);
