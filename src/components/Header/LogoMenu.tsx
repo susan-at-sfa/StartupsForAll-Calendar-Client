@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import logo from "../../assets/images/S4ALogo.png";
+import logo from "../../assets/images/logo_startupsforall.png";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { setMenuOpen } from "../../store/slices/menu/menuOpenSlice";
 import Menu from "./Menu";
@@ -33,7 +33,7 @@ const TopSticky = styled.div`
   margin: 0;
   z-index: 4;
   height: 45px;
-  background:transparent;
+  background: transparent;
 `;
 const Logo = styled.img`
   height: auto;

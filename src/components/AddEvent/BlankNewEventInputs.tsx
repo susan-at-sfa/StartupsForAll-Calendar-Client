@@ -157,7 +157,7 @@ const TextArea = styled.textarea`
   max-width: 100vw;
   &::placeholder {
     color: #e8d9d6;
-    font-weight: bold;
+    font-weight: 600;
   }
   &:focus {
     outline: none;

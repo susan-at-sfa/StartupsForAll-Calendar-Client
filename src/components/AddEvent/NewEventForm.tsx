@@ -112,11 +112,17 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   };
 
   const changeTopics = (topic: string) => {
-    const index = topics.indexOf(topic);
-    if (index === -1) {
+    const alreadyInList = topics.includes(topic);
+    console.log(
+      `New topic ${topic}. Previous Topics list ${topics}. Was in the last already? ${alreadyInList}`
+    );
+    if (!alreadyInList) {
+      if (topics.length >= 2) {
+        return toast("Please limit to two Topics max.");
+      }
       setTopics([...topics, topic]);
     } else {
-      const newTopics = topics.splice(index, 1);
+      const newTopics = topics.filter((top) => top !== topic);
       setTopics(newTopics);
     }
   };
@@ -168,7 +174,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       </PasteLinkContainer>
       <form onSubmit={submitForm}>
         <FormFields>
-
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
           <TextArea
             placeholder="Custom Blurb"
@@ -213,7 +218,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           <FormLabel htmlFor="topics" text="Add Topics" />
           <StyledContainer>
-            <TopicSelection onClick={changeTopics} />
+            <TopicSelection onClick={changeTopics} selectedState={topics} />
           </StyledContainer>
 
           {eventDetails && eventDetails.summary !== "" && (
@@ -256,7 +261,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  @media ${device.forms}{
+  @media ${device.forms} {
     display: block;
     width: 100%;
     margin-left: auto;
@@ -275,14 +280,14 @@ const PasteLink = styled.div`
   border: 8px solid #e8d9d6;
   border-right-width: 0px;
   button {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     flex: 0.4;
     color: white;
     height: 40px;
     background-color: #a36760;
     border: none;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--button-dark-hover);
       cursor: pointer;
@@ -302,7 +307,7 @@ const PasteLink = styled.div`
     padding-bottom: 12px;
     &::placeholder {
       color: #e8d9d6;
-      font-weight: bold;
+      font-weight: 600;
     }
     &:focus {
       outline: none;
@@ -326,7 +331,7 @@ const EventsGreenDiv = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-    @media ${device.forms}{
+  @media ${device.forms} {
     display: block;
     width: 100%;
   }
@@ -342,7 +347,7 @@ const ButtonDiv = styled.div`
   width: 100%;
   margin-right: 0;
   margin-left: auto;
-  @media ${device.forms}{
+  @media ${device.forms} {
     display: block;
     width: 100%;
     margin-left: auto;
@@ -361,9 +366,9 @@ const ButtonDiv = styled.div`
     height: 35px;
     background-color: #9dd3c9;
     border: none;
-    &:hover{
+    &:hover {
       color: #518077;
-      background-color:#c0e3dc;
+      background-color: #c0e3dc;
       transition: 0.5s ease;
       cursor: pointer;
     }
@@ -379,15 +384,15 @@ const ButtonDiv = styled.div`
     height: 35px;
     background-color: #e0f0f1;
     border: none;
-    &:hover{
-      color: #375F57;
-      background-color: #FFF;
+    &:hover {
+      color: #375f57;
+      background-color: #fff;
       transition: 0.5s ease;
       cursor: pointer;
     }
   }
   p {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 3px;
     color: white;
   }
@@ -402,7 +407,7 @@ const TextArea = styled.textarea`
   max-width: 100vw;
   &::placeholder {
     color: #e8d9d6;
-    font-weight: bold;
+    font-weight: 600;
   }
   &:focus {
     outline: none;

@@ -34,7 +34,7 @@ const Input = styled.input`
   margin-bottom: 15px;
   &::placeholder {
     color: #e8d9d6;
-    font-weight: bold;
+    font-weight: 600;
   }
   &:focus {
     outline: none;

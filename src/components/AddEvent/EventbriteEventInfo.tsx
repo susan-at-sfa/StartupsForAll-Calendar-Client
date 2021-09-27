@@ -47,7 +47,9 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
         An event by <Anchor>{props.creator_name}</Anchor>
       </Text>
       <Title>{eventDate}</Title>
-      <Text>{start_time} - {end_time}</Text>
+      <Text>
+        {start_time} - {end_time}
+      </Text>
       <Title>Location</Title>
       <Text>{props.location}</Text>
       <Title>Price</Title>
@@ -60,7 +62,9 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
       <Text>{props.summary}</Text>
       <Title>Event Link</Title>
       <Text>
-        <Anchor target="_blank" rel="noopener noreferrer" href={props.url}>{props.url}</Anchor>
+        <Anchor target="_blank" rel="noopener noreferrer" href={props.url}>
+          {props.url}
+        </Anchor>
       </Text>
     </>
   );
@@ -85,7 +89,7 @@ const ImageContainer = styled.div`
 `;
 const Title = styled.div`
   padding-top: 18px;
-  font-weight: bold;
+  font-weight: 600; ;
 `;
 const Text = styled.div`
   line-height: 23px;
@@ -97,4 +101,3 @@ const Anchor = styled.a`
   text-decoration: none;
   color: var(--submit-button-container-bg);
 `;
-

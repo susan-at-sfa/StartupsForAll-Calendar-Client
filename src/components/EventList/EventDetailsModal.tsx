@@ -39,26 +39,23 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
 
   const closeModal = (e: any) => {
     if (modalRef.current === e.target) {
-      dispatch(setEventDetailsModalOpen(false))
+      dispatch(setEventDetailsModalOpen(false));
     }
-  }
+  };
 
   const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape' && modalOpen) {
-        dispatch(setEventDetailsModalOpen(false))
+    (e) => {
+      if (e.key === "Escape" && modalOpen) {
+        dispatch(setEventDetailsModalOpen(false));
       }
     },
     [setEventDetailsModalOpen, modalOpen]
   );
 
-  useEffect(
-    () => {
-      document.addEventListener('keydown', keyPress);
-      return () => document.removeEventListener('keydown', keyPress);
-    },
-    [keyPress]
-  );
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
 
   return (
     <>
@@ -329,7 +326,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--add-button-hover);
       cursor: pointer;
@@ -345,7 +342,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--button-dark-hover);
       cursor: pointer;
@@ -361,10 +358,9 @@ const SmallHeader = styled.div`
   margin-bottom: 15px;
   margin-right: 10px;
   h2 {
-    margin-bottom: 5px;
     font-size: 14px;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     line-height: 18px;
   }
   h3 {
@@ -425,7 +421,7 @@ const CustomBlurb = styled.div`
   h2 {
     font-size: 14px;
     line-height: 23px;
-    font-weight: bold;
+    font-weight: 600;
   }
   p {
     margin: 0;
@@ -449,7 +445,7 @@ const ModalHeader = styled.div`
   margin-right: 10px;
   h2 {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin: 0 10px 8px 0;
     line-height: 22px;
   }
@@ -461,7 +457,7 @@ const ModalHeader = styled.div`
   h4 {
     font-size: 14px;
     line-height: 19px;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 30px;
     margin-bottom: 5px;
   }
@@ -480,7 +476,7 @@ const SecondSection = styled.div`
   h4 {
     font-size: 14px;
     line-height: 17px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 1px;
   }
   p {
@@ -530,7 +526,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--add-button-hover);
       cursor: pointer;
@@ -546,7 +542,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--add-button-hover);
       cursor: pointer;

@@ -1,10 +1,21 @@
 import { FC, useState } from "react";
 import styled from "@emotion/styled";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setToken } from "../../store/slices/auth/authSlice";
+import { resetUser } from "../../store/slices/user/userSlice";
 
 const Menu: FC = () => {
   const [cohortMenuOpen, setCohortMenuOpen] = useState(false);
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
   const [adminMenuOpen, setAdminMenuOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(({ user }) => user);
+  console.log("MENU user:", user);
+
+  const handleLogout = () => {
+    dispatch(setToken({ token: "" }));
+    dispatch(resetUser());
+  };
 
   const startUpsURL: string = "https://startupsforall.org/";
   const codaLink: string =
@@ -87,9 +98,17 @@ const Menu: FC = () => {
             <li onClick={() => setAdminMenuOpen(false)}>
               <p>{"< Back"}</p>
             </li>
-            <li>
-              <a href="/login">Admin Login</a>
-            </li>
+            {user && (user.name || user.username) ? (
+              <li>
+                <a onClick={handleLogout} href="/">
+                  Logout
+                </a>
+              </li>
+            ) : (
+              <li>
+                <a href="/login">Admin Login</a>
+              </li>
+            )}
             <li>
               <a href="/admin">Admin Home</a>
             </li>
