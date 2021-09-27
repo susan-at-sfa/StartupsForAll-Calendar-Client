@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import { resetUser } from "../../store/slices/user/userSlice";

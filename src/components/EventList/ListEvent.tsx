@@ -10,15 +10,25 @@ import { categoryBackgroundColor } from "../../constants/CategoryColors";
 
 export interface ListEventProps {
   category: string;
+  changed?: string;
+  created?: string;
   creator_name: string;
+  cost?: string | number;
   date: string;
   end_time: string;
   id: string;
   isAdmin?: boolean;
-  onGCal?: boolean;
+  in_google_cal?: boolean;
+  location?: string;
+  start?: string;
+  start_date?: string;
   start_time: string;
+  end?: string;
+  end_date?: string;
+  summary?: string;
   title: string;
   topics: string[];
+  url?: string;
   viewed?: boolean;
 }
 
@@ -26,14 +36,24 @@ const ListEvent: FC<ListEventProps> = (props) => {
   const {
     id,
     category,
-    title,
+    changed,
+    created,
+    cost,
+    creator_name,
     date,
     isAdmin,
-    onGCal,
+    in_google_cal,
+    location,
+    start_date,
+    start,
     start_time,
+    end,
+    end_date,
     end_time,
-    creator_name,
+    summary,
+    title,
     topics,
+    url,
     viewed,
   } = props;
   const dispatch = useAppDispatch();

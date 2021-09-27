@@ -1,33 +1,26 @@
-import React, { FC, FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
-import NewEvent from "../../constants/NewEvent.d";
-import BlankNewEventInputs from "./BlankNewEventInputs";
-import EventbriteEventInfo from "./EventbriteEventInfo";
-import FormLabel from "../FormLabel";
+import { FC, FormEvent, useState } from "react";
 import styled from "@emotion/styled";
-import { toast } from "react-toastify";
-import { device } from "../../constants/Device";
-
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { ListEventProps } from "./ListEvent";
+import { useHistory } from "react-router";
 import { Category } from "../../constants/Category.enum";
-import { CategoryText } from "../../constants/CategoryText.enum";
-import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
-import { useAppSelector, useAppDispatch } from "../../hooks";
 import { parseIdFromUrl, toLocalTime, toUtcDateTime } from "../../helpers";
+import NewEvent from "../../constants/NewEvent.d";
+import { emptyEvent } from "../../constants/NewEvent";
+import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
+import { toast } from "react-toastify";
+import { CategoryText } from "../../constants/CategoryText.enum";
 import {
   requestEventbriteEvent,
   resetEventBrite,
 } from "../../store/slices/eventbrite/eventbriteSlice";
-import TopicSelection from "../Selections/TopicSelection";
+import FormLabel from "../FormLabel";
+import BlankNewEventInputs from "../AddEvent/BlankNewEventInputs";
 import CategoryRadio from "../Selections/CategoryRadio";
-import { emptyEvent } from "../../constants/NewEvent";
+import TopicSelection from "../Selections/TopicSelection";
+import { device } from "../../constants/Device";
 
-interface NewEventFormProps {
-  eventDetails: NewEvent;
-  cancelEvent(): void;
-}
-
-const NewEventForm: FC<NewEventFormProps> = (props) => {
-  const { eventDetails } = props;
+const EditEvent: FC<ListEventProps> = (props) => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const token = useAppSelector(({ auth }) => auth.token);
@@ -38,32 +31,25 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   }));
 
   const [customBlurb, setCustomBlurb] = useState<string>("");
-  const [eventTitle, setEventTitle] = useState<string>(
-    eventDetails.title || eventDetails.name || ""
-  );
+  const [eventTitle, setEventTitle] = useState<string>(props.title || "");
   const [category, setCategory] = useState<Category | string>(
     Category.Community
   );
-  const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
-  const [currency, setCurrency] = useState<string>(
-    eventDetails.currency || "USD"
-  );
-  const [summary, setSummary] = useState<string>(eventDetails.summary || "");
+  const [cost, setCost] = useState<string | number>(props.cost || 0);
+  const [summary, setSummary] = useState<string>(props.summary || "");
 
   // Dates
-  const [startDate, setStartDate] = useState<string>(eventDetails.start);
-  const [endDate, setEndDate] = useState<string>(eventDetails.end);
+  const [startDate, setStartDate] = useState<string>(props.start || "");
+  const [endDate, setEndDate] = useState<string>(props.end || "");
   const [startTime, setStartTime] = useState<string>(
-    eventDetails.start !== "" ? toLocalTime(eventDetails.start) : ""
+    props.start !== "" ? toLocalTime(props.start || "") : ""
   );
   const [endTime, setEndTime] = useState<string>(
-    eventDetails.end !== "" ? toLocalTime(eventDetails.end) : ""
+    props.end !== "" ? toLocalTime(props.end || "") : ""
   );
 
-  const [location, setLocation] = useState<string>(
-    eventDetails.location || "Online"
-  );
-  const [url, setUrl] = useState<string>(eventDetails.url || "");
+  const [location, setLocation] = useState<string>(props.location || "Online");
+  const [url, setUrl] = useState<string>(props.url || "");
   const [topics, setTopics] = useState<string[]>([]);
 
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
@@ -71,12 +57,11 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     const fd: NewEvent = {
       category: category,
       category_text: getCategoryText(),
-      changed: eventDetails.changed,
+      changed: props.changed,
       cost: Number(cost),
-      created: eventDetails.created,
+      created: props.created,
       creator_email: creator_email,
       creator_name: creator_name,
-      currency: currency,
       custom_blurb: customBlurb,
       location: location,
       promoted: false,
@@ -84,9 +69,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       title: eventTitle,
       topics: topics,
     };
-    if (eventDetails.logo) {
-      fd.logo = eventDetails.logo;
-    }
     if (url) {
       fd.url = url;
     }
@@ -136,7 +118,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     return CategoryText.Community;
   };
 
-  const getNewEventDetails = async (event: FormEvent<HTMLFormElement>) => {
+  const getNewprops = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!url) {
       toast("Please include a valid Eventbrite Event URL or ID.");
@@ -154,10 +136,14 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     history.push("/add");
   };
 
+  const cancelEvent = () => {
+    console.log("event changes cancelled");
+  };
+
   return (
     <Wrapper>
       <PasteLinkContainer>
-        <form onSubmit={getNewEventDetails}>
+        <form onSubmit={getNewprops}>
           <FormLabel htmlFor="url" text="Eventbrite Event URL or ID" />
           <PasteLink>
             <TextArea
@@ -182,30 +168,26 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
             name="custom_blurb"
           />
 
-          {eventDetails && eventDetails.summary === "" && (
-            <BlankNewEventInputs
-              eventTitle={eventTitle}
-              setEventTitle={setEventTitle}
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-              startTime={startTime}
-              setStartTime={setStartTime}
-              endTime={endTime}
-              setEndTime={setEndTime}
-              location={location}
-              setLocation={setLocation}
-              cost={cost}
-              setCost={setCost}
-              currency={currency}
-              setCurrency={setCurrency}
-              summary={summary}
-              setSummary={setSummary}
-              url={url}
-              setUrl={setUrl}
-            />
-          )}
+          <BlankNewEventInputs
+            eventTitle={eventTitle}
+            setEventTitle={setEventTitle}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            startTime={startTime}
+            setStartTime={setStartTime}
+            endTime={endTime}
+            setEndTime={setEndTime}
+            location={location}
+            setLocation={setLocation}
+            cost={cost}
+            setCost={setCost}
+            summary={summary}
+            setSummary={setSummary}
+            url={url}
+            setUrl={setUrl}
+          />
 
           <FormLabel htmlFor="category" text="Category" />
           <StyledContainer>
@@ -219,29 +201,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
           <StyledContainer>
             <TopicSelection onClick={changeTopics} selectedState={topics} />
           </StyledContainer>
-
-          {eventDetails && eventDetails.summary !== "" && (
-            <EventbriteEventInfo
-              title={eventTitle}
-              logo={eventDetails.logo}
-              start_date={startDate}
-              end_date={endDate}
-              start_time={startTime}
-              end_time={endTime}
-              location={location}
-              cost={cost}
-              creator_name={creator_name}
-              currency={currency}
-              summary={summary}
-              url={url}
-            />
-          )}
         </FormFields>
 
         <EventsGreenDiv>
           <ButtonDiv>
             <p>Does this look right?</p>
-            <button type="button" id="cancel" onClick={props.cancelEvent}>
+            <button type="button" id="cancel" onClick={cancelEvent}>
               Cancel
             </button>
             <button type="submit" id="submitButton">
@@ -253,8 +218,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     </Wrapper>
   );
 };
-
-export default NewEventForm;
 
 const Wrapper = styled.div`
   display: flex;
@@ -425,3 +388,5 @@ const StyledContainer = styled.div`
   border-right-width: 20px;
   margin-bottom: 20px;
 `;
+
+export default EditEvent;

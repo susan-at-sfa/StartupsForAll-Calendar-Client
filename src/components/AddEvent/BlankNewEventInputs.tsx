@@ -18,8 +18,8 @@ interface BlankNewEventInputsProps {
   setLocation(value: string): void;
   cost: string | number;
   setCost(value: string): void;
-  currency: string;
-  setCurrency(value: string): void;
+  currency?: string;
+  setCurrency?(value: string): void;
   summary: string;
   setSummary(value: string): void;
   url: string;
