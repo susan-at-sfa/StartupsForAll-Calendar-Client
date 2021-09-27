@@ -20,7 +20,6 @@ const Login: FC = () => {
     e.preventDefault();
     const payload = { username, password };
     dispatch(login(payload));
-    // TODO: how to handle this? goes to /admin before getting token set async, then is auto-redirected to / route...
     history.push("/admin");
   }
 

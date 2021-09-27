@@ -102,3 +102,7 @@ option {
 .mv-dayname {
   color: white !important;
 }
+
+#calendarTitle {
+  display: none;
+}

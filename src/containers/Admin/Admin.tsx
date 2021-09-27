@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
+import { resetUser } from "../../store/slices/user/userSlice";
+import EventsList from "../../components/EventList/EventsList";
 import "./index.css";
 
 const Admin: FC | any = () => {
@@ -11,9 +13,10 @@ const Admin: FC | any = () => {
   console.log("Loaded Admin page with user:", user);
   const history = useHistory();
 
-  function handleLogout() {
+  const handleLogout = () => {
     dispatch(setToken({ token: "" }));
-  }
+    dispatch(resetUser());
+  };
 
   if (!user || !user.isAdmin) return history.push("/");
 
@@ -23,13 +26,17 @@ const Admin: FC | any = () => {
       <div className="button">
         <button onClick={handleLogout}>Log Out</button>
       </div>
+      <EventsList />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  max-width: 100%;
+  padding-top: 14px;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 export default Admin;

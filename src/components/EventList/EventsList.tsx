@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
+import { useLocation } from "react-router";
 import { useAppSelector } from "../../hooks";
 import { currentMonthEpochTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
@@ -7,6 +8,7 @@ import ListEvent from "./ListEvent";
 import { device } from "../../constants/Device";
 
 const EventsListComponent: FC = () => {
+  const location = useLocation();
   interface EventsList {
     [key: string]: {
       [key: string]: any;
@@ -91,19 +93,37 @@ const EventsListComponent: FC = () => {
                           }
                         );
 
-                        return (
-                          <ListEvent
-                            key={id}
-                            id={id}
-                            category={category}
-                            title={title}
-                            date={start_date}
-                            start_time={start_time}
-                            end_time={end_time}
-                            creator_name={creator_name}
-                            topics={topics}
-                          />
-                        );
+                        if (location.pathname === "/admin") {
+                          console.log("loading admin list view...");
+                          return (
+                            <ListEvent
+                              key={id}
+                              id={id}
+                              category={category}
+                              title={title}
+                              date={start_date}
+                              start_time={start_time}
+                              end_time={end_time}
+                              creator_name={creator_name}
+                              topics={topics}
+                              isAdmin={true}
+                            />
+                          );
+                        } else {
+                          return (
+                            <ListEvent
+                              key={id}
+                              id={id}
+                              category={category}
+                              title={title}
+                              date={start_date}
+                              start_time={start_time}
+                              end_time={end_time}
+                              creator_name={creator_name}
+                              topics={topics}
+                            />
+                          );
+                        }
                       })
                     ) : (
                       <div id="noEvents">

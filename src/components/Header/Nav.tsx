@@ -2,8 +2,10 @@ import { FC, useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import { device } from "../../constants/Device";
+import { useAppSelector } from "../../hooks";
 
 const Navbar: FC = () => {
+  const user = useAppSelector(({ user }) => user);
   const [selected, setSelected] = useState("/");
   const location = useLocation();
 
@@ -11,7 +13,7 @@ const Navbar: FC = () => {
     setSelected(location.pathname);
   }, [location.pathname]);
 
-  const linkList = [
+  let linkList = [
     {
       id: "/",
       title: "Event List",
@@ -21,6 +23,13 @@ const Navbar: FC = () => {
       title: "Add Event",
     },
   ];
+
+  if (user && user.isAdmin) {
+    linkList.push({
+      id: "/admin",
+      title: "Admin",
+    });
+  }
 
   return (
     <Wrapper>
@@ -57,6 +66,7 @@ const Wrapper = styled.section`
   }
   li {
     border-bottom: 3px solid transparent;
+    margin-right: 40px;
     @media ${device.desktop} {
       padding-top: 14px;
       padding-bottom: 9px;
@@ -67,9 +77,6 @@ const Wrapper = styled.section`
     }
     &.active {
       border-bottom: 4px solid white;
-    }
-    &:first-of-type {
-      margin-right: 40px;
     }
   }
 `;
