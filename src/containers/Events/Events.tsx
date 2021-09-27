@@ -1,9 +1,9 @@
 import { FC } from "react";
+import { device } from "../../constants/Device";
 import styled from "styled-components";
 import EventsList from "../../components/EventList/EventsList";
 import GoogleCalendar from "../../components/Google/GoogleCalendar";
 import FilterButton from "../../components/Selections/Filter Button";
-import { device } from "../../constants/Device";
 
 const Events: FC = () => {
 

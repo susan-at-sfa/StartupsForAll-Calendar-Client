@@ -5,7 +5,7 @@ import FormLabel from "../FormLabel";
 import styled from "@emotion/styled";
 import { requestEventbriteEvent } from "../../store/slices/eventbrite/eventbriteSlice";
 import { toast } from "react-toastify";
-import { device } from '../../constants/Device'
+import { device } from "../../constants/Device";
 
 interface EventbriteIDInputProps {
   newEvent(value: boolean): void;
@@ -72,7 +72,7 @@ const EventbritePasteWrapper = styled.div`
   flex-direction: column;
   padding-top: 14px;
   padding-left: 14px;
-@media ${device.forms}{
+  @media ${device.forms} {
     display: block;
     width: 100%;
     margin-left: auto;
@@ -89,14 +89,14 @@ const PasteLink = styled.div`
   height: 56px;
   border-right-width: 0px;
   button {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     flex: 0.4;
     color: white;
     height: 40px;
     background-color: #a36760;
     border: none;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--button-dark-hover);
       cursor: pointer;
@@ -114,7 +114,7 @@ const PasteLink = styled.div`
     padding: 0 6px;
     &::placeholder {
       color: #e8d9d6;
-      font-weight: bold;
+      font-weight: 600;
     }
     &:focus {
       outline: none;
@@ -138,13 +138,13 @@ const ButtonDiv = styled.div`
   display: flex;
   button {
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     border: none;
     width: 100%;
     height: 35px;
     background-color: #a36760;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--button-dark-hover);
       cursor: pointer;

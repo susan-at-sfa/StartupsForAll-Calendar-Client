@@ -35,9 +35,12 @@ const userSlice = createSlice({
       const userData = action.payload;
       return { ...state, ...userData };
     },
+    resetUser(state) {
+      return { ...state, ...initialState };
+    },
   },
 });
 
-export const { getUser, setUser } = userSlice.actions;
+export const { getUser, setUser, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
+import { useAppSelector } from '../../hooks';
 
 const AdminGoogle: FC = () => {
   const [consentURL, setConsentURL] = useState('')
@@ -9,17 +10,27 @@ const AdminGoogle: FC = () => {
   //User will be redirected to localhost:3000
   //Code will be sent to ? Database(store refresh token) : Front End(store in admin user)
 
+  const user = useAppSelector(({ user }) => user)
+  console.log("User", user)
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+
+  useEffect(() => {
+    getConsentURL();
+  }, [consentURL])
+
   const getConsentURL = async (): Promise<any> => {
-    const res = await fetch('http://localhost:1323/events/google/consent_url')
-    const consentURL = await res.text()
+    const res = await fetch(`${apiUrl}/events/google/google_consent`)
+    const returnedConsentURL = await res.text()
+    console.log("RETURNED URL", returnedConsentURL)
     return (
-      setConsentURL(consentURL)
+      setConsentURL(returnedConsentURL)
     )
   }
 
   return (
     <div>
-      <button onClick={() => getConsentURL()}>Click to Authorize App</button>
+      <a href={consentURL}><button>Click to Authorize App</button></a>
     </div >
   )
 }

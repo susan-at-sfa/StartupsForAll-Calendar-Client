@@ -7,11 +7,9 @@ import { SelectionDiv } from "./SelectionTheme";
 
 interface CategorySelectionProps {
   onClick: (a: string) => void;
-  multi?: boolean;
 }
 
 const CategorySelection: FC<CategorySelectionProps> = (props) => {
-  const { onClick } = props;
   return (
     <SelectionDiv>
       {categories.map((category: string) => (
@@ -25,10 +23,7 @@ const CategorySelection: FC<CategorySelectionProps> = (props) => {
           >
             {category}
           </div>
-          <input
-            type="checkbox"
-            onClick={() => onClick(category)}
-          />
+          <input type="checkbox" onClick={() => props.onClick(category)} />
           <span className="checkmark"></span>
         </label>
       ))}

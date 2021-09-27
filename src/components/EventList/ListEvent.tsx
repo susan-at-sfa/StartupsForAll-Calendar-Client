@@ -14,9 +14,12 @@ export interface ListEventProps {
   date: string;
   end_time: string;
   id: string;
+  isAdmin?: boolean;
+  onGCal?: boolean;
   start_time: string;
   title: string;
   topics: string[];
+  viewed?: boolean;
 }
 
 const ListEvent: FC<ListEventProps> = (props) => {
@@ -25,10 +28,13 @@ const ListEvent: FC<ListEventProps> = (props) => {
     category,
     title,
     date,
+    isAdmin,
+    onGCal,
     start_time,
     end_time,
     creator_name,
     topics,
+    viewed,
   } = props;
   const dispatch = useAppDispatch();
   const eventDate = new Date(date).toDateString();
@@ -38,8 +44,17 @@ const ListEvent: FC<ListEventProps> = (props) => {
     dispatch(setEventDetailsModalOpen(true));
   };
 
+  const editEvent = (id: string) => {
+    console.log("edit event clicked, id:", id);
+  };
+
   return (
-    <Wrapper key={id} onClick={() => onClickingEvent(id)}>
+    <Wrapper
+      key={id}
+      onClick={() => {
+        isAdmin ? editEvent(id) : onClickingEvent(id);
+      }}
+    >
       <SmallHeader>
         <SmallHeaderLeft>
           <div className="title">
@@ -95,10 +110,9 @@ const SmallHeader = styled.div`
   justify-content: space-between;
   max-width: 350px;
   h2 {
-    margin-bottom: 5px;
     font-size: 14px;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     line-height: 18px;
   }
   h3 {
