@@ -12,13 +12,15 @@ const AdminGoogle: FC = () => {
 
   const user = useAppSelector(({ user }) => user)
   console.log("User", user)
+  const apiUrl = process.env.REACT_APP_API_URL;
+
 
   useEffect(() => {
     getConsentURL();
   }, [consentURL])
 
   const getConsentURL = async (): Promise<any> => {
-    const res = await fetch('http://localhost:1323/events/google/google_consent')
+    const res = await fetch(`${apiUrl}/events/google/google_consent`)
     const returnedConsentURL = await res.text()
     console.log("RETURNED URL", returnedConsentURL)
     return (
