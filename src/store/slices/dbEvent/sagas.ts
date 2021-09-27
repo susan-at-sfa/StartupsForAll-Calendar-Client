@@ -1,7 +1,7 @@
 import { put, call, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { makeRequest } from '../../utils/makeRequest';
-import { setAllDbEvents, getAllDbEvents, getDbEventsByFilter } from './dbEventSlice';
+import { setAllDbEvents, getAllDbEvents, getDbEventsByFilter, setTopicFilters, setCategoryFilters } from './dbEventSlice';
 import { setFilterModalOpen } from '../filterModal/showFilterModalSlice';
 
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:1323';
@@ -48,7 +48,6 @@ export function* fetchDbEventsByFilter(dispatch: any) {
 
     if (success) {
       yield put(setAllDbEvents(data));
-      yield put(setFilterModalOpen(false));
     }
     if (error) {
       error.json().then((errData: any) => {
@@ -56,6 +55,10 @@ export function* fetchDbEventsByFilter(dispatch: any) {
         console.log('Unable to pull events data from API w/query string:', errData);
       })
     }
+    yield put(setFilterModalOpen(false));
+    yield put(setTopicFilters([]));
+    yield put(setCategoryFilters([]));
+    yield put(setFilterModalOpen(false));
   }
 }
 

@@ -23,30 +23,27 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   );
   const dispatch = useAppDispatch();
   const { modalOpen } = props;
-  const modalRef: any = useRef()
+  const modalRef: any = useRef();
 
   const closeModal = (e: any) => {
     if (modalRef.current === e.target) {
-      dispatch(setFilterModalOpen(false))
+      dispatch(setFilterModalOpen(false));
     }
-  }
+  };
 
   const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape' && modalOpen) {
-        dispatch(setFilterModalOpen(false))
+    (e) => {
+      if (e.key === "Escape" && modalOpen) {
+        dispatch(setFilterModalOpen(false));
       }
     },
     [setFilterModalOpen, modalOpen]
   );
 
-  useEffect(
-    () => {
-      document.addEventListener('keydown', keyPress);
-      return () => document.removeEventListener('keydown', keyPress);
-    },
-    [keyPress]
-  );
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
 
   const animation = useSpring({
     config: {
@@ -59,22 +56,22 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
       ? dispatch(
-        setTopicFilters(
-          topicFilters.filter((topicFilter) => topicFilter !== topic)
+          setTopicFilters(
+            topicFilters.filter((topicFilter) => topicFilter !== topic)
+          )
         )
-      )
       : dispatch(setTopicFilters([...topicFilters, topic]));
   };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
       ? dispatch(
-        setCategoryFilters(
-          categoryFilters.filter(
-            (categoryFilter) => categoryFilter !== category
+          setCategoryFilters(
+            categoryFilters.filter(
+              (categoryFilter) => categoryFilter !== category
+            )
           )
         )
-      )
       : dispatch(setCategoryFilters([...categoryFilters, category]));
   };
 
@@ -85,9 +82,6 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   };
 
   const submitFilterQuery = () => {
-    console.log("submit filter query clicked");
-    console.log("Topics", topicFilters);
-    console.log("Categories", categoryFilters);
     let payload: any = {};
     if (topicFilters.length > 0) {
       payload.topics = [...topicFilters];
@@ -95,7 +89,6 @@ const FilterModal: FC<FilterModalProps> = (props) => {
     if (categoryFilters.length > 0) {
       payload.categories = [...categoryFilters];
     }
-    console.log("dispatching query:", payload);
     dispatch(getDbEventsByFilter(payload));
   };
 
