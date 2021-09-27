@@ -19,6 +19,7 @@ import Events from "./containers/Events";
 import Login from "./containers/Login";
 import Admin from "./containers/Admin";
 import Add from "./containers/Add";
+import GoogleAuthCallback from "./containers/GoogleAuthCallback";
 import LogoMenu from "./components/Header/LogoMenu";
 import Hero from "./components/Header/Hero";
 import EventDetailsModal from "./components/EventList/EventDetailsModal";
@@ -46,6 +47,7 @@ const App: FC = () => {
 
   const routes = useMemo(() => {
     const jsx = [
+      <Route key={"GoogleAuthCallback"} path={Routes.GoogleAuthCallback} exact component={GoogleAuthCallback} />,
       <Route key={"Events"} path={Routes.Events} exact component={Events} />,
       <Route key={"Add"} path={Routes.Add} exact component={Add} />,
     ];

@@ -10,6 +10,7 @@ import "./index.css";
 const Admin: FC | any = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
+  console.log("Loaded Admin page with user:", user);
 
   const handleLogout = () => {
     dispatch(setToken({ token: "" }));
