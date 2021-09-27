@@ -95,7 +95,6 @@ const SmallHeader = styled.div`
   justify-content: space-between;
   max-width: 350px;
   h2 {
-    margin-bottom: 5px;
     font-size: 14px;
     font-style: normal;
     font-weight: bold;

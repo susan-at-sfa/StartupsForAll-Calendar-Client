@@ -39,26 +39,23 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
 
   const closeModal = (e: any) => {
     if (modalRef.current === e.target) {
-      dispatch(setEventDetailsModalOpen(false))
+      dispatch(setEventDetailsModalOpen(false));
     }
-  }
+  };
 
   const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape' && modalOpen) {
-        dispatch(setEventDetailsModalOpen(false))
+    (e) => {
+      if (e.key === "Escape" && modalOpen) {
+        dispatch(setEventDetailsModalOpen(false));
       }
     },
     [setEventDetailsModalOpen, modalOpen]
   );
 
-  useEffect(
-    () => {
-      document.addEventListener('keydown', keyPress);
-      return () => document.removeEventListener('keydown', keyPress);
-    },
-    [keyPress]
-  );
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
 
   return (
     <>
@@ -329,7 +326,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--add-button-hover);
       cursor: pointer;
@@ -345,7 +342,7 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--button-dark-hover);
       cursor: pointer;
@@ -361,7 +358,6 @@ const SmallHeader = styled.div`
   margin-bottom: 15px;
   margin-right: 10px;
   h2 {
-    margin-bottom: 5px;
     font-size: 14px;
     font-style: normal;
     font-weight: bold;
@@ -530,7 +526,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--add-button-hover);
       cursor: pointer;
@@ -546,7 +542,7 @@ const BottomButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: var(--add-button-hover);
       cursor: pointer;

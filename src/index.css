@@ -83,3 +83,19 @@ option {
   width: 100%;
   flex-grow: 0;
 }
+
+.creatorName {
+  margin-top: 5px;
+}
+
+/* Google Embed Calendar Styles */
+
+.today-button,
+.view-container-border,
+.mv-daynames-table {
+  background: rgb(163, 103, 96) !important;
+}
+
+.mv-dayname {
+  color: white !important;
+}
