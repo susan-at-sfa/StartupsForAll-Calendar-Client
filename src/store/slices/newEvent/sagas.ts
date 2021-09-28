@@ -16,6 +16,9 @@ function* saveNewEventSaga(action: PayloadAction<{ form: NewEvent, token: string
   if (success) {
     toast("New Event created successfully!");
     console.log('SUCCESS saving new event', data);
+    //check for 'in_google_cal' property of event
+    //if exists, all good
+    //if not, 'event created in app but not in calendar
     yield put(resetEvent(emptyEvent));
     yield put(resetEventBrite(emptyEvent));
     yield put(getAllDbEvents());

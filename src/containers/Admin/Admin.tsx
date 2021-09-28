@@ -22,6 +22,9 @@ const Admin: FC | any = () => {
     return <Redirect to={"/"} />;
   }
 
+  //Check to see if admin.isGoogleAuth === true
+  //If true, return 'App is authed blah...'
+  //If false, return button to auth app
   return (
     <Wrapper>
       <h1>Admin page</h1>

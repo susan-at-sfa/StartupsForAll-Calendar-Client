@@ -12,9 +12,6 @@ const GoogleAuthCallback = () => {
   const code = params.get('code');
 
   useEffect(() => {
-    // events/google/oauth2callback, pass code as query param
-    // get the code from the url params
-    // if there is one, we'll call our API endpoint and send that code over
     const sendCodeToApi = async () => {
       const apiUrl = process.env.REACT_APP_API_URL;
       const response = await makeRequest(`${apiUrl}/events/google/oauth2callback`, 'POST', { code }, token);

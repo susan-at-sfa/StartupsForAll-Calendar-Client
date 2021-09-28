@@ -29,18 +29,27 @@ input {
   cursor: pointer;
   height: 0;
   width: 0;
-  &:checked ~ .checkmarkBox{
+  &:checked ~ .markBox{
     border: 4px solid #A36760;
   }
-  &:checked ~ .checkmarkBox::after{
+  //This displays css checkmarks on :checked. Should be commented out to disable css checkmarks 
+  /* &:checked ~ .markBox::after{
 display: block;
-  }
-  &:checked ~ .marksTheSpot{
+  } */
+
+  //This should be uncommented to display svg checkmark on :checked (theoretically ammirite?)
+  &:checked ~ svg {
     display: block;
-  }
+}
 }
 
-.checkmarkBox {
+/* Checkmark component which would initially be hidden and then displayed on &:checked ~ svg above^*/
+svg{
+  display: none;
+}
+
+
+.markBox {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -49,6 +58,7 @@ display: block;
   width: 28px;
   background-color: white;
   &::after{ 
+    //This is the custom css checkmarks initially hidden
     content: "";
     position: absolute;
     display: none; 
@@ -64,6 +74,7 @@ display: block;
   } 
 }
 .emojiDisplay{
+  text-align: center;
   background-color: white;
   border-radius: 50%;
   width: 14px;

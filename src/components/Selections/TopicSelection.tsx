@@ -31,9 +31,11 @@ const TopicSelection: FC<TopicSelectionProps> = (props) => {
           ) : (
             <input type="checkbox" onClick={() => props.onClick(topic)} />
           )}
-          <div className="checkmarkBox">
-            <div className="checkmark"></div>
-          </div>
+          {/* This is the span with the imported svg component, I tried having the checkmark inside the span initially that didn't work. This displays the svg and changes border color on input:checked but the svg is not in the right spot */}
+          <span className="markBox"></span>
+          <Checkmark />
+          {/*This empty span is where the checkmark is being shown and hidden based on input:checked ~ .markBox::after*/}
+          {/* <span className="markBox"></span> */}
         </label>
       ))}
     </SelectionDiv>
