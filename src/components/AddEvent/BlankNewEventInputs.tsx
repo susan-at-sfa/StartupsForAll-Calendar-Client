@@ -29,10 +29,16 @@ interface BlankNewEventInputsProps {
 const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
   console.log("BlankNewEventInputs component - got props:", props);
 
-  const [localStartDate, setLocalStartDate] = useState<string>("");
-  const [localEndDate, setLocalEndDate] = useState<string>("");
-  const [localStartTime, setLocalStartTime] = useState<string>("");
-  const [localEndTime, setLocalEndTime] = useState<string>("");
+  const [localStartDate, setLocalStartDate] = useState<string | Date>(
+    props.startDate || ""
+  );
+  const [localEndDate, setLocalEndDate] = useState<string | Date>(
+    props.endDate || ""
+  );
+  const [localStartTime, setLocalStartTime] = useState<string>(
+    props.startTime || ""
+  );
+  const [localEndTime, setLocalEndTime] = useState<string>(props.endTime || "");
 
   const handleChange = (value: string, which: string) => {
     console.log("handling date/time change...", value, which);

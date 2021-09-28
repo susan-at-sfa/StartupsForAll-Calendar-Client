@@ -93,7 +93,7 @@ const Wrapper = styled.section`
     src: url(${Poppins});
   }
   @font-face {
-    font-family: Poppins;
+    font-family: Poppins-Bold;
     font-style: normal;
     font-weight: 600;
     src: url(${PoppinsBold});

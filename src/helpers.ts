@@ -12,6 +12,13 @@ export const parseIdFromUrl = (url: string): string | null => {
   return id ? id[0] : null;
 }
 
+// Takes in a UTC date string (eg 2021-10-02T19:00:00.000Z) and returns just the date part
+export const toLocalDate = (utcDateString: string): string => {
+  const date = utcDateString.split("T")[0];
+  console.log(`converted ${utcDateString} to ${date}`);
+  return date;
+}
+
 export const toLocalTime = (dateString: string): string => {
   if (dateString === "" || !dateString) return "";
   return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});

@@ -12,7 +12,7 @@ import BlankNewEventInputs from "../AddEvent/BlankNewEventInputs";
 import CategoryRadio from "../Selections/CategoryRadio";
 import TopicSelection from "../Selections/TopicSelection";
 import { device } from "../../constants/Device";
-import { toLocalTime, toUtcDateTime } from "../../helpers";
+import { toLocalTime, toUtcDateTime, toLocalDate } from "../../helpers";
 
 interface EditEventModalProps {
   id: string;
@@ -41,8 +41,12 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
     thisEvent.custom_blurb
   );
   // Dates
-  const [startDate, setStartDate] = useState<string>(thisEvent.start_date);
-  const [endDate, setEndDate] = useState<string>(thisEvent.end_date);
+  const [startDate, setStartDate] = useState<string>(
+    toLocalDate(thisEvent.start_date)
+  );
+  const [endDate, setEndDate] = useState<string>(
+    toLocalDate(thisEvent.end_date)
+  );
   const [startTime, setStartTime] = useState<string>(
     toLocalTime(thisEvent.start_date)
   );

@@ -20,7 +20,7 @@
 }
 
 @font-face {
-  font-weight: 600;
+  font-family: "Poppins-Bold";
   font-weight: 600;
   src: local("Poppins-Bold") url("./assets/fonts/Poppins-Bold.ttf")
     format("truetype");
