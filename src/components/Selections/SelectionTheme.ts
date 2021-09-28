@@ -4,7 +4,7 @@ export const SelectionDiv = styled.div`
 #displayText{
   color: #A36760;
   padding: 2px;
-  padding-left: 7px;
+  padding-left: 6px;
 }
 .container {
   display: block;
@@ -29,15 +29,15 @@ input {
   cursor: pointer;
   height: 0;
   width: 0;
-  &:checked ~ .checkmark{
+  &:checked ~ .checkmarkBox{
     border: 4px solid #A36760;
   }
-  &:checked ~ .checkmark::after{
-    display: block;
+  &:checked ~ .checkmarkBox::after{
+display: block;
   }
-
 }
-.checkmark {
+
+.checkmarkBox {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -45,10 +45,10 @@ input {
   height: 28px;
   width: 28px;
   background-color: white;
-  &::after{
+  &::after{ 
     content: "";
     position: absolute;
-    display: none;
+    display: none; 
     left: 8px;
     top: -8px;
     width: 5px;
@@ -57,7 +57,15 @@ input {
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+    transform: rotate(45deg); 
+  } 
+}
+.emojiDisplay{
+  background-color: white;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  padding: 1px 3px 0px 4px;
+  margin-right: 6px;
 }
 `

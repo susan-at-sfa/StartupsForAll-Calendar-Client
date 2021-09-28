@@ -15,3 +15,12 @@ export const topicsEmojis: Record<string, string> = {
   '🧩 Strategy': '🧩',
   '🔍 User Research': '🔍',
 }
+
+export const topicsText: Record<string, string> = {
+  '💵 Funding / Financial': 'Funding/Financial',
+  '☕️ Action Cafe': 'Action Cafe',
+  '🚀 Open Space': 'Open Space',
+  '🌎 Social Impact': 'Social Impact',
+  '🧩 Strategy': 'Strategy',
+  '🔍 User Research': 'User Research',
+}

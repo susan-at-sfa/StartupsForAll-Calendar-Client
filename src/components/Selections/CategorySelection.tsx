@@ -24,7 +24,7 @@ const CategorySelection: FC<CategorySelectionProps> = (props) => {
             {category}
           </div>
           <input type="checkbox" onClick={() => props.onClick(category)} />
-          <span className="checkmark"></span>
+          <span className="checkmarkBox"></span>
         </label>
       ))}
     </SelectionDiv>

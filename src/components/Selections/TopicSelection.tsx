@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Topics } from "../../constants/Topics.enum";
-import { topicsEmojiColors } from "../../constants/TopicsEmojiColors";
+import { topicsEmojiColors, topicsText, topicsEmojis } from "../../constants/TopicsEmojiColors";
 import { SelectionDiv } from "./SelectionTheme";
+import Checkmark from './Checkmark';
 interface TopicSelectionProps {
   onClick: (a: string) => void;
   selectedState?: string[];
@@ -19,7 +20,7 @@ const TopicSelection: FC<TopicSelectionProps> = (props) => {
             }}
             id="displayText"
           >
-            {topic}
+            <span className="emojiDisplay">{topicsEmojis[topic]}</span> {topicsText[topic]}
           </div>
           {props.selectedState ? (
             <input
@@ -30,7 +31,9 @@ const TopicSelection: FC<TopicSelectionProps> = (props) => {
           ) : (
             <input type="checkbox" onClick={() => props.onClick(topic)} />
           )}
-          <span className="checkmark"></span>
+          <div className="checkmarkBox">
+            <span className="checkmark"></span>
+          </div>
         </label>
       ))}
     </SelectionDiv>
@@ -38,3 +41,5 @@ const TopicSelection: FC<TopicSelectionProps> = (props) => {
 };
 
 export default TopicSelection;
+
+
