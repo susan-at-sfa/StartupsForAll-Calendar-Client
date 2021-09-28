@@ -10,6 +10,7 @@ import { BiVideo } from "react-icons/bi";
 import {
   topicsEmojiColors,
   topicsEmojis,
+  topicsText
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
 interface EventDetailsModalProps {
@@ -233,7 +234,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                                   backgroundColor: topicsEmojiColors[topic],
                                 }}
                               >
-                                {topic}
+                                <span className="emojiDisplay">{topicsEmojis[topic]}</span> {topicsText[topic]}
                               </li>
                             );
                           })}
@@ -574,6 +575,14 @@ const ModalFooter = styled.div`
     font-size: 12px;
     line-height: 17px;
   }
+  .emojiDisplay{
+  background-color: white;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  padding: 1px 3px 0px 4px;
+  margin-right: 6px;
+}
 `;
 const Centered = styled.p`
   display: flex;
