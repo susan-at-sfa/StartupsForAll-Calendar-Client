@@ -11,7 +11,9 @@ const LogoMenu: FC = () => {
 
   return (
     <TopSticky>
-      <Logo src={logo} alt="Startups for All logo" />
+      <div className="logoDiv">
+        <Logo src={logo} alt="Startups for All logo" />
+      </div>
       <Hamburger
         className={menuOpen ? "active" : "Hamburger"}
         onClick={() => dispatch(setMenuOpen(!menuOpen))}
@@ -34,13 +36,16 @@ const TopSticky = styled.div`
   z-index: 4;
   height: 45px;
   background: transparent;
-`;
+  .logoDiv{
+    position: relative;
+    z-index: 4;
+    padding: 10px 0 3px 10px;
+    width: 200px;
+}
+`
 const Logo = styled.img`
   height: auto;
-  width: 200px;
-  position: relative;
-  z-index: 4;
-  padding: 10px 0 3px 10px;
+  width: 100%;
 `;
 const Hamburger = styled.div`
   width: 34px;
