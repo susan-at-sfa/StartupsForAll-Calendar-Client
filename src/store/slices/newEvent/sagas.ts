@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { makeRequest } from '../../utils/makeRequest';
-import { resetEvent, saveNewEvent, updateExistingEvent } from './newEventSlice';
+import { deleteEvent, resetEvent, saveNewEvent, updateExistingEvent } from './newEventSlice';
 import { getAllDbEvents } from "../dbEvent/dbEventSlice";
 import NewEvent from '../../../constants/NewEvent.d';
 import { emptyEvent } from '../../../constants/NewEvent';
@@ -59,8 +59,27 @@ export function* updateExistingEventSaga(action: PayloadAction<{ form: NewEvent,
   }
 }
 
+export function* deleteEventSaga(action: PayloadAction<{ token: string, id: string }>) {
+  let endpoint = `events`
+  console.log('delete event saga with token and id:', action.payload.token, action.payload.id);
+  const body = null;
+  const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}/${action.payload.id}`, 'DELETE', body, action.payload.token);
+  if (success) {
+    toast("Event Deleted successfully!");
+    console.log('SUCCESS deleting event', data);
+    yield put(resetEvent(emptyEvent));
+    yield put(resetEventBrite(emptyEvent));
+    yield put(getAllDbEvents());
+  }
+  if (error) {
+    console.log("FAILED TO DELETE EVENT. got raw error of:", error);
+    toast(`Error creating new event. Please try again. ${error.message}.`);
+  }
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function* watchAllNewEvent() {
   yield takeEvery(saveNewEvent, saveNewEventSaga);
   yield takeEvery(updateExistingEvent, updateExistingEventSaga);
+  yield takeEvery(deleteEvent, deleteEventSaga);
 }

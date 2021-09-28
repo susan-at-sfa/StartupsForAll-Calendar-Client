@@ -1,10 +1,14 @@
 import { FC, FormEvent, useState } from "react";
+import Modal from "react-modal";
 import styled from "@emotion/styled";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useHistory } from "react-router";
 import { Category } from "../../constants/Category.enum";
 import NewEvent from "../../constants/NewEvent.d";
-import { updateExistingEvent } from "../../store/slices/newEvent/newEventSlice";
+import {
+  updateExistingEvent,
+  deleteEvent,
+} from "../../store/slices/newEvent/newEventSlice";
 import { toast } from "react-toastify";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import FormLabel from "../FormLabel";
@@ -12,6 +16,7 @@ import BlankNewEventInputs from "../AddEvent/BlankNewEventInputs";
 import CategoryRadio from "../Selections/CategoryRadio";
 import TopicSelection from "../Selections/TopicSelection";
 import { device } from "../../constants/Device";
+import TrashSvg from "../../assets/images/icon_trash.svg";
 import { toLocalTime, toUtcDateTime, toLocalDate } from "../../helpers";
 
 interface EditEventModalProps {
@@ -26,6 +31,8 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
   const thisEvent: Record<any, any> = useAppSelector(({ dbEvent }) =>
     dbEvent.dbEvents.filter((ev: any) => ev.id === props.id)
   )[0];
+  Modal.setAppElement("#root");
+  const [modalIsOpen, setModalOpen] = useState<boolean>(false);
   console.log("EDIT EVENT MODAL WITH ID, EVENT", props.id, thisEvent);
 
   const [category, setCategory] = useState<Category | string>(
@@ -120,8 +127,50 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
     return CategoryText.Community;
   };
 
+  const confirmDelete = () => {
+    console.log("DELETE EVENT CLICKED", thisEvent.id);
+    dispatch(
+      deleteEvent({
+        token: token,
+        id: thisEvent.id,
+      })
+    );
+    closeDeleteModal();
+    props.setEditModalOpen(false);
+    history.push("/admin");
+  };
+
+  // Confirm Deletion of Event Modal
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+  const openDeleteModal = () => setModalOpen(true);
+  const closeDeleteModal = () => setModalOpen(false);
+
   return (
     <Wrapper>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeDeleteModal}
+        style={customStyles}
+        contentLabel="Confirm Delete Event"
+      >
+        <ModalWrapper>
+          <h3>
+            Are you sure you want to permanently delete this Event from the list
+            and calendar?
+          </h3>
+          <button onClick={closeDeleteModal}>Cancel</button>
+          <button onClick={confirmDelete}>Delete</button>
+        </ModalWrapper>
+      </Modal>
       <form onSubmit={submitForm}>
         <FormFields>
           <FormLabel htmlFor="custom_blurb" text="Custom Blurb" />
@@ -168,6 +217,9 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
           <ConfirmContainer>
             <p>Does this look right?</p>
             <ButtonDiv>
+              <TrashContainer onClick={openDeleteModal}>
+                <img src={TrashSvg} alt="trash can" />
+              </TrashContainer>
               <button
                 type="button"
                 id="cancel"
@@ -233,6 +285,18 @@ const ConfirmContainer = styled.div`
   @media ${device.forms} {
     margin: 0 auto;
     max-width: 400px;
+  }
+`;
+const TrashContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #518077;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  &:hover {
+    background-color: #375f57;
   }
 `;
 const ButtonDiv = styled.div`
@@ -301,6 +365,9 @@ const StyledContainer = styled.div`
   border: 8px solid #e8d9d6;
   border-right-width: 20px;
   margin-bottom: 20px;
+`;
+const ModalWrapper = styled.div`
+  border: 1px solid red;
 `;
 
 export default EditEventModal;

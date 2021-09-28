@@ -14,9 +14,10 @@ const newEventSlice = createSlice({
     },
     saveNewEvent(state, action: PayloadAction<{form: NewEvent, token: string }>) {},
     updateExistingEvent(state, action: PayloadAction<{form: NewEvent, token: string, id: string}>) {},
+    deleteEvent(state, action: PayloadAction<{token: string, id: string}>) {},
   }
 });
 
-export const { saveNewEvent, resetEvent, updateExistingEvent } = newEventSlice.actions;
+export const { deleteEvent, saveNewEvent, resetEvent, updateExistingEvent } = newEventSlice.actions;
 
 export default newEventSlice.reducer;
