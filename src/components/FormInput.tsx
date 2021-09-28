@@ -2,16 +2,17 @@ import { FC } from "react";
 import styled from "@emotion/styled";
 
 interface FormInputProps {
-  placeholder?: string;
-  type?: string;
-  required?: boolean;
+  defaultValue?: string;
+  disabled?: boolean;
+  id?: string;
+  name?: string;
   onChange(value: any | null): void;
   onBlur?(value: any): void;
-  value?: string | number | Date | string[] | any;
-  name?: string;
-  disabled?: boolean;
-  defaultValue?: string;
+  placeholder?: string;
+  required?: boolean;
   rows?: string;
+  type?: string;
+  value?: string | number | Date | string[] | any;
 }
 
 const FormInput: FC<FormInputProps> = (props) => {
