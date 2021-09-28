@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -10,6 +11,7 @@ import "./index.css";
 import { device } from "../../constants/Device";
 
 const Admin: FC | any = () => {
+  const history = useHistory();
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
 
@@ -38,6 +40,7 @@ const Admin: FC | any = () => {
   const handleLogout = () => {
     dispatch(setToken({ token: "" }));
     dispatch(resetUser());
+    history.push("/");
   };
 
   const closeModal = (e: any) => {
