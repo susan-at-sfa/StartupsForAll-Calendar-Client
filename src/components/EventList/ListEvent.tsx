@@ -37,25 +37,13 @@ const ListEvent: FC<ListEventProps> = (props) => {
   const {
     id,
     category,
-    changed,
-    created,
-    cost,
     creator_name,
     date,
     isAdmin,
-    in_google_cal,
-    location,
-    start_date,
-    start,
     start_time,
-    end,
-    end_date,
     end_time,
-    summary,
     title,
     topics,
-    url,
-    viewed,
   } = props;
   const dispatch = useAppDispatch();
   const eventDate = new Date(date).toDateString();
