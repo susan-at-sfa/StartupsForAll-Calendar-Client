@@ -36,22 +36,19 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     creator_email: user.email,
     creator_name: user.name,
   }));
-  const [customBlurb, setCustomBlurb] = useState<string>("");
-  const [eventTitle, setEventTitle] = useState<string>(
-    eventDetails.title || eventDetails.name || ""
-  );
   const [category, setCategory] = useState<Category | string>(
     Category.Community
   );
   const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
-  const [currency, setCurrency] = useState<string>(
-    eventDetails.currency || "USD"
-  );
-  const [summary, setSummary] = useState<string>(eventDetails.summary || "");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [customBlurb, setCustomBlurb] = useState<string>("");
+  const [startDate, setStartDate] = useState(eventDetails.start || new Date());
+  const [endDate, setEndDate] = useState(eventDetails.end || new Date());
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
+  );
+  const [summary, setSummary] = useState<string>(eventDetails.summary || "");
+  const [title, setTitle] = useState<string>(
+    eventDetails.title || eventDetails.name || ""
   );
   const [url, setUrl] = useState<string>(eventDetails.url || "");
   const [topics, setTopics] = useState<string[]>([]);
@@ -66,12 +63,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       created: eventDetails.created,
       creator_email: creator_email,
       creator_name: creator_name,
-      currency: currency,
+      currency: "USD",
       custom_blurb: customBlurb,
       location: location,
       promoted: false,
       summary: summary,
-      title: eventTitle,
+      title: title,
       topics: topics,
     };
     if (eventDetails.logo) {
@@ -174,8 +171,8 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           {eventDetails && eventDetails.summary === "" && (
             <BlankNewEventInputs
-              eventTitle={eventTitle}
-              setEventTitle={setEventTitle}
+              eventTitle={title}
+              setEventTitle={setTitle}
               startDate={startDate}
               setStartDate={setStartDate}
               endDate={endDate}
@@ -184,8 +181,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
               setLocation={setLocation}
               cost={cost}
               setCost={setCost}
-              currency={currency}
-              setCurrency={setCurrency}
               summary={summary}
               setSummary={setSummary}
               url={url}
@@ -208,14 +203,13 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           {eventDetails && eventDetails.summary !== "" && (
             <EventbriteEventInfo
-              title={eventTitle}
+              title={title}
               logo={eventDetails.logo}
               start_date={startDate}
               end_date={endDate}
               location={location}
               cost={cost}
               creator_name={creator_name}
-              currency={currency}
               summary={summary}
               url={url}
             />

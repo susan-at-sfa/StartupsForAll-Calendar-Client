@@ -9,7 +9,7 @@ interface EventbriteEventInfoProps {
   end_date: Date;
   location: string;
   cost: number | string;
-  currency: string;
+  currency?: string;
   summary: string;
   url: string;
 }
