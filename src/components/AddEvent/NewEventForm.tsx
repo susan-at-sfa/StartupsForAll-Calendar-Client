@@ -36,7 +36,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     creator_email: user.email,
     creator_name: user.name,
   }));
-
   const [customBlurb, setCustomBlurb] = useState<string>("");
   const [eventTitle, setEventTitle] = useState<string>(
     eventDetails.title || eventDetails.name || ""
@@ -49,17 +48,8 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     eventDetails.currency || "USD"
   );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
-
-  // Dates
-  const [startDate, setStartDate] = useState<string>(eventDetails.start);
-  const [endDate, setEndDate] = useState<string>(eventDetails.end);
-  const [startTime, setStartTime] = useState<string>(
-    eventDetails.start !== "" ? toLocalTime(eventDetails.start) : ""
-  );
-  const [endTime, setEndTime] = useState<string>(
-    eventDetails.end !== "" ? toLocalTime(eventDetails.end) : ""
-  );
-
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
   );
@@ -94,12 +84,12 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     if (startDate.toString().includes("Z")) {
       fd.start_date = startDate;
     } else {
-      fd.start_date = toUtcDateTime(startDate, startTime);
+      fd.start_date = toUtcDateTime(startDate);
     }
     if (endDate.toString().includes("Z")) {
       fd.end_date = endDate;
     } else {
-      fd.end_date = toUtcDateTime(endDate, endTime);
+      fd.end_date = toUtcDateTime(endDate);
     }
     dispatch(
       saveNewEvent({
@@ -190,10 +180,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
-              startTime={startTime}
-              setStartTime={setStartTime}
-              endTime={endTime}
-              setEndTime={setEndTime}
               location={location}
               setLocation={setLocation}
               cost={cost}
@@ -226,8 +212,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
               logo={eventDetails.logo}
               start_date={startDate}
               end_date={endDate}
-              start_time={startTime}
-              end_time={endTime}
               location={location}
               cost={cost}
               creator_name={creator_name}

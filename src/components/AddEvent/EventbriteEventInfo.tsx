@@ -5,10 +5,8 @@ interface EventbriteEventInfoProps {
   title: string;
   logo?: string;
   creator_name?: string;
-  start_date: Date | string;
-  end_date: Date | string;
-  start_time: string;
-  end_time: string;
+  start_date: Date;
+  end_date: Date;
   location: string;
   cost: number | string;
   currency: string;

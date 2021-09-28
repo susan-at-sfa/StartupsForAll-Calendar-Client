@@ -47,18 +47,9 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
     thisEvent.custom_blurb
   );
   // Dates
-  const [startDate, setStartDate] = useState<string>(
-    toLocalDate(thisEvent.start_date)
-  );
-  const [endDate, setEndDate] = useState<string>(
-    toLocalDate(thisEvent.end_date)
-  );
-  const [startTime, setStartTime] = useState<string>(
-    toLocalTime(thisEvent.start_date)
-  );
-  const [endTime, setEndTime] = useState<string>(
-    toLocalTime(thisEvent.end_date)
-  );
+  const [startDate, setStartDate] = useState(new Date(thisEvent.start_date));
+  const [endDate, setEndDate] = useState(new Date(thisEvent.end_date));
+
   const [location, setLocation] = useState<string>(thisEvent.location);
   const [promoted, setPromoted] = useState<boolean>(thisEvent.promoted);
   const [summary, setSummary] = useState<string>(thisEvent.summary);
@@ -90,16 +81,16 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
       // TODO: change category text so it matches expected for the new category
     }
     // Eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
-    if (startDate.toString().includes("Z")) {
-      fd.start_date = startDate;
-    } else {
-      fd.start_date = toUtcDateTime(startDate, startTime);
-    }
-    if (endDate.toString().includes("Z")) {
-      fd.end_date = endDate;
-    } else {
-      fd.end_date = toUtcDateTime(endDate, endTime);
-    }
+    // if (startDate.toString().includes("Z")) {
+    //   fd.start_date = startDate;
+    // } else {
+    //   fd.start_date = toUtcDateTime(startDate, startTime);
+    // }
+    // if (endDate.toString().includes("Z")) {
+    //   fd.end_date = endDate;
+    // } else {
+    //   fd.end_date = toUtcDateTime(endDate, endTime);
+    // }
     return console.log("SUBMITTED CHANGED EVENT", thisEvent.id, fd);
     dispatch(
       saveNewEvent({
@@ -153,10 +144,6 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
             setStartDate={setStartDate}
             endDate={endDate}
             setEndDate={setEndDate}
-            startTime={startTime}
-            setStartTime={setStartTime}
-            endTime={endTime}
-            setEndTime={setEndTime}
             location={location}
             setLocation={setLocation}
             cost={cost}

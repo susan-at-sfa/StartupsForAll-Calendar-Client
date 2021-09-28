@@ -1,20 +1,18 @@
 import styled from "@emotion/styled";
-import React, { FC, useState } from "react";
-import { to24HourTime } from "../../helpers";
+import { FC } from "react";
+// import { to24HourTime } from "../../helpers";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface BlankNewEventInputsProps {
   eventTitle: string;
   setEventTitle(value: string): void;
-  startDate: Date | string;
-  setStartDate(value: string): void;
-  endDate: Date | string;
-  setEndDate(value: string): void;
-  startTime: string;
-  setStartTime(value: string): void;
-  endTime: string;
-  setEndTime(value: string): void;
+  startDate: Date;
+  setStartDate(value: Date): void;
+  endDate: Date;
+  setEndDate(value: Date): void;
   location: string;
   setLocation(value: string): void;
   cost: string | number;
@@ -29,59 +27,9 @@ interface BlankNewEventInputsProps {
 
 const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
   console.log("BlankNewEventInputs component - got props:", props);
-  let start_time;
-  if (
-    props.startTime &&
-    (props.startTime.includes("AM") || props.startTime.includes("PM"))
-  ) {
-    start_time = to24HourTime(props.startTime);
-  } else {
-    start_time = props.startTime;
-  }
-  let end_time;
-  if (
-    props.endTime &&
-    (props.endTime.includes("AM") || props.endTime.includes("PM"))
-  ) {
-    end_time = to24HourTime(props.endTime);
-  } else {
-    end_time = props.endTime;
-  }
-
-  const [localStartDate, setLocalStartDate] = useState<string | Date>(
-    props.startDate || ""
-  );
-  const [localEndDate, setLocalEndDate] = useState<string | Date>(
-    props.endDate || ""
-  );
-  const [localStartTime, setLocalStartTime] = useState<string>(
-    start_time || ""
-  );
-  const [localEndTime, setLocalEndTime] = useState<string>(end_time || "");
-
-  const handleChange = (value: string, which: string) => {
-    console.log("handling date/time change...", value, which);
-    if (which === "et") {
-      setLocalEndTime(value);
-      props.setEndTime(value);
-    } else if (which === "st") {
-      setLocalStartTime(value);
-      props.setStartTime(value);
-    } else if (which === "sd") {
-      setLocalStartDate(value);
-      // calling toString() ensures it is saved as a string formatted YYYY-MM-DD
-      // without toString it will be converted to a Date eg: "Date Fri Oct 22 2021 17:00:00 GMT-0700 (Pacific Daylight Time)"
-      // having a Date saved in state in this way makes it much harder to combine
-      // Date+Time to generate an accurate UTC/ISO8601 formatted date for the back end
-      props.setStartDate(value.toString());
-    } else if (which === "ed") {
-      setLocalEndDate(value);
-      props.setEndDate(value.toString());
-    }
-  };
 
   return (
-    <>
+    <form>
       <FormLabel htmlFor="title" text="Title" />
       <FormInput
         placeholder="Title"
@@ -93,54 +41,28 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         name="title"
       />
 
-      <FormLabel htmlFor="start_date" text="Start Date" />
-      <FormInput
-        placeholder="Start Date"
-        type="date"
-        required
-        disabled={false}
-        value={localStartDate}
-        onChange={(value) => handleChange(value, "sd")}
+      <FormLabel htmlFor="start_date" text="Start" />
+      <DatePicker
+        selected={props.startDate}
         name="start_date"
+        onChange={(date: Date) => props.setStartDate(date)}
+        showTimeSelect
+        timeCaption="Start"
+        timeFormat="HH:mm"
+        timeIntervals={5}
+        dateFormat="MMMM d, yyyy h:mm aa"
       />
-
-      <FormLabel htmlFor="end_date" text="End Date" />
-      <FormInput
-        placeholder="End Date"
-        type="date"
-        required
-        disabled={false}
-        value={localEndDate}
-        onChange={(value) => handleChange(value, "ed")}
+      <FormLabel htmlFor="end_date" text="End" />
+      <DatePicker
+        selected={props.endDate}
         name="end_date"
+        onChange={(date: Date) => props.setEndDate(date)}
+        showTimeSelect
+        timeCaption="End"
+        timeFormat="HH:mm"
+        timeIntervals={5}
+        dateFormat="MMMM d, yyyy h:mm aa"
       />
-
-      <div>
-        <FormLabel htmlFor="" text="Time" />
-        <TimesContainer>
-          <FormLabel htmlFor="start_time" text="" />
-          <FormInput
-            placeholder="Start Time"
-            type="time"
-            required
-            disabled={false}
-            value={localStartTime}
-            onChange={(value) => handleChange(value, "st")}
-            name="start_time"
-          />
-          <span>to</span>
-          <FormLabel htmlFor="end_time" text="" />
-          <FormInput
-            placeholder="End Time"
-            type="time"
-            required
-            disabled={false}
-            value={localEndTime}
-            onChange={(value) => handleChange(value, "et")}
-            name="end_time"
-          />
-        </TimesContainer>
-      </div>
 
       <FormLabel htmlFor="location" text="Location" />
       <FormInput
@@ -173,7 +95,7 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         onChange={(e) => props.setSummary(e.target.value)}
         name="summary"
       />
-    </>
+    </form>
   );
 };
 
@@ -197,18 +119,6 @@ const TextArea = styled.textarea`
   &:focus::placeholder {
     color: var(--input-focus);
     transition: 0.75s ease;
-  }
-`;
-const TimesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  span {
-    margin-bottom: 20px;
-    padding: 10px 8px 10px 0;
-    width: 40px;
-    background-color: var(--input-border-color);
   }
 `;
 
