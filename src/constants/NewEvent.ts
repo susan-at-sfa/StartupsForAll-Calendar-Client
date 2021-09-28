@@ -7,7 +7,7 @@ export const emptyEvent: NewEvent = {
   changed: '',
   cost: '',
   currency: '',
-  created: '',
+  created_at: '',
   creator_name: '',
   creator_email: '',
   custom_blurb: '',

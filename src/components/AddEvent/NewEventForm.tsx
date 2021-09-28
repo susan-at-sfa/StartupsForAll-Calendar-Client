@@ -58,9 +58,8 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     const fd: NewEvent = {
       category: category,
       category_text: getCategoryText(),
-      changed: eventDetails.changed,
       cost: Number(cost),
-      created: eventDetails.created,
+      created_at: eventDetails.created_at,
       creator_email: creator_email,
       creator_name: creator_name,
       currency: "USD",
@@ -76,6 +75,9 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     }
     if (url) {
       fd.url = url;
+    }
+    if (eventDetails.changed) {
+      fd.changed = eventDetails.changed;
     }
     // Eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
     if (startDate.toString().includes("Z")) {

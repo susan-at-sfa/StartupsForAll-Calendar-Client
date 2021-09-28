@@ -1,15 +1,15 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
+import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import { resetUser } from "../../store/slices/user/userSlice";
 import EventsList from "../../components/EventList/EventsList";
 import EditEventModal from "../../components/EventList/EditEventModal";
-import "./index.css";
 import AdminGoogle from "../../components/Google/AdminGoogle";
 import { device } from "../../constants/Device";
+import "./index.css";
 
 const Admin: FC | any = () => {
   const history = useHistory();
@@ -58,16 +58,22 @@ const Admin: FC | any = () => {
 
   return (
     <Wrapper onClick={closeModal} ref={modalRef}>
-      <AdminGoogle />
-      <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
       {editModalOpen ? (
         <EditEventModal id={eventId} setEditModalOpen={setEditModalOpen} />
       ) : (
-        <AdminWrapper>
-          <ListEventContainer>
-            <EventsList selectEvent={selectEvent} />
-          </ListEventContainer>
-        </AdminWrapper>
+        <Container>
+          <h1>Administration</h1>
+          <AdminWrapper>
+            <Title>Account</Title>
+            <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
+            <Title>Google Calendar</Title>
+            <AdminGoogle />
+            <ListEventContainer>
+              <Title>Events</Title>
+              <EventsList selectEvent={selectEvent} />
+            </ListEventContainer>
+          </AdminWrapper>
+        </Container>
       )}
     </Wrapper>
   );
@@ -78,6 +84,16 @@ const Wrapper = styled.div`
   z-index: 5;
   padding-bottom: 80px;
   padding-top: 14px;
+`;
+const Title = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+  margin: 20px 0 3px;
+  padding: 10px 0 3px;
+`;
+const Container = styled.div`
+  max-width: 340px;
+  margin: 0 auto;
 `;
 const ListEventContainer = styled.div`
   width: 340px;
@@ -97,13 +113,12 @@ const AdminWrapper = styled.div`
 `;
 const LogoutButton = styled.button`
   cursor: pointer;
-  position: absolute;
-  right: 0;
   color: white;
   font-weight: 600;
   font-size: 14px;
   border: none;
-  width: 92px;
+  width: 100%;
+  max-width: 200px;
   height: 35px;
   background-color: #a36760;
 `;

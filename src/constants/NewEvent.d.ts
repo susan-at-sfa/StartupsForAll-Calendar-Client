@@ -6,7 +6,7 @@ export default interface NewEvent {
   category: Category | string;
   category_text: CategoryText | string;
   cost?: string | number;
-  created?: DateString | string;
+  created_at?: DateString | string;
   creator_email?: string;
   creator_name?: string;
   currency?: string;

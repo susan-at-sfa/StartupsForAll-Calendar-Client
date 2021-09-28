@@ -4,10 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useHistory } from "react-router";
 import { Category } from "../../constants/Category.enum";
 import NewEvent from "../../constants/NewEvent.d";
-import {
-  resetEvent,
-  saveNewEvent,
-} from "../../store/slices/newEvent/newEventSlice";
+import { updateExistingEvent } from "../../store/slices/newEvent/newEventSlice";
 import { toast } from "react-toastify";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import FormLabel from "../FormLabel";
@@ -16,8 +13,6 @@ import CategoryRadio from "../Selections/CategoryRadio";
 import TopicSelection from "../Selections/TopicSelection";
 import { device } from "../../constants/Device";
 import { toLocalTime, toUtcDateTime, toLocalDate } from "../../helpers";
-import { emptyEvent } from "../../constants/NewEvent";
-import { resetEventBrite } from "../../store/slices/eventbrite/eventbriteSlice";
 
 interface EditEventModalProps {
   id: string;
@@ -46,10 +41,8 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
   const [customBlurb, setCustomBlurb] = useState<string>(
     thisEvent.custom_blurb
   );
-  // Dates
   const [startDate, setStartDate] = useState(new Date(thisEvent.start_date));
   const [endDate, setEndDate] = useState(new Date(thisEvent.end_date));
-
   const [location, setLocation] = useState<string>(thisEvent.location);
   const [promoted, setPromoted] = useState<boolean>(thisEvent.promoted);
   const [summary, setSummary] = useState<string>(thisEvent.summary);
@@ -62,9 +55,8 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
     const fd: NewEvent = {
       category: category,
       category_text: getCategoryText(),
-      changed: thisEvent.changed,
       cost: Number(cost),
-      created: thisEvent.created,
+      created_at: thisEvent.created_at,
       creator_email: creatorEmail,
       creator_name: creatorName,
       custom_blurb: customBlurb,
@@ -78,24 +70,28 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
       fd.url = url;
     }
     if (category !== thisEvent.category) {
-      // TODO: change category text so it matches expected for the new category
+      fd.category = category;
+    }
+    if (thisEvent.logo) {
+      fd.logo = thisEvent.logo;
     }
     // Eventbrite events start and end dates are already in UTC format (ie: they contain the Z)
-    // if (startDate.toString().includes("Z")) {
-    //   fd.start_date = startDate;
-    // } else {
-    //   fd.start_date = toUtcDateTime(startDate, startTime);
-    // }
-    // if (endDate.toString().includes("Z")) {
-    //   fd.end_date = endDate;
-    // } else {
-    //   fd.end_date = toUtcDateTime(endDate, endTime);
-    // }
-    return console.log("SUBMITTED CHANGED EVENT", thisEvent.id, fd);
+    if (startDate.toString().includes("Z")) {
+      fd.start_date = startDate;
+    } else {
+      fd.start_date = toUtcDateTime(startDate);
+    }
+    if (endDate.toString().includes("Z")) {
+      fd.end_date = endDate;
+    } else {
+      fd.end_date = toUtcDateTime(endDate);
+    }
+    console.log("SUBMITTING CHANGED EVENT", thisEvent.id, fd);
     dispatch(
-      saveNewEvent({
+      updateExistingEvent({
         form: fd,
         token: token,
+        id: thisEvent.id,
       })
     );
     history.push("/");
