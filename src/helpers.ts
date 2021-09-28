@@ -12,22 +12,49 @@ export const parseIdFromUrl = (url: string): string | null => {
   return id ? id[0] : null;
 }
 
+// Takes in a UTC date string (eg 2021-10-02T19:00:00.000Z) and returns just the date part
+export const toLocalDate = (utcDateString: string): string => {
+  const date = utcDateString.split("T")[0];
+  console.log(`converted ${utcDateString} to ${date}`);
+  return date;
+}
+
 export const toLocalTime = (dateString: string): string => {
   if (dateString === "" || !dateString) return "";
   return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
 }
 
-export const toUtcDateTime = (dateString: string, time: string): string | Date => {
-  const dateArray = dateString.split("-");
-  const year = Number(dateArray[0]);
-  // minus one as the months are 0th indexed 0-11 and date string is 1-12
-  const month = Number(dateArray[1]) - 1;
-  const day = Number(dateArray[2]);
-  const timeArray = time.split(":")
-  const hours = Number(timeArray[0]);
-  const mins = Number(timeArray[1]);
-  const localDateTime = new Date(year, month, day, hours, mins);
-  return localDateTime.toISOString();
+export const to24HourTime = (time12h: string): string => {
+  const [time, modifier] = time12h.split(' ');
+  let [hours, minutes] = time.split(':');
+  if (hours === '12') {
+    hours = '00';
+  }
+  if (modifier === 'PM') {
+    hours = "" + (parseInt(hours, 10) + 12);
+  }
+  return `${hours}:${minutes}`;
+}
+
+export const toUtcDateTime = (dateString: Date): string => {
+  console.log("HELPER - to utc time from date", dateString, dateString.toISOString());
+  return dateString.toISOString();
+  // const theDate = new Date(dateString);
+  // console.log("pure date", theDate);
+  // const utc = theDate.toISOString();
+  // const rawUtc = dateString.toISOString();
+  // console.log("converted raw and new dates to ISO", rawUtc, utc);
+  // return ""
+  // const dateArray = dateString.split("-");
+  // const year = Number(dateArray[0]);
+  // // minus one as the months are 0th indexed 0-11 and date string is 1-12
+  // const month = Number(dateArray[1]) - 1;
+  // const day = Number(dateArray[2]);
+  // const timeArray = time.split(":")
+  // const hours = Number(timeArray[0]);
+  // const mins = Number(timeArray[1]);
+  // const localDateTime = new Date(year, month, day, hours, mins);
+  // return localDateTime.toISOString();
 }
 
 export const currentMonthEpochTime = (): number => {
