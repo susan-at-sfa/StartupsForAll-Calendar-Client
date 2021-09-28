@@ -35,6 +35,9 @@ input {
   &:checked ~ .checkmarkBox::after{
 display: block;
   }
+  &:checked ~ .marksTheSpot{
+    display: block;
+  }
 }
 
 .checkmarkBox {
@@ -57,7 +60,7 @@ display: block;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
-    transform: rotate(45deg); 
+    transform: rotate(45deg);  
   } 
 }
 .emojiDisplay{

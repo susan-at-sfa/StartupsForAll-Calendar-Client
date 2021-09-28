@@ -32,7 +32,7 @@ const TopicSelection: FC<TopicSelectionProps> = (props) => {
             <input type="checkbox" onClick={() => props.onClick(topic)} />
           )}
           <div className="checkmarkBox">
-            <span className="checkmark"></span>
+            <div className="checkmark"></div>
           </div>
         </label>
       ))}

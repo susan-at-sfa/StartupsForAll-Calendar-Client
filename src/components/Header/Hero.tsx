@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "@emotion/styled";
 import { useLocation } from "react-router";
 import { useAppSelector } from "../../hooks";
-import stars from "../../assets/images/stars.jpeg";
+import stars from "../../assets/images/header_bkgd_events.png";
 
 const Hero: FC = () => {
   const menuOpen = useAppSelector(({ menu }) => menu.menuOpen);
