@@ -4,7 +4,10 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useHistory } from "react-router";
 import { Category } from "../../constants/Category.enum";
 import NewEvent from "../../constants/NewEvent.d";
-import { saveNewEvent } from "../../store/slices/newEvent/newEventSlice";
+import {
+  resetEvent,
+  saveNewEvent,
+} from "../../store/slices/newEvent/newEventSlice";
 import { toast } from "react-toastify";
 import { CategoryText } from "../../constants/CategoryText.enum";
 import FormLabel from "../FormLabel";
@@ -13,9 +16,12 @@ import CategoryRadio from "../Selections/CategoryRadio";
 import TopicSelection from "../Selections/TopicSelection";
 import { device } from "../../constants/Device";
 import { toLocalTime, toUtcDateTime, toLocalDate } from "../../helpers";
+import { emptyEvent } from "../../constants/NewEvent";
+import { resetEventBrite } from "../../store/slices/eventbrite/eventbriteSlice";
 
 interface EditEventModalProps {
   id: string;
+  setEditModalOpen: (e: boolean) => void;
 }
 
 const EditEventModal: FC<EditEventModalProps> = (props) => {
@@ -127,10 +133,6 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
     return CategoryText.Community;
   };
 
-  const cancelEvent = () => {
-    console.log("event changes cancelled");
-  };
-
   return (
     <Wrapper>
       <form onSubmit={submitForm}>
@@ -183,7 +185,11 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
           <ConfirmContainer>
             <p>Does this look right?</p>
             <ButtonDiv>
-              <button type="button" id="cancel" onClick={cancelEvent}>
+              <button
+                type="button"
+                id="cancel"
+                onClick={() => props.setEditModalOpen(false)}
+              >
                 Cancel
               </button>
               <button type="submit" id="submitButton">

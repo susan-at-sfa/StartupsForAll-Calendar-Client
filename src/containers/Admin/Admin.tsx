@@ -47,7 +47,6 @@ const Admin: FC | any = () => {
   };
 
   const selectEvent = (id: string) => {
-    console.log("ADMIN page - event selected:", id);
     setEventId(id);
     setEditModalOpen(true);
   };
@@ -56,7 +55,7 @@ const Admin: FC | any = () => {
     <Wrapper onClick={closeModal} ref={modalRef}>
       <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
       {editModalOpen ? (
-        <EditEventModal id={eventId} />
+        <EditEventModal id={eventId} setEditModalOpen={setEditModalOpen} />
       ) : (
         <AdminWrapper>
           <ListEventContainer>
