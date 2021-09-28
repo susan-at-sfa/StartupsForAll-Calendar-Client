@@ -26,7 +26,7 @@ const TopicSelection: FC<TopicSelectionProps> = (props) => {
             <input
               type="checkbox"
               checked={props.selectedState.includes(topic)}
-              onClick={() => props.onClick(topic)}
+              onChange={() => props.onClick(topic)}
             />
           ) : (
             <input type="checkbox" onClick={() => props.onClick(topic)} />

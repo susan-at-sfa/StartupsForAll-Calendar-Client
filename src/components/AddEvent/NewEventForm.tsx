@@ -239,15 +239,17 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
         </FormFields>
 
         <EventsGreenDiv>
-          <ButtonDiv>
+          <ConfirmContainer>
             <p>Does this look right?</p>
-            <button type="button" id="cancel" onClick={props.cancelEvent}>
-              Cancel
-            </button>
-            <button type="submit" id="submitButton">
-              Submit
-            </button>
-          </ButtonDiv>
+            <ButtonDiv>
+              <button type="button" id="cancel" onClick={props.cancelEvent}>
+                Cancel
+              </button>
+              <button type="submit" id="submitButton">
+                Submit
+              </button>
+            </ButtonDiv>
+          </ConfirmContainer>
         </EventsGreenDiv>
       </form>
     </Wrapper>
@@ -319,8 +321,14 @@ const PasteLink = styled.div`
     }
   }
 `;
+const FormFields = styled.div`
+  padding-left: 18px;
+  padding-top: 8px;
+  padding-bottom: 20px;
+`;
 const EventsGreenDiv = styled.div`
   display: flex;
+  flex-direction: column;
   border: none;
   padding: 10px 0 10px 18px;
   height: var(--submit-button-container-height);
@@ -331,36 +339,35 @@ const EventsGreenDiv = styled.div`
   bottom: 0;
   left: 0;
   @media ${device.forms} {
-    display: block;
     width: 100%;
   }
+  p {
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: white;
+  }
 `;
-const FormFields = styled.div`
-  padding-left: 18px;
-  padding-top: 8px;
-  padding-bottom: 20px;
-  margin-bottom: var(--submit-button-container-height);
-`;
-const ButtonDiv = styled.div`
-  display: block;
+const ConfirmContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-right: 0;
   margin-left: auto;
   @media ${device.forms} {
-    display: block;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     max-width: 400px;
   }
+`;
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   #cancel {
+    flex: 1;
     font-weight: 600;
     font-size: 15px;
     color: white;
     margin: 0;
-    width: 30%;
-    min-width: 80px;
-    max-width: 110px;
     display: inline;
     height: 35px;
     background-color: #9dd3c9;
@@ -373,13 +380,11 @@ const ButtonDiv = styled.div`
     }
   }
   #submitButton {
+    flex: 3;
     font-weight: 600;
     font-size: 15px;
     color: #518077;
     margin: 0;
-    width: 70%;
-    min-width: 150px;
-    max-width: 250px;
     height: 35px;
     background-color: #e0f0f1;
     border: none;
@@ -389,11 +394,6 @@ const ButtonDiv = styled.div`
       transition: 0.5s ease;
       cursor: pointer;
     }
-  }
-  p {
-    font-weight: 600;
-    margin-bottom: 3px;
-    color: white;
   }
 `;
 const TextArea = styled.textarea`

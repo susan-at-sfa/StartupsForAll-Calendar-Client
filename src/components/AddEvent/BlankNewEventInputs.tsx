@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React, { FC, useState } from "react";
+import { to24HourTime } from "../../helpers";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
 
@@ -28,6 +29,24 @@ interface BlankNewEventInputsProps {
 
 const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
   console.log("BlankNewEventInputs component - got props:", props);
+  let start_time;
+  if (
+    props.startTime &&
+    (props.startTime.includes("AM") || props.startTime.includes("PM"))
+  ) {
+    start_time = to24HourTime(props.startTime);
+  } else {
+    start_time = props.startTime;
+  }
+  let end_time;
+  if (
+    props.endTime &&
+    (props.endTime.includes("AM") || props.endTime.includes("PM"))
+  ) {
+    end_time = to24HourTime(props.endTime);
+  } else {
+    end_time = props.endTime;
+  }
 
   const [localStartDate, setLocalStartDate] = useState<string | Date>(
     props.startDate || ""
@@ -36,9 +55,9 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
     props.endDate || ""
   );
   const [localStartTime, setLocalStartTime] = useState<string>(
-    props.startTime || ""
+    start_time || ""
   );
-  const [localEndTime, setLocalEndTime] = useState<string>(props.endTime || "");
+  const [localEndTime, setLocalEndTime] = useState<string>(end_time || "");
 
   const handleChange = (value: string, which: string) => {
     console.log("handling date/time change...", value, which);
@@ -96,27 +115,32 @@ const BlankNewEventInputs: FC<BlankNewEventInputsProps> = (props) => {
         name="end_date"
       />
 
-      <FormLabel htmlFor="start_time" text="Start Time" />
-      <FormInput
-        placeholder="Start Time"
-        type="time"
-        required
-        disabled={false}
-        value={localStartTime}
-        onChange={(value) => handleChange(value, "st")}
-        name="start_time"
-      />
-
-      <FormLabel htmlFor="end_time" text="End Time" />
-      <FormInput
-        placeholder="End Time"
-        type="time"
-        required
-        disabled={false}
-        value={localEndTime}
-        onChange={(value) => handleChange(value, "et")}
-        name="end_time"
-      />
+      <div>
+        <FormLabel htmlFor="" text="Time" />
+        <TimesContainer>
+          <FormLabel htmlFor="start_time" text="" />
+          <FormInput
+            placeholder="Start Time"
+            type="time"
+            required
+            disabled={false}
+            value={localStartTime}
+            onChange={(value) => handleChange(value, "st")}
+            name="start_time"
+          />
+          <span>to</span>
+          <FormLabel htmlFor="end_time" text="" />
+          <FormInput
+            placeholder="End Time"
+            type="time"
+            required
+            disabled={false}
+            value={localEndTime}
+            onChange={(value) => handleChange(value, "et")}
+            name="end_time"
+          />
+        </TimesContainer>
+      </div>
 
       <FormLabel htmlFor="location" text="Location" />
       <FormInput
@@ -173,6 +197,18 @@ const TextArea = styled.textarea`
   &:focus::placeholder {
     color: var(--input-focus);
     transition: 0.75s ease;
+  }
+`;
+const TimesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  span {
+    margin-bottom: 20px;
+    padding: 10px 8px 10px 0;
+    width: 40px;
+    background-color: var(--input-border-color);
   }
 `;
 

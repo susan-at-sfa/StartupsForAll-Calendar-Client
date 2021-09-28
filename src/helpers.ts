@@ -24,6 +24,18 @@ export const toLocalTime = (dateString: string): string => {
   return dateString.includes("Z") ? new Date(dateString).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) : new Date(new Date(dateString).toISOString()).toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
 }
 
+export const to24HourTime = (time12h: string): string => {
+  const [time, modifier] = time12h.split(' ');
+  let [hours, minutes] = time.split(':');
+  if (hours === '12') {
+    hours = '00';
+  }
+  if (modifier === 'PM') {
+    hours = "" + (parseInt(hours, 10) + 12);
+  }
+  return `${hours}:${minutes}`;
+}
+
 export const toUtcDateTime = (dateString: string, time: string): string | Date => {
   const dateArray = dateString.split("-");
   const year = Number(dateArray[0]);
