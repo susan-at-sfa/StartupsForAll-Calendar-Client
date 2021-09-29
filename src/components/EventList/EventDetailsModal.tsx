@@ -81,8 +81,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               url,
             } = e;
 
-            console.log("GCAL LINK", g_cal_link);
-
             const eventDate = new Date(start_date).toDateString();
             const localeCreatedAt = new Date(created_at).toLocaleString([], {
               year: "numeric",
