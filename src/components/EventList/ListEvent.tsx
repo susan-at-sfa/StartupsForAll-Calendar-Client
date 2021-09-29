@@ -105,8 +105,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 78px;
   width: 100%;
-  margin-top: 15px;
-  padding: 10px 10px 10px 10px;
+  margin-top: 5px 0;
+  padding: 10px 5px;
   justify-content: space-between;
   &:hover {
     cursor: pointer;
