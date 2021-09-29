@@ -3,6 +3,7 @@ import {
   categories,
   categoryBackgroundColor,
 } from "../../constants/CategoryColors";
+import Checkmark from "./Checkmark";
 import { SelectionDiv } from "./SelectionTheme";
 
 interface CategorySelectionProps {
@@ -24,7 +25,8 @@ const CategorySelection: FC<CategorySelectionProps> = (props) => {
             {category}
           </div>
           <input type="checkbox" onClick={() => props.onClick(category)} />
-          <span className="checkmarkBox"></span>
+          <span className="markBox"></span>
+          <Checkmark />
         </label>
       ))}
     </SelectionDiv>

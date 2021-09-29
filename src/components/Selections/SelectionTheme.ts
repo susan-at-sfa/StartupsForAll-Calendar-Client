@@ -29,18 +29,20 @@ input {
   cursor: pointer;
   height: 0;
   width: 0;
-  &:checked ~ .checkmarkBox{
+  &:checked ~ .markBox{
     border: 4px solid #A36760;
   }
-  &:checked ~ .checkmarkBox::after{
-display: block;
-  }
-  &:checked ~ .marksTheSpot{
-    display: block;
+  &:checked ~ svg{
+    display: inline;
+    position: absolute;
+    top: 2px;
+    left: 6px;
   }
 }
-
-.checkmarkBox {
+svg{
+  display: none;
+}
+.markBox {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -48,20 +50,6 @@ display: block;
   height: 28px;
   width: 28px;
   background-color: white;
-  &::after{ 
-    content: "";
-    position: absolute;
-    display: none; 
-    left: 8px;
-    top: -8px;
-    width: 5px;
-    height: 18px;
-    border: solid #7BB1A7;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);  
-  } 
 }
 .emojiDisplay{
   background-color: white;
