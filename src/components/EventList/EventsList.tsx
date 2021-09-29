@@ -59,8 +59,6 @@ const EventsListComponent: FC<any> = (props) => {
     history.push("/add");
   };
 
-  console.log("EVENTS LIST component, events eventsList", events, eventsList);
-
   return (
     <Wrapper>
       {events.length === 0 && (
