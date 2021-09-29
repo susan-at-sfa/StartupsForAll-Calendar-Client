@@ -16,13 +16,13 @@ const userSlice = createSlice({
   reducers: {
     login(state, action: PayloadAction<{ username?: string; password: string, name?: string, email?: string }>) {},
     setToken(state, action: PayloadAction<{ token: string }>) {
-      console.log('hit authSlice setToken', action);
       const { token } = action.payload;
       return { ...state, token };
     },
+    changeEventKeyPassword(state, action: PayloadAction<{ token: string, password: string }>) {}
   },
 });
 
-export const { login, setToken } = userSlice.actions;
+export const { changeEventKeyPassword, login, setToken } = userSlice.actions;
 
 export default userSlice.reducer;

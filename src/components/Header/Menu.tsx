@@ -1,20 +1,23 @@
 import { FC, useState } from "react";
 import styled from "@emotion/styled";
+import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import { resetUser } from "../../store/slices/user/userSlice";
 
 const Menu: FC = () => {
-  const [cohortMenuOpen, setCohortMenuOpen] = useState(false);
-  const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
-  const [adminMenuOpen, setAdminMenuOpen] = useState(false);
+  const history = useHistory();
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
   console.log("MENU user:", user);
+  const [cohortMenuOpen, setCohortMenuOpen] = useState(false);
+  const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
+  const [adminMenuOpen, setAdminMenuOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(setToken({ token: "" }));
     dispatch(resetUser());
+    history.push("/");
   };
 
   const startUpsURL: string = "https://startupsforall.org/";
