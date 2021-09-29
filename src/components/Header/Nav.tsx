@@ -51,6 +51,7 @@ export default Navbar;
 const Wrapper = styled.section`
   position: sticky;
   margin-top: 165px;
+  padding-left: 30px;
   top: 0px;
   z-index: 3;
   display: flex;
@@ -62,7 +63,6 @@ const Wrapper = styled.section`
     display: flex;
     list-style: none;
     padding: 0;
-    margin: 15px;
   }
   li {
     border-bottom: 3px solid transparent;

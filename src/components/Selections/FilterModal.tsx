@@ -56,22 +56,22 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
       ? dispatch(
-          setTopicFilters(
-            topicFilters.filter((topicFilter) => topicFilter !== topic)
-          )
+        setTopicFilters(
+          topicFilters.filter((topicFilter) => topicFilter !== topic)
         )
+      )
       : dispatch(setTopicFilters([...topicFilters, topic]));
   };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
       ? dispatch(
-          setCategoryFilters(
-            categoryFilters.filter(
-              (categoryFilter) => categoryFilter !== category
-            )
+        setCategoryFilters(
+          categoryFilters.filter(
+            (categoryFilter) => categoryFilter !== category
           )
         )
+      )
       : dispatch(setCategoryFilters([...categoryFilters, category]));
   };
 
@@ -230,6 +230,9 @@ const FilterButton = styled.div`
     flex: 1;
     padding: 3px;
     display: flex;
+    &:hover{
+      cursor: pointer;
+    }
   }
   .right {
     flex: 1;
