@@ -1,8 +1,8 @@
 import { FC } from "react";
+import styled from "@emotion/styled";
 import { useAppDispatch } from "../../hooks";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
-import { FiList } from "react-icons/fi";
-import styled from "@emotion/styled";
+import FilterIcon from "../../assets/images/icon_filters.svg";
 import { device } from "../../constants/Device";
 
 const FilterButton: FC = () => {
@@ -11,8 +11,8 @@ const FilterButton: FC = () => {
   return (
     <Wrapper>
       <div id="filterClick" onClick={() => dispatch(setFilterModalOpen(true))}>
-        <FiList id="filterIcon" />
-        <p> Filters</p>
+        <FilterIconImg src={FilterIcon} alt="filters selector" />
+        <p>Filters</p>
       </div>
     </Wrapper>
   );
@@ -25,6 +25,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   margin: 0;
+  margin-top: 5px;
   margin-bottom: -21px;
   z-index: 8;
   position: sticky;
@@ -44,15 +45,15 @@ const Wrapper = styled.div`
     z-index: 8;
     position: sticky;
     top: 0px;
+    p {
+      display: inline;
+      color: #c79288;
+      font-size: 14px;
+      font-weight: 600;
+    }
   }
-  p {
-    display: inline;
-    color: #c79288;
-    font-size: 14px;
-    font-weight: 600;
-  }
-  #filterIcon {
-    color: #c79288;
-    margin: 2px 2px 0 0px;
-  }
+`;
+
+const FilterIconImg = styled.img`
+  margin-right: 4px;
 `;

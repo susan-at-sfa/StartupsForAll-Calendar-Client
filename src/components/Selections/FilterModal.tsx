@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import { FiList } from "react-icons/fi";
+import FilterIcon from "../../assets/images/icon_filters_grey.svg";
 import { useSpring, animated } from "react-spring";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setFilterModalOpen } from "../../store/slices/filterModal/showFilterModalSlice";
@@ -100,15 +100,17 @@ const FilterModal: FC<FilterModalProps> = (props) => {
             <Wrapper>
               <FilterButton>
                 <div className="left" onClick={() => onClickingExit()}>
-                  <FiList id="filterIcon" />
-                  <p> Filters</p>
+                  <FilterIconImg src={FilterIcon} alt="filter list" />
+                  <p>Filters</p>
                 </div>
                 <div className="right">
                   <button
                     type="button"
                     className="close"
                     onClick={() => onClickingExit()}
-                  />
+                  >
+                    <p>Clear</p>
+                  </button>
                 </div>
               </FilterButton>
               <div className="categories">
@@ -196,12 +198,12 @@ const FilterButton = styled.div`
   justify-content: space-between;
   .close {
     position: absolute;
-    right: 4px;
-    top: 4px;
-    border: 3px solid #cbcbcb;
+    right: 0;
+    top: 0;
+    border: 4px solid #cbcbcb;
     background-color: white;
-    width: 23px;
-    height: 23px;
+    width: 27px;
+    height: 27px;
     opacity: 0.8;
     &::after {
       transform: rotate(-45deg);
@@ -216,30 +218,35 @@ const FilterButton = styled.div`
     &::before,
     ::after {
       position: absolute;
-      top: 1px;
-      left: 7px;
+      top: 2px;
+      left: 8px;
       content: " ";
       height: 15px;
       width: 3px;
       background-color: #cbcbcb;
     }
   }
-  &.left {
-    flex: 0.5;
+  .left {
+    flex: 1;
+    padding: 3px;
+    display: flex;
   }
-  &.right {
-    flex: 0.5;
+  .right {
+    flex: 1;
+    padding: 3px;
+    display: flex;
+    align-items: flex-end;
+    p {
+      position: absolute;
+      top: -2px;
+      right: 30px;
+    }
   }
   p {
     color: #cbcbcb;
-    margin: 0;
-    position: relative;
-    top: 8px;
-    left: 14px;
+    margin-left: 4px;
     font-size: 16px;
     font-weight: 600;
-    padding: 0;
-    display: inline;
   }
   #filterIcon {
     color: #cbcbcb;
@@ -249,4 +256,11 @@ const FilterButton = styled.div`
     top: 11px;
     left: 15px;
   }
+`;
+
+const FilterIconImg = styled.img`
+  width: 23px;
+  height: 23px;
+  padding: 3px;
+  margin-left: 4px;
 `;
