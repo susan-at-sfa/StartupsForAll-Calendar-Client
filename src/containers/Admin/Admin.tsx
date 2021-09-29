@@ -11,6 +11,9 @@ import EditEventModal from "../../components/EventList/EditEventModal";
 import AdminGoogle from "../../components/Google/AdminGoogle";
 import { device } from "../../constants/Device";
 import "./index.css";
+import FormLabel from "../../components/FormLabel";
+import FormInput from "../../components/FormInput";
+import { toast } from "react-toastify";
 
 const Admin: FC | any = () => {
   const history = useHistory();
@@ -18,6 +21,7 @@ const Admin: FC | any = () => {
   const user = useAppSelector(({ user }) => user);
 
   const [eventId, setEventId] = useState<string>("");
+  const [eventKeyPassword, setEventKeyPassword] = useState<string>("");
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [isGoogleAuth, setIsGoogleAuth] = useState<boolean>(false);
   const modalRef: any = useRef();
@@ -69,6 +73,13 @@ const Admin: FC | any = () => {
     setEditModalOpen(true);
   };
 
+  const confirmEventKeyPwChange = () => {
+    console.log("change event key pw clicked", eventKeyPassword);
+    if (!eventKeyPassword) return toast("Please enter a new password first.");
+    setEventKeyPassword("");
+    // TODO: dispatch action
+  };
+
   return (
     <Wrapper onClick={closeModal} ref={modalRef}>
       {editModalOpen ? (
@@ -79,6 +90,17 @@ const Admin: FC | any = () => {
           <AdminWrapper>
             <Title>Account</Title>
             <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
+            <Title>Change Event Key Password</Title>
+            <SplitContainer>
+              <FormInput
+                placeholder="Password"
+                onChange={setEventKeyPassword}
+                type="password"
+              />
+              <LogoutButton onClick={confirmEventKeyPwChange}>
+                Change Password
+              </LogoutButton>
+            </SplitContainer>
             {!isGoogleAuth ? <Title>Google Calendar</Title> : null}
             <AdminGoogle isGoogleAuth={isGoogleAuth} />
             <ListEventContainer>
@@ -134,6 +156,16 @@ const LogoutButton = styled.button`
   max-width: 200px;
   height: 35px;
   background-color: #a36760;
+`;
+
+const SplitContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  > * {
+    margin: 0 2px;
+    height: 38px;
+  }
 `;
 
 export default Admin;
