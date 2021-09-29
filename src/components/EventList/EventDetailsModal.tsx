@@ -10,7 +10,7 @@ import { BiVideo } from "react-icons/bi";
 import {
   topicsEmojiColors,
   topicsEmojis,
-  topicsText
+  topicsText,
 } from "../../constants/TopicsEmojiColors";
 import { categoryBackgroundColor } from "../../constants/CategoryColors";
 interface EventDetailsModalProps {
@@ -81,9 +81,16 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               url,
             } = e;
 
-            console.log("GCAL LINK", g_cal_link);
-
-            const eventDate = new Date(start_date).toDateString();
+            const dateOptions: any = {
+              weekday: "long",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            };
+            const eventDate = new Date(start_date).toLocaleString(
+              [],
+              dateOptions
+            );
             const localeCreatedAt = new Date(created_at).toLocaleString([], {
               year: "numeric",
               month: "numeric",
@@ -112,16 +119,20 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                   <Wrapper>
                     <TopButtonDiv>
                       <div className="topButtonsLeft">
-                        <button
+                        <BackButton
                           id="back"
                           type="button"
                           onClick={() => onClickingBack()}
                         >
                           Back
-                        </button>
+                        </BackButton>
                       </div>
                       <div className="topButtonsRight">
-                        <a href={g_cal_link} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={g_cal_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <button id="calendarAdd" type="button">
                             + Cal
                           </button>
@@ -133,41 +144,6 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </a>
                       </div>
                     </TopButtonDiv>
-                    <SmallHeader>
-                      <SmallHeaderLeft>
-                        <div id="title">
-                          <h2>{title}</h2>
-                        </div>
-                        <div id="creatorName">
-                          <p>{creator_name}</p>
-                        </div>
-                      </SmallHeaderLeft>
-                      <SmallHeaderRight>
-                        <h2>{eventDate}</h2>
-                        <p>
-                          {start_time} - {end_time}
-                        </p>
-                        <div>
-                          <div className="topicsAndCategories">
-                            <ul>
-                              {topics.map((topic: string, index: number) => {
-                                return (
-                                  <li key={index}>{topicsEmojis[topic]}</li>
-                                );
-                              })}
-                            </ul>
-                            <h3
-                              style={{
-                                backgroundColor:
-                                  categoryBackgroundColor[category],
-                              }}
-                            >
-                              {category}
-                            </h3>
-                          </div>
-                        </div>
-                      </SmallHeaderRight>
-                    </SmallHeader>
                     <CustomBlurb>
                       <h2>Info from {creator_name}</h2>
                       <p>{custom_blurb}</p>
@@ -196,7 +172,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         <span id="cost">+ taxes & fees where applicable</span>
                       </p>
                       <h4>Summary</h4>
-                      <p>{summary}</p>
+                      <p style={{ paddingLeft: "10px" }}>{summary}</p>
                     </ModalHeader>
                     <SecondSection>
                       <BottomButtonDiv>
@@ -207,7 +183,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         >
                           Back
                         </button>
-                        <a href={g_cal_link} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={g_cal_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <button id="calendarAdd" type="button">
                             + Cal
                           </button>
@@ -218,17 +198,22 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                           </button>
                         </a>
                       </BottomButtonDiv>
-                      <h4>Event Link</h4>
-                      <p>
-                        <a
-                          id="link"
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {url}
-                        </a>
-                      </p>
+                      {url && (
+                        <>
+                          <h4>Event Link</h4>
+                          <p>
+                            <a
+                              id="link"
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ lineHeight: "17px" }}
+                            >
+                              {url}
+                            </a>
+                          </p>
+                        </>
+                      )}
                     </SecondSection>
                     <ModalFooter>
                       <div className="topics">
@@ -241,7 +226,10 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                                   backgroundColor: topicsEmojiColors[topic],
                                 }}
                               >
-                                <span className="emojiDisplay">{topicsEmojis[topic]}</span> {topicsText[topic]}
+                                <span className="emojiDisplay">
+                                  {topicsEmojis[topic]}
+                                </span>{" "}
+                                {topicsText[topic]}
                               </li>
                             );
                           })}
@@ -306,23 +294,6 @@ const TopButtonDiv = styled.div`
     color: white;
     font-weight: 600;
     font-size: 14px;
-  }
-  #back {
-    text-align: right;
-    align-self: flex-start;
-    padding: 0px 5px 5px 10px;
-    border: none;
-    height: 20px;
-    width: 75px;
-    background-color: #6073a3;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    &:hover {
-      cursor: pointer;
-      background-color: var(--back-button-hover);
-      transition: 0.5s ease;
-    }
   }
   #calendarAdd {
     padding: 1px 10px 1px 10px;
@@ -397,7 +368,7 @@ const SmallHeader = styled.div`
   }
 `;
 const SmallHeaderLeft = styled.div`
-  flex: 0.55;
+  flex: 1;
   h2 {
     max-width: 175px;
     overflow-wrap: break-word;
@@ -412,18 +383,21 @@ const SmallHeaderLeft = styled.div`
 `;
 const SmallHeaderRight = styled.div`
   text-align: right;
-  flex: 0.45;
+  flex: 1;
   .topicsAndCategories {
     display: flex;
     align-items: center;
     justify-content: right;
+  }
+  h2 {
+    font-size: 12px;
   }
 `;
 
 const CustomBlurb = styled.div`
   align-self: flex-end;
   width: 100%;
-  margin: 5px 0px 20px 0;
+  margin: 10px 0;
   background-color: #fdfbe4;
   padding: 15px 20px 15px 15px;
   h2 {
@@ -440,7 +414,7 @@ const ModalImg = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8px;
+  margin: 10px 0;
   img {
     width: 100%;
     height: auto;
@@ -448,7 +422,7 @@ const ModalImg = styled.div`
 `;
 const ModalHeader = styled.div`
   width: 100%;
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 20px;
   margin-right: 10px;
   h2 {
@@ -499,7 +473,6 @@ const SecondSection = styled.div`
 `;
 const BottomButtonDiv = styled.div`
   display: flex;
-  margin-bottom: 35px;
   width: 100%;
   a {
     text-decoration: none;
@@ -582,14 +555,14 @@ const ModalFooter = styled.div`
     font-size: 12px;
     line-height: 17px;
   }
-  .emojiDisplay{
-  background-color: white;
-  border-radius: 50%;
-  width: 14px;
-  height: 14px;
-  padding: 1px 3px 0px 4px;
-  margin-right: 6px;
-}
+  .emojiDisplay {
+    background-color: white;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    padding: 1px 3px 0px 4px;
+    margin-right: 6px;
+  }
 `;
 const Centered = styled.p`
   display: flex;
@@ -597,5 +570,22 @@ const Centered = styled.p`
   align-content: center;
   svg {
     margin-right: 4px;
+  }
+`;
+
+const BackButton = styled.button`
+  border: none;
+  width: 75px;
+  background-color: #6073a3;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: var(--back-button-hover);
+    transition: 0.5s ease;
   }
 `;
