@@ -32,8 +32,8 @@ const Admin: FC | any = () => {
   );
 
   useEffect(() => {
-    checkGoogleAuthStatus()
-  }, [])
+    checkGoogleAuthStatus();
+  }, []);
 
   useEffect(() => {
     document.addEventListener("keydown", keyPress);
@@ -42,13 +42,11 @@ const Admin: FC | any = () => {
 
   const checkGoogleAuthStatus = async () => {
     const apiUrl = process.env.REACT_APP_API_URL;
-    const response = await makeRequest(`${apiUrl}/oAuthTokenStatus`, 'Get');
+    const response = await makeRequest(`${apiUrl}/oAuthTokenStatus`, "Get");
     {
-      response.data === true
-        ? setIsGoogleAuth(true)
-        : setIsGoogleAuth(false)
+      response.data === true ? setIsGoogleAuth(true) : setIsGoogleAuth(false);
     }
-  }
+  };
 
   if (!user || !user.isAdmin) {
     return <Redirect to={"/"} />;
@@ -81,9 +79,7 @@ const Admin: FC | any = () => {
           <AdminWrapper>
             <Title>Account</Title>
             <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
-            {!isGoogleAuth ? (
-              <Title>Google Calendar</Title>
-            ) : null}
+            {!isGoogleAuth ? <Title>Google Calendar</Title> : null}
             <AdminGoogle isGoogleAuth={isGoogleAuth} />
             <ListEventContainer>
               <Title>Events</Title>

@@ -107,7 +107,7 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                   <button
                     type="button"
                     className="close"
-                    onClick={() => onClickingExit()}
+                    onClick={submitFilterQuery}
                   >
                     <p>Clear</p>
                   </button>

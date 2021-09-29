@@ -1,14 +1,17 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
-import { useLocation } from "react-router";
-import { useAppSelector } from "../../hooks";
+import { useLocation, useHistory } from "react-router";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { currentMonthEpochTime } from "../../helpers";
 import { MonthObject } from "../../constants/MonthObject";
 import ListEvent from "./ListEvent";
 import { device } from "../../constants/Device";
+import { getDbEventsByFilter } from "../../store/slices/dbEvent/dbEventSlice";
 
 const EventsListComponent: FC<any> = (props) => {
   const location = useLocation();
+  const history = useHistory();
+  const dispatch = useAppDispatch();
   interface EventsList {
     [key: string]: {
       [key: string]: any;
@@ -47,8 +50,28 @@ const EventsListComponent: FC<any> = (props) => {
     });
   });
 
+  const clearFilters = () => {
+    let payload: any = {};
+    dispatch(getDbEventsByFilter(payload));
+  };
+
+  const navigateToAdd = () => {
+    history.push("/add");
+  };
+
+  console.log("EVENTS LIST component, events eventsList", events, eventsList);
+
   return (
     <Wrapper>
+      {events.length === 0 && (
+        <NoneContainer>
+          <h3>No Events Found!</h3>
+          <ButtonsContainer>
+            <Button onClick={navigateToAdd}>Create New Event</Button>
+            <Button onClick={clearFilters}>Clear Events Filters</Button>
+          </ButtonsContainer>
+        </NoneContainer>
+      )}
       {Object.entries(eventsList).map(([year, months]) => {
         return (
           <React.Fragment key={year}>
@@ -184,4 +207,44 @@ const MonthSection = styled.section`
       top: 0px;
     }
   }
+`;
+
+const NoneContainer = styled.div`
+  display: flex;
+  max-width: 340px;
+  margin: 0 auto;
+  flex-direction: column;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > * {
+    margin-top: 20px;
+  }
+`;
+
+const Anchor = styled.a`
+  width: 100%;
+  text-decoration: none;
+  color: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  width: 100%;
+  max-width: 200px;
+  border: none;
+  height: 35px;
+  background-color: #a36760;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
