@@ -71,6 +71,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               creator_name,
               custom_blurb,
               end_date,
+              g_cal_link,
               start_date,
               logo,
               location,
@@ -79,6 +80,8 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               topics,
               url,
             } = e;
+
+            console.log("GCAL LINK", g_cal_link);
 
             const eventDate = new Date(start_date).toDateString();
             const localeCreatedAt = new Date(created_at).toLocaleString([], {
@@ -118,9 +121,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         </button>
                       </div>
                       <div className="topButtonsRight">
-                        <button id="calendarAdd" type="button">
-                          Button
-                        </button>
+                        <a href={g_cal_link} target="_blank" rel="noopener noreferrer">
+                          <button id="calendarAdd" type="button">
+                            + Cal
+                          </button>
+                        </a>
                         <a href={url} target="_blank" rel="noopener noreferrer">
                           <button id="viewPage" type="button">
                             View More Details
@@ -202,9 +207,11 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                         >
                           Back
                         </button>
-                        <button id="calendarAdd" type="button">
-                          Button
-                        </button>
+                        <a href={g_cal_link} target="_blank" rel="noopener noreferrer">
+                          <button id="calendarAdd" type="button">
+                            + Cal
+                          </button>
+                        </a>
                         <a href={url} target="_blank" rel="noopener noreferrer">
                           <button id="viewPage" type="button">
                             View More Details
