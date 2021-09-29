@@ -2,6 +2,7 @@ import { FC, useCallback, useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import { makeRequest } from "../../store/utils/makeRequest";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setToken } from "../../store/slices/auth/authSlice";
 import { resetUser } from "../../store/slices/user/userSlice";
@@ -15,10 +16,10 @@ const Admin: FC | any = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
-  console.log("Loaded Admin page with user:", user);
 
   const [eventId, setEventId] = useState<string>("");
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const [isGoogleAuth, setIsGoogleAuth] = useState<boolean>(false);
   const modalRef: any = useRef();
 
   const keyPress = useCallback(
@@ -31,9 +32,23 @@ const Admin: FC | any = () => {
   );
 
   useEffect(() => {
+    checkGoogleAuthStatus()
+  }, [])
+
+  useEffect(() => {
     document.addEventListener("keydown", keyPress);
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
+
+  const checkGoogleAuthStatus = async () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const response = await makeRequest(`${apiUrl}/oAuthTokenStatus`, 'Get');
+    {
+      response.data === true
+        ? setIsGoogleAuth(true)
+        : setIsGoogleAuth(false)
+    }
+  }
 
   if (!user || !user.isAdmin) {
     return <Redirect to={"/"} />;
@@ -66,8 +81,10 @@ const Admin: FC | any = () => {
           <AdminWrapper>
             <Title>Account</Title>
             <LogoutButton onClick={handleLogout}>Log Out</LogoutButton>
-            <Title>Google Calendar</Title>
-            <AdminGoogle />
+            {!isGoogleAuth ? (
+              <Title>Google Calendar</Title>
+            ) : null}
+            <AdminGoogle isGoogleAuth={isGoogleAuth} />
             <ListEventContainer>
               <Title>Events</Title>
               <EventsList selectEvent={selectEvent} />

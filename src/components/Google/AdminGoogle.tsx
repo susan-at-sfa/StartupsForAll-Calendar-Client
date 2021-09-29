@@ -1,36 +1,30 @@
 import styled from "@emotion/styled";
 import { FC, useState, useEffect } from "react";
-import { useAppSelector } from "../../hooks";
-
-const AdminGoogle: FC = () => {
+interface AdminGoogleProps {
+  isGoogleAuth: boolean;
+}
+const AdminGoogle: FC<AdminGoogleProps> = (props) => {
   const [consentURL, setConsentURL] = useState("");
+  const { isGoogleAuth } = props;
 
-  //When the user clicks the button, it will call to server to run generateAuthUrl
-  //The url created by generateAuthUrl will be returned to browser.
-  //User will be taken to url to authorize consent
-  //User will be redirected to localhost:3000
-  //Code will be sent to ? Database(store refresh token) : Front End(store in admin user)
+  if (!isGoogleAuth) {
 
-  const user = useAppSelector(({ user }) => user);
-  console.log("User", user);
+    const getConsentURL = async (): Promise<any> => {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const res = await fetch(`${apiUrl}/events/google/google_consent`);
+      const returnedConsentURL = await res.text();
+      setConsentURL(returnedConsentURL);
+    };
 
-  useEffect(() => {
     getConsentURL();
-  }, [consentURL]);
 
-  const getConsentURL = async (): Promise<any> => {
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const res = await fetch(`${apiUrl}/events/google/google_consent`);
-    const returnedConsentURL = await res.text();
-    console.log("RETURNED URL", returnedConsentURL);
-    return setConsentURL(returnedConsentURL);
-  };
-
-  return (
-    <Button>
-      <Anchor href={consentURL}>Authorize GCal</Anchor>
-    </Button>
-  );
+    return (
+      <Button>
+        <Anchor href={consentURL}>Authorize GCal</Anchor>
+      </Button>
+    );
+  }
+  return null;
 };
 
 const Anchor = styled.a`
