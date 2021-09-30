@@ -66,14 +66,14 @@ export function* deleteEventSaga(action: PayloadAction<{ token: string, id: stri
   const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}/${action.payload.id}`, 'DELETE', body, action.payload.token);
   if (success) {
     toast("Event Deleted successfully!");
-    console.log('SUCCESS deleting event', data);
+    console.log('SUCCESS deleting event', success, data, error);
     yield put(resetEvent(emptyEvent));
     yield put(resetEventBrite(emptyEvent));
     yield put(getAllDbEvents());
   }
   if (error) {
     console.log("FAILED TO DELETE EVENT. got raw error of:", error);
-    toast(`Error creating new event. Please try again. ${error.message}.`);
+    toast(`Unable to delete event from Google Calendar. Please try again later.`);
   }
 }
 
