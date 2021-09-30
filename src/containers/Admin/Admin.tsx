@@ -40,21 +40,10 @@ const Admin: FC | any = () => {
   );
 
   useEffect(() => {
-    checkGoogleAuthStatus();
-  }, []);
-
-  useEffect(() => {
     document.addEventListener("keydown", keyPress);
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
-  const checkGoogleAuthStatus = async () => {
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const response = await makeRequest(`${apiUrl}/oAuthTokenStatus`, "Get");
-    {
-      response.data === true ? setIsGoogleAuth(true) : setIsGoogleAuth(false);
-    }
-  };
 
   if (!user || !user.isAdmin) {
     return <Redirect to={"/"} />;
@@ -106,8 +95,8 @@ const Admin: FC | any = () => {
                 Change Password
               </LogoutButton>
             </SplitContainer>
-            {!isGoogleAuth ? <Title>Google Calendar</Title> : null}
-            <AdminGoogle isGoogleAuth={isGoogleAuth} />
+            <Title>Google Calendar</Title>
+            <AdminGoogle />
             <ListEventContainer>
               <Title>Events</Title>
               <EventsList selectEvent={selectEvent} />

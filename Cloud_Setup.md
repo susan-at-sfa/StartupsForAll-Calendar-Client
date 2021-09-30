@@ -78,4 +78,7 @@
 3. On the `Admin Login` screen, enter the Admin `username` and `password` and press `Log In`
 4. Navigate to the `Admin` link in the navigation bar near the top-left of the screen. 
 5. Click the `Authorize GCal` button. You will be redirected to an `OAuth Consent Screen`.
-6. 
+6. Choose the Google account you want to allow Google to access.
+    * **Note**: In order to add events to the correct Google calendar, the Google account associated with SfA Community Calendar should be the only account used in this step.
+7. You will be redirected to the application. The `Google Refresh Token` that allows the application access to your Google account will be stored in the database. 
+    * **Note**: The `Google Refresh Token` may be updated at any time, even if the current token is still valid. You can click the `Authorize GCal` button to reauthorize the application and a new token will be saved to the database. 

@@ -15,7 +15,7 @@ export function* saveNewEventSaga(action: PayloadAction<{ form: NewEvent, token:
   const { success, data, error } = yield call(makeRequest, `${BASE_URL}/${endpoint}`, 'POST', action.payload.form, action.payload.token);
   if (success) {
     console.log('SUCCESS saving new event', data);
-    if (data.in_google_cal.length) {
+    if (data.in_google_cal) {
       toast("New Event created successfully!");
     } else {
       toast("New Event created successfully! However, an error occurred while adding event to Google calendar.")

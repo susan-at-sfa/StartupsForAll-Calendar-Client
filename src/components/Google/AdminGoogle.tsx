@@ -1,31 +1,26 @@
 import styled from "@emotion/styled";
 import { FC, useState, useEffect } from "react";
-interface AdminGoogleProps {
-  isGoogleAuth: boolean;
-}
-const AdminGoogle: FC<AdminGoogleProps> = (props) => {
+
+const AdminGoogle: FC = () => {
   const [consentURL, setConsentURL] = useState("");
-  const { isGoogleAuth } = props;
 
-  if (!isGoogleAuth) {
+  useEffect(() => {
+    getConsentURL()
+  }, [])
 
-    const getConsentURL = async (): Promise<any> => {
-      const apiUrl = process.env.REACT_APP_API_URL;
-      const res = await fetch(`${apiUrl}/events/google/google_consent`);
-      const returnedConsentURL = await res.text();
-      setConsentURL(returnedConsentURL);
-    };
+  const getConsentURL = async (): Promise<any> => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const res = await fetch(`${apiUrl}/events/google/google_consent`);
+    const returnedConsentURL = await res.text();
+    setConsentURL(returnedConsentURL);
+  };
 
-    getConsentURL();
-
-    return (
-      <Button>
-        <Anchor href={consentURL}>Authorize GCal</Anchor>
-      </Button>
-    );
-  }
-  return null;
-};
+  return (
+    <Button>
+      <Anchor href={consentURL}>Authorize GCal</Anchor>
+    </Button>
+  );
+}
 
 const Anchor = styled.a`
   display: inline-block;
