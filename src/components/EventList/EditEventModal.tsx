@@ -128,7 +128,6 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
   };
 
   const confirmDelete = () => {
-    console.log("DELETE EVENT CLICKED", thisEvent.id);
     dispatch(
       deleteEvent({
         token: token,
@@ -149,6 +148,10 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      background: "rgba(0, 0, 0, 0.8)",
+      border: "unset",
+      height: "100vh",
+      width: "100vw",
     },
   };
   const openDeleteModal = () => setModalOpen(true);
@@ -167,8 +170,10 @@ const EditEventModal: FC<EditEventModalProps> = (props) => {
             Are you sure you want to permanently delete this Event from the list
             and calendar?
           </h3>
-          <button onClick={closeDeleteModal}>Cancel</button>
-          <button onClick={confirmDelete}>Delete</button>
+          <ModalButtonsWrapper>
+            <CancelButton onClick={closeDeleteModal}>Cancel</CancelButton>
+            <DeleteButton onClick={confirmDelete}>Delete</DeleteButton>
+          </ModalButtonsWrapper>
         </ModalWrapper>
       </Modal>
       <form onSubmit={submitForm}>
@@ -367,7 +372,53 @@ const StyledContainer = styled.div`
   margin-bottom: 20px;
 `;
 const ModalWrapper = styled.div`
-  border: 1px solid red;
+  box-shadow: 0px 0px 5px 2px gray;
+  padding: 20px;
+  background: white;
+  max-width: 600px;
+  margin: 250px auto h3 {
+    margin-bottom: 20px;
+  }
+`;
+const ModalButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  > * {
+    margin: 2px;
+    padding: 7px;
+    width: 100%;
+    max-width: 320px;
+    cursor: pointer;
+  }
+  @media ${device.forms} {
+    flex-direction: row;
+  }
+`;
+const CancelButton = styled.button`
+  flex: 1;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  margin: 0;
+  display: inline;
+  height: 35px;
+  background-color: #518077;
+  border: none;
+  margin-bottom: 2px;
+`;
+const DeleteButton = styled.button`
+  flex: 1;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  margin: 0;
+  display: inline;
+  height: 35px;
+  background-color: #b53c3c;
+  border: none;
+  margin-bottom: 2px;
 `;
 
 export default EditEventModal;
