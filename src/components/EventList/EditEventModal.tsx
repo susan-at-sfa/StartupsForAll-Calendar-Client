@@ -375,8 +375,8 @@ const ModalWrapper = styled.div`
   box-shadow: 0px 0px 5px 2px gray;
   padding: 20px;
   background: white;
-  margin-top: 75%;
-  h3 {
+  max-width: 600px;
+  margin: 250px auto h3 {
     margin-bottom: 20px;
   }
 `;
