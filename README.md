@@ -1,44 +1,95 @@
-# EyeCueLab Web-Client Template
+# Startups For All Events Community Calendar
 
-This repository will serve as the web client template for new EyeCue projects and Internship Projects
+This repository holds the front-end for the Startups For All Events Calendar.
 
-## React / Typecript Cheatsheet
+View the backend code at [https://github.com/eyecuelab/StartupsForAll-Calendar-Api](https://github.com/eyecuelab/StartupsForAll-Calendar-Api).
 
-- https://react-typescript-cheatsheet.netlify.app/
+View a test build of the app at [https://sfa-community-calendar-client.herokuapp.com/](https://sfa-community-calendar-client.herokuapp.com/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+---
 
-## Installation/Setup
+## Instructions For Use Of This Application
 
-This project uses [yarn](https://yarnpkg.com/) package manager for Node. Please follow the [installation instructions](https://yarnpkg.com/getting-started/install) on their website.
+NOTE: See below for local installation instructions or visit the test build [here](https://sfa-community-calendar-client.herokuapp.com/).
 
-```bash
-# install dependencies
-$ yarn
-# create .env.dev file
+This application allows users to view and interact with events associated with the [Startups For All](https://startupsforall.org/) community.
+
+Those with proper permissions to do so can also create events using this app. Any events created can be associated with an Evenbrite event ID or created from scratch by the user inputting event details. Once the details are reviewed and saved they are then added to this application's database and saved to the connected Google calendar.
+
+Events created within this application can then be found, details viewed, and links to sign up followed.
+
+The administrator of this application, upon authorization, can modify or delete any events from this application and the associated Google calendar.
+
+---
+
+## Requirements For Building/Testing Locally
+
+1. [yarn](https://yarnpkg.com/) package manager for Node. Please follow the [installation instructions](https://yarnpkg.com/getting-started/install) on their website.
+2. [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) version control software. Please follow the [installation instructions here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+3. [NodeJS](https://nodejs.org/en/download/) for running the application. Please follow the [download and install instructions here](https://nodejs.org/en/download/).
+4. A Google Cloud Platform application which is set up to accept events created using this application to be added to a Google Calendar. Please see the [Google Cloud Setup](Cloud_Setup.md) document for specific instructions.
+
+NOTE: For this frond-end application to work correctly it must communicate with a back-end server. Installation and use instructions for the back end are available [at this repository link](https://github.com/eyecuelab/StartupsForAll-Calendar-Api). Please see and follow all instructions there.
+
+---
+
+## Installation/Building Locally Instructions
+
+1. Download the repository using git:
+
+```
+git clone https://github.com/eyecuelab/StartupsForAll-Calendar-Client
+```
+
+2. Enter the newly-created project folder:
+
+```
+cd StartupsForAll-Calendar-Client/
+```
+
+3. Install all project dependencies with yarn:
+
+```
+yarn
+```
+
+4. Create an environmental variables file which includes information used by the app front end for accessing the app backend. Do this by coping the included example:
+
+```
 cp .env.example .env
 ```
 
-## Available Scripts
+5. Run the application front end:
 
-In the project directory, you can run:
+```
+yarn start
+```
 
-### `yarn start`
+6. Open a browser of your choice (Firefox, Chrome, etc.) and navigate to http://localhost:3000/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Note: You can also build the app for production which creates a build/ folder containing the minified and bundled project. Build with:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+yarn build
+```
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## License
 
-### `yarn build`
+[MIT](https://mit-license.org/)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.<br />
+## Known Issues
+
+- None known of at this time. Please open a pull request if any are found. Thanks!
+
+---
+
+## Copyright
+
+&copy; 2021
+EyeCue Lab&trade; and Startups For All&trade;
+
+All copyrights, trademarks, service marks, and logos are the respective property of their holders. If you detect any issues with the legality of this site in any way, shape, or form, problems are always unintentional and will be corrected upon notification.
