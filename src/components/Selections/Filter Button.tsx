@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   margin: 0;
   margin-top: 5px;
-  margin-bottom: -21px;
+  margin-bottom: -25px;
   z-index: 8;
   position: sticky;
   top: 49px;
@@ -51,7 +51,7 @@ const Wrapper = styled.div`
       font-size: 14px;
       font-weight: 600;
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }

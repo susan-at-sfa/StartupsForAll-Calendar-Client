@@ -1,24 +1,28 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import { makeRequest } from "../../store/utils/makeRequest";
+import { toast } from "react-toastify";
+import styled from "@emotion/styled";
+
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setToken } from "../../store/slices/auth/authSlice";
+import { makeRequest } from "../../store/utils/makeRequest";
 import { resetUser } from "../../store/slices/user/userSlice";
+import {
+  changeEventKeyPassword,
+  setToken,
+} from "../../store/slices/auth/authSlice";
+import { device } from "../../constants/Device";
+
 import EventsList from "../../components/EventList/EventsList";
 import EditEventModal from "../../components/EventList/EditEventModal";
 import AdminGoogle from "../../components/Google/AdminGoogle";
-import { device } from "../../constants/Device";
-import "./index.css";
-import FormLabel from "../../components/FormLabel";
 import FormInput from "../../components/FormInput";
-import { toast } from "react-toastify";
 
 const Admin: FC | any = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const user = useAppSelector(({ user }) => user);
+  const token = useAppSelector(({ auth }) => auth.token);
 
   const [eventId, setEventId] = useState<string>("");
   const [eventKeyPassword, setEventKeyPassword] = useState<string>("");
@@ -76,8 +80,9 @@ const Admin: FC | any = () => {
   const confirmEventKeyPwChange = () => {
     console.log("change event key pw clicked", eventKeyPassword);
     if (!eventKeyPassword) return toast("Please enter a new password first.");
+    const payload = { token, password: eventKeyPassword };
+    dispatch(changeEventKeyPassword(payload));
     setEventKeyPassword("");
-    // TODO: dispatch action
   };
 
   return (

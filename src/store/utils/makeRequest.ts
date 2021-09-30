@@ -12,15 +12,14 @@ export async function makeRequest(url: string, method: string, data?: unknown, t
     console.log('store/util/ MAKING REQUEST', init);
     const response = await fetch(url, init);
     if (!response.ok) {
-      // an error
-      console.error(response);
+      console.error('store/util/ ERROR', response);
       return { success: false, data: null, error: response };
     }
     const data = await response.json();
     console.log('store/util GOT DATA', data);
     return { success: true, data, error: null };
   } catch (e) {
-    console.error(e);
+    console.error('store/util/ ERROR caught:', e);
     return { success: false, data: null, error: e };
   }
 }

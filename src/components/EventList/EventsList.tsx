@@ -205,6 +205,9 @@ const MonthSection = styled.section`
       top: 0px;
     }
   }
+  > div:last-child {
+    margin-bottom: 8px;
+  }
 `;
 
 const NoneContainer = styled.div`
