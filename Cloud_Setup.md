@@ -47,27 +47,35 @@
         * **Note**: It is essential that the end of the URL does not contain a `/` symbol. The redirect will not work if it is present.
 6.  Click `Create`. A pop-up window will appear to confirm the creation of the OAuth client. Click `OK`.
     * **Note**: You can find the client information contained in the confirmation screen in the `Credentials` section of `APIs & Services` at any point after creation.
-7. You will be returned to the `APIs & Services` `Credentials` page and your client information should be visible within the `OAuth 2.0 Client IDs` section.
+7. You will be returned to the `APIs & Services` `Credentials`. Your client information will be visible within the `OAuth 2.0 Client IDs` section.
     * To access your `Client ID` & `Client Secret`, click the pencil icon `Edit OAuth client`.
-    * Your client information should be visible near the top-right corner of this page.
+    * Your client information will be visible near the top-right corner of this page.
 
 8. Click `+ Create Credentials` near the top-center of the screen and this time select `API key`.
 9. A pop-up window will appear to confirm the creation of your API key. Click `Close`.
     * **Note**: You can find the API key information contained in the confirmation screen in the `Credentials` section of `APIs & Services` at any point after creation.
+### Change Status of Project From "Testing" to "In Production"
+1. Navigate to the hamburger menu in the top-left corner of the screen. Select `APIs & Services` and then `OAuth Consent Screen`.
+2. Click `Publish App` in the `Publishing status` section.
+    * **Note**: The initial state of the app is `Testing` by default. 
+3. Click `Confirm` on the pop-up menu that appears.
+4. Your app will now have a status of `In Production`
+    * **Note**: You will be able to switch the status back to `Testing` at any time if needed. 
 ## Adding Google OAuth Information to Heroku App
 1. In the `sfa-community-calendar-api` Heroku App, navigate to `Settings` in the navigation menu toward the top of the screen.
 2. In the `Config Vars` section, click `Reveal Config Vars`. 
-3. Click the pencil icon next to the input field corresponding with `GOOGLE_AUTH_CLIENT_ID`. Enter your `Client ID` in the `Value` field of the pop-up window. Click `Save changes`.
-    * Refer to `Step 7` of the `Client ID & Client Secret` section above for information on where to gather your `Client ID`. 
-4. Click the pencil icon next to the input field corresponding with `GOOGLE_AUTH_CLIENT_SECRET`. Enter your `Client Secret` in the `Value` field of the pop-up window. Click `Save changes`.
-    * Refer to `Step 7` of the `Client ID & Client Secret` section above for information on where to gather your `Client Secret`.
-5. Click the pencil icon next to the input field corresponding with `GOOGLE_AUTH_REDIRECT_URL`. Enter `https://sfa-community-calendar-client.herokuapp.com/oauth2callback` in the `Value` field of the pop-up window. Click `Save changes`.
+3. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_CLIENT_ID`. Enter your `Client ID` in the `Value` field of the pop-up window. Click `Save changes`.
+    * <details><summary>Client ID?</summary>Refer to <code>Step 7</code> of the <code>Client ID & Client Secret</code> section above for information on where to gather your <code>Client ID</code>.</details>
+4. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_CLIENT_SECRET`. Enter your `Client Secret` in the `Value` field of the pop-up window. Click `Save changes`.
+    * <details><summary>Client Secret?</summary>Refer to <code>Step 7</code> of the <code>Client ID & Client Secret</code> section above for information on where to gather your <code>Client Secret</code>.</details>
+5. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_REDIRECT_URL`. Enter `https://sfa-community-calendar-client.herokuapp.com/oauth2callback` in the `Value` field of the pop-up window. Click `Save changes`.
     * **Note**: If the URL entered here does not **exactly** match the redirect URL entered in `Step 5` of the `Client ID & Client Secret` section above, the redirect from Google will not work. 
-6. Click the pencil icon next to the input field corresponding with `GOOGLE_AUTH_SCOPES`. Enter `https://www.googleapis.com/auth/calendar.events` in the `Value` field of the pop-up window. Click `Save changes`.
+6. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_SCOPES`. Enter `https://www.googleapis.com/auth/calendar.events` in the `Value` field of the pop-up window. Click `Save changes`.
 ## OAuth Consent & Refresh Token for Use in Application
-1. In the application, navigate to the hamburger menu near the top-right of the screen.
+1. While logged in to the Google account associated with the `Cloud Platform` project, navigate to the hamburger menu near the top-right of the screen.
+    * **Note**: No other Google account will be granted permission to connect with the application.
 2. Select `Admin` and then select `Admin Login`
-3. When prompted on the `Admin Login` screen, enter the Admin `username` and `password` and press `Log In`
+3. On the `Admin Login` screen, enter the Admin `username` and `password` and press `Log In`
 4. Navigate to the `Admin` link in the navigation bar near the top-left of the screen. 
-5. When you click the `Authorize GCal` button, you will be redirected to an `OAuth Consent Screen`.
+5. Click the `Authorize GCal` button. You will be redirected to an `OAuth Consent Screen`.
 6. 
