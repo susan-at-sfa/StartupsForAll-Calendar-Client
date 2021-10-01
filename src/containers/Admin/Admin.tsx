@@ -150,6 +150,12 @@ const LogoutButton = styled.button`
   max-width: 200px;
   height: 35px;
   background-color: #a36760;
+    &:hover{
+      color: white;
+      background-color: var(--button-dark-hover);
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
 `;
 
 const SplitContainer = styled.div`

@@ -248,4 +248,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+    &:hover{
+      color: white;
+      background-color: var(--button-dark-hover);
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
 `;

@@ -22,7 +22,7 @@
     * If no notification appears, navigate to the hamburger menu (three horizontal lines) in the top-left corner of the screen. Click `Home` and then `Dashboard`.
 9. While on the `Dashboard` screen, click to select your project.
 
-## Generating API Key, OAuth Consent Screen, Client ID & Client Secret
+## Generating API Key, OAuth Consent Screen, Client ID & Client Secret, Refresh Token
 ### API Key
 1. From the project dashboard, navigate to the hamburger menu in the top-left corner of the screen. Select `APIs & Services` then select `Library`.
 <img src="src/assets/images/CloudImages/calHamburger.png" width="30%" >
@@ -87,7 +87,34 @@
 3. Click `Confirm` on the pop-up menu that appears.
 4. Your app will now have a status of `In Production`
     * **Note**: You will be able to switch the status back to `Testing` at any time if needed. 
+### Generating Google Refresh Token from oAuth2 Playground
+1. Visit `https://developers.google.com/oauthplayground/`.
+2. Click the `Gear Icon` near the top-right corner of the page.
+3. Click the checkbox labeled `Use your own OAuth credentials`
+4. Enter your `Client ID` and `Client Secret` in the provided fields. Click `Close`.
+<img src="src/assets/images/CloudImages/useCreds.png" width="50%">
+
+5. In the `Select & authorize APIs` box on the left side of the page, scroll down to `Google Calendar API v3`. Select to open a dropdown menu.
+6. Select `https://www.googleapis.com/auth/calendar.events`
+<img src="src/assets/images/CloudImages/chooseAPI.png" width="50%">
+
+7. Click the `Authorize APIs` button near the bottom of the screen.
+<img src="src/assets/images/CloudImages/authAPIs.png" width="50%">
+
+8. A `Google Consent` screen will appear. Choose the SfA Google account associated with the Community Calendar that will be used in the application. 
+<img src="src/assets/images/CloudImages/chooseAccount.png" width="30%">
+
+9. A warning will appear to alert you that the application has not been verified by Google. Click `Advanced` and then `Go to {App Name}`
+    * **Note**: There may be a second pop-up window to determine the level of access you wish to grant the application. The application will need to `View and edit events on all your calendars`.
+<img src="src/assets/images/CloudImages/notVeried.png" width="40%">
+
+10. After authorization, you will be redirected back to `OAuth 2.0 Playground`. `Step 2` will now be open on the left side of the page. Click the `Exchange authorization code for tokens` button. 
+    * **Note**: `Step 2` will close and `Step 3` will open after the click. Return to `Step 2` to see the generated tokens.
+<img src="src/assets/images/CloudImages/exchange.png" width="50%">
+
+11. The generated `Refresh Token` will be used during the set-up of the Heroku application.
 ## Adding Google OAuth Information to Heroku App
+### Heroku App Set-up
 1. In the `sfa-community-calendar-api` Heroku App, navigate to `Settings` in the navigation menu toward the top of the screen.
 2. In the `Config Vars` section, click `Reveal Config Vars`. 
 <img src="src/assets/images/CloudImages/configVars.png" width="50%">
@@ -96,9 +123,11 @@
     * <details><summary>Client ID?</summary>Refer to <code>Step 7</code> of the <code>Client ID & Client Secret</code> section above for information on where to gather your <code>Client ID</code>.</details>
 4. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_CLIENT_SECRET`. Enter your `Client Secret` in the `Value` field of the pop-up window. Click `Save changes`.
     * <details><summary>Client Secret?</summary>Refer to <code>Step 7</code> of the <code>Client ID & Client Secret</code> section above for information on where to gather your <code>Client Secret</code>.</details>
-5. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_REDIRECT_URL`. Enter `https://sfa-community-calendar-client.herokuapp.com/oauth2callback` in the `Value` field of the pop-up window. Click `Save changes`.
+5. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_REFRESH_TOKEN`. Enter your `Refresh Token` in the `Value` field of the pop-up window. Click `Save changes`.
+    * <details><summary>Refresh Token?</summary>Refer to <code>Generating Google Refresh Token from oAuth2 Playground</code> above for information on where to gather your <code>Refresh Token</code>.</details>
+6. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_REDIRECT_URL`. Enter `https://sfa-community-calendar-client.herokuapp.com/oauth2callback` in the `Value` field of the pop-up window. Click `Save changes`.
     * **Note**: If the URL entered here does not **exactly** match the redirect URL entered in `Step 5` of the `Client ID & Client Secret` section above, the redirect from Google will not work. 
-6. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_SCOPES`. Enter `https://www.googleapis.com/auth/calendar.events` in the `Value` field of the pop-up window. Click `Save changes`.
+7. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_SCOPES`. Enter `https://www.googleapis.com/auth/calendar.events` in the `Value` field of the pop-up window. Click `Save changes`.
 ## OAuth Consent & Refresh Token for Use in Application
 1. While logged in to the Google account associated with the `Cloud Platform` project, navigate to the hamburger menu near the top-right of the screen.
     * **Note**: No other Google account will be granted permission to connect with the application.
