@@ -56,29 +56,34 @@ const FilterModal: FC<FilterModalProps> = (props) => {
   const onClickingTopic = (topic: string) => {
     topicFilters.includes(topic)
       ? dispatch(
-        setTopicFilters(
-          topicFilters.filter((topicFilter) => topicFilter !== topic)
+          setTopicFilters(
+            topicFilters.filter((topicFilter) => topicFilter !== topic)
+          )
         )
-      )
       : dispatch(setTopicFilters([...topicFilters, topic]));
   };
 
   const onClickingCategory = (category: string) => {
     categoryFilters.includes(category)
       ? dispatch(
-        setCategoryFilters(
-          categoryFilters.filter(
-            (categoryFilter) => categoryFilter !== category
+          setCategoryFilters(
+            categoryFilters.filter(
+              (categoryFilter) => categoryFilter !== category
+            )
           )
         )
-      )
       : dispatch(setCategoryFilters([...categoryFilters, category]));
   };
 
   const onClickingExit = () => {
+    dispatch(setFilterModalOpen(false));
+  };
+
+  const clearFilters = () => {
+    let payload: any = {};
     dispatch(setTopicFilters([]));
     dispatch(setCategoryFilters([]));
-    dispatch(setFilterModalOpen(false));
+    dispatch(getDbEventsByFilter(payload));
   };
 
   const submitFilterQuery = () => {
@@ -104,13 +109,8 @@ const FilterModal: FC<FilterModalProps> = (props) => {
                   <p>Filters</p>
                 </div>
                 <div className="right">
-                  <button
-                    type="button"
-                    className="close"
-                    onClick={submitFilterQuery}
-                  >
-                    <p>Clear</p>
-                  </button>
+                  <span onClick={clearFilters}>Clear</span>
+                  <button className="close" onClick={onClickingExit}></button>
                 </div>
               </FilterButton>
               <div className="categories">
@@ -230,7 +230,7 @@ const FilterButton = styled.div`
     flex: 1;
     padding: 3px;
     display: flex;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
@@ -238,11 +238,14 @@ const FilterButton = styled.div`
     flex: 1;
     padding: 3px;
     display: flex;
-    align-items: flex-end;
-    p {
+    align-items: center;
+    justify-content: flex-end;
+    span {
       position: absolute;
-      top: -2px;
-      right: 30px;
+      right: 32px;
+      font-weight: bold;
+      color: #cbcbcb;
+      cursor: pointer;
     }
   }
   p {
