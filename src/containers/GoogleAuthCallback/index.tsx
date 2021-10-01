@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom';
 import { makeRequest } from '../../store/utils/makeRequest';
 import { useAppSelector } from '../../hooks';
+import { toast } from 'react-toastify';
 
 const GoogleAuthCallback = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const GoogleAuthCallback = () => {
 
       if (response.success) {
         history.push('/admin');
+        toast("Google Account Successfully Authorized")
       }
     }
 

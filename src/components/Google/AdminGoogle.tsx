@@ -4,6 +4,7 @@ import { makeRequest } from "../../store/utils/makeRequest";
 import { useAppSelector } from "../../hooks";
 import FormInput from "../FormInput";
 import FormLabel from "../FormLabel";
+import { toast } from "react-toastify";
 
 const AdminGoogle: FC = () => {
   const [consentURL, setConsentURL] = useState("");
@@ -25,7 +26,9 @@ const AdminGoogle: FC = () => {
   const updateCalendarID = async (): Promise<any> => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const response = await makeRequest(`${apiUrl}/google/update-calendar-id`, 'POST', { calendarID }, token);
-    console.log("CAL ID RESPONSE", response)
+    if (response.success) {
+      toast("Calendar ID successfully updated")
+    }
   }
 
   return (
