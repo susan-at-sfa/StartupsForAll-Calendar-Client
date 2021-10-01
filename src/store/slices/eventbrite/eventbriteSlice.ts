@@ -27,7 +27,6 @@ const eventbriteSlice = createSlice({
       return { ...eventData };
     },
     resetEventBrite(state, action: PayloadAction<NewEvent>) {
-      console.log("eventbrite slice - reset eb event - action.payload", action.payload);
       let eventData = action.payload;
       return { ...eventData };
     }

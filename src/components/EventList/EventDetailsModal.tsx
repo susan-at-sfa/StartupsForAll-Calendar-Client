@@ -175,7 +175,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                       </Centered>
                       <h4>Price</h4>
                       <p>
-                        {cost}{" "}
+                        ${cost}{" "}
                         <span id="cost">+ taxes & fees where applicable</span>
                       </p>
                       <h4>Summary</h4>

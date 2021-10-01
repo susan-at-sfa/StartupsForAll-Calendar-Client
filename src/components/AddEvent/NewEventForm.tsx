@@ -32,6 +32,8 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   const history = useHistory();
   const token = useAppSelector(({ auth }) => auth.token);
 
+  console.log("NEW EVENT FORM COMPONENT - got event Details:", eventDetails);
+
   const { creator_name, creator_email } = useAppSelector(({ user }) => ({
     creator_email: user.email,
     creator_name: user.name,
@@ -39,7 +41,9 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   const [category, setCategory] = useState<Category | string>(
     Category.Community
   );
-  const [cost, setCost] = useState<string | number>(eventDetails.cost || 0);
+  const [cost, setCost] = useState<string | number>(
+    Number(eventDetails.cost) || 0
+  );
   const [customBlurb, setCustomBlurb] = useState<string>("");
   const [startDate, setStartDate] = useState(eventDetails.start || new Date());
   const [endDate, setEndDate] = useState(eventDetails.end || new Date());
@@ -108,9 +112,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
   const changeTopics = (topic: string) => {
     const alreadyInList = topics.includes(topic);
-    console.log(
-      `New topic ${topic}. Previous Topics list ${topics}. Was in the last already? ${alreadyInList}`
-    );
     if (!alreadyInList) {
       if (topics.length >= 2) {
         return toast("Please limit to two Topics max.");
@@ -212,15 +213,15 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
 
           {eventDetails && eventDetails.summary !== "" && (
             <EventbriteEventInfo
-              title={title}
+              cost={cost}
+              creator_name={creator_name}
+              location={location}
               logo={eventDetails.logo}
               start_date={startDate}
               end_date={endDate}
-              location={location}
               organizer={organizer}
-              cost={cost}
-              creator_name={creator_name}
               summary={summary}
+              title={title}
               url={url}
             />
           )}

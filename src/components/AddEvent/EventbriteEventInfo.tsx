@@ -59,9 +59,9 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
       <Text>{props.location}</Text>
       <Title>Price</Title>
       <Text>
-        {props.cost === 0 || props.cost === "0"
+        {props.cost === 0 || props.cost === "0" || !props.cost
           ? "Free"
-          : `${props.currency} $${props.cost}`}
+          : `$${props.cost}`}
       </Text>
       <Title>Event Summary from Eventbrite</Title>
       <Text>{props.summary}</Text>
