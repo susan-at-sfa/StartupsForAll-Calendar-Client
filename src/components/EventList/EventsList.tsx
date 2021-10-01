@@ -65,7 +65,6 @@ const EventsListComponent: FC<any> = (props) => {
         <NoneContainer>
           <h3>No Events Found!</h3>
           <ButtonsContainer>
-            <Button onClick={navigateToAdd}>Create New Event</Button>
             <Button onClick={clearFilters}>Clear Events Filters</Button>
           </ButtonsContainer>
         </NoneContainer>
@@ -248,10 +247,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-    &:hover{
-      color: white;
-      background-color: var(--button-dark-hover);
-      cursor: pointer;
-      transition: 0.5s ease;
-    }
+  &:hover {
+    color: white;
+    background-color: var(--button-dark-hover);
+    cursor: pointer;
+    transition: 0.5s ease;
+  }
 `;

@@ -14,6 +14,7 @@ export const emptyEvent: NewEvent = {
   // id: '',
   location: '',
   // name: '',
+  organizer: '',
   promoted: false,
   series_dates: [],
   start: '',

@@ -46,6 +46,9 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
   const [location, setLocation] = useState<string>(
     eventDetails.location || "Online"
   );
+  const [organizer, setOrganizer] = useState<string>(
+    eventDetails.organizer || ""
+  );
   const [summary, setSummary] = useState<string>(eventDetails.summary || "");
   const [title, setTitle] = useState<string>(
     eventDetails.title || eventDetails.name || ""
@@ -65,6 +68,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       currency: "USD",
       custom_blurb: customBlurb,
       location: location,
+      organizer: organizer,
       promoted: false,
       summary: summary,
       title: title,
@@ -210,6 +214,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
               start_date={startDate}
               end_date={endDate}
               location={location}
+              organizer={organizer}
               cost={cost}
               creator_name={creator_name}
               summary={summary}

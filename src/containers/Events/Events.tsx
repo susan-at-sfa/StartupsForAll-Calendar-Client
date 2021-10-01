@@ -26,14 +26,13 @@ export default Events;
 const Wrapper = styled.div`
   display: flex;
   padding-top: 2%;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: white;
   width: 100%;
   z-index: 2;
   position: relative;
   @media ${device.mobile} {
-    align-items: center;
     justify-content: center;
   }
   .eventBox {

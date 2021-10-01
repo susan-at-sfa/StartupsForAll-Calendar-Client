@@ -5,4 +5,5 @@ export const Topics = [
   '🌎 Social Impact',
   '🧩 Strategy',
   '🔍 User Research',
+  '🌱 Other',
 ]

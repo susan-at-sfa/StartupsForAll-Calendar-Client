@@ -2,20 +2,21 @@ import React, { FC } from "react";
 import styled from "@emotion/styled";
 
 interface EventbriteEventInfoProps {
-  title: string;
-  logo?: string;
   creator_name?: string;
+  cost: number | string;
+  currency?: string;
   start_date: Date;
   end_date: Date;
   location: string;
-  cost: number | string;
-  currency?: string;
+  logo?: string;
+  organizer?: string;
   summary: string;
+  title: string;
   url: string;
 }
 
 const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
-  // console.log("EVENT BRITE EVENT INFO component - ", props);
+  console.log("EVENT BRITE EVENT INFO component - ", props);
 
   const eventDate = new Date(props.start_date).toDateString();
 
@@ -41,9 +42,15 @@ const EventbriteEventInfo: FC<EventbriteEventInfoProps> = (props) => {
         </ImageContainer>
       ) : null}
       <Title>{props.title}</Title>
-      <Text>
-        An event by <Anchor>{props.creator_name}</Anchor>
-      </Text>
+      {props.organizer ? (
+        <Text>
+          An event by <Anchor>{props.organizer}</Anchor>
+        </Text>
+      ) : (
+        <Text>
+          Info from <Anchor>{props.creator_name}</Anchor>
+        </Text>
+      )}
       <Title>{eventDate}</Title>
       <Text>
         {start_time} - {end_time}

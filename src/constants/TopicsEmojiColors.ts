@@ -5,6 +5,7 @@ export const topicsEmojiColors: Record<string, string> = {
   '🌎 Social Impact': '#EFE9F8',
   '🧩 Strategy': '#FFF0F0',
   '🔍 User Research': '#FFFAF0',
+  '🌱 Other': '#FFEFE7',
 }
 
 export const topicsEmojis: Record<string, string> = {
@@ -14,6 +15,7 @@ export const topicsEmojis: Record<string, string> = {
   '🌎 Social Impact': '🌎',
   '🧩 Strategy': '🧩',
   '🔍 User Research': '🔍',
+  '🌱 Other': '🌱',
 }
 
 export const topicsText: Record<string, string> = {
@@ -23,4 +25,5 @@ export const topicsText: Record<string, string> = {
   '🌎 Social Impact': 'Social Impact',
   '🧩 Strategy': 'Strategy',
   '🔍 User Research': 'User Research',
+  '🌱 Other': 'Other'
 }

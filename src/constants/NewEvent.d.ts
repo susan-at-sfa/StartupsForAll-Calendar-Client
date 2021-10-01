@@ -14,6 +14,7 @@ export default interface NewEvent {
   id?: string;
   location?: string;
   logo?: string;
+  organizer?: string;
   promoted?: boolean;
   series_dates?: EventbriteSeries[];
   start?: string | Date | DateString;
