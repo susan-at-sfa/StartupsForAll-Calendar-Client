@@ -96,6 +96,7 @@ const EventsListComponent: FC<any> = (props) => {
                           start_date,
                           end_date,
                           creator_name,
+                          organizer,
                           topics,
                         } = displayEvent;
                         const timeOptions: any = {
@@ -124,6 +125,7 @@ const EventsListComponent: FC<any> = (props) => {
                               date={start_date}
                               start_time={start_time}
                               end_time={end_time}
+                              organizer={organizer}
                               creator_name={creator_name}
                               topics={topics}
                               isAdmin={true}
@@ -137,6 +139,7 @@ const EventsListComponent: FC<any> = (props) => {
                               id={id}
                               category={category}
                               title={title}
+                              organizer={organizer}
                               date={start_date}
                               start_time={start_time}
                               end_time={end_time}

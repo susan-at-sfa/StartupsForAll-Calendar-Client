@@ -20,6 +20,7 @@ export interface ListEventProps {
   isAdmin?: boolean;
   in_google_cal?: boolean;
   location?: string;
+  organizer?: string;
   start?: string;
   start_date?: string;
   start_time: string;
@@ -40,6 +41,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
     creator_name,
     date,
     isAdmin,
+    organizer,
     start_time,
     end_time,
     title,
@@ -70,7 +72,7 @@ const ListEvent: FC<ListEventProps> = (props) => {
             <h2>{title}</h2>
           </div>
           <div className="creatorName">
-            <p>{creator_name}</p>
+            <p>{organizer ? organizer : creator_name}</p>
           </div>
         </SmallHeaderLeft>
         <SmallHeaderRight>

@@ -75,6 +75,7 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
               start_date,
               logo,
               location,
+              organizer,
               summary,
               title,
               topics,
@@ -155,9 +156,15 @@ const EventDetailsModal: FC<EventDetailsModalProps> = (props) => {
                     ) : null}
                     <ModalHeader>
                       <h2>{title}</h2>
-                      <p>
-                        Referred by <span>{creator_name}</span>
-                      </p>
+                      {organizer ? (
+                        <p>
+                          An event by <span>{organizer}</span>
+                        </p>
+                      ) : (
+                        <p>
+                          Referred by <span>{creator_name}</span>
+                        </p>
+                      )}
                       <h4>{eventDate}</h4>
                       <p>
                         {start_time} - {end_time}
