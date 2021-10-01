@@ -66,7 +66,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       category: category,
       category_text: getCategoryText(),
       cost: Number(cost),
-      created_at: eventDetails.created_at,
+      created_at: eventDetails.created_at || new Date().toISOString(),
       creator_email: creator_email,
       creator_name: creator_name,
       currency: "USD",

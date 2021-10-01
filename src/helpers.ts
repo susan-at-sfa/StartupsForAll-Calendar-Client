@@ -36,9 +36,11 @@ export const to24HourTime = (time12h: string): string => {
   return `${hours}:${minutes}`;
 }
 
+// Takes a Date object, removes seconds and milliseconds as unecessary precision
+// and returns the string formatted for postgres timestampz eg: "2021-10-01T18:12:00Z"
 export const toUtcDateTime = (dateString: Date): string => {
   console.log("HELPER - to utc time from date", dateString, dateString.toISOString());
-  return dateString.toISOString();
+  return new Date(dateString.setSeconds(0,0)).toISOString().replace(':00.000Z', ":00Z");
   // const theDate = new Date(dateString);
   // console.log("pure date", theDate);
   // const utc = theDate.toISOString();
