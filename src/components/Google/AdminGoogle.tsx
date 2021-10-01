@@ -1,8 +1,15 @@
 import styled from "@emotion/styled";
 import { FC, useState, useEffect } from "react";
+import { makeRequest } from "../../store/utils/makeRequest";
+import { useAppSelector } from "../../hooks";
+import FormInput from "../FormInput";
+import FormLabel from "../FormLabel";
 
 const AdminGoogle: FC = () => {
   const [consentURL, setConsentURL] = useState("");
+  const [calendarID, setCalendarID] = useState("");
+  const token = useAppSelector(({ auth }) => auth.token);
+  console.log("CALENDAR ID", calendarID)
 
   useEffect(() => {
     getConsentURL()
@@ -15,10 +22,30 @@ const AdminGoogle: FC = () => {
     setConsentURL(returnedConsentURL);
   };
 
+  const updateCalendarID = async (): Promise<any> => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const response = await makeRequest(`${apiUrl}/google/update-calendar-id`, 'POST', { calendarID }, token);
+    console.log("CAL ID RESPONSE", response)
+  }
+
   return (
-    <Button>
-      <Anchor href={consentURL}>Authorize GCal</Anchor>
-    </Button>
+    <>
+      <form>
+        <FormLabel htmlFor="calendarID" text="Calendar ID" />
+        <FormInput
+          placeholder="Calendar ID"
+          type="text"
+          required
+          disabled={false}
+          value={calendarID}
+          onChange={setCalendarID}
+          name="calendarID"
+        />
+        <Button onClick={() => updateCalendarID()}>
+          <Anchor href={consentURL}>Authorize GCal</Anchor>
+        </Button>
+      </form>
+    </>
   );
 }
 
