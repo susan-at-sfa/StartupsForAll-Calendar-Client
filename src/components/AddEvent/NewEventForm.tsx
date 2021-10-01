@@ -68,7 +68,6 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
       currency: "USD",
       custom_blurb: customBlurb,
       location: location,
-      organizer: organizer,
       promoted: false,
       summary: summary,
       title: title,
@@ -76,6 +75,9 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     };
     if (eventDetails.logo) {
       fd.logo = eventDetails.logo;
+    }
+    if (eventDetails.organizer) {
+      fd.organizer = eventDetails.organizer;
     }
     if (url) {
       fd.url = url;
@@ -94,6 +96,7 @@ const NewEventForm: FC<NewEventFormProps> = (props) => {
     } else {
       fd.end_date = toUtcDateTime(endDate);
     }
+    // return console.log("before dispatching event:", fd);
     dispatch(
       saveNewEvent({
         form: fd,
