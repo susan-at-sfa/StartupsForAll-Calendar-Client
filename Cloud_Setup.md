@@ -99,7 +99,7 @@
 <img src="src/assets/images/CloudImages/chooseAPI.png" width="50%">
 
 7. Click the `Authorize APIs` button near the bottom of the screen.
-<img src="src/assets/images/CloudImages/authAPIs.png" width="50%">
+<img src="src/assets/images/CloudImages/authAPIS.png" width="50%">
 
 8. A `Google Consent` screen will appear. Choose the SfA Google account associated with the Community Calendar that will be used in the application. 
 <img src="src/assets/images/CloudImages/chooseAccount.png" width="30%">
