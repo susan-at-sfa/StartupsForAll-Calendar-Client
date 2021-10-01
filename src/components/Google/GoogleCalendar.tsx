@@ -15,8 +15,8 @@ const GoogleCalendar: FC = () => {
     <CalendarWrapper>
       <iframe
         title="embeddedCal"
-        // src="https://calendar.google.com/calendar/u/0/embed?src=c_60f3dckcqn4omm4r8ja4265u2k@group.calendar.google.com"
-        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&src=ZG91Z2xhc2Z1bm5hZUBnbWFpbC5jb20&color=%23eeeeee&showTabs=0&showPrint=0&showCalendars=0"
+        src="https://calendar.google.com/calendar/u/0/embed?src=c_60f3dckcqn4omm4r8ja4265u2k@group.calendar.google.com"
+        // src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&src=ZG91Z2xhc2Z1bm5hZUBnbWFpbC5jb20&color=%23eeeeee&showTabs=0&showPrint=0&showCalendars=0"
         style={calendarStyles}
       ></iframe>
     </CalendarWrapper>

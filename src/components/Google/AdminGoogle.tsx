@@ -26,9 +26,7 @@ const AdminGoogle: FC = () => {
   const updateCalendarID = async (): Promise<any> => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const response = await makeRequest(`${apiUrl}/google/update-calendar-id`, 'POST', { calendarID }, token);
-    if (response.success) {
-      return toast("Calendar ID successfully updated")
-    }
+    console.log("response")
   }
 
   return (
