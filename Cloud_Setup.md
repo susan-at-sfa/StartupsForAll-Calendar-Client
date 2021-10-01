@@ -128,12 +128,25 @@
 6. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_REDIRECT_URL`. Enter `https://sfa-community-calendar-client.herokuapp.com/oauth2callback` in the `Value` field of the pop-up window. Click `Save changes`.
     * **Note**: If the URL entered here does not **exactly** match the redirect URL entered in `Step 5` of the `Client ID & Client Secret` section above, the redirect from Google will not work. 
 7. Click the pencil icon next to the input field corresponding to `GOOGLE_AUTH_SCOPES`. Enter `https://www.googleapis.com/auth/calendar.events` in the `Value` field of the pop-up window. Click `Save changes`.
-## OAuth Consent & Refresh Token for Use in Application
-1. While logged in to the Google account associated with the `Cloud Platform` project, navigate to the hamburger menu near the top-right of the screen.
-    * **Note**: No other Google account will be granted permission to connect with the application.
+## Calendar ID, OAuth Consent & Refresh Token for Use in Application
+### Obtaining Google Calendar ID
+1. Visit `calendar.google.com`
+2. Sign in using the account associated with the calendar being used in the application.
+3. In the section labeled `My calendars`, on the left of the page, hover your mouse over the calendar name. Click the three dots to open an `Options` menu.
+<img src="src/assets/images/CloudImages/calName.png" width="30%">
+
+4. Select the option `Settings and Sharing`.
+<img src="src/assets/images/CloudImages/settings.png" width="20%">
+
+5. Scroll down to the `Integrate Calendar` section. Here you will find your `Calendar ID`.
+<img src="src/assets/images/CloudImages/calID.png" width="50%">
+
+### Calendar In-Application Set-up
+1. In the application, navigate to the hamburger menu near the top-right of the screen.
 2. Select `Admin` and then select `Admin Login`
 3. On the `Admin Login` screen, enter the Admin `username` and `password` and press `Log In`
 4. Navigate to the `Admin` link in the navigation bar near the top-left of the screen. 
+5. Enter your `Calendar ID` in the provided field.
 5. Click the `Authorize GCal` button. You will be redirected to an `OAuth Consent Screen`.
 <img src="src/assets/images/CloudImages/authButton.png" width="30%">
 
@@ -141,5 +154,6 @@
     * **Note**: In order to add events to the correct Google calendar, the Google account associated with SfA Community Calendar should be the only account used in this step.
 <img src="src/assets/images/CloudImages/chooseAccount.png" width="30%">
 
-7. You will be redirected to the application. The `Google Refresh Token` that allows the application access to your Google account will be stored in the database. 
-    * **Note**: The `Google Refresh Token` may be updated at any time, even if the current token is still valid. You can click the `Authorize GCal` button to reauthorize the application and a new token will be saved to the database. 
+7. You will be redirected to the application. The `Google Refresh Token` that allows the application access to your Google account and your `Calendar ID` will be stored in the database. 
+    * **Note**: You should only have to complete this process **one time** during the initialization process. When the application is authorized and the `Calendar ID` is set, it should remain that way. You **do not** need to press the `Authorize GCal` button again unless errors occur involving the Google calendar. 
+    * If errors are encountered with Google, The `Google Refresh Token` may be updated at any time, even if the current token is still valid. You can click the `Authorize GCal` button to reauthorize the application and a new token will be saved to the database. 
