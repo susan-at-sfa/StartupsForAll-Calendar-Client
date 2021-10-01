@@ -18,8 +18,8 @@ const GoogleAuthCallback = () => {
       const response = await makeRequest(`${apiUrl}/events/google/oauth2callback`, 'POST', { code }, token);
 
       if (response.success) {
-        history.push('/admin');
         toast("Google Account Successfully Authorized")
+        history.push('/admin');
       }
     }
 
