@@ -2,15 +2,15 @@
 
 This repository holds the front-end for the Startups For All Events Calendar.
 
-View the backend code at [https://github.com/eyecuelab/StartupsForAll-Calendar-Api](https://github.com/eyecuelab/StartupsForAll-Calendar-Api).
+View the backend code at [https://github.com/eyecuelab/StartupsForAll-Calendar-Api](https://github.com/susan-at-sfa/StartupsForAll-Calendar-Api).
 
-View a test build of the app at [https://sfa-community-calendar-client.herokuapp.com/](https://sfa-community-calendar-client.herokuapp.com/).
+View a test build of the app at [https://community-calendar-client.herokuapp.com/](https://community-calendar-client.herokuapp.com/).
 
 ---
 
 ## Instructions For Use Of This Application
 
-NOTE: See below for local installation instructions or visit the test build [here](https://sfa-community-calendar-client.herokuapp.com/).
+NOTE: See below for local installation instructions or visit the test build [here](https://community-calendar-client.herokuapp.com/).
 
 This application allows users to view and interact with events associated with the [Startups For All](https://startupsforall.org/) community.
 
